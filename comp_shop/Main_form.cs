@@ -33,5 +33,10 @@ namespace comp_shop
             InitializeComponent();
         }
 
+        private void addItem_Click(object sender, EventArgs e)
+        {
+            Form new_item = new NewItemForm();
+            new_item.ShowDialog();
+        }
     }
 }
