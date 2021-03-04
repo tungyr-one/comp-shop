@@ -20,10 +20,19 @@ namespace comp_shop
         public NewItemForm()
         {
             InitializeComponent();
+            textBox1.Text = "Компьютер";
+            textBox2.Text = "10255,45";
+            comboBox1.Text = "Компьютеры";
+            textBox3.Text = "Иванов ИП";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //this.name = textBox1.Text;
+            //this.price = double.Parse(textBox2.Text);
+            //this.category = comboBox1.Text;
+            //this.supplier = textBox3.Text;
+
             this.name = textBox1.Text;
             this.price = double.Parse(textBox2.Text);
             this.category = comboBox1.Text;
