@@ -28,15 +28,168 @@ namespace comp_shop
 {
     public partial class Main_form : Form
     {
+        List<Item> working_items = new List<Item>();
+        Item current_item = null;
+
         public Main_form()
         {
             InitializeComponent();
+            radioButton1.Checked = true;
         }
 
+        // нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
-            Form new_item = new NewItemForm();
-            new_item.ShowDialog();
+            NewItemForm new_item_form = new NewItemForm();
+            new_item_form.ShowDialog();
+            if (new_item_form.my_item == null)
+                return;
+            //TODO: спросить Почему my_item, будучи объектом класса Item не имеет доступа к приватным методам my_item.DBFormat()
+            DB.addToDB(new_item_form.my_item.DBFormat());
+            current_item = new_item_form.my_item;
+            richTextBox1.Text += current_item.ToString();
+        }
+
+        // нажатие кнопки редактировать
+        private void editItem_Click(object sender, EventArgs e)
+        {
+            if (current_item == null)
+            {
+                MessageBox.Show("Не выбрано ни одного товара!");
+                return;
+            }
+            else
+            {
+                NewItemForm new_item_form = new NewItemForm();
+                //TODO: Спровить:как правильно передача в новую форму выбранного товара для редактирования
+                new_item_form.my_item = current_item;
+                new_item_form.ShowDialog();
+                // TODO: Спросить: проверка изменений, внесенных в данные товара, как?
+                // Можно ли просто сравнить сами объекты до и после изменения?
+            }
+        }
+
+        // нажатие кнопки поиск
+        private void find_Click(object sender, EventArgs e)
+        {
+            // TODO: text fields validation first
+            if (radioButton1.Checked)
+            {
+               var search_result = DB.SearchByName(searchBox1.Text);
+                // почему не работает Concat?
+                //working_items.Concat(search_result);
+                SearchResultTreat(search_result);
+            }
+
+            if (radioButton2.Checked)
+                try
+                {
+                    DB.SearchByPrice(double.Parse(searchBox1.Text), double.Parse(searchBox2.Text));
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная цена!");
+                }
+
+            if (radioButton3.Checked)
+                try
+                {
+                    DB.SearchByCategory(searchBox1.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная категория!");
+                }
+
+            if (radioButton4.Checked)
+                try
+                {
+                    DB.SearchByCategoryAndPrice(searchBox1.Text, double.Parse(searchBox2.Text));
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная категория или цена!");
+                }
+
+            if (radioButton5.Checked)
+            {
+                DB.SearchBySeller(searchBox1.Text);
+            }
+
+            if (radioButton6.Checked)
+            {
+                DB.SearchBySupplier(searchBox1.Text);
+            }
+        }
+
+        private void SearchResultTreat(List<Item> items_list)
+        {
+            richTextBox1.Clear();
+            foreach (Item list_item in items_list)
+            {
+                richTextBox1.Text += list_item.ToString();
+                working_items.Add(list_item);
+            }
+            current_item = working_items[0];
+        }
+
+
+
+        // выбор чекбоксов
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                searchParam1.Text = "Название товара:";
+                searchParam2.Visible = false;
+                searchBox2.Visible = false;
+            }
+
+            if (radioButton2.Checked)
+            {
+                // TODO: поля увеличивать и смещать левее, координаты как установить?
+                searchParam1.Text = "Цена от: ";
+                searchParam2.Text = "Цена до: ";
+                searchParam2.Visible = true;
+                searchBox2.Visible = true;
+            }
+
+            if (radioButton3.Checked)
+            {
+                // TODO: Сделать комбо категории товара
+                searchParam1.Text = "Категория товара:";
+                searchParam2.Visible = false;
+                searchBox2.Visible = false;
+            }
+
+            if (radioButton4.Checked)
+            {
+                // TODO: Сделать комбо категории товара
+                searchParam1.Text = "Категория: ";
+                searchParam2.Text = "Цена: ";
+                searchParam2.Visible = true;
+                searchBox2.Visible = true;
+            }
+
+            if (radioButton5.Checked)
+            {
+                searchParam1.Text = "Продавец:";
+                searchParam2.Visible = false;
+                searchBox2.Visible = false;
+            }
+
+            if (radioButton6.Checked)
+            {
+                searchParam1.Text = "Поставщик:";
+                searchParam2.Visible = false;
+                searchBox2.Visible = false;
+            }
+        }
+
+        // проперти текущего товара
+        public Item ItemGetter
+        {
+            get { return current_item; }
         }
     }
 }
