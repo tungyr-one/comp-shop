@@ -26,6 +26,7 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
+    // TODO: Cпросить: про десятую лабу про фокус форм
     public partial class Main_form : Form
     {
         List<Item> working_items = new List<Item>();
