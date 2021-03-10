@@ -19,7 +19,7 @@ namespace comp_shop
         string category;
         string seller;
         string supplier;
-        public Item my_item = null;
+        public Article my_item = null;
 
         public NewItemForm()
         {
@@ -34,7 +34,7 @@ namespace comp_shop
 
         }
 
-        private void editItem(Item itemToEdit)
+        private void editItem(Article itemToEdit)
         {
             this.textBox1.Text = my_item.ItemNameGetter;
             this.textBox2.Text = my_item.ItemPriceGetter.ToString();
@@ -54,7 +54,7 @@ namespace comp_shop
             this.button2.Text = "Готово";
 
             // TODO: Спросить: как это исправить??? Как сразу создать new_item и чтобы оно было видно на уровне класса?
-            Item new_item = new Item(name, price, category, seller, supplier);
+            Article new_item = new Article(name, price, category, seller, supplier);
             my_item = new_item;
         }
 

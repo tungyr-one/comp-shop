@@ -34,12 +34,12 @@ namespace comp_shop
 
 
 
-        static public List<Item> SearchByName(string name)
+        static public List<Article> SearchByName(string name)
         {
-            List<Item> items_by_name = new List<Item>();
-            Item item_fm_db1 = new Item(name, price, category, seller, supplier);
-            Item item_fm_db2 = new Item(name, price, category, seller, supplier);
-            Item item_fm_db3 = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_name = new List<Article>();
+            Article item_fm_db1 = new Article(name, price, category, seller, supplier);
+            Article item_fm_db2 = new Article(name, price, category, seller, supplier);
+            Article item_fm_db3 = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_name.Add(item_fm_db1);
             items_by_name.Add(item_fm_db2);
@@ -48,46 +48,46 @@ namespace comp_shop
         }
 
 
-        static public List<Item> SearchByPrice(double priceFrom, double priceTo)
+        static public List<Article> SearchByPrice(double priceFrom, double priceTo)
         {
-            List<Item> items_by_price = new List<Item>();
-            Item item_fm_db = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_price = new List<Article>();
+            Article item_fm_db = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_price.Add(item_fm_db);
             return items_by_price;
         }
 
-        static public List<Item> SearchByCategory(string category)
+        static public List<Article> SearchByCategory(string category)
         {
-            List<Item> items_by_category = new List<Item>();
-            Item item_fm_db = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_category = new List<Article>();
+            Article item_fm_db = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_category.Add(item_fm_db);
             return items_by_category;
         }
 
-        static public List<Item> SearchByCategoryAndPrice(string category, double Price)
+        static public List<Article> SearchByCategoryAndPrice(string category, double Price)
         {
-            List<Item> items_by_category_and_price = new List<Item>();
-            Item item_fm_db = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_category_and_price = new List<Article>();
+            Article item_fm_db = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_category_and_price.Add(item_fm_db);
             return items_by_category_and_price;
         }
 
-        static public List<Item> SearchBySeller(string seller)
+        static public List<Article> SearchBySeller(string seller)
         {
-            List<Item> items_by_seller = new List<Item>();
-            Item item_fm_db = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_seller = new List<Article>();
+            Article item_fm_db = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_seller.Add(item_fm_db);
             return items_by_seller;
         }
 
-        static public List<Item> SearchBySupplier(string supplier)
+        static public List<Article> SearchBySupplier(string supplier)
         {
-            List<Item> items_by_supplier = new List<Item>();
-            Item item_fm_db = new Item(name, price, category, seller, supplier);
+            List<Article> items_by_supplier = new List<Article>();
+            Article item_fm_db = new Article(name, price, category, seller, supplier);
             //TODO:  searching logic
             items_by_supplier.Add(item_fm_db);
             return items_by_supplier;

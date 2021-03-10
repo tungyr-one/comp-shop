@@ -29,8 +29,8 @@ namespace comp_shop
     // TODO: Cпросить: про десятую лабу про фокус форм
     public partial class Main_form : Form
     {
-        List<Item> working_items = new List<Item>();
-        Item current_item = null;
+        List<Article> working_items = new List<Article>();
+        Article current_item = null;
 
         public Main_form()
         {
@@ -123,10 +123,10 @@ namespace comp_shop
             }
         }
 
-        private void SearchResultTreat(List<Item> items_list)
+        private void SearchResultTreat(List<Article> items_list)
         {
             richTextBox1.Clear();
-            foreach (Item list_item in items_list)
+            foreach (Article list_item in items_list)
             {
                 richTextBox1.Text += list_item.ToString();
                 working_items.Add(list_item);
@@ -188,7 +188,7 @@ namespace comp_shop
         }
 
         // проперти текущего товара
-        public Item ItemGetter
+        public Article ItemGetter
         {
             get { return current_item; }
         }
