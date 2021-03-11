@@ -192,5 +192,20 @@ namespace comp_shop
         {
             get { return current_item; }
         }
+
+        ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+            var query =
+           from item in dataEntities.Items
+           where item.Item1 == "Computer Dell"
+           orderby item.ItemID
+           select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier};
+
+            dataGridView1.DataSource = query.ToList();
+            //dataGridView1.DataSource = new List<string>() { "sss", "aaa", "aaa"}.Select(x => new { Name = x }).ToList();
+            //this.Controls.Add(dataGridView1); // add gridview to current form or panel ( or container), then only it will display 
+        }
     }
 }

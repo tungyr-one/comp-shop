@@ -58,10 +58,16 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обАвтореToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.computerShopDataSet = new comp_shop.ComputerShopDataSet();
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seller = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -341,15 +347,30 @@
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(370, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(729, 271);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ItemID,
+            this.Item,
+            this.Price,
+            this.Category,
+            this.Seller,
+            this.Supplier});
             this.dataGridView1.DataSource = this.computerShopDataSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(370, 315);
+            this.dataGridView1.Location = new System.Drawing.Point(382, 329);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(729, 398);
-            this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.Size = new System.Drawing.Size(647, 150);
+            this.dataGridView1.TabIndex = 14;
             // 
             // computerShopDataSet
             // 
@@ -361,21 +382,43 @@
             this.computerShopDataSetBindingSource.DataSource = this.computerShopDataSet;
             this.computerShopDataSetBindingSource.Position = 0;
             // 
-            // richTextBox1
+            // ItemID
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(370, 27);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(729, 271);
-            this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
+            this.ItemID.HeaderText = "ItemID";
+            this.ItemID.Name = "ItemID";
+            // 
+            // Item
+            // 
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.Name = "Category";
+            // 
+            // Seller
+            // 
+            this.Seller.HeaderText = "Seller";
+            this.Seller.Name = "Seller";
+            // 
+            // Supplier
+            // 
+            this.Supplier.HeaderText = "Supplier";
+            this.Supplier.Name = "Supplier";
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 725);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.addItem);
             this.Controls.Add(this.editItem);
             this.Controls.Add(this.find);
@@ -388,6 +431,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Main_form";
             this.Text = "Компьютерный магазин БД";
+            this.Load += new System.EventHandler(this.Main_form_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -433,10 +477,16 @@
         private System.Windows.Forms.Label searchParam2;
         private System.Windows.Forms.TextBox searchBox1;
         private System.Windows.Forms.Label searchParam1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Seller;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
         private System.Windows.Forms.BindingSource computerShopDataSetBindingSource;
         private ComputerShopDataSet computerShopDataSet;
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
