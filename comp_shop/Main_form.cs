@@ -195,29 +195,13 @@ namespace comp_shop
 
 
         // https://www.entityframeworktutorial.net/basics/how-entity-framework-works.aspx
-        ComputerShopEntities dataEntities = new ComputerShopEntities();
+       
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            // show all
-            var query =
-           (from item in dataEntities.Items
-           //where item.Item1 == "Computer Dell"
-           orderby item.ItemID
-           select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
-
-            dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = query;
-
-            //BindingSource bindingSource1 = new BindingSource();
-            //bindingSource1.DataSource = (from item in dataEntities.Items
-            //                             where item.Item1 == "Computer Dell"
-            //                             orderby item.ItemID
-            //                             select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
-
-
+            DB.ShowAllItems();
             //dataGridView1.AutoGenerateColumns = true;
-            //dataGridView1.DataSource = bindingSource1;
+            //dataGridView1.DataSource = queryAllItems;
         }
     }
 }

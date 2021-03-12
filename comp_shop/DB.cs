@@ -23,6 +23,39 @@ namespace comp_shop
 
         static private string filename = "db_file.txt";
 
+        static public List<ComputerShopEntities> ShowAllItems()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+            // show all items
+            var queryAllItems =
+           (from item in dataEntities.Items
+                //where item.Item1 == "Computer Dell"
+            orderby item.ItemID
+            select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier });
+
+            return queryAllItems.ToList();
+
+           // // show all orders
+           // var queryAllOrders =
+           //(from order in dataEntities.Orders
+           //     //where item.Item1 == "Computer Dell"
+           // orderby order.OrderID
+           // select new { order.OrderID, order.ItemID, order.Customer, order.OrderDate, order.OrderQuantity }).ToList();
+
+
+
+            //BindingSource bindingSource1 = new BindingSource();
+            //bindingSource1.DataSource = (from item in dataEntities.Items
+            //                             where item.Item1 == "Computer Dell"
+            //                             orderby item.ItemID
+            //                             select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+
+
+            //dataGridView1.AutoGenerateColumns = true;
+            //dataGridView1.DataSource = bindingSource1;
+
+            
+        }
 
         static public void addToDB(string item_entry)
         {
@@ -32,8 +65,7 @@ namespace comp_shop
             sw.Close();
         }
 
-
-
+ 
         static public List<Article> SearchByName(string name)
         {
             List<Article> items_by_name = new List<Article>();

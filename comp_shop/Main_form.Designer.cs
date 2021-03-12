@@ -341,18 +341,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(370, 27);
+            this.richTextBox1.Location = new System.Drawing.Point(382, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(729, 271);
+            this.richTextBox1.Size = new System.Drawing.Size(29, 20);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(370, 326);
+            this.dataGridView1.Location = new System.Drawing.Point(370, 26);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(729, 188);
+            this.dataGridView1.Size = new System.Drawing.Size(748, 675);
             this.dataGridView1.TabIndex = 14;
             // 
             // Main_form
