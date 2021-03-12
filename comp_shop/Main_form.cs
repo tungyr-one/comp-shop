@@ -193,19 +193,31 @@ namespace comp_shop
             get { return current_item; }
         }
 
+
+        // https://www.entityframeworktutorial.net/basics/how-entity-framework-works.aspx
         ComputerShopEntities dataEntities = new ComputerShopEntities();
 
         private void Main_form_Load(object sender, EventArgs e)
         {
+            // show all
             var query =
-           from item in dataEntities.Items
-           where item.Item1 == "Computer Dell"
+           (from item in dataEntities.Items
+           //where item.Item1 == "Computer Dell"
            orderby item.ItemID
-           select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier};
+           select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
 
-            dataGridView1.DataSource = query.ToList();
-            //dataGridView1.DataSource = new List<string>() { "sss", "aaa", "aaa"}.Select(x => new { Name = x }).ToList();
-            //this.Controls.Add(dataGridView1); // add gridview to current form or panel ( or container), then only it will display 
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = query;
+
+            //BindingSource bindingSource1 = new BindingSource();
+            //bindingSource1.DataSource = (from item in dataEntities.Items
+            //                             where item.Item1 == "Computer Dell"
+            //                             orderby item.ItemID
+            //                             select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+
+
+            //dataGridView1.AutoGenerateColumns = true;
+            //dataGridView1.DataSource = bindingSource1;
         }
     }
 }

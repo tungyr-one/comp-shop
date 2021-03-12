@@ -59,21 +59,13 @@
             this.обАвтореToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.computerShopDataSet = new comp_shop.ComputerShopDataSet();
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seller = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.computerShopDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerShopDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -357,60 +349,11 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ItemID,
-            this.Item,
-            this.Price,
-            this.Category,
-            this.Seller,
-            this.Supplier});
-            this.dataGridView1.DataSource = this.computerShopDataSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(382, 329);
+            this.dataGridView1.Location = new System.Drawing.Point(370, 326);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(647, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(729, 188);
             this.dataGridView1.TabIndex = 14;
-            // 
-            // computerShopDataSet
-            // 
-            this.computerShopDataSet.DataSetName = "ComputerShopDataSet";
-            this.computerShopDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // computerShopDataSetBindingSource
-            // 
-            this.computerShopDataSetBindingSource.DataSource = this.computerShopDataSet;
-            this.computerShopDataSetBindingSource.Position = 0;
-            // 
-            // ItemID
-            // 
-            this.ItemID.HeaderText = "ItemID";
-            this.ItemID.Name = "ItemID";
-            // 
-            // Item
-            // 
-            this.Item.HeaderText = "Item";
-            this.Item.Name = "Item";
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            // 
-            // Category
-            // 
-            this.Category.HeaderText = "Category";
-            this.Category.Name = "Category";
-            // 
-            // Seller
-            // 
-            this.Seller.HeaderText = "Seller";
-            this.Seller.Name = "Seller";
-            // 
-            // Supplier
-            // 
-            this.Supplier.HeaderText = "Supplier";
-            this.Supplier.Name = "Supplier";
             // 
             // Main_form
             // 
@@ -438,9 +381,8 @@
             this.groupBox2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.computerShopDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.computerShopDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,15 +420,8 @@
         private System.Windows.Forms.TextBox searchBox1;
         private System.Windows.Forms.Label searchParam1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ItemID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Item;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Seller;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
         private System.Windows.Forms.BindingSource computerShopDataSetBindingSource;
-        private ComputerShopDataSet computerShopDataSet;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
