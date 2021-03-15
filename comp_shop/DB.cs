@@ -11,7 +11,7 @@ namespace comp_shop
     class DB     
 
     {
-        // TODO: Спросить: как подключить БД и какую лучше выбрать?
+
         // TODO: сделать один список на всех, а не в каждом методе свой?
 
 
@@ -23,38 +23,60 @@ namespace comp_shop
 
         static private string filename = "db_file.txt";
 
-        static public List<ComputerShopEntities> ShowAllItems()
+        static public List<Item> ShowAllItems()
         {
             ComputerShopEntities dataEntities = new ComputerShopEntities();
-            // show all items
-            var queryAllItems =
-           (from item in dataEntities.Items
-                //where item.Item1 == "Computer Dell"
-            orderby item.ItemID
-            select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier });
+            return dataEntities.Items.ToList();
+        }
 
-            return queryAllItems.ToList();
+        static public List<Order> ShowAllOrders()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+            return dataEntities.Orders.ToList();
+        }
 
-           // // show all orders
-           // var queryAllOrders =
-           //(from order in dataEntities.Orders
-           //     //where item.Item1 == "Computer Dell"
-           // orderby order.OrderID
-           // select new { order.OrderID, order.ItemID, order.Customer, order.OrderDate, order.OrderQuantity }).ToList();
-
-
-
-            //BindingSource bindingSource1 = new BindingSource();
-            //bindingSource1.DataSource = (from item in dataEntities.Items
-            //                             where item.Item1 == "Computer Dell"
-            //                             orderby item.ItemID
-            //                             select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
-
-
-            //dataGridView1.AutoGenerateColumns = true;
-            //dataGridView1.DataSource = bindingSource1;
+        static public List<Item> ShowParticularItem(string itemName)
+        {
+            
+            using (var tables = new ComputerShopEntities())
+            {
+                //var computer = tables.Items
+                //                .Where(s => s.Name == "itemName")
+                //                .FirstOrDefault<Item>();
+                var computerList = tables.Items.Where(s => s.Name == itemName).ToList();
+                return computerList;
+            }
 
             
+
+            // ComputerShopEntities dataEntities = new ComputerShopEntities();
+            // var queryItem =
+            //(from item in dataEntities.Items
+            // where item.Name == itemName
+            // //orderby item.ItemID
+            // select new Item() { Name = item.Name, Price = item.Price, Category = item.Category, Seller = item.Seller, Supplier = item.Supplier });
+
+            // return queryItem.ToList();
+
+
+            //   // show all orders
+            //   var queryAllOrders =
+            //  (from order in dataEntities.Orders
+            //       //where item.Item1 == "Computer Dell"
+            //orderby order.OrderID
+            //   select new { order.OrderID, order.ItemID, order.Customer, order.OrderDate, order.OrderQuantity }).ToList();
+
+
+
+            //   BindingSource bindingSource1 = new BindingSource();
+            //   bindingSource1.DataSource = (from item in dataEntities.Items
+            //                                where item.Item1 == "Computer Dell"
+            //                                orderby item.ItemID
+            //                                select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+
+
+            //   dataGridView1.AutoGenerateColumns = true;
+            //   dataGridView1.DataSource = bindingSource1;
         }
 
         static public void addToDB(string item_entry)

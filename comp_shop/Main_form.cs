@@ -199,9 +199,20 @@ namespace comp_shop
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            DB.ShowAllItems();
-            //dataGridView1.AutoGenerateColumns = true;
-            //dataGridView1.DataSource = queryAllItems;
+           // ComputerShopEntities dataEntities = new ComputerShopEntities();
+           // // show all items
+           // var queryAllItems =
+           //(from item in dataEntities.Items
+           //     //where item.Item1 == "Computer Dell"
+           // orderby item.ItemID
+           // select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+
+           
+            dataGridView1.AutoGenerateColumns = true;
+            //dataGridView1.DataSource = DB.ShowAllItems();
+            //dataGridView1.DataSource = DB.ShowAllOrders();
+            var query = DB.ShowParticularItem("Computer Dell");
+            dataGridView1.DataSource = query;
         }
     }
 }
