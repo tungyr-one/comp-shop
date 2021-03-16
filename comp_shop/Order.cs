@@ -15,7 +15,7 @@ namespace comp_shop
     public partial class Order
     {
         public int OrderID { get; set; }
-        public string ItemID { get; set; }
+        public int ItemID { get; set; }
         public string Customer { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<int> OrderQuantity { get; set; }

@@ -9,9 +9,9 @@
           <Key>
             <PropertyRef Name="ItemID" />
           </Key>
-          <Property Name="ItemID" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Item" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="smallmoney" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Seller" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier" Type="nvarchar" MaxLength="50" />
@@ -21,7 +21,7 @@
             <PropertyRef Name="OrderID" />
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
-          <Property Name="ItemID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
           <Property Name="Customer" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="OrderQuantity" Type="int" />
@@ -54,20 +54,20 @@
           <Key>
             <PropertyRef Name="ItemID" />
           </Key>
-          <Property Name="ItemID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Seller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Items" FromRole="Items" ToRole="Orders" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="ItemID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
           <Property Name="Customer" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="OrderQuantity" Type="Int32" />
@@ -102,8 +102,8 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="ComputerShopModel.Item">
               <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="Name" ColumnName="Item" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Seller" ColumnName="Seller" />

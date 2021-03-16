@@ -35,7 +35,7 @@ namespace comp_shop
             return dataEntities.Orders.ToList();
         }
 
-        static public List<Item> ShowParticularItem(string itemName)
+        static public List<Item> SearchItemByName(string itemName)
         {
             
             using (var tables = new ComputerShopEntities())
@@ -87,28 +87,17 @@ namespace comp_shop
             sw.Close();
         }
 
- 
-        static public List<Article> SearchByName(string name)
-        {
-            List<Article> items_by_name = new List<Article>();
-            Article item_fm_db1 = new Article(name, price, category, seller, supplier);
-            Article item_fm_db2 = new Article(name, price, category, seller, supplier);
-            Article item_fm_db3 = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_name.Add(item_fm_db1);
-            items_by_name.Add(item_fm_db2);
-            items_by_name.Add(item_fm_db3);
-            return items_by_name;
-        }
 
-
-        static public List<Article> SearchByPrice(double priceFrom, double priceTo)
+        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
-            List<Article> items_by_price = new List<Article>();
-            Article item_fm_db = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_price.Add(item_fm_db);
-            return items_by_price;
+            using (var tables = new ComputerShopEntities())
+            {
+                //var computer = tables.Items
+                //                .Where(s => s.Name == "itemName")
+                //                .FirstOrDefault<Item>();
+                var computerList = tables.Items.Where(s => priceTo >= s.Price >= priceFrom).ToList();
+                return computerList;
+            }
         }
 
         static public List<Article> SearchByCategory(string category)

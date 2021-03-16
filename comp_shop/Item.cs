@@ -20,12 +20,12 @@ namespace comp_shop
             this.Orders = new HashSet<Order>();
         }
     
-        public string ItemID { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
+        public int ItemID { get; set; }
+        public decimal Price { get; set; }
         public string Category { get; set; }
         public string Seller { get; set; }
         public string Supplier { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

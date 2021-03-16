@@ -24,6 +24,9 @@ using System.Windows.Forms;
 //-  программа должна обладать формой пользовательского интерфейса для ввода 
 //    информации об объектах и корректировки данных в случае необходимости;
 
+    // LINKS
+    //https://www.entityframeworktutorial.net/
+
 namespace comp_shop
 {
     // TODO: Cпросить: про десятую лабу про фокус форм
@@ -31,6 +34,7 @@ namespace comp_shop
     {
         List<Article> working_items = new List<Article>();
         Article current_item = null;
+        List<Item> search_result;
 
         public Main_form()
         {
@@ -73,19 +77,18 @@ namespace comp_shop
         // нажатие кнопки поиск
         private void find_Click(object sender, EventArgs e)
         {
+            
             // TODO: text fields validation first
             if (radioButton1.Checked)
             {
-               var search_result = DB.SearchByName(searchBox1.Text);
-                // почему не работает Concat?
-                //working_items.Concat(search_result);
-                SearchResultTreat(search_result);
+               search_result = DB.SearchItemByName(searchBox1.Text);
             }
 
             if (radioButton2.Checked)
                 try
                 {
-                    DB.SearchByPrice(double.Parse(searchBox1.Text), double.Parse(searchBox2.Text));
+                    DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
+
                 }
                 catch
                 {
@@ -121,6 +124,8 @@ namespace comp_shop
             {
                 DB.SearchBySupplier(searchBox1.Text);
             }
+
+            dataGridView1.DataSource = search_result;
         }
 
         private void SearchResultTreat(List<Article> items_list)
@@ -195,24 +200,33 @@ namespace comp_shop
 
 
         // https://www.entityframeworktutorial.net/basics/how-entity-framework-works.aspx
-       
+
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-           // ComputerShopEntities dataEntities = new ComputerShopEntities();
-           // // show all items
-           // var queryAllItems =
-           //(from item in dataEntities.Items
-           //     //where item.Item1 == "Computer Dell"
-           // orderby item.ItemID
-           // select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+            // ComputerShopEntities dataEntities = new ComputerShopEntities();
+            // // show all items
+            // var queryAllItems =
+            //(from item in dataEntities.Items
+            //     //where item.Item1 == "Computer Dell"
+            //  orderby item.ItemID
+            // select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
 
-           
+
             dataGridView1.AutoGenerateColumns = true;
             //dataGridView1.DataSource = DB.ShowAllItems();
             //dataGridView1.DataSource = DB.ShowAllOrders();
-            var query = DB.ShowParticularItem("Computer Dell");
-            dataGridView1.DataSource = query;
+
+            //dataGridView1.DataSource = DB.ShowParticularItem("Computer Dell");
+
+            //using
+            //    (
+            //        var ctx = new ComputerShopEntities())
+            //    {
+            //        dataGridView1.DataSource = ctx.Items.ToList();
+            //    }
+
+
         }
     }
 }

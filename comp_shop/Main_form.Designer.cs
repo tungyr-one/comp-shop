@@ -58,9 +58,9 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обАвтореToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -339,6 +339,16 @@
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.DataSource = this.computerShopDataSetBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(370, 26);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(748, 675);
+            this.dataGridView1.TabIndex = 14;
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(382, 0);
@@ -346,14 +356,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(29, 20);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(370, 26);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(748, 675);
-            this.dataGridView1.TabIndex = 14;
             // 
             // Main_form
             // 
@@ -419,9 +421,9 @@
         private System.Windows.Forms.Label searchParam2;
         private System.Windows.Forms.TextBox searchBox1;
         private System.Windows.Forms.Label searchParam1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.BindingSource computerShopDataSetBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
