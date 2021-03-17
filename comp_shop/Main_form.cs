@@ -24,12 +24,21 @@ using System.Windows.Forms;
 //-  программа должна обладать формой пользовательского интерфейса для ввода 
 //    информации об объектах и корректировки данных в случае необходимости;
 
-    // LINKS
-    //https://www.entityframeworktutorial.net/
+// LINKS
+//https://www.entityframeworktutorial.net/
+
+// disable lazy loading EF:
+
+//public partial class ComputerShopEntities : DbContext
+//{
+//    public ComputerShopEntities()
+//        : base("name=ComputerShopEntities")
+//    {
+//        this.Configuration.LazyLoadingEnabled = false;
+//    }
 
 namespace comp_shop
 {
-    // TODO: Cпросить: про десятую лабу про фокус форм
     public partial class Main_form : Form
     {
         List<Article> working_items = new List<Article>();
@@ -87,7 +96,7 @@ namespace comp_shop
             if (radioButton2.Checked)
                 try
                 {
-                    DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
+                    search_result = DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
 
                 }
                 catch
@@ -98,7 +107,7 @@ namespace comp_shop
             if (radioButton3.Checked)
                 try
                 {
-                    DB.SearchByCategory(searchBox1.Text);
+                    search_result = DB.SearchByCategory(searchBox1.Text);
                 }
                 catch
                 {
@@ -117,12 +126,12 @@ namespace comp_shop
 
             if (radioButton5.Checked)
             {
-                DB.SearchBySeller(searchBox1.Text);
+                search_result = DB.SearchBySeller(searchBox1.Text);
             }
 
             if (radioButton6.Checked)
             {
-                DB.SearchBySupplier(searchBox1.Text);
+                search_result = DB.SearchBySupplier(searchBox1.Text);
             }
 
             dataGridView1.DataSource = search_result;

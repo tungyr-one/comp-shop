@@ -95,18 +95,18 @@ namespace comp_shop
                 //var computer = tables.Items
                 //                .Where(s => s.Name == "itemName")
                 //                .FirstOrDefault<Item>();
-                var computerList = tables.Items.Where(s => priceTo >= s.Price >= priceFrom).ToList();
+                var computerList = tables.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom).ToList();
                 return computerList;
             }
         }
 
-        static public List<Article> SearchByCategory(string category)
+        static public List<Item> SearchByCategory(string itemCategory)
         {
-            List<Article> items_by_category = new List<Article>();
-            Article item_fm_db = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_category.Add(item_fm_db);
-            return items_by_category;
+            using (var tables = new ComputerShopEntities())
+            {
+                var computerList = tables.Items.Where(s => s.Category == itemCategory).ToList();
+                return computerList;
+            }
         }
 
         static public List<Article> SearchByCategoryAndPrice(string category, double Price)
@@ -118,22 +118,22 @@ namespace comp_shop
             return items_by_category_and_price;
         }
 
-        static public List<Article> SearchBySeller(string seller)
+        static public List<Item> SearchBySeller(string itemSeller)
         {
-            List<Article> items_by_seller = new List<Article>();
-            Article item_fm_db = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_seller.Add(item_fm_db);
-            return items_by_seller;
+            using (var tables = new ComputerShopEntities())
+            {
+                var computerList = tables.Items.Where(s => s.Seller == itemSeller).ToList();
+                return computerList;
+            }
         }
 
-        static public List<Article> SearchBySupplier(string supplier)
+        static public List<Item> SearchBySupplier(string itemSupplier)
         {
-            List<Article> items_by_supplier = new List<Article>();
-            Article item_fm_db = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_supplier.Add(item_fm_db);
-            return items_by_supplier;
+            using (var tables = new ComputerShopEntities())
+            {
+                var computerList = tables.Items.Where(s => s.Supplier == itemSupplier).ToList();
+                return computerList;
+            }
         }
 
     }
