@@ -61,6 +61,8 @@
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.searchParam3 = new System.Windows.Forms.Label();
+            this.searchBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -167,20 +169,22 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.searchBox3);
+            this.groupBox2.Controls.Add(this.searchParam3);
             this.groupBox2.Controls.Add(this.searchBox2);
             this.groupBox2.Controls.Add(this.searchParam2);
             this.groupBox2.Controls.Add(this.searchBox1);
             this.groupBox2.Controls.Add(this.searchParam1);
             this.groupBox2.Location = new System.Drawing.Point(36, 375);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(314, 139);
+            this.groupBox2.Size = new System.Drawing.Size(314, 150);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры поиска";
             // 
             // searchBox2
             // 
-            this.searchBox2.Location = new System.Drawing.Point(173, 84);
+            this.searchBox2.Location = new System.Drawing.Point(173, 76);
             this.searchBox2.Name = "searchBox2";
             this.searchBox2.Size = new System.Drawing.Size(131, 26);
             this.searchBox2.TabIndex = 3;
@@ -189,7 +193,7 @@
             // searchParam2
             // 
             this.searchParam2.AutoSize = true;
-            this.searchParam2.Location = new System.Drawing.Point(6, 84);
+            this.searchParam2.Location = new System.Drawing.Point(6, 81);
             this.searchParam2.Name = "searchParam2";
             this.searchParam2.Size = new System.Drawing.Size(84, 20);
             this.searchParam2.TabIndex = 2;
@@ -214,9 +218,9 @@
             // 
             // find
             // 
-            this.find.Location = new System.Drawing.Point(93, 532);
+            this.find.Location = new System.Drawing.Point(93, 550);
             this.find.Name = "find";
-            this.find.Size = new System.Drawing.Size(170, 59);
+            this.find.Size = new System.Drawing.Size(170, 41);
             this.find.TabIndex = 7;
             this.find.Text = "Найти";
             this.find.UseVisualStyleBackColor = true;
@@ -357,6 +361,24 @@
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             // 
+            // searchParam3
+            // 
+            this.searchParam3.AutoSize = true;
+            this.searchParam3.Location = new System.Drawing.Point(6, 115);
+            this.searchParam3.Name = "searchParam3";
+            this.searchParam3.Size = new System.Drawing.Size(84, 20);
+            this.searchParam3.TabIndex = 4;
+            this.searchParam3.Text = "Цена до:";
+            this.searchParam3.Visible = false;
+            // 
+            // searchBox3
+            // 
+            this.searchBox3.Location = new System.Drawing.Point(173, 110);
+            this.searchBox3.Name = "searchBox3";
+            this.searchBox3.Size = new System.Drawing.Size(131, 26);
+            this.searchBox3.TabIndex = 5;
+            this.searchBox3.Visible = false;
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -424,6 +446,8 @@
         private System.Windows.Forms.BindingSource computerShopDataSetBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox searchBox3;
+        private System.Windows.Forms.Label searchParam3;
     }
 }
 

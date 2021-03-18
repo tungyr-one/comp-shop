@@ -92,9 +92,6 @@ namespace comp_shop
         {
             using (var tables = new ComputerShopEntities())
             {
-                //var computer = tables.Items
-                //                .Where(s => s.Name == "itemName")
-                //                .FirstOrDefault<Item>();
                 var computerList = tables.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom).ToList();
                 return computerList;
             }
@@ -109,13 +106,13 @@ namespace comp_shop
             }
         }
 
-        static public List<Article> SearchByCategoryAndPrice(string category, double Price)
+        static public List<Item> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
         {
-            List<Article> items_by_category_and_price = new List<Article>();
-            Article item_fm_db = new Article(name, price, category, seller, supplier);
-            //TODO:  searching logic
-            items_by_category_and_price.Add(item_fm_db);
-            return items_by_category_and_price;
+            using (var tables = new ComputerShopEntities())
+            {
+                var computerList = tables.Items.Where(s => itemCategory == s.Category && priceTo >= s.Price && s.Price >= priceFrom).ToList();
+                return computerList;
+            }
         }
 
         static public List<Item> SearchBySeller(string itemSeller)

@@ -117,7 +117,7 @@ namespace comp_shop
             if (radioButton4.Checked)
                 try
                 {
-                    DB.SearchByCategoryAndPrice(searchBox1.Text, double.Parse(searchBox2.Text));
+                    search_result = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
                 }
                 catch
                 {
@@ -153,11 +153,15 @@ namespace comp_shop
         // выбор чекбоксов
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            searchParam3.Visible = false;
+            searchBox3.Visible = false;
+
+            searchParam2.Visible = false;
+            searchBox2.Visible = false;
+
             if (radioButton1.Checked)
             {
                 searchParam1.Text = "Название товара:";
-                searchParam2.Visible = false;
-                searchBox2.Visible = false;
             }
 
             if (radioButton2.Checked)
@@ -173,31 +177,27 @@ namespace comp_shop
             {
                 // TODO: Сделать комбо категории товара
                 searchParam1.Text = "Категория товара:";
-                searchParam2.Visible = false;
-                searchBox2.Visible = false;
             }
 
             if (radioButton4.Checked)
             {
                 // TODO: Сделать комбо категории товара
                 searchParam1.Text = "Категория: ";
-                searchParam2.Text = "Цена: ";
+                searchParam2.Text = "Цена от:";
                 searchParam2.Visible = true;
                 searchBox2.Visible = true;
+                searchParam3.Visible = true;
+                searchBox3.Visible = true;
             }
 
             if (radioButton5.Checked)
             {
                 searchParam1.Text = "Продавец:";
-                searchParam2.Visible = false;
-                searchBox2.Visible = false;
             }
 
             if (radioButton6.Checked)
             {
                 searchParam1.Text = "Поставщик:";
-                searchParam2.Visible = false;
-                searchBox2.Visible = false;
             }
         }
 
