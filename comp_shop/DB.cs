@@ -79,12 +79,22 @@ namespace comp_shop
             //   dataGridView1.DataSource = bindingSource1;
         }
 
-        static public void addToDB(string item_entry)
+        static public void addToDB(Article insertEntry)
         {
-            //StreamWriter sw = new StreamWriter(filename, false, System.Text.Encoding.GetEncoding(1251));
-            StreamWriter sw = File.AppendText(filename);
-            sw.WriteLine(item_entry);
-            sw.Close();
+            using (var tables = new ComputerShopEntities())
+            {
+                var std = new Item()
+                {
+                    Name = insertEntry.ItemNameGetter,
+                    Price = insertEntry.ItemPriceGetter,
+                    Category = insertEntry.ItemCategoryGetter,
+                    Seller = insertEntry.ItemSellerGetter,
+                    Supplier = insertEntry.ItemSupplierGetter
+                };
+                tables.Items.Add(std);
+
+                tables.SaveChanges();
+            }
         }
 
 

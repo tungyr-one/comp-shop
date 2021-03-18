@@ -59,7 +59,7 @@ namespace comp_shop
             if (new_item_form.my_item == null)
                 return;
             //TODO: спросить Почему my_item, будучи объектом класса Item не имеет доступа к приватным методам my_item.DBFormat()
-            DB.addToDB(new_item_form.my_item.DBFormat());
+            DB.addToDB(new_item_form.my_item);
             current_item = new_item_form.my_item;
             richTextBox1.Text += current_item.ToString();
         }

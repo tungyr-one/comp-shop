@@ -15,7 +15,7 @@ namespace comp_shop
         // TODO: Спросить: Используется одна форма для добавления и редактирования. 
         // Как заставить понимать форму что нужно делать - редактировать или создавать товар?
         string name;
-        double price;
+        decimal price;
         string category;
         string seller;
         string supplier;
@@ -47,7 +47,7 @@ namespace comp_shop
         private void CreateItem()
         {
             this.name = textBox1.Text;
-            this.price = double.Parse(textBox2.Text);
+            this.price = decimal.Parse(textBox2.Text);
             this.category = comboBox1.Text;
             this.seller = textBox3.Text;
             this.supplier = textBox3.Text;

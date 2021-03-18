@@ -9,20 +9,20 @@ namespace comp_shop
     public class Article
     {
         private string name;
-        private double price;
+        private decimal price;
         private string category;
         private string seller;
         private string supplier;
         //private List<Item> items = new List<Item>();
 
-        public Article(string name, double price, string category, string seller, string supplier)
+        public Article(string name, decimal price, string category, string seller, string supplier)
         {
             this.name = name;
             this.price = price;
             this.category = category;
             this.seller = seller;
             this.supplier = supplier;            
-            DB.addToDB(this.DBFormat());
+            //DB.addToDB(this.DBFormat());
             //items.Add(this);
 
         }
@@ -52,7 +52,7 @@ namespace comp_shop
             get { return this.name; }
         }
 
-        public double ItemPriceGetter
+        public decimal ItemPriceGetter
         {
             get { return this.price; }
         }
