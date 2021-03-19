@@ -77,7 +77,7 @@
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 20);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Категория";
             // 
             // label4
@@ -87,7 +87,7 @@
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 6;
             this.label4.Text = "Продавец";
             // 
             // textBox2
@@ -96,7 +96,7 @@
             this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(291, 26);
-            this.textBox2.TabIndex = 6;
+            this.textBox2.TabIndex = 3;
             // 
             // textBox3
             // 
@@ -117,7 +117,7 @@
             this.comboBox1.Location = new System.Drawing.Point(230, 164);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(291, 28);
-            this.comboBox1.TabIndex = 9;
+            this.comboBox1.TabIndex = 5;
             // 
             // button1
             // 
@@ -145,7 +145,7 @@
             this.textBox4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(291, 26);
-            this.textBox4.TabIndex = 12;
+            this.textBox4.TabIndex = 9;
             // 
             // label5
             // 
@@ -154,7 +154,7 @@
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 20);
-            this.label5.TabIndex = 13;
+            this.label5.TabIndex = 8;
             this.label5.Text = "Поставщик";
             // 
             // NewItemForm

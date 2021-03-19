@@ -36,12 +36,12 @@ namespace comp_shop
 
         private void editItem(Article itemToEdit)
         {
-            this.textBox1.Text = my_item.ItemNameGetter;
-            this.textBox2.Text = my_item.ItemPriceGetter.ToString();
-            this.comboBox1.Text = my_item.ItemCategoryGetter;
+            this.textBox1.Text = my_item.ArticleName;
+            this.textBox2.Text = my_item.ArticlePrice.ToString();
+            this.comboBox1.Text = my_item.ArticleCategory;
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал? 
-            this.textBox3.Text = my_item.ItemSellerGetter;
-            this.textBox4.Text = my_item.ItemSupplierGetter;
+            this.textBox3.Text = my_item.ArticleSeller;
+            this.textBox4.Text = my_item.ArticleSupplier;
         }
 
         private void CreateItem()
@@ -88,12 +88,12 @@ namespace comp_shop
         {
             if (this.my_item != null)
             {
-                this.textBox1.Text = my_item.ItemNameGetter;
-                this.textBox2.Text = my_item.ItemPriceGetter.ToString();
-                this.comboBox1.Text = my_item.ItemCategoryGetter;
+                this.textBox1.Text = my_item.ArticleName;
+                this.textBox2.Text = my_item.ArticlePrice.ToString();
+                this.comboBox1.Text = my_item.ArticleCategory;
                 // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
-                this.textBox3.Text = my_item.ItemSellerGetter;
-                this.textBox4.Text = my_item.ItemSupplierGetter;
+                this.textBox3.Text = my_item.ArticleSeller;
+                this.textBox4.Text = my_item.ArticleSupplier;
             }
         }
     }

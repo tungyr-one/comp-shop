@@ -15,6 +15,10 @@ namespace comp_shop
         private string supplier;
         //private List<Item> items = new List<Item>();
 
+        public Article()
+        {
+        }
+
         public Article(string name, decimal price, string category, string seller, string supplier)
         {
             this.name = name;
@@ -47,30 +51,20 @@ namespace comp_shop
         }
 
 
-        public string ItemNameGetter
-        {
-            get { return this.name; }
-        }
+        public string ArticleName
+        { get; set; }
 
-        public decimal ItemPriceGetter
-        {
-            get { return this.price; }
-        }
+        public decimal ArticlePrice
+        { get; set; }
 
-        public string ItemCategoryGetter
-        {
-            get { return this.category; }
-        }
+        public string ArticleCategory
+        { get; set; }
 
-        public string ItemSellerGetter
-        {
-            get { return this.seller; }
-        }
+        public string ArticleSeller
+        { get; set; }
 
-        public string ItemSupplierGetter
-        {
-            get { return this.supplier; }
-        }
+        public string ArticleSupplier
+        { get; set; }
 
     }
 }

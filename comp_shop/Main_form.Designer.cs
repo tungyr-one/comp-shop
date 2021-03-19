@@ -38,6 +38,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.searchBox3 = new System.Windows.Forms.TextBox();
+            this.searchParam3 = new System.Windows.Forms.Label();
             this.searchBox2 = new System.Windows.Forms.TextBox();
             this.searchParam2 = new System.Windows.Forms.Label();
             this.searchBox1 = new System.Windows.Forms.TextBox();
@@ -60,9 +62,8 @@
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.searchParam3 = new System.Windows.Forms.Label();
-            this.searchBox3 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -182,6 +183,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры поиска";
             // 
+            // searchBox3
+            // 
+            this.searchBox3.Location = new System.Drawing.Point(173, 110);
+            this.searchBox3.Name = "searchBox3";
+            this.searchBox3.Size = new System.Drawing.Size(131, 26);
+            this.searchBox3.TabIndex = 5;
+            this.searchBox3.Visible = false;
+            // 
+            // searchParam3
+            // 
+            this.searchParam3.AutoSize = true;
+            this.searchParam3.Location = new System.Drawing.Point(6, 115);
+            this.searchParam3.Name = "searchParam3";
+            this.searchParam3.Size = new System.Drawing.Size(84, 20);
+            this.searchParam3.TabIndex = 4;
+            this.searchParam3.Text = "Цена до:";
+            this.searchParam3.Visible = false;
+            // 
             // searchBox2
             // 
             this.searchBox2.Location = new System.Drawing.Point(173, 76);
@@ -218,9 +237,9 @@
             // 
             // find
             // 
-            this.find.Location = new System.Drawing.Point(93, 550);
+            this.find.Location = new System.Drawing.Point(108, 547);
             this.find.Name = "find";
-            this.find.Size = new System.Drawing.Size(170, 41);
+            this.find.Size = new System.Drawing.Size(135, 41);
             this.find.TabIndex = 7;
             this.find.Text = "Найти";
             this.find.UseVisualStyleBackColor = true;
@@ -228,7 +247,7 @@
             // 
             // editItem
             // 
-            this.editItem.Location = new System.Drawing.Point(65, 615);
+            this.editItem.Location = new System.Drawing.Point(65, 594);
             this.editItem.Name = "editItem";
             this.editItem.Size = new System.Drawing.Size(232, 37);
             this.editItem.TabIndex = 9;
@@ -238,9 +257,9 @@
             // 
             // addItem
             // 
-            this.addItem.Location = new System.Drawing.Point(65, 676);
+            this.addItem.Location = new System.Drawing.Point(65, 637);
             this.addItem.Name = "addItem";
-            this.addItem.Size = new System.Drawing.Size(237, 37);
+            this.addItem.Size = new System.Drawing.Size(232, 37);
             this.addItem.TabIndex = 10;
             this.addItem.Text = "Добавить новый товар";
             this.addItem.UseVisualStyleBackColor = true;
@@ -345,47 +364,43 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.DataSource = this.computerShopDataSetBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(370, 26);
+            this.dataGridView1.Location = new System.Drawing.Point(370, 27);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(748, 675);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(748, 437);
             this.dataGridView1.TabIndex = 14;
             // 
-            // richTextBox1
+            // button1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(382, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(29, 20);
-            this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
+            this.button1.Location = new System.Drawing.Point(65, 680);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(232, 37);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Загрузить все";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // searchParam3
+            // label2
             // 
-            this.searchParam3.AutoSize = true;
-            this.searchParam3.Location = new System.Drawing.Point(6, 115);
-            this.searchParam3.Name = "searchParam3";
-            this.searchParam3.Size = new System.Drawing.Size(84, 20);
-            this.searchParam3.TabIndex = 4;
-            this.searchParam3.Text = "Цена до:";
-            this.searchParam3.Visible = false;
-            // 
-            // searchBox3
-            // 
-            this.searchBox3.Location = new System.Drawing.Point(173, 110);
-            this.searchBox3.Name = "searchBox3";
-            this.searchBox3.Size = new System.Drawing.Size(131, 26);
-            this.searchBox3.TabIndex = 5;
-            this.searchBox3.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(370, 485);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 20);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "label2";
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 725);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.addItem);
             this.Controls.Add(this.editItem);
             this.Controls.Add(this.find);
@@ -398,6 +413,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Main_form";
             this.Text = "Компьютерный магазин БД";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_form_FormClosing);
             this.Load += new System.EventHandler(this.Main_form_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -445,9 +461,10 @@
         private System.Windows.Forms.Label searchParam1;
         private System.Windows.Forms.BindingSource computerShopDataSetBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox searchBox3;
         private System.Windows.Forms.Label searchParam3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

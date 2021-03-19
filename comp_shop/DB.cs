@@ -85,11 +85,11 @@ namespace comp_shop
             {
                 var std = new Item()
                 {
-                    Name = insertEntry.ItemNameGetter,
-                    Price = insertEntry.ItemPriceGetter,
-                    Category = insertEntry.ItemCategoryGetter,
-                    Seller = insertEntry.ItemSellerGetter,
-                    Supplier = insertEntry.ItemSupplierGetter
+                    Name = insertEntry.ArticleName,
+                    Price = insertEntry.ArticlePrice,
+                    Category = insertEntry.ArticleCategory,
+                    Seller = insertEntry.ArticleSeller,
+                    Supplier = insertEntry.ArticleSupplier
                 };
                 tables.Items.Add(std);
 

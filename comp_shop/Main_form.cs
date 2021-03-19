@@ -42,7 +42,7 @@ namespace comp_shop
     public partial class Main_form : Form
     {
         List<Article> working_items = new List<Article>();
-        Article current_item = null;
+        Article current_item = new Article();
         List<Item> search_result;
 
         public Main_form()
@@ -60,27 +60,58 @@ namespace comp_shop
                 return;
             //TODO: спросить Почему my_item, будучи объектом класса Item не имеет доступа к приватным методам my_item.DBFormat()
             DB.addToDB(new_item_form.my_item);
-            current_item = new_item_form.my_item;
-            richTextBox1.Text += current_item.ToString();
+            current_item = null;
         }
 
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
-            if (current_item == null)
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                MessageBox.Show("Не выбрано ни одного товара!");
-                return;
+                current_item.ArticleName = row.Cells[1].Value.ToString();
+                //current_item.ArticlePrice = decimal.(row.Cells[2].Value.ToString());
+                current_item.ArticleCategory = row.Cells[3].Value.ToString();
+                current_item.ArticleSeller = row.Cells[4].Value.ToString();
+                current_item.ArticleSupplier = row.Cells[5].Value.ToString();
             }
-            else
+
+            //NewItemForm new_item_form = new NewItemForm();
+            //new_item_form.my_item = current_item;
+            //new_item_form.ShowDialog();
+
+            //if (current_item == null)
+            //{
+            //    MessageBox.Show("Не выбрано ни одного товара!");
+            //    return;
+            //}
+            //else
+            //{
+            //    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            //    {
+            //        current_item.ArticleName = row.Cells[1].Value.ToString();
+            //        current_item.ArticlePrice = Convert.ToDecimal(row.Cells[2].Value);
+            //        current_item.ArticleCategory = row.Cells[3].Value.ToString();
+            //        current_item.ArticleSeller = row.Cells[4].Value.ToString();
+            //        current_item.ArticleSupplier = row.Cells[5].Value.ToString();
+            //    }
+
+            //    NewItemForm new_item_form = new NewItemForm();
+            //    new_item_form.my_item = current_item;
+            //    new_item_form.ShowDialog();
+            //}
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                NewItemForm new_item_form = new NewItemForm();
-                //TODO: Спровить:как правильно передача в новую форму выбранного товара для редактирования
-                new_item_form.my_item = current_item;
-                new_item_form.ShowDialog();
-                // TODO: Спросить: проверка изменений, внесенных в данные товара, как?
-                // Можно ли просто сравнить сами объекты до и после изменения?
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                string value4 = row.Cells[3].Value.ToString();
+                string value5 = row.Cells[4].Value.ToString();
+                string value6 = row.Cells[5].Value.ToString();
+                label2.Text = value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
             }
+
         }
 
         // нажатие кнопки поиск
@@ -136,18 +167,6 @@ namespace comp_shop
 
             dataGridView1.DataSource = search_result;
         }
-
-        private void SearchResultTreat(List<Article> items_list)
-        {
-            richTextBox1.Clear();
-            foreach (Article list_item in items_list)
-            {
-                richTextBox1.Text += list_item.ToString();
-                working_items.Add(list_item);
-            }
-            current_item = working_items[0];
-        }
-
 
 
         // выбор чекбоксов
@@ -213,29 +232,19 @@ namespace comp_shop
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            // ComputerShopEntities dataEntities = new ComputerShopEntities();
-            // // show all items
-            // var queryAllItems =
-            //(from item in dataEntities.Items
-            //     //where item.Item1 == "Computer Dell"
-            //  orderby item.ItemID
-            // select new { item.Name, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
-
-
             dataGridView1.AutoGenerateColumns = true;
-            //dataGridView1.DataSource = DB.ShowAllItems();
-            //dataGridView1.DataSource = DB.ShowAllOrders();
 
-            //dataGridView1.DataSource = DB.ShowParticularItem("Computer Dell");
+        }
 
-            //using
-            //    (
-            //        var ctx = new ComputerShopEntities())
-            //    {
-            //        dataGridView1.DataSource = ctx.Items.ToList();
-            //    }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
+            dataGridView1.DataSource = DB.ShowAllItems();
+        }
 
-
+        private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
