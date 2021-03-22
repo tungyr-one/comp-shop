@@ -12,7 +12,7 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Orders
     {
         public int OrderID { get; set; }
         public int ItemID { get; set; }
@@ -20,6 +20,6 @@ namespace comp_shop
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<int> OrderQuantity { get; set; }
     
-        public virtual Item Item { get; set; }
+        public virtual Items Items { get; set; }
     }
 }

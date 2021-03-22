@@ -23,26 +23,26 @@ namespace comp_shop
 
         static private string filename = "db_file.txt";
 
-        static public List<Item> ShowAllItems()
+        static public List<Items> ShowAllItems()
         {
             ComputerShopEntities dataEntities = new ComputerShopEntities();
             return dataEntities.Items.ToList();
         }
 
-        static public List<Order> ShowAllOrders()
+        static public List<Orders> ShowAllOrders()
         {
             ComputerShopEntities dataEntities = new ComputerShopEntities();
             return dataEntities.Orders.ToList();
         }
 
-        static public List<Item> SearchItemByName(string itemName)
+        static public List<Items> SearchItemByName(string itemName)
         {
             
             using (var tables = new ComputerShopEntities())
             {
                 //var computer = tables.Items
                 //                .Where(s => s.Name == "itemName")
-                //                .FirstOrDefault<Item>();
+                //                .FirstOrDefault<Items>();
                 var computerList = tables.Items.Where(s => s.Name == itemName).ToList();
                 return computerList;
             }
@@ -54,7 +54,7 @@ namespace comp_shop
             //(from item in dataEntities.Items
             // where item.Name == itemName
             // //orderby item.ItemID
-            // select new Item() { Name = item.Name, Price = item.Price, Category = item.Category, Seller = item.Seller, Supplier = item.Supplier });
+            // select new Items() { Name = item.Name, Price = item.Price, Category = item.Category, Seller = item.Seller, Supplier = item.Supplier });
 
             // return queryItem.ToList();
 
@@ -79,26 +79,26 @@ namespace comp_shop
             //   dataGridView1.DataSource = bindingSource1;
         }
 
-        static public void addToDB(Article insertEntry)
-        {
-            using (var tables = new ComputerShopEntities())
-            {
-                var std = new Item()
-                {
-                    Name = insertEntry.ArticleName,
-                    Price = insertEntry.ArticlePrice,
-                    Category = insertEntry.ArticleCategory,
-                    Seller = insertEntry.ArticleSeller,
-                    Supplier = insertEntry.ArticleSupplier
-                };
-                tables.Items.Add(std);
+        //static public void addToDB(Article insertEntry)
+        //{
+        //    using (var tables = new ComputerShopEntities())
+        //    {
+        //        var std = new Items()
+        //        {
+        //            Name = insertEntry.ArticleName,
+        //            Price = insertEntry.ArticlePrice,
+        //            CategoryID = insertEntry.ArticleCategory,
+        //            Seller = insertEntry.ArticleSeller,
+        //            Supplier = insertEntry.ArticleSupplier
+        //        };
+        //        tables.Items.Add(std);
 
-                tables.SaveChanges();
-            }
-        }
+        //        tables.SaveChanges();
+        //    }
+        //}
 
 
-        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
+        static public List<Items> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
             using (var tables = new ComputerShopEntities())
             {
@@ -107,25 +107,25 @@ namespace comp_shop
             }
         }
 
-        static public List<Item> SearchByCategory(string itemCategory)
-        {
-            using (var tables = new ComputerShopEntities())
-            {
-                var computerList = tables.Items.Where(s => s.Category == itemCategory).ToList();
-                return computerList;
-            }
-        }
+        //static public List<Items> SearchByCategory(string itemCategory)
+        //{
+        //    using (var tables = new ComputerShopEntities())
+        //    {
+        //        var computerList = tables.Items.Where(s => s.Category == itemCategory).ToList();
+        //        return computerList;
+        //    }
+        //}
 
-        static public List<Item> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
-        {
-            using (var tables = new ComputerShopEntities())
-            {
-                var computerList = tables.Items.Where(s => itemCategory == s.Category && priceTo >= s.Price && s.Price >= priceFrom).ToList();
-                return computerList;
-            }
-        }
+        //static public List<Items> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
+        //{
+        //    using (var tables = new ComputerShopEntities())
+        //    {
+        //        var computerList = tables.Items.Where(s => itemCategory == s.Category && priceTo >= s.Price && s.Price >= priceFrom).ToList();
+        //        return computerList;
+        //    }
+        //}
 
-        static public List<Item> SearchBySeller(string itemSeller)
+        static public List<Items> SearchBySeller(string itemSeller)
         {
             using (var tables = new ComputerShopEntities())
             {
@@ -134,14 +134,14 @@ namespace comp_shop
             }
         }
 
-        static public List<Item> SearchBySupplier(string itemSupplier)
-        {
-            using (var tables = new ComputerShopEntities())
-            {
-                var computerList = tables.Items.Where(s => s.Supplier == itemSupplier).ToList();
-                return computerList;
-            }
-        }
+        //static public List<Items> SearchBySupplier(string itemSupplier)
+        //{
+        //    using (var tables = new ComputerShopEntities())
+        //    {
+        //        var computerList = tables.Items.Where(s => s.Supplier == itemSupplier).ToList();
+        //        return computerList;
+        //    }
+        //}
 
     }
 }

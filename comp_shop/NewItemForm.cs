@@ -12,8 +12,6 @@ namespace comp_shop
 {
     public partial class NewItemForm : Form
     {
-        // TODO: Спросить: Используется одна форма для добавления и редактирования. 
-        // Как заставить понимать форму что нужно делать - редактировать или создавать товар?
         string name;
         decimal price;
         string category;
@@ -53,7 +51,6 @@ namespace comp_shop
             this.supplier = textBox3.Text;
             this.button2.Text = "Готово";
 
-            // TODO: Спросить: как это исправить??? Как сразу создать new_item и чтобы оно было видно на уровне класса?
             Article new_item = new Article(name, price, category, seller, supplier);
             my_item = new_item;
         }

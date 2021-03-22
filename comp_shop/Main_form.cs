@@ -26,6 +26,7 @@ using System.Windows.Forms;
 
 // LINKS
 //https://www.entityframeworktutorial.net/
+//http://csharp.net-informations.com/datagridview/csharp-datagridview-add-column.htm
 
 // disable lazy loading EF:
 
@@ -43,7 +44,7 @@ namespace comp_shop
     {
         List<Article> working_items = new List<Article>();
         Article current_item = new Article();
-        List<Item> search_result;
+        List<Items> search_result;
 
         public Main_form()
         {
@@ -51,16 +52,15 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
-        // нажатие кнопки добавить
+        //// нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
-            NewItemForm new_item_form = new NewItemForm();
-            new_item_form.ShowDialog();
-            if (new_item_form.my_item == null)
-                return;
-            //TODO: спросить Почему my_item, будучи объектом класса Item не имеет доступа к приватным методам my_item.DBFormat()
-            DB.addToDB(new_item_form.my_item);
-            current_item = null;
+            //NewItemForm new_item_form = new NewItemForm();
+            //new_item_form.ShowDialog();
+            //if (new_item_form.my_item == null)
+            //    return;
+            //DB.addToDB(new_item_form.my_item);
+            //current_item = null;
         }
 
         // нажатие кнопки редактировать
@@ -135,35 +135,35 @@ namespace comp_shop
                     MessageBox.Show("Неправильная цена!");
                 }
 
-            if (radioButton3.Checked)
-                try
-                {
-                    search_result = DB.SearchByCategory(searchBox1.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Неправильная категория!");
-                }
+            //if (radioButton3.Checked)
+            //    try
+            //    {
+            //        search_result = DB.SearchByCategory(searchBox1.Text);
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Неправильная категория!");
+            //    }
 
-            if (radioButton4.Checked)
-                try
-                {
-                    search_result = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
-                }
-                catch
-                {
-                    MessageBox.Show("Неправильная категория или цена!");
-                }
+            //if (radioButton4.Checked)
+            //    try
+            //    {
+            //        search_result = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Неправильная категория или цена!");
+            //    }
 
             if (radioButton5.Checked)
             {
                 search_result = DB.SearchBySeller(searchBox1.Text);
             }
 
-            if (radioButton6.Checked)
-            {
-                search_result = DB.SearchBySupplier(searchBox1.Text);
-            }
+            //if (radioButton6.Checked)
+            //{
+            //    search_result = DB.SearchBySupplier(searchBox1.Text);
+            //}
 
             dataGridView1.DataSource = search_result;
         }
@@ -232,7 +232,7 @@ namespace comp_shop
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            dataGridView1.AutoGenerateColumns = true;
+            //dataGridView1.AutoGenerateColumns = true;
 
         }
 

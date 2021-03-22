@@ -13,7 +13,7 @@ namespace comp_shop
         private string category;
         private string seller;
         private string supplier;
-        //private List<Item> items = new List<Item>();
+        //private List<Items> items = new List<Items>();
 
         public Article()
         {
