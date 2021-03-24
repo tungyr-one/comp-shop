@@ -100,7 +100,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComputerShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Categories">
+        <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
@@ -108,7 +108,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Items" Relationship="Self.FK_Items_Categories" FromRole="Categories" ToRole="Items" />
         </EntityType>
-        <EntityType Name="Items">
+        <EntityType Name="Item">
           <Key>
             <PropertyRef Name="ItemID" />
           </Key>
@@ -118,11 +118,11 @@
           <Property Name="Seller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="SupplierID" Type="Int32" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK_Items_Suppliers" FromRole="Items" ToRole="Suppliers" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Items_Suppliers" FromRole="Items" ToRole="Suppliers" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Items" FromRole="Items" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="Orders">
+        <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
@@ -131,9 +131,9 @@
           <Property Name="Customer" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="OrderQuantity" Type="Int32" />
-          <NavigationProperty Name="Items" Relationship="Self.FK_Orders_Items" FromRole="Orders" ToRole="Items" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Orders_Items" FromRole="Orders" ToRole="Items" />
         </EntityType>
-        <EntityType Name="Suppliers">
+        <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierID" />
           </Key>
@@ -143,8 +143,8 @@
           <NavigationProperty Name="Items" Relationship="Self.FK_Items_Suppliers" FromRole="Suppliers" ToRole="Items" />
         </EntityType>
         <Association Name="FK_Items_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="CategoryID" />
@@ -155,8 +155,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Items_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Suppliers">
               <PropertyRef Name="SupplierID" />
@@ -167,8 +167,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orders_Items">
-          <End Role="Items" Type="Self.Items" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Items">
               <PropertyRef Name="ItemID" />
@@ -179,10 +179,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ComputerShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="Self.Categories" />
-          <EntitySet Name="Items" EntityType="Self.Items" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" />
-          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <AssociationSet Name="FK_Items_Categories" Association="Self.FK_Items_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Items" EntitySet="Items" />
@@ -203,7 +203,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ComputerShopModelStoreContainer" CdmEntityContainer="ComputerShopEntities">
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ComputerShopModel.Categories">
+            <EntityTypeMapping TypeName="ComputerShopModel.Category">
               <MappingFragment StoreEntitySet="Categories">
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -211,7 +211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="ComputerShopModel.Items">
+            <EntityTypeMapping TypeName="ComputerShopModel.Item">
               <MappingFragment StoreEntitySet="Items">
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -223,7 +223,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ComputerShopModel.Orders">
+            <EntityTypeMapping TypeName="ComputerShopModel.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
@@ -234,7 +234,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="ComputerShopModel.Suppliers">
+            <EntityTypeMapping TypeName="ComputerShopModel.Supplier">
               <MappingFragment StoreEntitySet="Suppliers">
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -256,7 +256,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

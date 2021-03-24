@@ -12,12 +12,12 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Suppliers
+    public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Suppliers()
+        public Supplier()
         {
-            this.Items = new HashSet<Items>();
+            this.Items = new HashSet<Item>();
         }
     
         public int SupplierID { get; set; }
@@ -25,6 +25,6 @@ namespace comp_shop
         public string Contacts { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Items> Items { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

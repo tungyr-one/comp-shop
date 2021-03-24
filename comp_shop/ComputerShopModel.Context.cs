@@ -25,9 +25,9 @@ namespace comp_shop
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Items> Items { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
     }
 }

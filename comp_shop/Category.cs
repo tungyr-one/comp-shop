@@ -12,25 +12,18 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Items
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Items()
+        public Category()
         {
-            this.Orders = new HashSet<Orders>();
+            this.Items = new HashSet<Item>();
         }
     
-        public int ItemID { get; set; }
+        public int CategoryID { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Seller { get; set; }
-        public string CategoryName { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public Nullable<int> SupplierID { get; set; }
     
-        public virtual Categories Categories { get; set; }
-        public virtual Suppliers Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

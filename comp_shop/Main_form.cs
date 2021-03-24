@@ -27,6 +27,8 @@ using System.Windows.Forms;
 // LINKS
 //https://www.entityframeworktutorial.net/
 //http://csharp.net-informations.com/datagridview/csharp-datagridview-add-column.htm
+//https://www.entityframeworktutorial.net/entity-relationships.aspx
+//https://www.entityframeworktutorial.net/basics/entity-in-entityframework.aspx#reference-navigation-property
 
 // disable lazy loading EF:
 
@@ -44,7 +46,7 @@ namespace comp_shop
     {
         List<Article> working_items = new List<Article>();
         Article current_item = new Article();
-        List<Items> search_result;
+        List<Item> search_result;
 
         public Main_form()
         {
@@ -55,13 +57,16 @@ namespace comp_shop
         //// нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
-            //NewItemForm new_item_form = new NewItemForm();
-            //new_item_form.ShowDialog();
-            //if (new_item_form.my_item == null)
-            //    return;
-            //DB.addToDB(new_item_form.my_item);
+            NewItemForm new_item_form = new NewItemForm();
+            new_item_form.ShowDialog();
+            if (new_item_form.my_item == null)
+                return;
+            DB.addToDB(new_item_form.my_item);
             //current_item = null;
         }
+
+
+        
 
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)

@@ -18,6 +18,9 @@ namespace comp_shop
         string seller;
         string supplier;
         public Article my_item = null;
+        public static ComputerShopEntities db = new ComputerShopEntities();
+        public List<Category> categories = db.Categories.ToList();
+        public List<Supplier> suppliers = db.Suppliers.ToList();
 
         public NewItemForm()
         {
@@ -29,17 +32,16 @@ namespace comp_shop
             //// Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
             //textBox3.Text = "Петров В.А.";
             //textBox4.Text = "Иванов ИП";
-
         }
 
         private void editItem(Article itemToEdit)
         {
             this.textBox1.Text = my_item.ArticleName;
             this.textBox2.Text = my_item.ArticlePrice.ToString();
-            this.comboBox1.Text = my_item.ArticleCategory;
+            this.comboBox1.DataSource = categories;
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал? 
             this.textBox3.Text = my_item.ArticleSeller;
-            this.textBox4.Text = my_item.ArticleSupplier;
+            this.comboBox2.DataSource = suppliers;
         }
 
         private void CreateItem()
@@ -87,10 +89,10 @@ namespace comp_shop
             {
                 this.textBox1.Text = my_item.ArticleName;
                 this.textBox2.Text = my_item.ArticlePrice.ToString();
-                this.comboBox1.Text = my_item.ArticleCategory;
+                this.comboBox1.DataSource = categories;
                 // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
                 this.textBox3.Text = my_item.ArticleSeller;
-                this.textBox4.Text = my_item.ArticleSupplier;
+                this.comboBox2.DataSource = suppliers;
             }
         }
     }
