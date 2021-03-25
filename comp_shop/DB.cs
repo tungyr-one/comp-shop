@@ -45,8 +45,7 @@ namespace comp_shop
         }
 
         static public List<Item> SearchItemByName(string itemName)
-        {
-            
+        {            
             using (var tables = new ComputerShopEntities())
             {
                 //var computer = tables.Items
@@ -120,14 +119,14 @@ namespace comp_shop
             }
         }
 
-        //static public List<Items> SearchByCategory(string itemCategory)
-        //{
-        //    using (var tables = new ComputerShopEntities())
-        //    {
-        //        var computerList = tables.Items.Where(s => s.Category == itemCategory).ToList();
-        //        return computerList;
-        //    }
-        //}
+        static public List<Category> SearchByCategory(string itemCategory)
+        {
+            using (var tables = new ComputerShopEntities())
+            {
+                var computerList = tables.Categories.Where(s => s.Name == itemCategory).ToList();
+                return computerList;
+            }
+        }
 
         //static public List<Items> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
         //{

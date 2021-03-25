@@ -44,7 +44,6 @@ namespace comp_shop
 {
     public partial class Main_form : Form
     {
-        List<Article> working_items = new List<Article>();
         Article current_item = new Article();
         List<Item> search_result;
 
@@ -140,15 +139,16 @@ namespace comp_shop
                     MessageBox.Show("Неправильная цена!");
                 }
 
-            //if (radioButton3.Checked)
-            //    try
-            //    {
-            //        search_result = DB.SearchByCategory(searchBox1.Text);
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Неправильная категория!");
-            //    }
+            if (radioButton3.Checked)
+                try
+                {
+                    List<Category> search_result;
+                    search_result = DB.SearchByCategory(searchBox1.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная категория!");
+                }
 
             //if (radioButton4.Checked)
             //    try
