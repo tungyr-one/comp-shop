@@ -25,17 +25,32 @@ namespace comp_shop
 
         static public List<Item> ShowAllItems()
         {
-            //ComputerShopEntities dataEntities = new ComputerShopEntities();
-            //return dataEntities.Items.ToList();
+            //простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+            return dataEntities.Items.ToList();
 
-            List<Item> res = new List<Item>();
-            using (ComputerShopEntities db = new ComputerShopEntities())
-            {
-                var items = db.Items;
-                foreach (Item i in items)
-                    res = db.Items.ToList();
-            }
-            return res;
+            //List<Item> res = new List<Item>();
+
+            //using (var db = new ComputerShopEntities())
+            //{
+            //    var data = (from item in db.Items.ToList()
+            //                join category in db.Categories
+            //                on item.CategoryID equals category.CategoryID
+            //                select new 
+            //                {
+            //                    item.ItemID,
+            //                    ItemName = item.Name,
+            //                    CategoryName = category.Name,
+            //                }).ToList();
+            //    return data;
+            //}
+            //using (ComputerShopEntities db = new ComputerShopEntities())
+            //{
+            //    var items = db.Items;
+            //    foreach (Item i in items)
+            //        res = db.Items.ToList();
+            //}
+            //return res;
         }
 
         static public List<Order> ShowAllOrders()
@@ -44,50 +59,75 @@ namespace comp_shop
             return dataEntities.Orders.ToList();
         }
 
-        static public List<Item> SearchItemByName(string itemName)
-        {            
-            using (var tables = new ComputerShopEntities())
-            {
-                //var computer = tables.Items
-                //                .Where(s => s.Name == "itemName")
-                //                .FirstOrDefault<Items>();
-                var computerList = tables.Items.Where(s => s.Name == itemName).ToList();
-                return computerList;
+        static ComputerShopEntities context = new ComputerShopEntities();
+
+        static public IEnumerable<Item> SearchItemByName(string itemName)
+        {
+            // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
+            return (from item in context.Items where item.Name == itemName select item).ToList();
+
+            //using (var tables = new ComputerShopEntities())
+            //{
+            //    //var computer = tables.Items
+            //    //                .Where(s => s.Name == "itemName")
+            //    //                .FirstOrDefault<Items>();
+            //    var computerList = tables.Items.Where(s => s.Name == itemName).ToList();
+            //    return computerList;
+            //}
+
+            // пример с anonymous error требует решения
+            //using (var context = new ComputerShopEntities())
+            //{
+            //       var data = (from item in context.Items
+            //                join category in context.Categories on item.CategoryID equals category.CategoryID
+            //                join supplier in context.Suppliers on item.SupplierID equals supplier.SupplierID
+            //                where item.Name == itemName
+            //                select new
+            //                {
+            //                    ItemId = item.ItemID,
+            //                    ItemName = item.Name,
+            //                    ItemPrice = item.Price,
+            //                    ItemSeller = item.Seller,
+            //                    CategoryName = category.Name,
+            //                    SupplierName = supplier.Name
+            //                }).ToList();
+
+            //    return data;
+            //}
+
+
+
+                // ComputerShopEntities dataEntities = new ComputerShopEntities();
+                // var queryItem =
+                //(from item in dataEntities.Items
+                // where item.Name == itemName
+                // //orderby item.ItemID
+                // select new Items() { Name = item.Name, Price = item.Price, Category = item.Category, Seller = item.Seller, Supplier = item.Supplier });
+
+                // return queryItem.ToList();
+
+
+                //   // show all orders
+                //   var queryAllOrders =
+                //  (from order in dataEntities.Orders
+                //       //where item.Item1 == "Computer Dell"
+                //orderby order.OrderID
+                //   select new { order.OrderID, order.ItemID, order.Customer, order.OrderDate, order.OrderQuantity }).ToList();
+
+
+
+                //   BindingSource bindingSource1 = new BindingSource();
+                //   bindingSource1.DataSource = (from item in dataEntities.Items
+                //                                where item.Item1 == "Computer Dell"
+                //                                orderby item.ItemID
+                //                                select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
+
+
+                //   dataGridView1.AutoGenerateColumns = true;
+                //   dataGridView1.DataSource = bindingSource1;
             }
 
-            
-
-            // ComputerShopEntities dataEntities = new ComputerShopEntities();
-            // var queryItem =
-            //(from item in dataEntities.Items
-            // where item.Name == itemName
-            // //orderby item.ItemID
-            // select new Items() { Name = item.Name, Price = item.Price, Category = item.Category, Seller = item.Seller, Supplier = item.Supplier });
-
-            // return queryItem.ToList();
-
-
-            //   // show all orders
-            //   var queryAllOrders =
-            //  (from order in dataEntities.Orders
-            //       //where item.Item1 == "Computer Dell"
-            //orderby order.OrderID
-            //   select new { order.OrderID, order.ItemID, order.Customer, order.OrderDate, order.OrderQuantity }).ToList();
-
-
-
-            //   BindingSource bindingSource1 = new BindingSource();
-            //   bindingSource1.DataSource = (from item in dataEntities.Items
-            //                                where item.Item1 == "Computer Dell"
-            //                                orderby item.ItemID
-            //                                select new { item.Item1, item.Price, item.Category, item.Seller, item.Supplier }).ToList();
-
-
-            //   dataGridView1.AutoGenerateColumns = true;
-            //   dataGridView1.DataSource = bindingSource1;
-        }
-
-        static public void addToDB(Article insertEntry)
+            static public void addToDB(Article insertEntry)
         {
             //using (var tables = new ComputerShopEntities())
             //{

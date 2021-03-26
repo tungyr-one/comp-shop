@@ -29,6 +29,8 @@ using System.Windows.Forms;
 //http://csharp.net-informations.com/datagridview/csharp-datagridview-add-column.htm
 //https://www.entityframeworktutorial.net/entity-relationships.aspx
 //https://www.entityframeworktutorial.net/basics/entity-in-entityframework.aspx#reference-navigation-property
+//https://entityframework.net/include-with-where-clause
+// https://www.tutorialsteacher.com/linq/linq-query-syntax
 
 // disable lazy loading EF:
 
@@ -125,7 +127,55 @@ namespace comp_shop
             // TODO: text fields validation first
             if (radioButton1.Checked)
             {
-               search_result = DB.SearchItemByName(searchBox1.Text);
+
+                dataGridView1.DataSource = DB.SearchItemByName(searchBox1.Text);
+
+                //// ЗАПИСЬ С ПОДТЯГИВАНИЕМ ИНФЫ ИЗ ДРУГИХ ТАБЛИЦ
+                //using (var context = new ComputerShopEntities())
+                //{
+                //    var data = (from item in context.Items
+                //        join category in context.Categories on item.CategoryID equals category.CategoryID
+                //        join supplier in context.Suppliers on item.SupplierID equals supplier.SupplierID
+                //             where item.Name == searchBox1.Text
+                //             select new
+                //             {
+                //                 ItemId = item.ItemID,
+                //                 ItemName = item.Name,
+                //                 ItemPrice = item.Price,
+                //                 ItemSeller = item.Seller,
+                //                 CategoryName = category.Name,
+                //                 SupplierName = supplier.Name
+                //             }).ToList();
+
+                //    dataGridView1.DataSource = data;
+                //}
+
+                //// найти одну запись без подтягивания записей из других таблиц
+                //using (var context = new ComputerShopEntities())
+                //{
+                //    var data = (from d in context.Items
+                //                where d.Name == searchBox1.Text
+                //                select d).ToList();
+                //    dataGridView1.DataSource = data;
+
+                //}
+
+
+
+                //using (var db = new ComputerShopEntities())
+                //{
+                //    var data = (from item in db.Items.Where(s => s.Name == searchBox1.Text).ToList()                            
+                //                select new
+                //                {
+                //                    item.ItemID,
+                //                    ItemName = item.Name,
+                //                    ItemPrice = item.Price,
+                //                    ItemSeller = item.Seller,
+                //                }).ToList();
+                //    dataGridView1.DataSource = data;
+                //    return;
+                //}
+
             }
 
             if (radioButton2.Checked)
@@ -139,11 +189,13 @@ namespace comp_shop
                     MessageBox.Show("Неправильная цена!");
                 }
 
+            // поиск по категории
             if (radioButton3.Checked)
                 try
                 {
-                    List<Category> search_result;
-                    search_result = DB.SearchByCategory(searchBox1.Text);
+                    //List<Category> search_result;
+                    //search_result = DB.SearchByCategory(searchBox1.Text);
+
                 }
                 catch
                 {
@@ -170,7 +222,7 @@ namespace comp_shop
             //    search_result = DB.SearchBySupplier(searchBox1.Text);
             //}
 
-            dataGridView1.DataSource = search_result;
+            //dataGridView1.DataSource = search_result;
         }
 
 
@@ -237,10 +289,11 @@ namespace comp_shop
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            //dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.AutoGenerateColumns = true;
 
         }
 
+        // отобразить все записи
         private void button1_Click(object sender, EventArgs e)
         {
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
