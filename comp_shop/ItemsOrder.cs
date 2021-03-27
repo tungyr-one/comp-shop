@@ -12,26 +12,24 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class ItemsOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
+        public ItemsOrder()
         {
-            this.ItemsOrders = new HashSet<ItemsOrder>();
+            this.Items = new HashSet<Item>();
+            this.Orders = new HashSet<Order>();
         }
     
+        public int ItemOrderID { get; set; }
         public int ItemID { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Seller { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public Nullable<int> SupplierID { get; set; }
-        public Nullable<int> ItemOrderID { get; set; }
+        public int OrderID { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual ItemsOrder ItemsOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemsOrder> ItemsOrders { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual Order Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

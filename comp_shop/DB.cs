@@ -31,9 +31,10 @@ namespace comp_shop
             ComputerShopEntities dataEntities = new ComputerShopEntities();
             //return dataEntities.Items.ToList();
 
+            // TO-DO не показывает заказы
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Items.Include("Category").Include("Supplier").Include("Orders").ToList<Item>(); // показывает все, с dynamic тоже
+                var data = context.Items.Include("Category").Include("Supplier").ToList<Item>();
 
                 //// raw sql
                 //var data = context.Items.SqlQuery("select Items.Name, Categories.Name" +
@@ -74,20 +75,18 @@ namespace comp_shop
 
 
         //static public IEnumerable<Item> SearchItemByName(string itemName)
-        static public System.Type SearchItemByName(string itemName)
+        static public List<Item> SearchItemByName(string itemName)
         {
             // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
             //var context = new ComputerShopEntities();
             //return (from item in context.Items where item.Name == itemName select item).ToList();
-
-
             using (var context = new ComputerShopEntities())
             {
-                var blog = context.Items.Find(1);
-                var entityType = ObjectContext.GetObjectType(blog.GetType());
+                var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").Include("ItemsOrder").ToList<Item>();
 
-                return entityType;
+                return data;
             }
+
 
 
             //using (var tables = new ComputerShopEntities())

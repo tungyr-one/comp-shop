@@ -64,15 +64,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.itemsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ordersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -404,22 +403,13 @@
             this.priceDataGridViewTextBoxColumn,
             this.sellerDataGridViewTextBoxColumn,
             this.categoryDataGridViewTextBoxColumn,
-            this.supplierDataGridViewTextBoxColumn,
-            this.ordersDataGridViewTextBoxColumn});
+            this.supplierDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.itemsBindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(343, 35);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(787, 295);
             this.dataGridView1.TabIndex = 17;
-            // 
-            // itemsBindingSource1
-            // 
-            this.itemsBindingSource1.DataSource = typeof(comp_shop.Item);
-            // 
-            // itemsBindingSource
-            // 
-            this.itemsBindingSource.DataSource = typeof(comp_shop.Item);
             // 
             // itemIDDataGridViewTextBoxColumn
             // 
@@ -463,12 +453,13 @@
             this.supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
             this.supplierDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // ordersDataGridViewTextBoxColumn
+            // itemsBindingSource1
             // 
-            this.ordersDataGridViewTextBoxColumn.DataPropertyName = "Orders";
-            this.ordersDataGridViewTextBoxColumn.HeaderText = "Orders";
-            this.ordersDataGridViewTextBoxColumn.Name = "ordersDataGridViewTextBoxColumn";
-            this.ordersDataGridViewTextBoxColumn.ReadOnly = true;
+            this.itemsBindingSource1.DataSource = typeof(comp_shop.Item);
+            // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataSource = typeof(comp_shop.Item);
             // 
             // Main_form
             // 
