@@ -289,7 +289,7 @@ namespace comp_shop
 
         private void Main_form_Load(object sender, EventArgs e)
         {
-            dataGridView1.AutoGenerateColumns = true;
+            //dataGridView1.AutoGenerateColumns = true;
 
         }
 

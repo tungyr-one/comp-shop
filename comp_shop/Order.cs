@@ -21,5 +21,10 @@ namespace comp_shop
         public Nullable<int> OrderQuantity { get; set; }
     
         public virtual Item Item { get; set; }
+
+        public override string ToString()
+        {
+            return Customer;
+        }
     }
 }
