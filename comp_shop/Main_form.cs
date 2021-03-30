@@ -130,6 +130,7 @@ namespace comp_shop
 
                 dataGridView1.DataSource = DB.SearchItemByName(searchBox1.Text);
 
+                #region
                 //// ЗАПИСЬ С ПОДТЯГИВАНИЕМ ИНФЫ ИЗ ДРУГИХ ТАБЛИЦ
                 //using (var context = new ComputerShopEntities())
                 //{
@@ -175,13 +176,14 @@ namespace comp_shop
                 //    dataGridView1.DataSource = data;
                 //    return;
                 //}
+                #endregion
 
             }
 
             if (radioButton2.Checked)
                 try
                 {
-                    search_result = DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
+                    dataGridView1.DataSource = DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
 
                 }
                 catch
@@ -191,36 +193,37 @@ namespace comp_shop
 
             // поиск по категории
             if (radioButton3.Checked)
-                try
-                {
-                    //List<Category> search_result;
-                    //search_result = DB.SearchByCategory(searchBox1.Text);
-
-                }
-                catch
-                {
-                    MessageBox.Show("Неправильная категория!");
-                }
-
-            //if (radioButton4.Checked)
-            //    try
+                dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
+            //try
             //    {
-            //        search_result = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
+            //        //List<Category> search_result;
+            //        dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
+
             //    }
             //    catch
             //    {
-            //        MessageBox.Show("Неправильная категория или цена!");
+            //        MessageBox.Show("Неправильная категория!");
             //    }
+
+            if (radioButton4.Checked)
+                try
+                {
+                    dataGridView1.DataSource = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная категория или цена!");
+                }
 
             if (radioButton5.Checked)
             {
-                search_result = DB.SearchBySeller(searchBox1.Text);
+                dataGridView1.DataSource = DB.SearchBySeller(searchBox1.Text);
             }
 
-            //if (radioButton6.Checked)
-            //{
-            //    search_result = DB.SearchBySupplier(searchBox1.Text);
-            //}
+            if (radioButton6.Checked)
+            {
+                dataGridView1.DataSource = DB.SearchBySupplier(searchBox1.Text);
+            }
 
             //dataGridView1.DataSource = search_result;
         }

@@ -74,7 +74,37 @@ namespace comp_shop
         }
 
 
-        //static public IEnumerable<Item> SearchItemByName(string itemName)
+        static public void AddCategory(string categoryName)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                context.Categories.Add(new Category { Name = categoryName });
+            }
+        }
+
+        static public void addToDB(Article insertEntry)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
+
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
+
+                var itemEntry = new Item()
+                {
+                    Name = insertEntry.ArticleName,
+                    Price = insertEntry.ArticlePrice,
+                    Category = categoryEntry,
+                    Seller = insertEntry.ArticleSeller,
+                    Supplier = supplierEntry,
+                };
+                context.Items.Add(itemEntry);
+
+                context.SaveChanges();
+            }
+        }
+
+
         static public List<Item> SearchItemByName(string itemName)
         {
             // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
@@ -150,73 +180,70 @@ namespace comp_shop
             //   dataGridView1.DataSource = bindingSource1;
         }
 
-        static public void addToDB(Article insertEntry)
-        {
-            //using (var tables = new ComputerShopEntities())
-            //{
-            //    var std = new Item()
-            //    {
-            //        Name = insertEntry.ArticleName,
-            //        Price = insertEntry.ArticlePrice,
-            //        Category = 1
-            //        Seller = insertEntry.ArticleSeller,
-            //        Supplier = insertEntry.ArticleSupplier
-            //    };
-            //    tables.Items.Add(std);
 
-            //    tables.SaveChanges();
-            //}
-        }
 
 
         static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
-            using (var tables = new ComputerShopEntities())
-            {
-                //Item itemEntity = tables.Items.Find(1);
-                var studentEntity = tables.Items.SqlQuery("select * from items where itemid = 1").FirstOrDefault<Item>();
+            //using (var tables = new ComputerShopEntities())
+            //{
+            //    //Item itemEntity = tables.Items.Find(1);
+            //    var studentEntity = tables.Items.SqlQuery("select * from items where itemid = 1").FirstOrDefault<Item>();
 
-                var computerList = tables.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom).ToList();
-                return computerList;
-                //return studentEntity;
+            //    var computerList = tables.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom).ToList();
+            //    return computerList;
+            //    //return studentEntity;
+
+
+            //}
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Items.Where(x => priceTo >= x.Price && x.Price >= priceFrom).Include("Category").Include("Supplier").ToList<Item>();
+
+                return data;
             }
         }
 
-        static public List<Category> SearchByCategory(string itemCategory)
+        static public List<Item> SearchByCategory(string itemCategory)
         {
-            using (var tables = new ComputerShopEntities())
+            using (var context = new ComputerShopEntities())
             {
-                var computerList = tables.Categories.Where(s => s.Name == itemCategory).ToList();
-                return computerList;
+                Category category = context.Categories.FirstOrDefault(c => c.Name == itemCategory);
+                var data = context.Items.Where(x => x.Category.Name == category.Name).Include("Category").Include("Supplier").ToList<Item>();
+                return data;
             }
         }
 
-        //static public List<Items> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
-        //{
-        //    using (var tables = new ComputerShopEntities())
-        //    {
-        //        var computerList = tables.Items.Where(s => itemCategory == s.Category && priceTo >= s.Price && s.Price >= priceFrom).ToList();
-        //        return computerList;
-        //    }
-        //}
+        static public List<Item> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom && s.Category.Name == itemCategory).Include("Category").Include("Supplier").ToList();
+                return data;
+            }
+        }
 
         static public List<Item> SearchBySeller(string itemSeller)
         {
-            using (var tables = new ComputerShopEntities())
+            using (var context = new ComputerShopEntities())
             {
-                var computerList = tables.Items.Where(s => s.Seller == itemSeller).ToList();
-                return computerList;
+                var data = context.Items.Where(x => x.Seller == itemSeller).Include("Category").Include("Supplier").ToList<Item>();
+
+                return data;
             }
         }
 
-        //static public List<Items> SearchBySupplier(string itemSupplier)
-        //{
-        //    using (var tables = new ComputerShopEntities())
-        //    {
-        //        var computerList = tables.Items.Where(s => s.Supplier == itemSupplier).ToList();
-        //        return computerList;
-        //    }
-        //}
+        static public List<Item> SearchBySupplier(string itemSupplier)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == itemSupplier);
+                var data = context.Items.Where(x => x.Supplier.Name == supplier.Name).Include("Category").Include("Supplier").ToList<Item>();
+
+                return data;
+            }
+        }
 
     }
 }
