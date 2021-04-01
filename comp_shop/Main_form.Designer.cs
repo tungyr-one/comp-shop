@@ -44,7 +44,7 @@
             this.searchParam2 = new System.Windows.Forms.Label();
             this.searchBox1 = new System.Windows.Forms.TextBox();
             this.searchParam1 = new System.Windows.Forms.Label();
-            this.find = new System.Windows.Forms.Button();
+            this.findButton = new System.Windows.Forms.Button();
             this.editItem = new System.Windows.Forms.Button();
             this.addItem = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -73,7 +73,6 @@
             this.sellerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,7 +81,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -201,6 +199,7 @@
             this.searchBox3.Size = new System.Drawing.Size(131, 26);
             this.searchBox3.TabIndex = 5;
             this.searchBox3.Visible = false;
+            this.searchBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox3_KeyDown);
             // 
             // searchParam3
             // 
@@ -219,6 +218,7 @@
             this.searchBox2.Size = new System.Drawing.Size(131, 26);
             this.searchBox2.TabIndex = 3;
             this.searchBox2.Visible = false;
+            this.searchBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox2_KeyDown);
             // 
             // searchParam2
             // 
@@ -236,6 +236,7 @@
             this.searchBox1.Name = "searchBox1";
             this.searchBox1.Size = new System.Drawing.Size(131, 26);
             this.searchBox1.TabIndex = 1;
+            this.searchBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox1_KeyDown_1);
             // 
             // searchParam1
             // 
@@ -246,15 +247,15 @@
             this.searchParam1.TabIndex = 0;
             this.searchParam1.Text = "Название товара:";
             // 
-            // find
+            // findButton
             // 
-            this.find.Location = new System.Drawing.Point(108, 547);
-            this.find.Name = "find";
-            this.find.Size = new System.Drawing.Size(135, 41);
-            this.find.TabIndex = 7;
-            this.find.Text = "Найти";
-            this.find.UseVisualStyleBackColor = true;
-            this.find.Click += new System.EventHandler(this.find_Click);
+            this.findButton.Location = new System.Drawing.Point(108, 547);
+            this.findButton.Name = "findButton";
+            this.findButton.Size = new System.Drawing.Size(135, 41);
+            this.findButton.TabIndex = 7;
+            this.findButton.Text = "Найти";
+            this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.find_Click);
             // 
             // editItem
             // 
@@ -405,7 +406,7 @@
             this.sellerDataGridViewTextBoxColumn,
             this.categoryDataGridViewTextBoxColumn,
             this.supplierDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.itemsBindingSource1;
+            this.dataGridView1.DataSource = this.itemsBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -439,7 +440,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(754, 416);
+            this.tabPage2.Size = new System.Drawing.Size(747, 614);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -486,10 +487,6 @@
             this.supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
             this.supplierDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // itemsBindingSource1
-            // 
-            this.itemsBindingSource1.DataSource = typeof(comp_shop.Item);
-            // 
             // itemsBindingSource
             // 
             this.itemsBindingSource.DataSource = typeof(comp_shop.Item);
@@ -504,7 +501,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.addItem);
             this.Controls.Add(this.editItem);
-            this.Controls.Add(this.find);
+            this.Controls.Add(this.findButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -516,6 +513,7 @@
             this.Text = "Компьютерный магазин БД";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_form_FormClosing);
             this.Load += new System.EventHandler(this.Main_form_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -526,7 +524,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -544,7 +541,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button find;
+        private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button editItem;
         private System.Windows.Forms.Button addItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -573,17 +570,16 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoriesDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn suppliersDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource itemsBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordersDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sellerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ordersDataGridViewTextBoxColumn;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 

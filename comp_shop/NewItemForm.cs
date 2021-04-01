@@ -18,39 +18,47 @@ namespace comp_shop
         string seller;
         string supplier;
         public Article my_item = null;
-        public static ComputerShopEntities db = new ComputerShopEntities();
-        public List<Category> categories = db.Categories.ToList();
-        public List<Supplier> suppliers = db.Suppliers.ToList();
 
         public NewItemForm()
         {
             InitializeComponent();
 
-            //textBox1.Text = "Компьютер";
-            //textBox2.Text = "10255,45";
-            //comboBox1.Text = "Компьютеры";
-            //// Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
-            //textBox3.Text = "Петров В.А.";
-            //textBox4.Text = "Иванов ИП";
+            textBox1.Text = "Razor";
+            textBox2.Text = "10255,45";
+
+            // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
+            textBox3.Text = "Pupkin";
+
+            using (ComputerShopEntities c = new ComputerShopEntities())
+            {
+                comboBox1.DataSource = c.Categories.ToList();
+                comboBox2.DataSource = c.Suppliers.ToList();
+
+                comboBox1.ValueMember = "Name";
+                comboBox1.DisplayMember = "Name";
+
+                comboBox2.ValueMember = "Name";
+                comboBox2.DisplayMember = "Name";
+            }
         }
 
         private void editItem(Article itemToEdit)
         {
             this.textBox1.Text = my_item.ArticleName;
             this.textBox2.Text = my_item.ArticlePrice.ToString();
-            this.comboBox1.DataSource = categories;
+            //this.comboBox1.DataSource = categories;
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал? 
             this.textBox3.Text = my_item.ArticleSeller;
-            this.comboBox2.DataSource = suppliers;
+            //this.comboBox2.DataSource = suppliers;
         }
 
         private void CreateItem()
         {
             this.name = textBox1.Text;
             this.price = decimal.Parse(textBox2.Text);
-            this.category = comboBox1.Text;
+            this.category = comboBox1.SelectedItem.ToString();
             this.seller = textBox3.Text;
-            this.supplier = textBox3.Text;
+            this.supplier = comboBox2.SelectedItem.ToString();
             this.button2.Text = "Готово";
 
             Article new_item = new Article(name, price, category, seller, supplier);
@@ -89,10 +97,10 @@ namespace comp_shop
             {
                 this.textBox1.Text = my_item.ArticleName;
                 this.textBox2.Text = my_item.ArticlePrice.ToString();
-                this.comboBox1.DataSource = categories;
+                //this.comboBox1.DataSource = categories;
                 // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
                 this.textBox3.Text = my_item.ArticleSeller;
-                this.comboBox2.DataSource = suppliers;
+                //this.comboBox2.DataSource = suppliers;
             }
         }
     }

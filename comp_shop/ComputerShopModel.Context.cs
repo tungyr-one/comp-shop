@@ -20,6 +20,7 @@ namespace comp_shop
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.ValidateOnSaveEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

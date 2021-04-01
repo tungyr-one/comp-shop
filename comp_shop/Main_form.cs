@@ -59,9 +59,10 @@ namespace comp_shop
         private void addItem_Click(object sender, EventArgs e)
         {
             NewItemForm new_item_form = new NewItemForm();
-            new_item_form.ShowDialog();
+                new_item_form.ShowDialog();
             if (new_item_form.my_item == null)
                 return;
+            label2.Text = 1 + new_item_form.my_item.DBFormat();
             DB.addToDB(new_item_form.my_item);
             //current_item = null;
         }
@@ -306,6 +307,46 @@ namespace comp_shop
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Main_form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                findButton.PerformClick();
+            }
+        }
+
+        private void searchBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                findButton.PerformClick();
+            }
+        }
+
+        private void searchBox1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                findButton.PerformClick();
+            }
+        }
+
+        private void searchBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                findButton.PerformClick();
+            }
+        }
+
+        private void searchBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                findButton.PerformClick();
+            }
         }
     }
 }

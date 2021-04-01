@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Windows.Forms;
 
 namespace comp_shop
 {
@@ -17,11 +19,12 @@ namespace comp_shop
         // TODO: сделать один список на всех, а не в каждом методе свой?
 
 
-        static string name = "temp_name";
-        static double price = 36.9;
-        static string category = "temp_category";
-        static string seller = "temp_seller";
-        static string supplier = "temp_supplier";
+        //static string name = "temp_name";
+        //static double price = 36.9;
+        //static string category = "temp_category";
+        //static string seller = "temp_seller";
+        //static string supplier = "temp_supplier";
+
 
         static private string filename = "db_file.txt";
 
@@ -84,25 +87,47 @@ namespace comp_shop
 
         static public void addToDB(Article insertEntry)
         {
-            using (var context = new ComputerShopEntities())
+
+            MessageBox.Show("outside using: " + insertEntry.DBFormat());
+            try
             {
-                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
-
-                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
-
-                var itemEntry = new Item()
+                using (var context = new ComputerShopEntities())
                 {
-                    Name = insertEntry.ArticleName,
-                    Price = insertEntry.ArticlePrice,
-                    Category = categoryEntry,
-                    Seller = insertEntry.ArticleSeller,
-                    Supplier = supplierEntry,
-                };
-                context.Items.Add(itemEntry);
+                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
+                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
 
-                context.SaveChanges();
+                    MessageBox.Show("inside using: " + insertEntry.DBFormat());
+                    var itemEntry = new Item()
+                    {
+                        Name = insertEntry.ArticleName,
+                        Price = insertEntry.ArticlePrice,
+                        Category = categoryEntry,
+                        Seller = insertEntry.ArticleSeller,
+                        Supplier = supplierEntry,
+
+
+                    };
+
+                    MessageBox.Show("itemEntry name: " + itemEntry.ToString()) ;
+                    context.Items.Add(itemEntry);
+
+                    context.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show(ve.ErrorMessage);
+                    }
+                }
+                throw;
+
             }
         }
+
 
 
         static public List<Item> SearchItemByName(string itemName)
