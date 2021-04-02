@@ -99,10 +99,10 @@ namespace comp_shop
                     MessageBox.Show("inside using: " + insertEntry.DBFormat());
                     var itemEntry = new Item()
                     {
-                        Name = insertEntry.ArticleName,
+                        Name = "example",
                         Price = insertEntry.ArticlePrice,
                         Category = categoryEntry,
-                        Seller = insertEntry.ArticleSeller,
+                        Seller = "another",
                         Supplier = supplierEntry,
 
 

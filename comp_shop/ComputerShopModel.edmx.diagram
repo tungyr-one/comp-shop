@@ -4,18 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd120bf49b4e4922b0e60c39a8aad2aa" Name="Diagram1">
-        <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+      <Diagram DiagramId="f76a4a1e70a64b84a19025421ba9f1e1" Name="Diagram1">
+        <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.ItemsOrder" Width="1.5" PointX="5.375" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="6.625" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerShopModel.FK_Items_ItemOrder" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerShopModel.FK_Items_Orders_Items" ManuallyRouted="false" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Suppliers" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerShopModel.FK_Items_Orders_Orders" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerShopModel.FK_Orders_Items" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
