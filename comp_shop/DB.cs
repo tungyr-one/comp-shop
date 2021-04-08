@@ -89,8 +89,8 @@ namespace comp_shop
         {
 
             MessageBox.Show("outside using: " + insertEntry.DBFormat());
-            try
-            {
+            //try
+            //{
                 using (var context = new ComputerShopEntities())
                 {
                     Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
@@ -99,10 +99,10 @@ namespace comp_shop
                     MessageBox.Show("inside using: " + insertEntry.DBFormat());
                     var itemEntry = new Item()
                     {
-                        Name = "example",
+                        Name = insertEntry.ArticleName,
                         Price = insertEntry.ArticlePrice,
                         Category = categoryEntry,
-                        Seller = "another",
+                        Seller = insertEntry.ArticleSeller,
                         Supplier = supplierEntry,
 
 
@@ -113,19 +113,19 @@ namespace comp_shop
 
                     context.SaveChanges();
                 }
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        MessageBox.Show(ve.ErrorMessage);
-                    }
-                }
-                throw;
+            //}
+            //catch (DbEntityValidationException e)
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            MessageBox.Show(ve.ErrorMessage);
+            //        }
+            //    }
+            //    throw;
 
-            }
+            //}
         }
 
 

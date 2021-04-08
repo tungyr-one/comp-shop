@@ -20,8 +20,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="smallmoney" Nullable="false" />
           <Property Name="Seller" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CategoryID" Type="int" />
-          <Property Name="SupplierID" Type="int" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -41,7 +41,7 @@
           <Property Name="Contacts" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Items_Categories">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -53,7 +53,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Items_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Suppliers">
@@ -99,8 +99,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="Seller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" />
-          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Items_Suppliers" FromRole="Items" ToRole="Suppliers" />
         </EntityType>
@@ -123,7 +123,7 @@
           <NavigationProperty Name="Items" Relationship="Self.FK_Items_Suppliers" FromRole="Suppliers" ToRole="Items" />
         </EntityType>
         <Association Name="FK_Items_Categories">
-          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="Items" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
@@ -135,7 +135,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Items_Suppliers">
-          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
           <End Role="Items" Type="Self.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Suppliers">

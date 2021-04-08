@@ -14,20 +14,19 @@ namespace comp_shop
     
     public partial class Item
     {
+        public int ItemID { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string Seller { get; set; }
+        public int CategoryID { get; set; }
+        public int SupplierID { get; set; }
+    
+        public virtual Category Category { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
         public override string ToString()
         {
             return Name;
         }
-
-        public int ItemID { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Seller { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public Nullable<int> SupplierID { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Supplier Supplier { get; set; }
     }
 }
