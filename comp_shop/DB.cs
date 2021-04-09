@@ -87,16 +87,25 @@ namespace comp_shop
 
         static public void addToDB(Article insertEntry)
         {
-
-            MessageBox.Show("outside using: " + insertEntry.DBFormat());
-            //try
-            //{
+            // проверка содержимого полей Article
+            //MessageBox.Show("outside using: " + insertEntry.ArticleName + "-" + 
+            //    insertEntry.ArticlePrice + "-" +
+            //    insertEntry.ArticleCategory + "-" +
+            //    insertEntry.ArticleSeller + "-" +                
+            //    insertEntry.ArticleSupplier);
+            try
+            {
                 using (var context = new ComputerShopEntities())
                 {
                     Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
                     Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
+                    // проверка содержимого полей Article
+                //    MessageBox.Show("inside using: " + insertEntry.ArticleName + "-" +
+                //insertEntry.ArticlePrice + "-" +
+                //insertEntry.ArticleCategory + "-" +
+                //insertEntry.ArticleSeller + "-" +
+                //insertEntry.ArticleSupplier);
 
-                    MessageBox.Show("inside using: " + insertEntry.DBFormat());
                     var itemEntry = new Item()
                     {
                         Name = insertEntry.ArticleName,
@@ -113,22 +122,30 @@ namespace comp_shop
 
                     context.SaveChanges();
                 }
-            //}
-            //catch (DbEntityValidationException e)
-            //{
-            //    foreach (var eve in e.EntityValidationErrors)
-            //    {
-            //        foreach (var ve in eve.ValidationErrors)
-            //        {
-            //            MessageBox.Show(ve.ErrorMessage);
-            //        }
-            //    }
-            //    throw;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show(ve.ErrorMessage);
+                    }
+                }
+                throw;
 
-            //}
+            }
         }
 
-
+        static public void RemoveItem(Article removeEntry)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ArticleId));
+                context.SaveChanges();
+                MessageBox.Show(removeEntry.ArticleName + " removed from database!");
+            }
+        }
 
         static public List<Item> SearchItemByName(string itemName)
         {
@@ -269,6 +286,8 @@ namespace comp_shop
                 return data;
             }
         }
+
+
 
     }
 }

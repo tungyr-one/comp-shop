@@ -18,17 +18,31 @@ namespace comp_shop
         string seller;
         string supplier;
         public Article my_item = null;
+        bool createOperation;
 
-        public NewItemForm()
+        public NewItemForm(bool createOperation = true)
         {
             InitializeComponent();
+            
+           this.createOperation = createOperation;
 
             textBox1.Text = "Razor";
             textBox2.Text = "10255,45";
-
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
             textBox3.Text = "Pupkin";
 
+            if (createOperation == true)
+            {
+                this.Text = "Добавление товара";
+                button1.Text = "Добавить";
+            }
+            else
+            {
+                this.Text = "Изменение товара";
+                button1.Text = "Изменить";
+            }
+
+            // заполнение комбобоксов значениями
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
                 comboBox1.DataSource = c.Categories.ToList();
@@ -46,10 +60,10 @@ namespace comp_shop
         {
             this.textBox1.Text = my_item.ArticleName;
             this.textBox2.Text = my_item.ArticlePrice.ToString();
-            //this.comboBox1.DataSource = categories;
+            this.comboBox1.ValueMember = my_item.ArticleCategory;
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал? 
             this.textBox3.Text = my_item.ArticleSeller;
-            //this.comboBox2.DataSource = suppliers;
+            this.comboBox2.ValueMember = my_item.ArticleSupplier;
         }
 
         private void CreateItem()
@@ -71,14 +85,12 @@ namespace comp_shop
             //this.price = double.Parse(textBox2.Text);
             //this.category = comboBox1.Text;
             //this.supplier = textBox3.Text;
-            if (this.my_item == null)
+            if (createOperation == true)
             {
-                button1.Text = "Довить";
                 this.CreateItem();
             }
             else
             {
-                button1.Text = "Изменить";
                 this.editItem(my_item);
             }
         }

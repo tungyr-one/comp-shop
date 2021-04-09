@@ -62,7 +62,7 @@ namespace comp_shop
                 new_item_form.ShowDialog();
             if (new_item_form.my_item == null)
                 return;
-            label2.Text = 1 + new_item_form.my_item.DBFormat();
+            statusStrip1.Text = new_item_form.my_item.DBFormat();
             DB.addToDB(new_item_form.my_item);
             //current_item = null;
         }
@@ -74,18 +74,11 @@ namespace comp_shop
         private void editItem_Click(object sender, EventArgs e)
         {
 
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                current_item.ArticleName = row.Cells[1].Value.ToString();
-                //current_item.ArticlePrice = decimal.(row.Cells[2].Value.ToString());
-                current_item.ArticleCategory = row.Cells[3].Value.ToString();
-                current_item.ArticleSeller = row.Cells[4].Value.ToString();
-                current_item.ArticleSupplier = row.Cells[5].Value.ToString();
-            }
 
-            //NewItemForm new_item_form = new NewItemForm();
-            //new_item_form.my_item = current_item;
-            //new_item_form.ShowDialog();
+            // открыте формы изменения товара
+            NewItemForm new_item_form = new NewItemForm(false);
+            new_item_form.my_item = current_item;
+            new_item_form.ShowDialog();
 
             //if (current_item == null)
             //{
@@ -103,21 +96,10 @@ namespace comp_shop
             //        current_item.ArticleSupplier = row.Cells[5].Value.ToString();
             //    }
 
-            //    NewItemForm new_item_form = new NewItemForm();
-            //    new_item_form.my_item = current_item;
-            //    new_item_form.ShowDialog();
+                //NewItemForm new_item_form = new NewItemForm();
+                //new_item_form.my_item = current_item;
+                //new_item_form.ShowDialog();
             //}
-
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                string value1 = row.Cells[0].Value.ToString();
-                string value2 = row.Cells[1].Value.ToString();
-                string value3 = row.Cells[2].Value.ToString();
-                string value4 = row.Cells[3].Value.ToString();
-                string value5 = row.Cells[4].Value.ToString();
-                string value6 = row.Cells[5].Value.ToString();
-                label2.Text = value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
-            }
 
         }
 
@@ -309,6 +291,7 @@ namespace comp_shop
             Application.Exit();
         }
 
+        // обработка нажатия Enter
         private void Main_form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -341,11 +324,44 @@ namespace comp_shop
             }
         }
 
+
         private void searchBox3_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 findButton.PerformClick();
+            }
+        }
+
+        //нажатие кнопки удалить
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DB.RemoveItem(current_item);
+        }
+
+        //изменение выбора строки
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            // присваивание текущему обрабатываемому товару имена из выбранного элемента в DataGridView
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                current_item.ArticleId = Convert.ToInt32(row.Cells[0].Value);
+                current_item.ArticleName = row.Cells[1].Value.ToString();
+                current_item.ArticlePrice = Convert.ToDecimal(row.Cells[2].Value);
+                current_item.ArticleCategory = row.Cells[3].Value.ToString();
+                current_item.ArticleSeller = row.Cells[4].Value.ToString();
+                current_item.ArticleSupplier = row.Cells[5].Value.ToString();
+            }
+
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                string value4 = row.Cells[3].Value.ToString();
+                string value5 = row.Cells[4].Value.ToString();
+                string value6 = row.Cells[5].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
             }
         }
     }

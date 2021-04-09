@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 61);
+            this.label1.Location = new System.Drawing.Point(60, 62);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(156, 20);
@@ -55,7 +55,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(230, 58);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(291, 26);
             this.textBox1.TabIndex = 1;
@@ -83,7 +83,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 219);
+            this.label4.Location = new System.Drawing.Point(60, 218);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
@@ -93,15 +93,15 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(230, 114);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(5);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(291, 26);
             this.textBox2.TabIndex = 3;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(230, 216);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.textBox3.Location = new System.Drawing.Point(230, 215);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(5);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(291, 26);
             this.textBox3.TabIndex = 7;
@@ -109,16 +109,16 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(230, 164);
+            this.comboBox1.Location = new System.Drawing.Point(230, 165);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(291, 28);
             this.comboBox1.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(116, 329);
+            this.button1.Location = new System.Drawing.Point(117, 329);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 36);
+            this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 10;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(339, 329);
+            this.button2.Location = new System.Drawing.Point(338, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(107, 35);
             this.button2.TabIndex = 11;
@@ -147,16 +147,16 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(230, 267);
+            this.comboBox2.Location = new System.Drawing.Point(230, 268);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(291, 28);
-            this.comboBox2.TabIndex = 12;
+            this.comboBox2.TabIndex = 9;
             // 
             // NewItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 408);
+            this.ClientSize = new System.Drawing.Size(656, 465);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
@@ -170,7 +170,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "NewItemForm";
             this.Text = "Добавление/изменение товара";
             this.Load += new System.EventHandler(this.NewItemForm_Load);

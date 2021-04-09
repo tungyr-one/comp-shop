@@ -62,11 +62,13 @@
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.computerShopDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -249,7 +252,7 @@
             // 
             // findButton
             // 
-            this.findButton.Location = new System.Drawing.Point(108, 547);
+            this.findButton.Location = new System.Drawing.Point(109, 531);
             this.findButton.Name = "findButton";
             this.findButton.Size = new System.Drawing.Size(135, 41);
             this.findButton.TabIndex = 7;
@@ -259,7 +262,7 @@
             // 
             // editItem
             // 
-            this.editItem.Location = new System.Drawing.Point(65, 594);
+            this.editItem.Location = new System.Drawing.Point(66, 578);
             this.editItem.Name = "editItem";
             this.editItem.Size = new System.Drawing.Size(232, 37);
             this.editItem.TabIndex = 9;
@@ -269,7 +272,7 @@
             // 
             // addItem
             // 
-            this.addItem.Location = new System.Drawing.Point(65, 637);
+            this.addItem.Location = new System.Drawing.Point(66, 621);
             this.addItem.Name = "addItem";
             this.addItem.Size = new System.Drawing.Size(232, 37);
             this.addItem.TabIndex = 10;
@@ -376,22 +379,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(65, 680);
+            this.button1.Location = new System.Drawing.Point(66, 664);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(232, 37);
             this.button1.TabIndex = 15;
             this.button1.Text = "Загрузить все";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(359, 697);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "label2";
             // 
             // dataGridView1
             // 
@@ -409,10 +403,13 @@
             this.dataGridView1.DataSource = this.itemsBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(741, 608);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(741, 563);
             this.dataGridView1.TabIndex = 17;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // tabControl1
             // 
@@ -421,7 +418,7 @@
             this.tabControl1.Location = new System.Drawing.Point(363, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(755, 647);
+            this.tabControl1.Size = new System.Drawing.Size(755, 602);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
@@ -430,7 +427,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(747, 614);
+            this.tabPage1.Size = new System.Drawing.Size(747, 569);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Товары";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -440,10 +437,36 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(747, 614);
+            this.tabPage2.Size = new System.Drawing.Size(747, 569);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(363, 664);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(232, 37);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Удалить запись";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 702);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1130, 22);
+            this.statusStrip1.TabIndex = 20;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
+            this.toolStripStatusLabel1.Text = "Выбрано:";
             // 
             // itemIDDataGridViewTextBoxColumn
             // 
@@ -495,9 +518,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1130, 725);
+            this.ClientSize = new System.Drawing.Size(1130, 724);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.addItem);
             this.Controls.Add(this.editItem);
@@ -524,6 +548,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -565,7 +591,6 @@
         private System.Windows.Forms.TextBox searchBox3;
         private System.Windows.Forms.Label searchParam3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource itemsBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoriesDataGridViewTextBoxColumn;
@@ -580,6 +605,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sellerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
