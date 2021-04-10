@@ -13,6 +13,7 @@ namespace comp_shop
     public partial class NewItemForm : Form
     {
         public Article workingItem = new Article();
+        //public Item workingItem = new Item();
         bool createOperation;
 
         public NewItemForm(bool createOperation = true)

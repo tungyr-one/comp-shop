@@ -47,7 +47,9 @@ namespace comp_shop
     public partial class Main_form : Form
     {
         Article current_item = new Article();
-        List<Item> search_result;
+        //Item current_item = new Item();
+
+        ComputerShopEntities context = new ComputerShopEntities();
 
         public Main_form()
         {
@@ -55,7 +57,7 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
-        //// нажатие кнопки добавить
+        // нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
             NewItemForm new_item_form = new NewItemForm();
@@ -239,10 +241,10 @@ namespace comp_shop
         }
 
         // проперти текущего товара
-        public Article ItemGetter
-        {
-            get { return current_item; }
-        }
+        //public Article ItemGetter
+        //{
+        //    get { return current_item; }
+        //}
 
 
         private void Main_form_Load(object sender, EventArgs e)
@@ -322,6 +324,8 @@ namespace comp_shop
                 current_item.ArticleSeller = row.Cells[3].Value.ToString();
                 current_item.ArticleCategory = row.Cells[4].Value.ToString();
                 current_item.ArticleSupplier = row.Cells[5].Value.ToString();
+                // TODO: заменить Article на Item повсюду
+                //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
             }
 
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
