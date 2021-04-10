@@ -17,7 +17,7 @@ namespace comp_shop
         string category;
         string seller;
         string supplier;
-        public Article my_item = null;
+        public Article workingItem = new Article();
         bool createOperation;
 
         public NewItemForm(bool createOperation = true)
@@ -26,21 +26,9 @@ namespace comp_shop
             
            this.createOperation = createOperation;
 
-            textBox1.Text = "Razor";
-            textBox2.Text = "10255,45";
             // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
-            textBox3.Text = "Pupkin";
 
-            if (createOperation == true)
-            {
-                this.Text = "Добавление товара";
-                button1.Text = "Добавить";
-            }
-            else
-            {
-                this.Text = "Изменение товара";
-                button1.Text = "Изменить";
-            }
+
 
             // заполнение комбобоксов значениями
             using (ComputerShopEntities c = new ComputerShopEntities())
@@ -56,27 +44,55 @@ namespace comp_shop
             }
         }
 
-        private void editItem(Article itemToEdit)
+
+        // установка значений полей при загрузке
+        private void NewItemForm_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = my_item.ArticleName;
-            this.textBox2.Text = my_item.ArticlePrice.ToString();
-            this.comboBox1.ValueMember = my_item.ArticleCategory;
-            // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал? 
-            this.textBox3.Text = my_item.ArticleSeller;
-            this.comboBox2.ValueMember = my_item.ArticleSupplier;
+            // если создание товара
+            if (createOperation == true)
+            {
+                this.Text = "Добавление товара";
+                button1.Text = "Добавить";
+
+                // временные постоянные значения полей
+                textBox1.Text = "Razor";
+                textBox2.Text = "10255,45";
+                textBox3.Text = "Pupkin";
+            }
+            // если редактирование товара
+            else
+            {
+                this.Text = "Изменение товара";
+                button1.Text = "Изменить";                
+                
+                this.textBox1.Text = workingItem.ArticleName;
+                this.textBox2.Text = workingItem.ArticlePrice.ToString();
+                this.comboBox1.SelectedItem = workingItem.ArticleCategory;
+                this.textBox3.Text = workingItem.ArticleSeller;
+                this.comboBox2.SelectedItem = workingItem.ArticleCategory;
+            }
         }
 
-        private void CreateItem()
+
+        //private void editItem(Article itemToEdit)
+        //{
+        //    this.name = textBox1.Text;
+        //    this.price = decimal.Parse(textBox2.Text);
+        //    this.category = comboBox1.SelectedItem.ToString();
+        //    this.seller = textBox3.Text;
+        //    this.supplier = comboBox2.SelectedItem.ToString();
+        //    this.button2.Text = "Готово";
+        //}
+
+        private void CreateEditItem()
         {
-            this.name = textBox1.Text;
-            this.price = decimal.Parse(textBox2.Text);
-            this.category = comboBox1.SelectedItem.ToString();
-            this.seller = textBox3.Text;
-            this.supplier = comboBox2.SelectedItem.ToString();
+            workingItem.ArticleName = textBox1.Text;
+            workingItem.ArticlePrice = decimal.Parse(textBox2.Text);
+            workingItem.ArticleCategory = comboBox1.SelectedItem.ToString();
+            workingItem.ArticleSeller = textBox3.Text;
+            workingItem.ArticleSupplier = comboBox2.SelectedItem.ToString();
             this.button2.Text = "Готово";
 
-            Article new_item = new Article(name, price, category, seller, supplier);
-            my_item = new_item;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -85,14 +101,15 @@ namespace comp_shop
             //this.price = double.Parse(textBox2.Text);
             //this.category = comboBox1.Text;
             //this.supplier = textBox3.Text;
-            if (createOperation == true)
-            {
-                this.CreateItem();
-            }
-            else
-            {
-                this.editItem(my_item);
-            }
+            //if (createOperation == true)
+            //{
+            //    this.CreateItem();
+            //}
+            //else
+            //{
+            //    this.editItem(my_item);
+            //}
+            CreateEditItem();
         }
 
 
@@ -102,18 +119,6 @@ namespace comp_shop
             return;
         }
 
-        // установка значений полей при загрузке, если редактирование товара
-        private void NewItemForm_Load(object sender, EventArgs e)
-        {
-            if (this.my_item != null)
-            {
-                this.textBox1.Text = my_item.ArticleName;
-                this.textBox2.Text = my_item.ArticlePrice.ToString();
-                //this.comboBox1.DataSource = categories;
-                // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
-                this.textBox3.Text = my_item.ArticleSeller;
-                //this.comboBox2.DataSource = suppliers;
-            }
-        }
+
     }
 }

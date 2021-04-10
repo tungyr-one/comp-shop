@@ -49,14 +49,14 @@ namespace comp_shop
 
         public string DBFormat()
         {
-            string str = ArticleName + '-' + ArticlePrice.ToString() + '-' + ArticleCategory + '-' + ArticleSupplier + '-' + ArticleSeller + '\n';
+            string str = ArticleId + '-' + ArticleName + '-' + ArticlePrice.ToString() + '-' + ArticleCategory + '-' + ArticleSupplier + '-' + ArticleSeller + '\n';
             return str;
         }
 
         public override string ToString()
         {          
-
-            string item_string = ($"Название: {ArticleName} " +
+            string item_string = ($"Id: {ArticleId} " + 
+                $"\nНазвание: {ArticleName} " +
              $"\nЦена, руб: {ArticlePrice}" +
              $"\nКатегория: {ArticleCategory}" +
              $"\nПродавец: {ArticleSeller}" +

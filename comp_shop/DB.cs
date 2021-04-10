@@ -113,8 +113,6 @@ namespace comp_shop
                         Category = categoryEntry,
                         Seller = insertEntry.ArticleSeller,
                         Supplier = supplierEntry,
-
-
                     };
 
                     MessageBox.Show("itemEntry name: " + itemEntry.ToString()) ;
@@ -145,6 +143,29 @@ namespace comp_shop
                 context.SaveChanges();
                 MessageBox.Show(removeEntry.ArticleName + " removed from database!");
             }
+        }
+
+        static public void editEntry(Article entryToEdit)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Items.Find(entryToEdit.ArticleId);
+
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == entryToEdit.ArticleCategory);
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == entryToEdit.ArticleSupplier);
+
+                if (original != null)
+                {
+                    original.Name = entryToEdit.ArticleName;
+                    original.Price = entryToEdit.ArticlePrice;
+                    original.Category = categoryEntry;
+                    original.Seller = entryToEdit.ArticleSeller;
+                    original.Supplier = supplierEntry;
+                };
+                context.SaveChanges();
+                MessageBox.Show(entryToEdit.ArticleName + " updated!");
+            }
+            
         }
 
         static public List<Item> SearchItemByName(string itemName)

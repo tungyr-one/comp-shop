@@ -60,10 +60,10 @@ namespace comp_shop
         {
             NewItemForm new_item_form = new NewItemForm();
                 new_item_form.ShowDialog();
-            if (new_item_form.my_item == null)
+            if (new_item_form.workingItem == null)
                 return;
-            statusStrip1.Text = new_item_form.my_item.DBFormat();
-            DB.addToDB(new_item_form.my_item);
+            statusStrip1.Text = new_item_form.workingItem.DBFormat();
+            DB.addToDB(new_item_form.workingItem);
             //current_item = null;
         }
 
@@ -73,33 +73,24 @@ namespace comp_shop
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
-
-
             // открыте формы изменения товара
             NewItemForm new_item_form = new NewItemForm(false);
-            new_item_form.my_item = current_item;
+            new_item_form.workingItem = current_item;
             new_item_form.ShowDialog();
 
-            //if (current_item == null)
-            //{
-            //    MessageBox.Show("Не выбрано ни одного товара!");
-            //    return;
-            //}
-            //else
-            //{
-            //    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            //    {
-            //        current_item.ArticleName = row.Cells[1].Value.ToString();
-            //        current_item.ArticlePrice = Convert.ToDecimal(row.Cells[2].Value);
-            //        current_item.ArticleCategory = row.Cells[3].Value.ToString();
-            //        current_item.ArticleSeller = row.Cells[4].Value.ToString();
-            //        current_item.ArticleSupplier = row.Cells[5].Value.ToString();
-            //    }
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                string value4 = row.Cells[3].Value.ToString();
+                string value5 = row.Cells[4].Value.ToString();
+                string value6 = row.Cells[5].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
+            }
 
-                //NewItemForm new_item_form = new NewItemForm();
-                //new_item_form.my_item = current_item;
-                //new_item_form.ShowDialog();
-            //}
+            DB.editEntry(new_item_form.workingItem);
+            DB.ShowAllItems();
 
         }
 
@@ -276,6 +267,7 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             //dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = DB.ShowAllItems();
 
         }
 
@@ -348,8 +340,8 @@ namespace comp_shop
                 current_item.ArticleId = Convert.ToInt32(row.Cells[0].Value);
                 current_item.ArticleName = row.Cells[1].Value.ToString();
                 current_item.ArticlePrice = Convert.ToDecimal(row.Cells[2].Value);
-                current_item.ArticleCategory = row.Cells[3].Value.ToString();
-                current_item.ArticleSeller = row.Cells[4].Value.ToString();
+                current_item.ArticleSeller = row.Cells[3].Value.ToString();
+                current_item.ArticleCategory = row.Cells[4].Value.ToString();
                 current_item.ArticleSupplier = row.Cells[5].Value.ToString();
             }
 
