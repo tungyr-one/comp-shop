@@ -76,7 +76,6 @@ namespace comp_shop
             return dataEntities.Orders.ToList();
         }
 
-
         static public void AddCategory(string categoryName)
         {
             using (var context = new ComputerShopEntities())

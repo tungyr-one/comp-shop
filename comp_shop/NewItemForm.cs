@@ -12,11 +12,11 @@ namespace comp_shop
 {
     public partial class NewItemForm : Form
     {
-        string name;
-        decimal price;
-        string category;
-        string seller;
-        string supplier;
+        //string name;
+        //decimal price;
+        //string category;
+        //string seller;
+        //string supplier;
         public Article workingItem = new Article();
         bool createOperation;
 

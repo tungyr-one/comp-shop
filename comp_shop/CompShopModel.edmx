@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Items">
@@ -27,7 +27,7 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Customer" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="OrderQuantity" Type="int" />
@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="SupplierID" />
           </Key>
-          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Contacts" Type="nvarchar" MaxLength="50" />
         </EntityType>
