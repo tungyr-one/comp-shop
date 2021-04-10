@@ -24,10 +24,10 @@ namespace comp_shop
         private void button1_Click(object sender, EventArgs e)
         {
             // проверка заполненности поля названия категории
-            //if (textBox1.Text == "")
-            //{
-            //    MessageBox.Show("Категория пуста!");
-            //}
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Категория пуста!");
+            }
 
             // определение нобходимого действия в зависимости от нажатой радиокнопки
             if (radioButton1.Checked)

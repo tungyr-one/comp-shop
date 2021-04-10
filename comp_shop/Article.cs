@@ -34,7 +34,7 @@ namespace comp_shop
         {
         }
 
-        public Article(string name, decimal price, string category, string seller, string supplier, int id = 0)
+        public Article(string name, decimal price, string category, string supplier, int id = 0, string seller=null)
         {
             ArticleId = id;
             ArticleName = name;

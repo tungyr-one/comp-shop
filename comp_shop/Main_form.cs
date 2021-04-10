@@ -60,11 +60,10 @@ namespace comp_shop
         {
             NewItemForm new_item_form = new NewItemForm();
             new_item_form.ShowDialog();
-            DB.ShowAllItems();
+            //обновление списка товаров
+            dataGridView1.DataSource = DB.ShowAllItems();
         }
-
-
-        
+                
 
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
@@ -73,8 +72,9 @@ namespace comp_shop
             NewItemForm new_item_form = new NewItemForm(false);
             // передача в форму редактирования выбранной сущности
             new_item_form.workingItem = current_item;
-            new_item_form.ShowDialog();            
-            DB.ShowAllItems();
+            new_item_form.ShowDialog();
+            //обновление списка товаров
+            dataGridView1.DataSource = DB.ShowAllItems();
 
         }
 
@@ -245,14 +245,9 @@ namespace comp_shop
         }
 
 
-        // https://www.entityframeworktutorial.net/basics/how-entity-framework-works.aspx
-
-
         private void Main_form_Load(object sender, EventArgs e)
         {
-            //dataGridView1.AutoGenerateColumns = true;
             dataGridView1.DataSource = DB.ShowAllItems();
-
         }
 
         // отобразить все записи

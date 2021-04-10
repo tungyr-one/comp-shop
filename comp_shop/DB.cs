@@ -87,6 +87,8 @@ namespace comp_shop
             }
         }
 
+
+        // TODO: автоматически назначать привязанным к категории товарам категорию "без категории" (и поставщика тоже)
         // удаление категории
         static public void RemoveCategory(string categoryName)
         {
@@ -96,7 +98,7 @@ namespace comp_shop
                 {
                     context.Categories.Remove(context.Categories.Single(a => a.Name == categoryName));
                     context.SaveChanges();
-                    MessageBox.Show(categoryName + " removed from database!");
+                    MessageBox.Show(categoryName + " удален!");
                 }
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
@@ -105,14 +107,45 @@ namespace comp_shop
             }
         }
 
+
+        // добавление поставщика
+        static public void AddSupplier(string supplierName, string supplierAddres = null)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                context.Suppliers.Add(new Supplier { Name = supplierName, Contacts = supplierAddres });
+                context.SaveChanges();
+                MessageBox.Show("Добавлен поставщик: " + supplierName);
+            }
+        }
+
+        // удаление поставщика
+        static public void RemoveSupplier(string supplierName)
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    context.Suppliers.Remove(context.Suppliers.Single(a => a.Name == supplierName));
+                    context.SaveChanges();
+                    MessageBox.Show(supplierName + " удален!");
+                }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!");
+            }
+        }
+
+
         static public void addToDB(Article insertEntry)
         {
             // проверка содержимого полей Article
-            //MessageBox.Show("outside using: " + insertEntry.ArticleName + "-" + 
-            //    insertEntry.ArticlePrice + "-" +
-            //    insertEntry.ArticleCategory + "-" +
-            //    insertEntry.ArticleSeller + "-" +                
-            //    insertEntry.ArticleSupplier);
+            MessageBox.Show("outside using: " + insertEntry.ArticleName + "-" +
+                insertEntry.ArticlePrice + "-" +
+                insertEntry.ArticleCategory + "-" +
+                insertEntry.ArticleSeller + "-" +
+                insertEntry.ArticleSupplier);
             try
             {
                 using (var context = new ComputerShopEntities())

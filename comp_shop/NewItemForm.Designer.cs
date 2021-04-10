@@ -156,7 +156,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(529, 152);
+            this.button3.Location = new System.Drawing.Point(100, 390);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(128, 53);
             this.button3.TabIndex = 12;
@@ -166,18 +166,19 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(529, 255);
+            this.button4.Location = new System.Drawing.Point(321, 390);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(128, 53);
+            this.button4.Size = new System.Drawing.Size(145, 52);
             this.button4.TabIndex = 13;
-            this.button4.Text = "Добавить поставщика";
+            this.button4.Text = "Управление поставщиками";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // NewItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 465);
+            this.ClientSize = new System.Drawing.Size(576, 465);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);

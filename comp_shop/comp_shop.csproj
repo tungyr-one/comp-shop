@@ -111,6 +111,12 @@
     <Compile Include="ManageCategory.Designer.cs">
       <DependentUpon>ManageCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageSupplier.Designer.cs">
+      <DependentUpon>ManageSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManageCategory.resx">
       <DependentUpon>ManageCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageSupplier.resx">
+      <DependentUpon>ManageSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewItemForm.resx">
       <DependentUpon>NewItemForm.cs</DependentUpon>
