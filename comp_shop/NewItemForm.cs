@@ -132,7 +132,7 @@ namespace comp_shop
         //добавление категории
         private void button3_Click(object sender, EventArgs e)
         {
-            NewCategory addCategoryForm = new NewCategory();
+            ManageCategory addCategoryForm = new ManageCategory();
             addCategoryForm.Show();
             //if (addCategoryForm.newCategory != null)
             //{ DB.AddCategory(addCategoryForm.newCategory); 

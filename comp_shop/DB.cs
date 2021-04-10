@@ -76,6 +76,7 @@ namespace comp_shop
             return dataEntities.Orders.ToList();
         }
 
+        // добавление категории
         static public void AddCategory(string categoryName)
         {
             using (var context = new ComputerShopEntities())
@@ -83,6 +84,24 @@ namespace comp_shop
                 context.Categories.Add(new Category { Name = categoryName });
                 context.SaveChanges();
                 MessageBox.Show("Добавлена категория: " + categoryName);
+            }
+        }
+
+        // удаление категории
+        static public void RemoveCategory(string categoryName)
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    context.Categories.Remove(context.Categories.Single(a => a.Name == categoryName));
+                    context.SaveChanges();
+                    MessageBox.Show(categoryName + " removed from database!");
+                }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                MessageBox.Show("Невозможно удалить, в категории есть товары!");
             }
         }
 
@@ -100,13 +119,6 @@ namespace comp_shop
                 {
                     Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
                     Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
-                    // проверка содержимого полей Article
-                //    MessageBox.Show("inside using: " + insertEntry.ArticleName + "-" +
-                //insertEntry.ArticlePrice + "-" +
-                //insertEntry.ArticleCategory + "-" +
-                //insertEntry.ArticleSeller + "-" +
-                //insertEntry.ArticleSupplier);
-
                     var itemEntry = new Item()
                     {
                         Name = insertEntry.ArticleName,
@@ -135,6 +147,7 @@ namespace comp_shop
             }
         }
 
+        // удаление товара
         static public void RemoveItem(Article removeEntry)
         {
             using (var context = new ComputerShopEntities())
@@ -145,6 +158,8 @@ namespace comp_shop
             }
         }
 
+
+        // редактирование товара
         static public void editEntry(Article entryToEdit)
         {
             using (var context = new ComputerShopEntities())
