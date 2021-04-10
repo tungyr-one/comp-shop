@@ -67,6 +67,7 @@ namespace comp_shop
                 
                 this.textBox1.Text = workingItem.ArticleName;
                 this.textBox2.Text = workingItem.ArticlePrice.ToString();
+                // TODO: show article catagory and supplier
                 this.comboBox1.SelectedItem = workingItem.ArticleCategory;
                 this.textBox3.Text = workingItem.ArticleSeller;
                 this.comboBox2.SelectedItem = workingItem.ArticleCategory;
@@ -92,6 +93,15 @@ namespace comp_shop
             workingItem.ArticleSeller = textBox3.Text;
             workingItem.ArticleSupplier = comboBox2.SelectedItem.ToString();
             this.button2.Text = "Готово";
+
+            if(createOperation)
+            {
+                DB.addToDB(workingItem);
+            }
+            else
+            {
+                DB.editEntry(workingItem);
+            }
 
         }
 
@@ -119,6 +129,15 @@ namespace comp_shop
             return;
         }
 
+        //добавление категории
+        private void button3_Click(object sender, EventArgs e)
+        {
+            NewCategory addCategoryForm = new NewCategory();
+            addCategoryForm.Show();
+            //if (addCategoryForm.newCategory != null)
+            //{ DB.AddCategory(addCategoryForm.newCategory); 
+            this.Update();
 
+        }
     }
 }

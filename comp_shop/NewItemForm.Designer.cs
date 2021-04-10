@@ -40,6 +40,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -152,11 +154,32 @@
             this.comboBox2.Size = new System.Drawing.Size(291, 28);
             this.comboBox2.TabIndex = 9;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(529, 152);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(128, 53);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Добавить категорию";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(529, 255);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(128, 53);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Добавить поставщика";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
             // NewItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 465);
+            this.ClientSize = new System.Drawing.Size(669, 465);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
@@ -193,5 +216,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

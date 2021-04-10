@@ -105,6 +105,12 @@
       <DependentUpon>Main_form.cs</DependentUpon>
     </Compile>
     <Compile Include="Article.cs" />
+    <Compile Include="NewCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCategory.Designer.cs">
+      <DependentUpon>NewCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </Compile>
     <EmbeddedResource Include="Main_form.resx">
       <DependentUpon>Main_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCategory.resx">
+      <DependentUpon>NewCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewItemForm.resx">
       <DependentUpon>NewItemForm.cs</DependentUpon>

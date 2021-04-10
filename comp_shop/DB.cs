@@ -82,6 +82,8 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 context.Categories.Add(new Category { Name = categoryName });
+                context.SaveChanges();
+                MessageBox.Show("Добавлена категория: " + categoryName);
             }
         }
 
@@ -113,12 +115,11 @@ namespace comp_shop
                         Category = categoryEntry,
                         Seller = insertEntry.ArticleSeller,
                         Supplier = supplierEntry,
-                    };
-
-                    MessageBox.Show("itemEntry name: " + itemEntry.ToString()) ;
+                    };                    
                     context.Items.Add(itemEntry);
 
                     context.SaveChanges();
+                    MessageBox.Show("Добавлен товрар: " + itemEntry.ToString());
                 }
             }
             catch (DbEntityValidationException e)
@@ -175,7 +176,7 @@ namespace comp_shop
             //return (from item in context.Items where item.Name == itemName select item).ToList();
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").Include("ItemsOrder").ToList<Item>();
+                var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
 
                 return data;
             }

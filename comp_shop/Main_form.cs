@@ -59,12 +59,8 @@ namespace comp_shop
         private void addItem_Click(object sender, EventArgs e)
         {
             NewItemForm new_item_form = new NewItemForm();
-                new_item_form.ShowDialog();
-            if (new_item_form.workingItem == null)
-                return;
-            statusStrip1.Text = new_item_form.workingItem.DBFormat();
-            DB.addToDB(new_item_form.workingItem);
-            //current_item = null;
+            new_item_form.ShowDialog();
+            DB.ShowAllItems();
         }
 
 
@@ -75,21 +71,9 @@ namespace comp_shop
         {
             // открыте формы изменения товара
             NewItemForm new_item_form = new NewItemForm(false);
+            // передача в форму редактирования выбранной сущности
             new_item_form.workingItem = current_item;
-            new_item_form.ShowDialog();
-
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                string value1 = row.Cells[0].Value.ToString();
-                string value2 = row.Cells[1].Value.ToString();
-                string value3 = row.Cells[2].Value.ToString();
-                string value4 = row.Cells[3].Value.ToString();
-                string value5 = row.Cells[4].Value.ToString();
-                string value6 = row.Cells[5].Value.ToString();
-                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
-            }
-
-            DB.editEntry(new_item_form.workingItem);
+            new_item_form.ShowDialog();            
             DB.ShowAllItems();
 
         }
