@@ -19,12 +19,7 @@ namespace comp_shop
         {
             this.Items = new HashSet<Item>();
         }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
+    
         public int CategoryID { get; set; }
         public string Name { get; set; }
     

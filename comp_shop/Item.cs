@@ -23,10 +23,5 @@ namespace comp_shop
     
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
-
-        public override string ToString()
-        {
-            return Name;
-        }
     }
 }

@@ -18,8 +18,6 @@ namespace comp_shop
         public ComputerShopEntities()
             : base("name=ComputerShopEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
