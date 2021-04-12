@@ -65,7 +65,7 @@ namespace comp_shop
             //обновление списка товаров
             dataGridView1.DataSource = DB.ShowAllItems();
         }
-                
+
 
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
@@ -83,7 +83,7 @@ namespace comp_shop
         // нажатие кнопки поиск
         private void find_Click(object sender, EventArgs e)
         {
-            
+
             // TODO: text fields validation first
             if (radioButton1.Checked)
             {
@@ -250,6 +250,14 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
+            //List <Order> comboboxOrders = DB.ShowAllOrders();
+            //DataGridViewComboBoxColumn orders =
+            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
+            //orders.DataSource = comboboxOrders;
+            //orders.ValueType = typeof(Order);
+
+            //orderBindingSource1.DataSource = context.Orders.ToList();
+
         }
 
         // отобразить все записи
@@ -257,6 +265,15 @@ namespace comp_shop
         {
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridView1.DataSource = DB.ShowAllItems();
+
+            dataGridView2.DataSource = DB.ShowAllOrders();
+
+            //List<Order> check = DB.ShowAllOrders();
+            List<Item> check = DB.ShowAllItems();
+            foreach (Item ord in check)
+            {
+                label2.Text += ord + " - ";
+            }
         }
 
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
@@ -337,6 +354,25 @@ namespace comp_shop
                 string value5 = row.Cells[4].Value.ToString();
                 string value6 = row.Cells[5].Value.ToString();
                 toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
+            }
+
+
+
+        }
+
+
+        // не показывает ошибку, хотя она писутствует
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //This event is used to avoid the error of DataGridviewCombobox Cell
+            if (e.Exception.Message == "DataGridViewComboBoxCell value is not valid.")
+            {
+
+                object value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                if (!((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Contains(value))
+                {
+                    ((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Add(value); e.ThrowException = false;
+                }
             }
         }
     }

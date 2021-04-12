@@ -14,6 +14,17 @@ namespace comp_shop
     
     public partial class Item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Item()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -23,5 +34,7 @@ namespace comp_shop
     
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

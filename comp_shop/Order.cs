@@ -14,9 +14,23 @@ namespace comp_shop
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.Items = new HashSet<Item>();
+        }
+
+        public override string ToString()
+        {
+            return OrderID.ToString();
+        }
+
         public int OrderID { get; set; }
-        public string Customer { get; set; }
+        public string CustomerName { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<int> OrderQuantity { get; set; }
+        public Nullable<int> Quantity { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

@@ -240,6 +240,16 @@ namespace comp_shop
         }
 
 
+        // ORDERS
 
+        static public List<Order> ShowAllOrders(string itemSupplier)
+        { 
+            using (var context = new ComputerShopEntities())
+            {
+                //var data = context.Orders.Include("Category").Include("Supplier").ToList<Item>();
+                var data = context.Orders.ToList<Order>();
+                return data;
+            }            
+        }
     }
 }
