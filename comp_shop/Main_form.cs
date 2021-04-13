@@ -250,13 +250,14 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
-            //List <Order> comboboxOrders = DB.ShowAllOrders();
-            //DataGridViewComboBoxColumn orders =
-            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
-            //orders.DataSource = comboboxOrders;
-            //orders.ValueType = typeof(Order);
+            List<Order> comboboxOrders = DB.ShowAllOrders();
 
-            //orderBindingSource1.DataSource = context.Orders.ToList();
+            DataGridViewComboBoxColumn orders =
+            dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
+            orders.DataSource = comboboxOrders;
+            orders.ValueType = typeof(Order);
+
+            orderBindingSource1.DataSource = context.Orders.ToList();
 
         }
 
@@ -361,19 +362,19 @@ namespace comp_shop
         }
 
 
-        // не показывает ошибку, хотя она писутствует
+        // не показывает ошибку, хотя она присутствует
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            //This event is used to avoid the error of DataGridviewCombobox Cell
-            if (e.Exception.Message == "DataGridViewComboBoxCell value is not valid.")
-            {
+            ////This event is used to avoid the error of DataGridviewCombobox Cell
+            //if (e.Exception.Message == "DataGridViewComboBoxCell value is not valid.")
+            //{
 
-                object value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                if (!((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Contains(value))
-                {
-                    ((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Add(value); e.ThrowException = false;
-                }
-            }
+            //    object value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            //    if (!((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Contains(value))
+            //    {
+            //        ((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Add(value); e.ThrowException = false;
+            //    }
+            //}
         }
     }
 }

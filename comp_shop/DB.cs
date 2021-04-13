@@ -251,5 +251,18 @@ namespace comp_shop
                 return data;
             }            
         }
+
+        //static public List<Order> SearchOrderByItem(string itemName)
+        //{
+        //    // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
+        //    //var context = new ComputerShopEntities();
+        //    //return (from item in context.Items where item.Name == itemName select item).ToList();
+        //    using (var context = new ComputerShopEntities())
+        //    {
+        //        var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+
+        //        return data;
+        //    }
+        //}
     }
 }
