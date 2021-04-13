@@ -17,7 +17,7 @@ namespace comp_shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            this.Orders = new HashSet<Order>();
+            this.Sellers = new HashSet<Seller>();
         }
 
         public override string ToString()
@@ -35,6 +35,6 @@ namespace comp_shop
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Seller> Sellers { get; set; }
     }
 }

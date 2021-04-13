@@ -514,10 +514,7 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "label2";
             // 
-            // orderBindingSource1
-            // 
-            this.orderBindingSource1.DataSource = typeof(comp_shop.Order);
-            // 
+          // 
             // itemsBindingSource
             // 
             this.itemsBindingSource.DataSource = typeof(comp_shop.Item);
@@ -557,10 +554,7 @@
             this.itemsDataGridViewTextBoxColumn.Name = "itemsDataGridViewTextBoxColumn";
             this.itemsDataGridViewTextBoxColumn.ReadOnly = true;
             this.itemsDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // orderBindingSource
-            // 
-            this.orderBindingSource.DataSource = typeof(comp_shop.Order);
+
             // 
             // itemBindingSource
             // 

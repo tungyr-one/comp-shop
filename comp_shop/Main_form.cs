@@ -267,7 +267,7 @@ namespace comp_shop
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridView1.DataSource = DB.ShowAllItems();
 
-            dataGridView2.DataSource = DB.ShowAllOrders();
+            //dataGridView2.DataSource = DB.ShowAllOrders();
 
             //List<Order> check = DB.ShowAllOrders();
             List<Item> check = DB.ShowAllItems();

@@ -12,22 +12,22 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Seller
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Seller()
         {
             this.Items = new HashSet<Item>();
         }
 
         public override string ToString()
         {
-            return OrderID.ToString();
+            return SellerName;
         }
 
-        public int OrderID { get; set; }
-        public string CustomerName { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
+        public int SellerID { get; set; }
+        public string SellerName { get; set; }
+        public Nullable<System.DateTime> SellDate { get; set; }
         public Nullable<int> Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

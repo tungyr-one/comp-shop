@@ -12,14 +12,6 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="ItemOrders">
-          <Key>
-            <PropertyRef Name="ItemID" />
-            <PropertyRef Name="OrderID" />
-          </Key>
-          <Property Name="ItemID" Type="int" Nullable="false" />
-          <Property Name="OrderID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -31,13 +23,21 @@
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Orders">
+        <EntityType Name="ItemSellers">
           <Key>
-            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ItemID" />
+            <PropertyRef Name="SellerID" />
           </Key>
-          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
-          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="SellerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sellers">
+          <Key>
+            <PropertyRef Name="SellerID" />
+          </Key>
+          <Property Name="SellerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SellerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SellDate" Type="datetime" />
           <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="Suppliers">
@@ -48,27 +48,27 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Contacts" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__ItemOrder__ItemI__0FEC5ADD">
+        <Association Name="FK__ItemSelle__ItemI__28B808A7">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
-          <End Role="ItemOrders" Type="Self.ItemOrders" Multiplicity="*" />
+          <End Role="ItemSellers" Type="Self.ItemSellers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Items">
               <PropertyRef Name="ItemID" />
             </Principal>
-            <Dependent Role="ItemOrders">
+            <Dependent Role="ItemSellers">
               <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ItemOrder__Order__10E07F16">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="ItemOrders" Type="Self.ItemOrders" Multiplicity="*" />
+        <Association Name="FK__ItemSelle__Selle__29AC2CE0">
+          <End Role="Sellers" Type="Self.Sellers" Multiplicity="1" />
+          <End Role="ItemSellers" Type="Self.ItemSellers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="OrderID" />
+            <Principal Role="Sellers">
+              <PropertyRef Name="SellerID" />
             </Principal>
-            <Dependent Role="ItemOrders">
-              <PropertyRef Name="OrderID" />
+            <Dependent Role="ItemSellers">
+              <PropertyRef Name="SellerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -98,17 +98,17 @@
         </Association>
         <EntityContainer Name="ComputerShopModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ItemOrders" EntityType="Self.ItemOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemSellers" EntityType="Self.ItemSellers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sellers" EntityType="Self.Sellers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__ItemOrder__ItemI__0FEC5ADD" Association="Self.FK__ItemOrder__ItemI__0FEC5ADD">
+          <AssociationSet Name="FK__ItemSelle__ItemI__28B808A7" Association="Self.FK__ItemSelle__ItemI__28B808A7">
             <End Role="Items" EntitySet="Items" />
-            <End Role="ItemOrders" EntitySet="ItemOrders" />
+            <End Role="ItemSellers" EntitySet="ItemSellers" />
           </AssociationSet>
-          <AssociationSet Name="FK__ItemOrder__Order__10E07F16" Association="Self.FK__ItemOrder__Order__10E07F16">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="ItemOrders" EntitySet="ItemOrders" />
+          <AssociationSet Name="FK__ItemSelle__Selle__29AC2CE0" Association="Self.FK__ItemSelle__Selle__29AC2CE0">
+            <End Role="Sellers" EntitySet="Sellers" />
+            <End Role="ItemSellers" EntitySet="ItemSellers" />
           </AssociationSet>
           <AssociationSet Name="FK_Items_Categories" Association="Self.FK_Items_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -144,17 +144,17 @@
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Items_Categories" FromRole="Items" ToRole="Categories" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_Items_Suppliers" FromRole="Items" ToRole="Suppliers" />
-          <NavigationProperty Name="Orders" Relationship="Self.ItemOrders" FromRole="Items" ToRole="Orders" />
+          <NavigationProperty Name="Sellers" Relationship="Self.ItemSellers" FromRole="Items" ToRole="Sellers" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="Seller">
           <Key>
-            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="SellerID" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="SellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SellerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SellDate" Type="DateTime" Precision="3" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Items" Relationship="Self.ItemOrders" FromRole="Orders" ToRole="Items" />
+          <NavigationProperty Name="Items" Relationship="Self.ItemSellers" FromRole="Sellers" ToRole="Items" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -189,14 +189,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ItemOrders">
+        <Association Name="ItemSellers">
           <End Role="Items" Type="Self.Item" Multiplicity="*" />
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <End Role="Sellers" Type="Self.Seller" Multiplicity="*" />
         </Association>
         <EntityContainer Name="ComputerShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Items" EntityType="Self.Item" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <AssociationSet Name="FK_Items_Categories" Association="Self.FK_Items_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -206,9 +206,9 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
-          <AssociationSet Name="ItemOrders" Association="Self.ItemOrders">
+          <AssociationSet Name="ItemSellers" Association="Self.ItemSellers">
             <End Role="Items" EntitySet="Items" />
-            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Sellers" EntitySet="Sellers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -237,12 +237,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ComputerShopModel.Order">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="ComputerShopModel.Seller">
+              <MappingFragment StoreEntitySet="Sellers">
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+                <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+                <ScalarProperty Name="SellDate" ColumnName="SellDate" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -256,12 +256,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ItemOrders" TypeName="ComputerShopModel.ItemOrders" StoreEntitySet="ItemOrders">
-            <EndProperty Name="Orders">
-              <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-            </EndProperty>
+          <AssociationSetMapping Name="ItemSellers" TypeName="ComputerShopModel.ItemSellers" StoreEntitySet="ItemSellers">
             <EndProperty Name="Items">
               <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+            </EndProperty>
+            <EndProperty Name="Sellers">
+              <ScalarProperty Name="SellerID" ColumnName="SellerID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

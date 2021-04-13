@@ -12,6 +12,8 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
+
+    // how to bind collection to DataGridView: http://www.developer-corner.com/blog/2007/07/19/datagridview-how-to-bind-nested-objects/
     class DB    
     {
 
@@ -27,11 +29,11 @@ namespace comp_shop
                 return data;
         }   }
 
-        static public List<Order> ShowAllOrders()
-        {
-            ComputerShopEntities dataEntities = new ComputerShopEntities();
-            return dataEntities.Orders.ToList();
-        }
+        //static public List<Order> ShowAllOrders()
+        //{
+        //    ComputerShopEntities dataEntities = new ComputerShopEntities();
+        //    return dataEntities.Orders.ToList();
+        //}
 
         // добавление категории
         static public void AddCategory(string categoryName)
@@ -238,18 +240,18 @@ namespace comp_shop
         }
 
 
-        // ORDERS
+        //// ORDERS
 
-        static public List<Order> ShowAllOrders(string itemSupplier)
-        { 
-            using (var context = new ComputerShopEntities())
-            {
-                //var data = context.Orders.Include("Category").Include("Supplier").ToList<Item>();
-                var data = context.Orders.ToList<Order>();
-                return data;
-            }            
-        }
-        // how to bind collection to DataGridView: http://www.developer-corner.com/blog/2007/07/19/datagridview-how-to-bind-nested-objects/
+        //static public List<Order> ShowAllOrders(string itemSupplier)
+        //{ 
+        //    using (var context = new ComputerShopEntities())
+        //    {
+        //        //var data = context.Orders.Include("Category").Include("Supplier").ToList<Item>();
+        //        var data = context.Orders.ToList<Order>();
+        //        return data;
+        //    }            
+        //}
+
         //static public ICollection<Order> SearchOrderByItem(Item item)
         //{
         //    using (var context = new ComputerShopEntities())
