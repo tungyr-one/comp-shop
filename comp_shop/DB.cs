@@ -15,8 +15,6 @@ namespace comp_shop
     class DB    
     {
 
-        static private string filename = "db_file.txt";
-
         static public List<Item> ShowAllItems()
         {
 
@@ -251,15 +249,14 @@ namespace comp_shop
                 return data;
             }            
         }
-
-        //static public List<Order> SearchOrderByItem(string itemName)
+        // how to bind collection to DataGridView: http://www.developer-corner.com/blog/2007/07/19/datagridview-how-to-bind-nested-objects/
+        //static public ICollection<Order> SearchOrderByItem(Item item)
         //{
-        //    // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
-        //    //var context = new ComputerShopEntities();
-        //    //return (from item in context.Items where item.Name == itemName select item).ToList();
         //    using (var context = new ComputerShopEntities())
         //    {
-        //        var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+        //        var data = context.Items.Where(x => x.Name == item.Name).ToList<Item>();
+        //        foreach (Item itemForShow in data)
+
 
         //        return data;
         //    }

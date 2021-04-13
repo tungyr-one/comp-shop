@@ -420,6 +420,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1091, 563);
             this.dataGridView1.TabIndex = 17;
@@ -610,11 +611,9 @@
             // Orders
             // 
             this.Orders.DataPropertyName = "Orders";
-            this.Orders.DataSource = this.orderBindingSource1;
-            this.Orders.DisplayMember = "OrderID";
             this.Orders.HeaderText = "Orders";
             this.Orders.Name = "Orders";
-            this.Orders.ValueMember = "OrderID";
+            this.Orders.ReadOnly = true;
             // 
             // Main_form
             // 

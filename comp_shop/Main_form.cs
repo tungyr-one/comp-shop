@@ -250,14 +250,14 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
-            List<Order> comboboxOrders = DB.ShowAllOrders();
+            //List<Order> comboboxOrders = DB.ShowAllOrders();
 
-            DataGridViewComboBoxColumn orders =
-            dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
-            orders.DataSource = comboboxOrders;
-            orders.ValueType = typeof(Order);
+            //DataGridViewComboBoxColumn orders =
+            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
+            //orders.DataSource = comboboxOrders;
+            //orders.ValueType = typeof(Order);
 
-            orderBindingSource1.DataSource = context.Orders.ToList();
+            //orderBindingSource1.DataSource = context.Orders.ToList();
 
         }
 
