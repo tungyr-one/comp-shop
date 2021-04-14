@@ -250,6 +250,8 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
+            dataGridView2.DataSource = DB.ShowAllSellers();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
             //List<Order> comboboxOrders = DB.ShowAllOrders();
 
             //DataGridViewComboBoxColumn orders =
@@ -258,6 +260,9 @@ namespace comp_shop
             //orders.ValueType = typeof(Order);
 
             //orderBindingSource1.DataSource = context.Orders.ToList();
+
+
+
 
         }
 
@@ -344,6 +349,8 @@ namespace comp_shop
                 current_item.ArticleSupplier = row.Cells[5].Value.ToString();
                 // TODO: заменить Article на Item повсюду
                 //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
+
+                DB.ShowByName(current_item);
             }
 
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)

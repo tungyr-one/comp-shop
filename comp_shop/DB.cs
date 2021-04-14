@@ -188,7 +188,30 @@ namespace comp_shop
             }
         }
 
-        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
+        //example
+        static public void ShowByName(Article item)
+        {
+            // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
+            //var context = new ComputerShopEntities();
+            //return (from item in context.Items where item.Name == itemName select item).ToList();
+            using (var context = new ComputerShopEntities())
+            {
+
+                var original = context.Items.Find(item.ArticleId);
+                MessageBox.Show(original.Sellers.Count().ToString());
+                List<Seller> sels = original.Sellers.ToList();
+               string dataStr = "";
+
+                foreach (Seller sel in sels)
+                {
+                    dataStr += sel.SellerName + " - ";
+                }
+                MessageBox.Show(dataStr);
+            }
+        }
+    
+
+static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
 
             using (var context = new ComputerShopEntities())
@@ -240,28 +263,32 @@ namespace comp_shop
         }
 
 
-        //// ORDERS
-
-        //static public List<Order> ShowAllOrders(string itemSupplier)
-        //{ 
-        //    using (var context = new ComputerShopEntities())
-        //    {
-        //        //var data = context.Orders.Include("Category").Include("Supplier").ToList<Item>();
-        //        var data = context.Orders.ToList<Order>();
-        //        return data;
-        //    }            
-        //}
-
-        //static public ICollection<Order> SearchOrderByItem(Item item)
-        //{
-        //    using (var context = new ComputerShopEntities())
-        //    {
-        //        var data = context.Items.Where(x => x.Name == item.Name).ToList<Item>();
-        //        foreach (Item itemForShow in data)
+        // SELLERS
 
 
-        //        return data;
-        //    }
-        //}
+        static public List<Seller> ShowAllSellers()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Sellers.ToList<Seller>();
+                return data;
+            }
+        }
+
+        // SUPPLIERS
+
+
+        static public List<Supplier> ShowAllSuppliers()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Suppliers.ToList<Supplier>();
+                return data;
+            }
+        }
     }
 }
