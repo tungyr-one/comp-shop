@@ -25,7 +25,14 @@ namespace comp_shop
             // TO-DO не показывает заказы
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Items.Include("Category").Include("Supplier").ToList<Item>();
+                //var data = context.Items.Include("Category").Include("Supplier").Include("Sellers").ToList<Item>();
+
+                var data = context.Items
+                        .Include("Category")
+                        .Include("Supplier")
+                        .Include("Sellers")
+                        .ToList();
+
                 return data;
         }   }
 
@@ -191,13 +198,26 @@ namespace comp_shop
         //example
         static public void ShowByName(Article item)
         {
-            // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
-            //var context = new ComputerShopEntities();
-            //return (from item in context.Items where item.Name == itemName select item).ToList();
+
             using (var context = new ComputerShopEntities())
             {
+                //!!! другой способ загрузки Sellers
+                var itemSearch = context.Items.Find(1);
 
+                // Load the blog related to a given post.
+                context.Entry(itemSearch).Collection(p => p.Sellers).Load();
+                List<Seller> sels1 = itemSearch.Sellers.ToList();
+                string dataStr1 = "";
+                foreach (Seller sel in sels1)
+                {
+                    dataStr1 += sel.SellerName + " - ";
+                }
+                MessageBox.Show(dataStr1);
+
+                // !!!поиск только одного товара
                 var original = context.Items.Find(item.ArticleId);
+                //!!! поиск множества товаров
+                //var original = context.Items.Where(x => x.Name == item.ArticleName);
                 MessageBox.Show(original.Sellers.Count().ToString());
                 List<Seller> sels = original.Sellers.ToList();
                string dataStr = "";

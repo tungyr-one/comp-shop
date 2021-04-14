@@ -25,6 +25,16 @@ namespace comp_shop
             return Name;
         }
 
+        public string SellersToString()
+        {
+            string result = "";
+            foreach (Seller sel in Sellers)
+            {
+                result += sel.SellerName + " - ";
+            }
+            return result;
+        }
+
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

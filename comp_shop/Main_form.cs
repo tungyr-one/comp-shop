@@ -383,5 +383,15 @@ namespace comp_shop
             //    }
             //}
         }
+
+        private void dataGridView2_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
+
+        private void dataGridView3_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
     }
 }
