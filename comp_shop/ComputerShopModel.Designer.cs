@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\rotkiv\Documents\Study\Study_II\Прикладное программирование\Курсовой проект\comp_shop\comp_shop\CompShopModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\rotkiv\Documents\Study\Study_II\Прикладное программирование\Курсовой проект\comp_shop\comp_shop\ComputerShopModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

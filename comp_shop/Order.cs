@@ -12,20 +12,15 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Seller
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Seller()
+        public Order()
         {
             this.Items = new HashSet<Item>();
         }
-
-        public override string ToString()
-        {
-            return SellerName;
-        }
-
-        public int SellerID { get; set; }
+    
+        public int OrderID { get; set; }
         public string SellerName { get; set; }
         public Nullable<System.DateTime> SellDate { get; set; }
         public Nullable<int> Quantity { get; set; }

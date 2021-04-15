@@ -18,8 +18,6 @@ namespace comp_shop
         public ComputerShopEntities()
             : base("name=ComputerShopEntities")
         {
-            //this.Configuration.LazyLoadingEnabled = false;
-            //this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,7 +27,7 @@ namespace comp_shop
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
-        public virtual DbSet<Seller> Sellers { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
     }
 }

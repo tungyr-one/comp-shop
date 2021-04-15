@@ -57,6 +57,68 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
+
+        // загрузка формы
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = DB.ShowAllItems();
+            dataGridView2.DataSource = DB.ShowAllOrders();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            // загрузка списка продавцов в DataGridView
+            //DataGridViewSellersForItems();
+            //DataGridViewItemsForSellers();
+            DB.LoadAllStuff(1);
+
+            //DataGridViewComboBoxColumn orders =
+            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
+            //orders.DataSource = comboboxOrders;
+            //orders.ValueType = typeof(Order);
+
+            //orderBindingSource1.DataSource = context.Orders.ToList();
+        }
+
+
+        //// загрузка дополнительной информации o продавцах в DataGridView1
+        //private void DataGridViewSellersForItems()
+        //{
+        //    foreach (DataGridViewRow row in dataGridView1.Rows)
+        //    {
+        //        row.Cells[dataGridView1.Columns["Sellers"].Index].Value = DB.SellersToString(Convert.ToInt32(row.Cells[0].Value));
+        //    }
+        //}
+
+        //// загрузка дополнительной информации o товарах в DataGridView2
+        //private void DataGridViewItemsForSellers()
+        //{
+        //    foreach (DataGridViewRow row in dataGridView2.Rows)
+        //    {
+        //        row.Cells[dataGridView2.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
+        //    }
+        //}
+
+        // отобразить все записи
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
+            dataGridView1.DataSource = DB.ShowAllItems();
+            dataGridView2.DataSource = DB.ShowAllOrders();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
+
+            // загрузка списка продавцов в DataGridView
+            //DataGridViewSellersForItems();
+
+            // TODO: временная проверка удалить
+            List<Item> check = DB.ShowAllItems();
+            foreach (Item ord in check)
+            {
+                label2.Text += ord + " - ";
+            }
+
+        }
+
+
+
+
         // нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
@@ -177,7 +239,7 @@ namespace comp_shop
 
             if (radioButton5.Checked)
             {
-                dataGridView1.DataSource = DB.SearchBySeller(searchBox1.Text);
+                //dataGridView1.DataSource = DB.SearchBySeller(searchBox1.Text);
             }
 
             if (radioButton6.Checked)
@@ -247,62 +309,7 @@ namespace comp_shop
         //}
 
 
-        private void Main_form_Load(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllSellers();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
-            // загрузка списка продавцов в DataGridView
-            DataGridViewSellersForItems();
-            DataGridViewItemsForSellers();
-            DB.LoadAllStuff(1);
 
-            //DataGridViewComboBoxColumn orders =
-            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
-            //orders.DataSource = comboboxOrders;
-            //orders.ValueType = typeof(Order);
-
-            //orderBindingSource1.DataSource = context.Orders.ToList();
-        }
-
-
-        // загрузка дополнительной информации o продавцах в DataGridView1
-        private void DataGridViewSellersForItems()
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                row.Cells[dataGridView1.Columns["Sellers"].Index].Value = DB.SuppliersToString(Convert.ToInt32(row.Cells[0].Value));
-            }
-        }
-
-        // загрузка дополнительной информации o товарах в DataGridView2
-        private void DataGridViewItemsForSellers()
-        {
-            foreach (DataGridViewRow row in dataGridView2.Rows)
-            {
-                row.Cells[dataGridView2.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
-            }
-        }
-
-        // отобразить все записи
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
-            dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllSellers();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
-            
-            // загрузка списка продавцов в DataGridView
-            DataGridViewSellersForItems();
-
-            // TODO: временная проверка удалить
-List<Item> check = DB.ShowAllItems(); 
-            foreach (Item ord in check)
-            {
-                label2.Text += ord + " - ";
-            }
-           
-        }
 
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -361,10 +368,10 @@ List<Item> check = DB.ShowAllItems();
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             // загрузка списка продавцов в DataGridView1
-            DataGridViewSellersForItems();
+            //DataGridViewSellersForItems();
 
             // загрузка списка товаров в DataGridView2
-            DataGridViewItemsForSellers();
+            //DataGridViewItemsForSellers();
 
             // присваивание текущему обрабатываемому товару имен из выбранного элемента в DataGridView
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
@@ -374,7 +381,7 @@ List<Item> check = DB.ShowAllItems();
                 current_item.Price = Convert.ToDecimal(row.Cells[2].Value);                
                 current_item.Category = row.Cells[3].Value.ToString();
                 current_item.Supplier = row.Cells[4].Value.ToString();
-                current_item.Sellers = row.Cells[5].Value.ToString();
+                //current_item.Sellers = row.Cells[5].Value.ToString();
                 // TODO: заменить Article на Item повсюду
                 //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
 
@@ -388,8 +395,8 @@ List<Item> check = DB.ShowAllItems();
                 string value3 = row.Cells[2].Value.ToString();
                 string value4 = row.Cells[3].Value.ToString();
                 string value5 = row.Cells[4].Value.ToString();
-                string value6 = row.Cells[5].Value.ToString();
-                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
+                //string value6 = row.Cells[5].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
             }
 
 

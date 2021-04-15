@@ -17,7 +17,7 @@ namespace comp_shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            this.Sellers = new HashSet<Seller>();
+            this.Orders = new HashSet<Order>();
         }
 
         public override string ToString()
@@ -25,26 +25,15 @@ namespace comp_shop
             return Name;
         }
 
-        public string SellersToString()
-        {
-            string result = "";
-            foreach (Seller sel in Sellers)
-            {
-                result += sel.SellerName + " - ";
-            }
-            return result;
-        }
-
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
-        public string Seller { get; set; }
         public int CategoryID { get; set; }
         public int SupplierID { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seller> Sellers { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
