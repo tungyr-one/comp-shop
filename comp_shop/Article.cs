@@ -11,22 +11,22 @@ namespace comp_shop
 
         //private List<Items> items = new List<Items>();
 
-        public int ArticleId
+        public int Id
         { get; set; }
 
-        public string ArticleName
+        public string Name
         { get; set; }
 
-        public decimal ArticlePrice
+        public decimal Price
         { get; set; }
 
-        public string ArticleCategory
+        public string Category
         { get; set; }
 
-        public string ArticleSeller
+        public string Sellers
         { get; set; }
 
-        public string ArticleSupplier
+        public string Supplier
         { get; set; }
 
 
@@ -36,12 +36,12 @@ namespace comp_shop
 
         public Article(string name, decimal price, string category, string supplier, int id = 0, string seller=null)
         {
-            ArticleId = id;
-            ArticleName = name;
-            ArticlePrice = price;
-            ArticleCategory = category;
-            ArticleSeller = seller;
-            ArticleSupplier = supplier;            
+            Id = id;
+            Name = name;
+            Price = price;
+            Category = category;
+            Sellers = seller;
+            Supplier = supplier;            
             //DB.addToDB(this.DBFormat());
             //items.Add(this);
 
@@ -49,18 +49,18 @@ namespace comp_shop
 
         public string DBFormat()
         {
-            string str = ArticleId + '-' + ArticleName + '-' + ArticlePrice.ToString() + '-' + ArticleCategory + '-' + ArticleSupplier + '-' + ArticleSeller + '\n';
+            string str = Id + '-' + Name + '-' + Price.ToString() + '-' + Category + '-' + Supplier + '-' + Sellers + '\n';
             return str;
         }
 
         public override string ToString()
         {          
-            string item_string = ($"Id: {ArticleId} " + 
-                $"\nНазвание: {ArticleName} " +
-             $"\nЦена, руб: {ArticlePrice}" +
-             $"\nКатегория: {ArticleCategory}" +
-             $"\nПродавец: {ArticleSeller}" +
-             $"\nПоставщик: {ArticleSupplier}" +
+            string item_string = ($"Id: {Id} " + 
+                $"\nНазвание: {Name} " +
+             $"\nЦена, руб: {Price}" +
+             $"\nКатегория: {Category}" +
+             $"\nПродавец: {Sellers}" +
+             $"\nПоставщик: {Supplier}" +
              "\n---------------------------------\n");
 
             return item_string;

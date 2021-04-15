@@ -58,12 +58,12 @@ namespace comp_shop
                 button1.Text = "Изменить";                
                 
                 // присваивание текстовым полям значений редактируемого товара
-                this.textBox1.Text = workingItem.ArticleName;
-                this.textBox2.Text = workingItem.ArticlePrice.ToString();
+                this.textBox1.Text = workingItem.Name;
+                this.textBox2.Text = workingItem.Price.ToString();
                 // TODO: show article catagory and supplier
-                this.comboBox1.SelectedItem = workingItem.ArticleCategory;
-                this.textBox3.Text = workingItem.ArticleSeller;
-                this.comboBox2.SelectedItem = workingItem.ArticleCategory;
+                this.comboBox1.SelectedItem = workingItem.Category;
+                this.textBox3.Text = workingItem.Sellers;
+                this.comboBox2.SelectedItem = workingItem.Category;
             }
         }
 
@@ -71,11 +71,11 @@ namespace comp_shop
         private void CreateEditItem()
         {
             // формирования объекта класса Article для передачи в БД
-            workingItem.ArticleName = textBox1.Text;
-            workingItem.ArticlePrice = decimal.Parse(textBox2.Text);
-            workingItem.ArticleCategory = comboBox1.SelectedItem.ToString();
-            workingItem.ArticleSeller = textBox3.Text;
-            workingItem.ArticleSupplier = comboBox2.SelectedItem.ToString();
+            workingItem.Name = textBox1.Text;
+            workingItem.Price = decimal.Parse(textBox2.Text);
+            workingItem.Category = comboBox1.SelectedItem.ToString();
+            workingItem.Sellers = textBox3.Text;
+            workingItem.Supplier = comboBox2.SelectedItem.ToString();
             this.button2.Text = "Готово";
 
             // определение необходимого метода в классе работы с БД

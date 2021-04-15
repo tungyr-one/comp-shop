@@ -34,40 +34,41 @@ namespace comp_shop
 
         //}
 
-        //example - всплывающее окно с продавцами
-        static public string SuppliersToTable(int itemID)
+        // список продавцов по ID товара
+        static public string SuppliersToString(int itemID)
         {
 
             using (var context = new ComputerShopEntities())
             {
-                //!!! другой способ загрузки Sellers
-                var itemSearch = context.Items.Find(itemID);
+                ////!!! другой способ загрузки Sellers
+                //var itemSearch = context.Items.Find(itemID);
 
-                // Load the blog related to a given post.
-                context.Entry(itemSearch).Collection(p => p.Sellers).Load();
-                List<Seller> sels1 = itemSearch.Sellers.ToList();
-                string dataStr1 = "";
-                foreach (Seller sel in sels1)
-                {
-                    dataStr1 += sel.SellerName + "; ";
-                    dataStr1 += "\n";
-                }
-                return dataStr1;
+                //// Load the blog related to a given post.
+                //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
+                //List<Seller> sels1 = itemSearch.Sellers.ToList();
+                //string dataStr1 = "";
+                //foreach (Seller sel in sels1)
+                //{
+                //    dataStr1 += sel.SellerName + "; ";
+                //    dataStr1 += "\n";
+                //}
+                
+
                 //MessageBox.Show(dataStr1);
 
-                //// !!!поиск только одного товара
-                ////var original = context.Items.Find(item.ArticleId);
-                ////!!! поиск множества товаров
-                ////var original = context.Items.Where(x => x.Name == item.ArticleName);
+                // !!!поиск только одного товара
+                var itemWithSellers = context.Items.Find(itemID);
+                //!!! поиск множества товаров
+                //var original = context.Items.Where(x => x.Name == item.Name);
                 //MessageBox.Show(original.Sellers.Count().ToString());
-                //List<Seller> sels = original.Sellers.ToList();
-                //string dataStr = "";
+                List<Seller> sels = itemWithSellers.Sellers.ToList();
+                string sellersListStr = "";
 
-                //foreach (Seller sel in sels)
-                //{
-                //    dataStr += sel.SellerName + " - ";
-                //}
-                //MessageBox.Show(dataStr);
+                foreach (Seller sel in sels)
+                {
+                    sellersListStr += sel.SellerName + "; ";
+                }
+                return sellersListStr;
             }
         }
 
@@ -154,23 +155,23 @@ namespace comp_shop
         static public void addToDB(Article insertEntry)
         {
             // проверка содержимого полей Article
-            //MessageBox.Show("outside using: " + insertEntry.ArticleName + "-" +
-            //    insertEntry.ArticlePrice + "-" +
-            //    insertEntry.ArticleCategory + "-" +
-            //    insertEntry.ArticleSeller + "-" +
-            //    insertEntry.ArticleSupplier);
+            //MessageBox.Show("outside using: " + insertEntry.Name + "-" +
+            //    insertEntry.Price + "-" +
+            //    insertEntry.Category + "-" +
+            //    insertEntry.Sellers + "-" +
+            //    insertEntry.Supplier);
             try
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.ArticleCategory);
-                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.ArticleSupplier);
+                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.Category);
+                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.Supplier);
                     var itemEntry = new Item()
                     {
-                        Name = insertEntry.ArticleName,
-                        Price = insertEntry.ArticlePrice,
+                        Name = insertEntry.Name,
+                        Price = insertEntry.Price,
                         Category = categoryEntry,
-                        Seller = insertEntry.ArticleSeller,
+                        Seller = insertEntry.Sellers,
                         Supplier = supplierEntry,
                     };                    
                     context.Items.Add(itemEntry);
@@ -198,9 +199,9 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ArticleId));
+                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.Id));
                 context.SaveChanges();
-                MessageBox.Show(removeEntry.ArticleName + " removed from database!");
+                MessageBox.Show(removeEntry.Name + " removed from database!");
             }
         }
 
@@ -210,21 +211,21 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-                var original = context.Items.Find(entryToEdit.ArticleId);
+                var original = context.Items.Find(entryToEdit.Id);
 
-                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == entryToEdit.ArticleCategory);
-                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == entryToEdit.ArticleSupplier);
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == entryToEdit.Category);
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == entryToEdit.Supplier);
 
                 if (original != null)
                 {
-                    original.Name = entryToEdit.ArticleName;
-                    original.Price = entryToEdit.ArticlePrice;
+                    original.Name = entryToEdit.Name;
+                    original.Price = entryToEdit.Price;
                     original.Category = categoryEntry;
-                    original.Seller = entryToEdit.ArticleSeller;
+                    original.Seller = entryToEdit.Sellers;
                     original.Supplier = supplierEntry;
                 };
                 context.SaveChanges();
-                MessageBox.Show(entryToEdit.ArticleName + " updated!");
+                MessageBox.Show(entryToEdit.Name + " updated!");
             }
             
         }
@@ -308,11 +309,49 @@ namespace comp_shop
             }
         }
 
-        // SUPPLIERS
-
-
-        static public List<Supplier> ShowAllSuppliers()
+        // список товаров по ID продавца
+        static public string ItemsToString(int sellerID)
         {
+
+            using (var context = new ComputerShopEntities())
+            {
+                ////!!! другой способ загрузки Sellers
+                //var itemSearch = context.Items.Find(itemID);
+
+                //// Load the blog related to a given post.
+                //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
+                //List<Seller> sels1 = itemSearch.Sellers.ToList();
+                //string dataStr1 = "";
+                //foreach (Seller sel in sels1)
+                //{
+                //    dataStr1 += sel.SellerName + "; ";
+                //    dataStr1 += "\n";
+                //}
+
+
+                //MessageBox.Show(dataStr1);
+
+                // !!!поиск только одного товара
+                var sellerWithItems = context.Sellers.Find(sellerID);
+                //!!! поиск множества товаров
+                //var original = context.Items.Where(x => x.Name == item.Name);
+                //MessageBox.Show(original.Sellers.Count().ToString());
+                List<Item> items = sellerWithItems.Items.ToList();
+                string itemsListStr = "";
+
+                foreach (Item it in items)
+                {
+                    itemsListStr += it.Name + "; "; ;
+                }
+                return itemsListStr;
+            }
+        }
+
+            // SUPPLIERS
+
+
+            static public List<Supplier> ShowAllSuppliers()
+            {
             ComputerShopEntities dataEntities = new ComputerShopEntities();
 
             using (var context = new ComputerShopEntities())
@@ -320,6 +359,6 @@ namespace comp_shop
                 var data = context.Suppliers.ToList<Supplier>();
                 return data;
             }
-        }
+            }
     }
 }

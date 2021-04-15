@@ -250,9 +250,11 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
-            //dataGridView2.DataSource = DB.ShowAllSellers();
-            //dataGridView3.DataSource = DB.ShowAllSuppliers();
-            //List<Order> comboboxOrders = DB.ShowAllOrders();
+            dataGridView2.DataSource = DB.ShowAllSellers();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            // загрузка списка продавцов в DataGridView
+            DataGridViewSellersForItems();
+            DataGridViewItemsForSellers();
 
             //DataGridViewComboBoxColumn orders =
             //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
@@ -260,31 +262,24 @@ namespace comp_shop
             //orders.ValueType = typeof(Order);
 
             //orderBindingSource1.DataSource = context.Orders.ToList();
+        }
 
-            //foreach (DataGridViewRow row in dataGridView1.Rows)
-            //{
-            //    row.Cells[dataGridView1.Columns["Sellers"].Index].Value = "Sellers!!!";
-            //}
 
-            //dataGridView1.RowCount = rowQtty;
-            //dataGridView1.ColumnCount = colQtty;
+        // загрузка дополнительной информации o продавцах в DataGridView1
+        private void DataGridViewSellersForItems()
+        {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
+                row.Cells[dataGridView1.Columns["Sellers"].Index].Value = DB.SuppliersToString(Convert.ToInt32(row.Cells[0].Value));
+            }
+        }
 
-                string val = DB.SuppliersToTable(Convert.ToInt32(row.Cells[0].Value));
-                val += "\n";
-                row.Cells[6].Value = val;
-                //for (int j = 0; j < 7; j++)
-                //{
-                //    // если выбрано заполнение случайными значениями
-                //    if (radioButton1.Checked)
-                //    {
-                //        dataGridView1.ReadOnly = true;
-                //        row.Cells[j].Value = rand.Next(-100, 100);
-                //    }
-
-
-                //}
+        // загрузка дополнительной информации o товарах в DataGridView2
+        private void DataGridViewItemsForSellers()
+        {
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                row.Cells[dataGridView2.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
             }
         }
 
@@ -293,15 +288,19 @@ namespace comp_shop
         {
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridView1.DataSource = DB.ShowAllItems();
+            dataGridView2.DataSource = DB.ShowAllSellers();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            
+            // загрузка списка продавцов в DataGridView
+            DataGridViewSellersForItems();
 
-            //dataGridView2.DataSource = DB.ShowAllOrders();
-
-            //List<Order> check = DB.ShowAllOrders();
-            List<Item> check = DB.ShowAllItems();
+            // TODO: временная проверка удалить
+List<Item> check = DB.ShowAllItems(); 
             foreach (Item ord in check)
             {
                 label2.Text += ord + " - ";
             }
+           
         }
 
         private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
@@ -360,15 +359,21 @@ namespace comp_shop
         //изменение выбора строки
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            // присваивание текущему обрабатываемому товару имена из выбранного элемента в DataGridView
+            // загрузка списка продавцов в DataGridView1
+            DataGridViewSellersForItems();
+
+            // загрузка списка товаров в DataGridView2
+            DataGridViewItemsForSellers();
+
+            // присваивание текущему обрабатываемому товару имен из выбранного элемента в DataGridView
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                current_item.ArticleId = Convert.ToInt32(row.Cells[0].Value);
-                current_item.ArticleName = row.Cells[1].Value.ToString();
-                current_item.ArticlePrice = Convert.ToDecimal(row.Cells[2].Value);
-                current_item.ArticleSeller = row.Cells[3].Value.ToString();
-                current_item.ArticleCategory = row.Cells[4].Value.ToString();
-                current_item.ArticleSupplier = row.Cells[5].Value.ToString();
+                current_item.Id = Convert.ToInt32(row.Cells[0].Value);
+                current_item.Name = row.Cells[1].Value.ToString();
+                current_item.Price = Convert.ToDecimal(row.Cells[2].Value);                
+                current_item.Category = row.Cells[3].Value.ToString();
+                current_item.Supplier = row.Cells[4].Value.ToString();
+                current_item.Sellers = row.Cells[5].Value.ToString();
                 // TODO: заменить Article на Item повсюду
                 //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
 
