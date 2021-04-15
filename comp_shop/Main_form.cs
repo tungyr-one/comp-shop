@@ -250,8 +250,8 @@ namespace comp_shop
         private void Main_form_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllSellers();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            //dataGridView2.DataSource = DB.ShowAllSellers();
+            //dataGridView3.DataSource = DB.ShowAllSuppliers();
             //List<Order> comboboxOrders = DB.ShowAllOrders();
 
             //DataGridViewComboBoxColumn orders =
@@ -261,9 +261,31 @@ namespace comp_shop
 
             //orderBindingSource1.DataSource = context.Orders.ToList();
 
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    row.Cells[dataGridView1.Columns["Sellers"].Index].Value = "Sellers!!!";
+            //}
+
+            //dataGridView1.RowCount = rowQtty;
+            //dataGridView1.ColumnCount = colQtty;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+
+                string val = DB.SuppliersToTable(Convert.ToInt32(row.Cells[0].Value));
+                val += "\n";
+                row.Cells[6].Value = val;
+                //for (int j = 0; j < 7; j++)
+                //{
+                //    // если выбрано заполнение случайными значениями
+                //    if (radioButton1.Checked)
+                //    {
+                //        dataGridView1.ReadOnly = true;
+                //        row.Cells[j].Value = rand.Next(-100, 100);
+                //    }
 
 
-
+                //}
+            }
         }
 
         // отобразить все записи
@@ -350,7 +372,7 @@ namespace comp_shop
                 // TODO: заменить Article на Item повсюду
                 //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
 
-                DB.ShowByName(current_item);
+                //DB.ShowByName(current_item);
             }
 
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
@@ -363,7 +385,6 @@ namespace comp_shop
                 string value6 = row.Cells[5].Value.ToString();
                 toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5 + " - " + value6;
             }
-
 
 
         }

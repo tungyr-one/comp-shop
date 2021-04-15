@@ -17,30 +17,77 @@ namespace comp_shop
     class DB    
     {
 
+        //_______________________________________________________________________________
+
+
+        //static public List<Item> ShowAllItems()
+        //{
+
+        //    ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+        //    using (var context = new ComputerShopEntities())
+        //    {
+        //        var data =  context.Items.Include(c => c.Sellers.Select(b => b.SellerName.ToString())).Load().ToList<Item>();
+        //        //var data = context.Items.Include("Category").Include("Supplier").Include("Sellers").;
+        //        return data;
+        //    }
+
+        //}
+
+        //example - всплывающее окно с продавцами
+        static public string SuppliersToTable(int itemID)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                //!!! другой способ загрузки Sellers
+                var itemSearch = context.Items.Find(itemID);
+
+                // Load the blog related to a given post.
+                context.Entry(itemSearch).Collection(p => p.Sellers).Load();
+                List<Seller> sels1 = itemSearch.Sellers.ToList();
+                string dataStr1 = "";
+                foreach (Seller sel in sels1)
+                {
+                    dataStr1 += sel.SellerName + "; ";
+                    dataStr1 += "\n";
+                }
+                return dataStr1;
+                //MessageBox.Show(dataStr1);
+
+                //// !!!поиск только одного товара
+                ////var original = context.Items.Find(item.ArticleId);
+                ////!!! поиск множества товаров
+                ////var original = context.Items.Where(x => x.Name == item.ArticleName);
+                //MessageBox.Show(original.Sellers.Count().ToString());
+                //List<Seller> sels = original.Sellers.ToList();
+                //string dataStr = "";
+
+                //foreach (Seller sel in sels)
+                //{
+                //    dataStr += sel.SellerName + " - ";
+                //}
+                //MessageBox.Show(dataStr);
+            }
+        }
+
+        //_______________________________________________________________________________
+
         static public List<Item> ShowAllItems()
         {
 
             ComputerShopEntities dataEntities = new ComputerShopEntities();
 
-            // TO-DO не показывает заказы
+
             using (var context = new ComputerShopEntities())
             {
-                //var data = context.Items.Include("Category").Include("Supplier").Include("Sellers").ToList<Item>();
-
-                var data = context.Items
-                        .Include("Category")
-                        .Include("Supplier")
-                        .Include("Sellers")
-                        .ToList();
-
+                var data = context.Items.Include("Category").Include("Supplier").Include("Sellers").ToList<Item>();
                 return data;
-        }   }
+            }
 
-        //static public List<Order> ShowAllOrders()
-        //{
-        //    ComputerShopEntities dataEntities = new ComputerShopEntities();
-        //    return dataEntities.Orders.ToList();
-        //}
+        }
+
+
 
         // добавление категории
         static public void AddCategory(string categoryName)
@@ -195,43 +242,7 @@ namespace comp_shop
             }
         }
 
-        //example
-        static public void ShowByName(Article item)
-        {
-
-            using (var context = new ComputerShopEntities())
-            {
-                //!!! другой способ загрузки Sellers
-                var itemSearch = context.Items.Find(1);
-
-                // Load the blog related to a given post.
-                context.Entry(itemSearch).Collection(p => p.Sellers).Load();
-                List<Seller> sels1 = itemSearch.Sellers.ToList();
-                string dataStr1 = "";
-                foreach (Seller sel in sels1)
-                {
-                    dataStr1 += sel.SellerName + " - ";
-                }
-                MessageBox.Show(dataStr1);
-
-                // !!!поиск только одного товара
-                var original = context.Items.Find(item.ArticleId);
-                //!!! поиск множества товаров
-                //var original = context.Items.Where(x => x.Name == item.ArticleName);
-                MessageBox.Show(original.Sellers.Count().ToString());
-                List<Seller> sels = original.Sellers.ToList();
-               string dataStr = "";
-
-                foreach (Seller sel in sels)
-                {
-                    dataStr += sel.SellerName + " - ";
-                }
-                MessageBox.Show(dataStr);
-            }
-        }
-    
-
-static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
+        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
 
             using (var context = new ComputerShopEntities())
