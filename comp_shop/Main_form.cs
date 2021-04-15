@@ -255,6 +255,7 @@ namespace comp_shop
             // загрузка списка продавцов в DataGridView
             DataGridViewSellersForItems();
             DataGridViewItemsForSellers();
+            DB.LoadAllStuff(1);
 
             //DataGridViewComboBoxColumn orders =
             //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;

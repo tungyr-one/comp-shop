@@ -75,23 +75,23 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.Sellers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Items = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sellerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.supplierIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sellerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Items = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -576,6 +576,12 @@
             this.Sellers.HeaderText = "Sellers";
             this.Sellers.Name = "Sellers";
             // 
+            // Items
+            // 
+            this.Items.HeaderText = "Item";
+            this.Items.Name = "Items";
+            this.Items.ReadOnly = true;
+            // 
             // itemIDDataGridViewTextBoxColumn
             // 
             this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
@@ -615,6 +621,34 @@
             // 
             this.itemsBindingSource.DataSource = typeof(comp_shop.Item);
             // 
+            // sellerIDDataGridViewTextBoxColumn
+            // 
+            this.sellerIDDataGridViewTextBoxColumn.DataPropertyName = "SellerID";
+            this.sellerIDDataGridViewTextBoxColumn.HeaderText = "SellerID";
+            this.sellerIDDataGridViewTextBoxColumn.Name = "sellerIDDataGridViewTextBoxColumn";
+            this.sellerIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sellerNameDataGridViewTextBoxColumn
+            // 
+            this.sellerNameDataGridViewTextBoxColumn.DataPropertyName = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.HeaderText = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.Name = "sellerNameDataGridViewTextBoxColumn";
+            this.sellerNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sellDateDataGridViewTextBoxColumn
+            // 
+            this.sellDateDataGridViewTextBoxColumn.DataPropertyName = "SellDate";
+            this.sellDateDataGridViewTextBoxColumn.HeaderText = "SellDate";
+            this.sellDateDataGridViewTextBoxColumn.Name = "sellDateDataGridViewTextBoxColumn";
+            this.sellDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Quantity";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
             // sellerBindingSource
             // 
             this.sellerBindingSource.DataSource = typeof(comp_shop.Seller);
@@ -646,40 +680,6 @@
             // supplierBindingSource
             // 
             this.supplierBindingSource.DataSource = typeof(comp_shop.Supplier);
-            // 
-            // sellerIDDataGridViewTextBoxColumn
-            // 
-            this.sellerIDDataGridViewTextBoxColumn.DataPropertyName = "SellerID";
-            this.sellerIDDataGridViewTextBoxColumn.HeaderText = "SellerID";
-            this.sellerIDDataGridViewTextBoxColumn.Name = "sellerIDDataGridViewTextBoxColumn";
-            this.sellerIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sellerNameDataGridViewTextBoxColumn
-            // 
-            this.sellerNameDataGridViewTextBoxColumn.DataPropertyName = "SellerName";
-            this.sellerNameDataGridViewTextBoxColumn.HeaderText = "SellerName";
-            this.sellerNameDataGridViewTextBoxColumn.Name = "sellerNameDataGridViewTextBoxColumn";
-            this.sellerNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sellDateDataGridViewTextBoxColumn
-            // 
-            this.sellDateDataGridViewTextBoxColumn.DataPropertyName = "SellDate";
-            this.sellDateDataGridViewTextBoxColumn.HeaderText = "SellDate";
-            this.sellDateDataGridViewTextBoxColumn.Name = "sellDateDataGridViewTextBoxColumn";
-            this.sellDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Quantity";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Quantity";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // Items
-            // 
-            this.Items.HeaderText = "Item";
-            this.Items.Name = "Items";
-            this.Items.ReadOnly = true;
             // 
             // Main_form
             // 

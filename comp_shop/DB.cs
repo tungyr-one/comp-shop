@@ -35,15 +35,38 @@ namespace comp_shop
         //}
 
         // список продавцов по ID товара
-        static public string SuppliersToString(int itemID)
+        static public string LoadAllStuff(int ID)
         {
 
             using (var context = new ComputerShopEntities())
             {
+                //!!!поиск товаров по SellerID через Where и Any
+               var itemWithSellers = context.Items.Where(x => x.Sellers.Any(y => y.SellerID == ID)).ToList();
+                string dataStr = "";
+                foreach (Item it in itemWithSellers)
+                {
+                    dataStr += it.Name + "; ";
+                    dataStr += "\n";
+                }
+                MessageBox.Show(itemWithSellers.Count().ToString());
+                MessageBox.Show(dataStr);
+                return dataStr;
+
+                //!!! поиск продавцов по ItemID через Where и Any
+                //var SellersWithItems = context.Sellers.Where(x => x.Items.Any(y => y.ItemID == ID)).ToList();
+                //string dataStr1 = "";
+                //foreach (Seller sel in SellersWithItems)
+                //{
+                //    dataStr1 += sel.SellerName + "; ";
+                //    dataStr1 += "\n";
+                //}
+                //MessageBox.Show(SellersWithItems.Count().ToString());
+                //MessageBox.Show(dataStr1);
+                //return dataStr1;
+
+
                 ////!!! другой способ загрузки Sellers
                 //var itemSearch = context.Items.Find(itemID);
-
-                //// Load the blog related to a given post.
                 //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
                 //List<Seller> sels1 = itemSearch.Sellers.ToList();
                 //string dataStr1 = "";
@@ -52,9 +75,36 @@ namespace comp_shop
                 //    dataStr1 += sel.SellerName + "; ";
                 //    dataStr1 += "\n";
                 //}
-                
+
 
                 //MessageBox.Show(dataStr1);
+
+                // !!!поиск только одного товара
+                //var itemWithSellers = context.Items.Find(itemID);
+                //!!! поиск множества товаров
+                //var original = context.Items.Where(x => x.Name == item.Name);
+                //MessageBox.Show(original.Sellers.Count().ToString());
+                //List<Seller> sels = itemWithSellers.Sellers.ToList();
+                //string sellersListStr = "";
+
+                //foreach (Seller sel in sels)
+                //{
+                //    sellersListStr += sel.SellerName + "; ";
+                //}
+                //return sellersListStr;
+            }
+        }
+
+        //_______________________________________________________________________________
+
+
+        static public string SuppliersToString(int itemID)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+
+               //MessageBox.Show(dataStr1);
 
                 // !!!поиск только одного товара
                 var itemWithSellers = context.Items.Find(itemID);
@@ -72,8 +122,6 @@ namespace comp_shop
             }
         }
 
-        //_______________________________________________________________________________
-
         static public List<Item> ShowAllItems()
         {
 
@@ -82,7 +130,7 @@ namespace comp_shop
 
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Items.Include("Category").Include("Supplier").Include("Sellers").ToList<Item>();
+                var data = context.Items.Include("Category").Include("Supplier").ToList<Item>();
                 return data;
             }
 
@@ -336,6 +384,8 @@ namespace comp_shop
                 //!!! поиск множества товаров
                 //var original = context.Items.Where(x => x.Name == item.Name);
                 //MessageBox.Show(original.Sellers.Count().ToString());
+                //var sellerResults = context.Items.Where(x => x.)
+
                 List<Item> items = sellerWithItems.Items.ToList();
                 string itemsListStr = "";
 
