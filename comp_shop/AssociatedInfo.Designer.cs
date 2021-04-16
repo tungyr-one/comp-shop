@@ -1,7 +1,7 @@
 ﻿
 namespace comp_shop
 {
-    partial class ConnectedInfo
+    partial class AssociatedInfo
     {
         /// <summary>
         /// Required designer variable.

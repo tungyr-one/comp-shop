@@ -56,6 +56,18 @@ namespace comp_shop
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
+
+            radioButton5.Enabled = false;
+            radioButton6.Enabled = false;
+
+            dateTimePicker1.Enabled = false;
+            dateTimePicker1.Visible = false;
+            dateTimePicker2.Enabled = false;
+            dateTimePicker2.Visible = false;
+
+
+            // отключение кнопок поиска по продавцу и поставщику
+
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
@@ -278,19 +290,19 @@ namespace comp_shop
 
             if (radioButton5.Checked)
             {
-                //dataGridView1.DataSource = DB.SearchBySeller(searchBox1.Text);
+                dataGridView2.DataSource = DB.SearchBySeller(searchBox1.Text);
             }
 
             if (radioButton6.Checked)
             {
-                dataGridView1.DataSource = DB.SearchBySupplier(searchBox1.Text);
+                dataGridView3.DataSource = DB.SearchBySupplier(searchBox1.Text);
             }
 
             //dataGridView1.DataSource = search_result;
         }
 
 
-        // выбор чекбоксов
+        // обработка выбора чекбоксов
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             searchParam3.Visible = false;
@@ -333,6 +345,12 @@ namespace comp_shop
             if (radioButton5.Checked)
             {
                 searchParam1.Text = "Продавец:";
+                searchParam2.Text = "Период от:";
+                searchParam3.Text = "Период до:";
+
+
+
+
             }
 
             if (radioButton6.Checked)
@@ -470,7 +488,7 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                ConnectedInfo connInfoForm = new ConnectedInfo();
+                AssociatedInfo connInfoForm = new AssociatedInfo();
                 ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
                 connInfoForm.ordersToItems= ordersConnectedData;
                 connInfoForm.ShowDialog();
@@ -486,7 +504,7 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                ConnectedInfo connInfoForm = new ConnectedInfo();
+                AssociatedInfo connInfoForm = new AssociatedInfo();
                 itemsConnectedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
                 connInfoForm.itemsToSupplier = itemsConnectedData;
                 connInfoForm.ShowDialog();
@@ -494,6 +512,65 @@ namespace comp_shop
 
         }
 
+        // обработка переключения вкладок
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (tabControl1.SelectedTab.Name == "tabPage1")
+            {
+                // включение первой радиокнопки
+                radioButton1.Checked = true;
+// отключение первых пяти радиокнопок
+                radioButton1.Enabled = true;
+                radioButton2.Enabled = true;
+                radioButton3.Enabled = true;
+                radioButton4.Enabled = true;
+                radioButton5.Enabled = false;
+                radioButton6.Enabled = false;
 
+                searchParam2.Visible = false;
+                searchParam3.Visible = false;
+
+                dateTimePicker1.Enabled = false;
+                dateTimePicker1.Visible = false;
+                dateTimePicker2.Enabled = false;
+                dateTimePicker2.Visible = false;
+            }
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
+            {
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                radioButton3.Enabled = false;
+                radioButton4.Enabled = false;
+                radioButton5.Enabled = true;
+                radioButton5.Checked = true;
+                radioButton6.Enabled = false;
+
+                searchParam2.Visible = true;
+                searchParam3.Visible = true;
+
+                dateTimePicker1.Enabled = true;
+                dateTimePicker1.Visible = true;
+                dateTimePicker2.Enabled = true;
+                dateTimePicker2.Visible = true;
+            }
+            else
+            {
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                radioButton3.Enabled = false;
+                radioButton4.Enabled = false;
+                radioButton5.Enabled = false;
+                radioButton6.Enabled = true;
+                radioButton6.Checked = true;
+
+                searchParam2.Visible = false;
+                searchParam3.Visible = false;
+
+                dateTimePicker1.Enabled = false;
+                dateTimePicker1.Visible = false;
+                dateTimePicker2.Enabled = false;
+                dateTimePicker2.Visible = false;
+            }
+        }
     }
 }

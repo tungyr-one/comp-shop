@@ -33,7 +33,7 @@ namespace comp_shop
 
         public override string ToString()
         {
-            return "Id " + ItemID + ": " + Name;
+            return Name + "; " + Price;
         }
     }
 }

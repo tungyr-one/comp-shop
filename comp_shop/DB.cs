@@ -365,22 +365,22 @@ namespace comp_shop
             }
         }
 
-        //static public List<Item> SearchBySeller(string itemSeller)
-        //{
-        //    using (var context = new ComputerShopEntities())
-        //    {
-        //        var data = context.Items.Where(x => x.Seller == itemSeller).Include("Category").Include("Supplier").ToList<Item>();
+        static public List<Order> SearchBySeller(string itemSeller)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.Where(x => x.SellerName == itemSeller).Include("Item").ToList<Order>();
 
-        //        return data;
-        //    }
-        //}
+                return data;
+            }
+        }
 
-        static public List<Item> SearchBySupplier(string itemSupplier)
+        static public List<Supplier> SearchBySupplier(string itemSupplier)
         {
             using (var context = new ComputerShopEntities())
             {
                 Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == itemSupplier);
-                var data = context.Items.Where(x => x.Supplier.Name == supplier.Name).Include("Category").Include("Supplier").ToList<Item>();
+                var data = context.Suppliers.Where(x => x.Name == itemSupplier).ToList<Supplier>();
 
                 return data;
             }

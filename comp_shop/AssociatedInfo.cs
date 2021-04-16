@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    public partial class ConnectedInfo : Form
+    public partial class AssociatedInfo : Form
     {
         
         public List<Item> itemsToSupplier = new List<Item>();
         public List<Order> ordersToItems = new List<Order>();
 
-        public ConnectedInfo()
+        public AssociatedInfo()
         {
             InitializeComponent();
             
@@ -34,6 +34,7 @@ namespace comp_shop
             // проверка заполненности списка товаров и домонстрация его в DataGridView
             if (itemsToSupplier.Count > 0)
             {
+                this.Text = "Товары поставщика";
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = itemBindingSource;
                 dataGridView1.DataSource = itemsToSupplier;
@@ -41,6 +42,7 @@ namespace comp_shop
             }
             else
             {
+                this.Text = "Продажи товара";
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 dataGridView1.DataSource = ordersToItems;
