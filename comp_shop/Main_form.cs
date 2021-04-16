@@ -185,6 +185,7 @@ namespace comp_shop
         {
             // открыте формы изменения товара
             NewItemForm new_item_form = new NewItemForm(false);
+
             // передача в форму редактирования выбранной сущности
             new_item_form.workingItem = current_item;
             new_item_form.ShowDialog();
@@ -253,6 +254,7 @@ namespace comp_shop
 
             }
 
+            // поиск по цене
             if (radioButton2.Checked)
                 try
                 {
@@ -278,6 +280,7 @@ namespace comp_shop
             //        MessageBox.Show("Неправильная категория!");
             //    }
 
+            // поиск по категории и цене
             if (radioButton4.Checked)
                 try
                 {
@@ -288,17 +291,23 @@ namespace comp_shop
                     MessageBox.Show("Неправильная категория или цена!");
                 }
 
+            // поиск по продажам, продавцам и времени
             if (radioButton5.Checked)
             {
-                dataGridView2.DataSource = DB.SearchBySeller(searchBox1.Text);
+                // поиск только по времени если поле имени продавца пустое
+                if (searchBox1.Text == "")
+                {
+                    dataGridView2.DataSource = DB.SearchByTime(dateTimePicker1.Value, dateTimePicker2.Value);
+                }
+                else
+                dataGridView2.DataSource = DB.SearchBySellerAndTime(searchBox1.Text, dateTimePicker1.Value, dateTimePicker2.Value);
             }
 
+            // поиск по поставщику
             if (radioButton6.Checked)
             {
                 dataGridView3.DataSource = DB.SearchBySupplier(searchBox1.Text);
             }
-
-            //dataGridView1.DataSource = search_result;
         }
 
 

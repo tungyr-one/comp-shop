@@ -322,6 +322,8 @@ namespace comp_shop
             
         }
 
+        // SEARCHING
+
         static public List<Item> SearchItemByName(string itemName)
         {
             // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
@@ -365,11 +367,28 @@ namespace comp_shop
             }
         }
 
-        static public List<Order> SearchBySeller(string itemSeller)
+        static public List<Order> SearchBySellerAndTime(string itemSeller, DateTime dateFrom, DateTime dateTo )
         {
+
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Orders.Where(x => x.SellerName == itemSeller).Include("Item").ToList<Order>();
+                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
+                                        .Where(x => x.OrderDate >= dateFrom)
+                                        .Where(x => x.SellerName == itemSeller)
+                                        .Include("Item").ToList<Order>();
+
+                return data;
+            }
+        }
+
+        static public List<Order> SearchByTime(DateTime dateFrom, DateTime dateTo)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
+                                        .Where(x => x.OrderDate >= dateFrom)
+                                        .Include("Item").ToList<Order>();
 
                 return data;
             }
