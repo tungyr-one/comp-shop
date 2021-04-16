@@ -14,6 +14,7 @@ namespace comp_shop
     {
         
         public List<Item> itemsToSupplier = new List<Item>();
+        public List<Order> ordersToItems = new List<Order>();
 
         public ConnectedInfo()
         {
@@ -23,12 +24,20 @@ namespace comp_shop
 
         private void ConnectedInfo_Load(object sender, EventArgs e)
         {
-            //dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = itemsToSupplier;
-            for (int i=0;  i < dataGridView1.RowCount;i++)
-            {
-                dataGridView1.Rows[i].Cells[0].Value = itemsToSupplier[i].Category;
+            // проверка заполненности списка товаров и домонстрация его в DataGridView
+            if (itemsToSupplier.Count > 0)
+            {//dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = itemBindingSource;
+                dataGridView1.DataSource = itemsToSupplier;                
+                itemsToSupplier.Clear();
             }
+            //else
+            //{
+            //    dataGridView1.DataSource = orderBindingSource;
+            //    dataGridView1.DataSource = ordersToItems;
+            //}
+
+  
         }
 
             private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)

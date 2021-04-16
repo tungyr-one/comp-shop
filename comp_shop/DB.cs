@@ -160,14 +160,13 @@ namespace comp_shop
         }
 
 
-        // список товаров поставщика
+        // список товаров поставщика для ConnectedInfo
         static public List<Item> ItemsToList(int SupplierID)
         {
             using (var context = new ComputerShopEntities())
             {
-                var supplierWithItems = context.Suppliers.Find(SupplierID);
-                List<Item> items = supplierWithItems.Items.ToList();
-                return items;
+                List<Item> original = context.Items.Where(x => x.SupplierID == SupplierID).Include("Category").Include("Supplier").ToList();
+                return original;
             }
         }
 

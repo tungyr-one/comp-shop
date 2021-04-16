@@ -73,18 +73,18 @@ namespace comp_shop
 
 
         //COMBOBOX загрузка дополнительной информации o заказах в DataGridView1 
-        private void DataGridViewOrdersForItems()
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                List<Order> ordersData = DB.OrdersToList(Convert.ToInt32(row.Cells[0].Value));
-                DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
-                cell.DataSource = ordersData;
-                // демонстрация первого заказа в combobox если он есть
-                if (ordersData.Count > 0)
-                cell.Value = ordersData[0];
-            }
-        }
+        //private void DataGridViewOrdersForItems()
+        //{
+        //    foreach (DataGridViewRow row in dataGridView1.Rows)
+        //    {
+        //        List<Order> ordersData = DB.OrdersToList(Convert.ToInt32(row.Cells[0].Value));
+        //        DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
+        //        cell.DataSource = ordersData;
+        //        // демонстрация первого заказа в combobox если он есть
+        //        if (ordersData.Count > 0)
+        //        cell.Value = ordersData[0];
+        //    }
+        //}
 
         //STRING загрузка дополнительной информации o связанных заказах в DataGridView1 
         //private void DataGridViewOrdersForItems()
@@ -107,21 +107,31 @@ namespace comp_shop
         //}
 
 
-        //загрузка информации о связанных товарах DataGridView3
+        //ConnectedInfo загрузка дополнительной информации o заказах в DataGridView1 
+        private void DataGridViewOrdersForItems()
+        {
+            //добавление кнопок для вызова дополнительной информации о продажах
+            DataGridViewButtonColumn buttonColumn =
+                        new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = "Orders";
+            buttonColumn.Name = "Show Orders";
+            buttonColumn.Text = "Show Orders";
+            buttonColumn.UseColumnTextForButtonValue = true;
+
+            dataGridView1.Columns.Add(buttonColumn);
+        }
+
+        //загрузка информации о связанных с поставщиками товарах DataGridView3
         private void DataGridViewItemsForSuppliers()
         {
             DataGridViewButtonColumn buttonColumn =
                         new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Items";
-            buttonColumn.Name = "Status Request";
+            buttonColumn.Name = "Show items";
             buttonColumn.Text = "Show items";
             buttonColumn.UseColumnTextForButtonValue = true;
 
             dataGridView3.Columns.Add(buttonColumn);
-            // получаем данные о товарах поставщика                    
-
-            //dataGridView3.CellClick +=
-            //new DataGridViewCellEventHandler(dataGridView3_CellClick);
         }
 
         // отобразить все записи
@@ -451,6 +461,7 @@ namespace comp_shop
 
         }
 
+        // нажатие кнопки show items
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
