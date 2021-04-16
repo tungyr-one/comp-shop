@@ -64,8 +64,8 @@ namespace comp_shop
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
-            // загрузка списка продавцов в DataGridView
-            //DataGridViewSellersForItems();
+            // загрузка списка заказов в DataGridView
+            DataGridViewOrdersForItems();
             //DataGridViewItemsForSellers();
             //DB.LoadAllStuff(1);
 
@@ -78,23 +78,32 @@ namespace comp_shop
         }
 
 
-        //// загрузка дополнительной информации o продавцах в DataGridView1
-        //private void DataGridViewSellersForItems()
+
+
+        //COMBOBOX загрузка дополнительной информации o заказах в DataGridView1 
+        private void DataGridViewOrdersForItems()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                List<Order> ordersData = DB.OrdersToList(Convert.ToInt32(row.Cells[0].Value));
+                DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
+                cell.DataSource = ordersData;
+                // демонстрация первого заказа в combobox если он есть
+                if (ordersData.Count > 0)
+                cell.Value = ordersData[0];
+            }
+        }
+
+
+        //STRING загрузка дополнительной информации o заказах в DataGridView1 
+        //private void DataGridViewOrdersForItems()
         //{
         //    foreach (DataGridViewRow row in dataGridView1.Rows)
         //    {
-        //        row.Cells[dataGridView1.Columns["Sellers"].Index].Value = DB.SellersToString(Convert.ToInt32(row.Cells[0].Value));
+        //        row.Cells[dataGridView1.Columns["Orders"].Index].Value = DB.OrdersToString(Convert.ToInt32(row.Cells[0].Value));
         //    }
         //}
 
-        //// загрузка дополнительной информации o товарах в DataGridView2
-        //private void DataGridViewItemsForSellers()
-        //{
-        //    foreach (DataGridViewRow row in dataGridView2.Rows)
-        //    {
-        //        row.Cells[dataGridView2.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
-        //    }
-        //}
 
         // отобразить все записи
         private void button1_Click(object sender, EventArgs e)

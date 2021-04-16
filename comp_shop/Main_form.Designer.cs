@@ -74,24 +74,27 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.label2 = new System.Windows.Forms.Label();
-            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerContactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.supplierIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Orders = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -422,7 +425,7 @@
             this.priceDataGridViewTextBoxColumn,
             this.categoryDataGridViewTextBoxColumn,
             this.supplierDataGridViewTextBoxColumn,
-            this.dataGridViewTextBoxColumn8});
+            this.Orders});
             this.dataGridView1.DataSource = this.itemBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
@@ -479,13 +482,16 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            this.customerDataGridViewTextBoxColumn,
+            this.customerContactDataGridViewTextBoxColumn,
+            this.itemIDDataGridViewTextBoxColumn1,
+            this.itemDataGridViewTextBoxColumn});
             this.dataGridView2.DataSource = this.orderBindingSource;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(3, 3);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(813, 563);
+            this.dataGridView2.Size = new System.Drawing.Size(813, 570);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView2_DataError);
             // 
@@ -571,42 +577,6 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "label2";
             // 
-            // itemIDDataGridViewTextBoxColumn
-            // 
-            this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
-            this.itemIDDataGridViewTextBoxColumn.HeaderText = "ItemID";
-            this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            // 
-            // categoryDataGridViewTextBoxColumn
-            // 
-            this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
-            this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
-            this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
-            // 
-            // supplierDataGridViewTextBoxColumn
-            // 
-            this.supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
-            this.supplierDataGridViewTextBoxColumn.HeaderText = "Supplier";
-            this.supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "OrderID";
-            this.dataGridViewTextBoxColumn8.HeaderText = "OrderID";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
             // itemBindingSource
             // 
             this.itemBindingSource.DataSource = typeof(comp_shop.Item);
@@ -639,12 +609,33 @@
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn7
+            // customerDataGridViewTextBoxColumn
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Items";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Items";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.customerDataGridViewTextBoxColumn.DataPropertyName = "Customer";
+            this.customerDataGridViewTextBoxColumn.HeaderText = "Customer";
+            this.customerDataGridViewTextBoxColumn.Name = "customerDataGridViewTextBoxColumn";
+            this.customerDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // customerContactDataGridViewTextBoxColumn
+            // 
+            this.customerContactDataGridViewTextBoxColumn.DataPropertyName = "CustomerContact";
+            this.customerContactDataGridViewTextBoxColumn.HeaderText = "CustomerContact";
+            this.customerContactDataGridViewTextBoxColumn.Name = "customerContactDataGridViewTextBoxColumn";
+            this.customerContactDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // itemIDDataGridViewTextBoxColumn1
+            // 
+            this.itemIDDataGridViewTextBoxColumn1.DataPropertyName = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn1.HeaderText = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn1.Name = "itemIDDataGridViewTextBoxColumn1";
+            this.itemIDDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // itemDataGridViewTextBoxColumn
+            // 
+            this.itemDataGridViewTextBoxColumn.DataPropertyName = "Item";
+            this.itemDataGridViewTextBoxColumn.HeaderText = "Item";
+            this.itemDataGridViewTextBoxColumn.Name = "itemDataGridViewTextBoxColumn";
+            this.itemDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // orderBindingSource
             // 
@@ -677,6 +668,42 @@
             // supplierBindingSource
             // 
             this.supplierBindingSource.DataSource = typeof(comp_shop.Supplier);
+            // 
+            // itemIDDataGridViewTextBoxColumn
+            // 
+            this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn.HeaderText = "ItemID";
+            this.itemIDDataGridViewTextBoxColumn.Name = "itemIDDataGridViewTextBoxColumn";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            // 
+            // categoryDataGridViewTextBoxColumn
+            // 
+            this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
+            this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
+            this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
+            // 
+            // supplierDataGridViewTextBoxColumn
+            // 
+            this.supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
+            this.supplierDataGridViewTextBoxColumn.HeaderText = "Supplier";
+            this.supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
+            // 
+            // Orders
+            // 
+            this.Orders.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Orders.HeaderText = "Orders";
+            this.Orders.Name = "Orders";
             // 
             // Main_form
             // 
@@ -792,19 +819,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sellerNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sellDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.BindingSource itemBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerContactDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemIDDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn itemDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource orderBindingSource;
-        private System.Windows.Forms.BindingSource itemBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Orders;
     }
 }
 

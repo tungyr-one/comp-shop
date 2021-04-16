@@ -23,5 +23,10 @@ namespace comp_shop
         public int ItemID { get; set; }
     
         public virtual Item Item { get; set; }
+
+        public override string ToString()
+        {
+            return OrderID + ". " + Customer;
+        }
     }
 }

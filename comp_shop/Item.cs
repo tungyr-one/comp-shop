@@ -19,7 +19,12 @@ namespace comp_shop
         {
             this.Orders = new HashSet<Order>();
         }
-    
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
