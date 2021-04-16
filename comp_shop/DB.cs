@@ -97,7 +97,7 @@ namespace comp_shop
 
         //_______________________________________________________________________________
 
-
+        // заказы товара в виде строки
         static public string OrdersToString(int itemID)
         {
 
@@ -122,7 +122,20 @@ namespace comp_shop
             }
         }
 
+        // список заказов на товар
         static public List<Order> OrdersToList(int itemID)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                var itemWithOrders = context.Items.Find(itemID);
+                List<Order> ords = itemWithOrders.Orders.ToList();
+                return ords;
+            }
+        }
+
+        // товары поставщика в виде строки
+        static public string ItemsToString(int supplierID)
         {
 
             using (var context = new ComputerShopEntities())
@@ -131,12 +144,30 @@ namespace comp_shop
                 //MessageBox.Show(dataStr1);
 
                 // !!!поиск только одного товара
-                var itemWithOrders = context.Items.Find(itemID);
+                var itemWithOrders = context.Suppliers.Find(supplierID);
                 //!!! поиск множества товаров
                 //var original = context.Items.Where(x => x.Name == item.Name);
                 //MessageBox.Show(original.Sellers.Count().ToString());
-                List<Order> ords = itemWithOrders.Orders.ToList();
-                return ords;
+                List<Item> ords = itemWithOrders.Items.ToList();
+                string sellersListStr = "";
+
+                foreach (Item sel in ords)
+                {
+                    sellersListStr += sel + "; ";
+                }
+                return sellersListStr;
+            }
+        }
+
+
+        // список товаров поставщика
+        static public List<Item> ItemsToList(int SupplierID)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var supplierWithItems = context.Suppliers.Find(SupplierID);
+                List<Item> items = supplierWithItems.Items.ToList();
+                return items;
             }
         }
 
@@ -418,13 +449,13 @@ namespace comp_shop
 
             static public List<Supplier> ShowAllSuppliers()
             {
-            ComputerShopEntities dataEntities = new ComputerShopEntities();
+                ComputerShopEntities dataEntities = new ComputerShopEntities();
 
-            using (var context = new ComputerShopEntities())
-            {
+                using (var context = new ComputerShopEntities())
+                {
                 var data = context.Suppliers.ToList<Supplier>();
                 return data;
-            }
+                }
             }
     }
 }

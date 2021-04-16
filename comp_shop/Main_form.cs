@@ -24,13 +24,6 @@ using System.Windows.Forms;
 //-  программа должна обладать формой пользовательского интерфейса для ввода 
 //    информации об объектах и корректировки данных в случае необходимости;
 
-// LINKS
-//https://www.entityframeworktutorial.net/
-//http://csharp.net-informations.com/datagridview/csharp-datagridview-add-column.htm
-//https://www.entityframeworktutorial.net/entity-relationships.aspx
-//https://www.entityframeworktutorial.net/basics/entity-in-entityframework.aspx#reference-navigation-property
-//https://entityframework.net/include-with-where-clause
-// https://www.tutorialsteacher.com/linq/linq-query-syntax
 
 // disable lazy loading EF:
 
@@ -48,6 +41,7 @@ namespace comp_shop
     {
         Article current_item = new Article();
         //Item current_item = new Item();
+        List<Item> itemsConnectedData = new List<Item>();
 
         ComputerShopEntities context = new ComputerShopEntities();
 
@@ -66,7 +60,7 @@ namespace comp_shop
             dataGridView3.DataSource = DB.ShowAllSuppliers();
             // загрузка списка заказов в DataGridView
             DataGridViewOrdersForItems();
-            //DataGridViewItemsForSellers();
+            DataGridViewItemsForSuppliers();
             //DB.LoadAllStuff(1);
 
             //DataGridViewComboBoxColumn orders =
@@ -76,8 +70,6 @@ namespace comp_shop
 
             //orderBindingSource1.DataSource = context.Orders.ToList();
         }
-
-
 
 
         //COMBOBOX загрузка дополнительной информации o заказах в DataGridView1 
@@ -94,8 +86,7 @@ namespace comp_shop
             }
         }
 
-
-        //STRING загрузка дополнительной информации o заказах в DataGridView1 
+        //STRING загрузка дополнительной информации o связанных заказах в DataGridView1 
         //private void DataGridViewOrdersForItems()
         //{
         //    foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -104,6 +95,34 @@ namespace comp_shop
         //    }
         //}
 
+
+        //STRING загрузка дополнительной информации o связанных заказах в DataGridView3
+        //private void DataGridViewItemsForSuppliers()
+        //{
+        //    foreach (DataGridViewRow row in dataGridView3.Rows)
+        //    {
+        //        row.Cells[dataGridView3.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
+        //        MessageBox.Show(DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value)));
+        //    }
+        //}
+
+
+        //загрузка информации о связанных товарах DataGridView3
+        private void DataGridViewItemsForSuppliers()
+        {
+            DataGridViewButtonColumn buttonColumn =
+                        new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = "Items";
+            buttonColumn.Name = "Status Request";
+            buttonColumn.Text = "Show items";
+            buttonColumn.UseColumnTextForButtonValue = true;
+
+            dataGridView3.Columns.Add(buttonColumn);
+            // получаем данные о товарах поставщика                    
+
+            //dataGridView3.CellClick +=
+            //new DataGridViewCellEventHandler(dataGridView3_CellClick);
+        }
 
         // отобразить все записи
         private void button1_Click(object sender, EventArgs e)
@@ -376,11 +395,6 @@ namespace comp_shop
         //изменение выбора строки
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            // загрузка списка продавцов в DataGridView1
-            //DataGridViewSellersForItems();
-
-            // загрузка списка товаров в DataGridView2
-            //DataGridViewItemsForSellers();
 
             // присваивание текущему обрабатываемому товару имен из выбранного элемента в DataGridView
             //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
@@ -434,6 +448,21 @@ namespace comp_shop
 
         private void dataGridView3_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+
+        }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                ConnectedInfo connInfoForm = new ConnectedInfo();
+                itemsConnectedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
+                connInfoForm.itemsToSupplier = itemsConnectedData;
+                connInfoForm.ShowDialog();
+            }
 
         }
     }

@@ -94,6 +94,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ComputerShopModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ConnectedInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectedInfo.Designer.cs">
+      <DependentUpon>ConnectedInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="Item.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
@@ -131,6 +137,9 @@
     <Compile Include="Supplier.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ConnectedInfo.resx">
+      <DependentUpon>ConnectedInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main_form.resx">
       <DependentUpon>Main_form.cs</DependentUpon>
     </EmbeddedResource>
