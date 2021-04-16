@@ -42,6 +42,7 @@ namespace comp_shop
         Article current_item = new Article();
         //Item current_item = new Item();
         List<Item> itemsConnectedData = new List<Item>();
+        List<Order> ordersConnectedData = new List<Order>();
 
         ComputerShopEntities context = new ComputerShopEntities();
 
@@ -107,10 +108,10 @@ namespace comp_shop
         //}
 
 
-        //ConnectedInfo загрузка дополнительной информации o заказах в DataGridView1 
+        //добавление кнопок для вызова дополнительной информации о продажах
         private void DataGridViewOrdersForItems()
         {
-            //добавление кнопок для вызова дополнительной информации о продажах
+            
             DataGridViewButtonColumn buttonColumn =
                         new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Orders";
@@ -121,7 +122,7 @@ namespace comp_shop
             dataGridView1.Columns.Add(buttonColumn);
         }
 
-        //загрузка информации о связанных с поставщиками товарах DataGridView3
+        // //добавление кнопок для вызова дополнительной информации о товарах
         private void DataGridViewItemsForSuppliers()
         {
             DataGridViewButtonColumn buttonColumn =
@@ -461,6 +462,22 @@ namespace comp_shop
 
         }
 
+        // нажатие кнопки show orders
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                ConnectedInfo connInfoForm = new ConnectedInfo();
+                ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+                connInfoForm.ordersToItems= ordersConnectedData;
+                connInfoForm.ShowDialog();
+            }
+
+        }
+
         // нажатие кнопки show items
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -476,5 +493,7 @@ namespace comp_shop
             }
 
         }
+
+
     }
 }

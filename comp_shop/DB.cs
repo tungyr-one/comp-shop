@@ -122,15 +122,13 @@ namespace comp_shop
             }
         }
 
-        // список заказов на товар
+        // список заказов на товар для ConnectedInfo
         static public List<Order> OrdersToList(int itemID)
         {
-
             using (var context = new ComputerShopEntities())
             {
-                var itemWithOrders = context.Items.Find(itemID);
-                List<Order> ords = itemWithOrders.Orders.ToList();
-                return ords;
+                List<Order> original = context.Orders.Where(x => x.ItemID == itemID).ToList();
+                return original;
             }
         }
 

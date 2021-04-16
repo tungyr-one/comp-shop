@@ -24,25 +24,41 @@ namespace comp_shop
 
         private void ConnectedInfo_Load(object sender, EventArgs e)
         {
+
+            //dataGridView1.AutoGenerateColumns = true;
+            ////dataGridView1.DataSource = orderBindingSource;
+            //dataGridView1.DataSource = ordersToItems;
+            //ordersToItems.Clear();
+
+
             // проверка заполненности списка товаров и домонстрация его в DataGridView
             if (itemsToSupplier.Count > 0)
-            {//dataGridView1.AutoGenerateColumns = true;
+            {
+                dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = itemBindingSource;
-                dataGridView1.DataSource = itemsToSupplier;                
-                itemsToSupplier.Clear();
+                dataGridView1.DataSource = itemsToSupplier;
+                
             }
-            //else
-            //{
-            //    dataGridView1.DataSource = orderBindingSource;
-            //    dataGridView1.DataSource = ordersToItems;
-            //}
+            else
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.DataSource = ordersToItems;
+                
+            }
 
-  
+
         }
 
             private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
+            {
 
+            }
+
+        private void ConnectedInfo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            itemsToSupplier.Clear();
+            ordersToItems.Clear();
         }
     }
 }
