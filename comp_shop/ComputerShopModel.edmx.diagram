@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a83daffed5c34419a6ab87df74ea0281" Name="Diagram1">
+      <Diagram DiagramId="160e3eb9f5064d61bc675a31c01308ff" Name="Diagram1">
         <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Suppliers" ManuallyRouted="false" />
-        <AssociationConnector Association="ComputerShopModel.ItemOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_Orders_Items" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

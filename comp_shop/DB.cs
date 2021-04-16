@@ -35,22 +35,22 @@ namespace comp_shop
         //}
 
         // список продавцов по ID товара
-        static public string LoadAllStuff(int ID)
-        {
+        //static public string LoadAllStuff(int ID)
+        //{
 
-            using (var context = new ComputerShopEntities())
-            {
-                //!!!поиск товаров по OrderID через Where и Any
-               var itemWithSellers = context.Items.Where(x => x.Orders.Any(y => y.OrderID == ID)).ToList();
-                string dataStr = "";
-                foreach (Item it in itemWithSellers)
-                {
-                    dataStr += it.Name + "; ";
-                    dataStr += "\n";
-                }
-                MessageBox.Show(itemWithSellers.Count().ToString());
-                MessageBox.Show(dataStr);
-                return dataStr;
+        //    using (var context = new ComputerShopEntities())
+        //    {
+                //!!!поиск товаров по OrderID через Where и Any (many-to-many)
+               //var itemWithSellers = context.Items.Where(x => x.Orders.Any(y => y.OrderID == ID)).ToList();
+               // string dataStr = "";
+               // foreach (Item it in itemWithSellers)
+               // {
+               //     dataStr += it.Name + "; ";
+               //     dataStr += "\n";
+               // }
+               // MessageBox.Show(itemWithSellers.Count().ToString());
+               // MessageBox.Show(dataStr);
+               // return dataStr;
 
                 //!!! поиск продавцов по ItemID через Where и Any
                 //var SellersWithItems = context.Sellers.Where(x => x.Items.Any(y => y.ItemID == ID)).ToList();
@@ -92,35 +92,35 @@ namespace comp_shop
                 //    sellersListStr += sel.SellerName + "; ";
                 //}
                 //return sellersListStr;
-            }
-        }
+        //    }
+        //}
 
         //_______________________________________________________________________________
 
 
-        static public string SellersToString(int itemID)
-        {
+        //static public string SellersToString(int itemID)
+        //{
 
-            using (var context = new ComputerShopEntities())
-            {
+        //    using (var context = new ComputerShopEntities())
+        //    {
 
-               //MessageBox.Show(dataStr1);
+        //       //MessageBox.Show(dataStr1);
 
-                // !!!поиск только одного товара
-                var itemWithSellers = context.Items.Find(itemID);
-                //!!! поиск множества товаров
-                //var original = context.Items.Where(x => x.Name == item.Name);
-                //MessageBox.Show(original.Sellers.Count().ToString());
-                List<Order> sels = itemWithSellers.Orders.ToList();
-                string sellersListStr = "";
+        //        // !!!поиск только одного товара
+        //        var itemWithSellers = context.Items.Find(itemID);
+        //        //!!! поиск множества товаров
+        //        //var original = context.Items.Where(x => x.Name == item.Name);
+        //        //MessageBox.Show(original.Sellers.Count().ToString());
+        //        List<Order> sels = itemWithSellers.Orders.ToList();
+        //        string sellersListStr = "";
 
-                foreach (Order sel in sels)
-                {
-                    sellersListStr += sel.SellerName + "; ";
-                }
-                return sellersListStr;
-            }
-        }
+        //        foreach (Order sel in sels)
+        //        {
+        //            sellersListStr += sel.SellerName + "; ";
+        //        }
+        //        return sellersListStr;
+        //    }
+        //}
 
         static public List<Item> ShowAllItems()
         {
@@ -356,44 +356,44 @@ namespace comp_shop
         }
 
         // список товаров по ID order
-        static public string ItemsToString(int orderID)
-        {
+        //static public string ItemsToString(int orderID)
+        //{
 
-            using (var context = new ComputerShopEntities())
-            {
-                ////!!! другой способ загрузки Sellers
-                //var itemSearch = context.Items.Find(itemID);
+            //using (var context = new ComputerShopEntities())
+            //{
+            //    ////!!! другой способ загрузки Sellers
+            //    //var itemSearch = context.Items.Find(itemID);
 
-                //// Load the blog related to a given post.
-                //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
-                //List<Seller> sels1 = itemSearch.Sellers.ToList();
-                //string dataStr1 = "";
-                //foreach (Seller sel in sels1)
-                //{
-                //    dataStr1 += sel.SellerName + "; ";
-                //    dataStr1 += "\n";
-                //}
+            //    //// Load the blog related to a given post.
+            //    //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
+            //    //List<Seller> sels1 = itemSearch.Sellers.ToList();
+            //    //string dataStr1 = "";
+            //    //foreach (Seller sel in sels1)
+            //    //{
+            //    //    dataStr1 += sel.SellerName + "; ";
+            //    //    dataStr1 += "\n";
+            //    //}
 
 
-                //MessageBox.Show(dataStr1);
+            //    //MessageBox.Show(dataStr1);
 
-                // !!!поиск только одного товара
-                var orderWithItems = context.Orders.Find(orderID);
-                //!!! поиск множества товаров
-                //var original = context.Items.Where(x => x.Name == item.Name);
-                //MessageBox.Show(original.Sellers.Count().ToString());
-                //var sellerResults = context.Items.Where(x => x.)
+            //    // !!!поиск только одного товара
+            //    var orderWithItems = context.Orders.Find(orderID);
+            //    //!!! поиск множества товаров
+            //    //var original = context.Items.Where(x => x.Name == item.Name);
+            //    //MessageBox.Show(original.Sellers.Count().ToString());
+            //    //var sellerResults = context.Items.Where(x => x.)
 
-                List<Item> items = orderWithItems.Items.ToList();
-                string itemsListStr = "";
+            //    List<Item> items = orderWithItems.Items.ToList();
+            //    string itemsListStr = "";
 
-                foreach (Item it in items)
-                {
-                    itemsListStr += it.Name + "; "; ;
-                }
-                return itemsListStr;
-            }
-        }
+            //    foreach (Item it in items)
+            //    {
+            //        itemsListStr += it.Name + "; "; ;
+            //    }
+            //    return itemsListStr;
+            //}
+        //}
 
             // SUPPLIERS
 

@@ -192,7 +192,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CompShopModel.edmx.sql" />
     <Content Include="ComputerShop.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

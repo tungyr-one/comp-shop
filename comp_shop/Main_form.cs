@@ -67,7 +67,7 @@ namespace comp_shop
             // загрузка списка продавцов в DataGridView
             //DataGridViewSellersForItems();
             //DataGridViewItemsForSellers();
-            DB.LoadAllStuff(1);
+            //DB.LoadAllStuff(1);
 
             //DataGridViewComboBoxColumn orders =
             //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
@@ -374,30 +374,30 @@ namespace comp_shop
             //DataGridViewItemsForSellers();
 
             // присваивание текущему обрабатываемому товару имен из выбранного элемента в DataGridView
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                current_item.Id = Convert.ToInt32(row.Cells[0].Value);
-                current_item.Name = row.Cells[1].Value.ToString();
-                current_item.Price = Convert.ToDecimal(row.Cells[2].Value);                
-                current_item.Category = row.Cells[3].Value.ToString();
-                current_item.Supplier = row.Cells[4].Value.ToString();
-                //current_item.Sellers = row.Cells[5].Value.ToString();
-                // TODO: заменить Article на Item повсюду
-                //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
+            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            //{
+            //    //current_item.Id = Convert.ToInt32(row.Cells[0].Value);
+            //    //current_item.Name = row.Cells[1].Value.ToString();
+            //    //current_item.Price = Convert.ToDecimal(row.Cells[2].Value);                
+            //    //current_item.Category = row.Cells[3].Value.ToString();
+            //    //current_item.Supplier = row.Cells[4].Value.ToString();
+            //    //current_item.Sellers = row.Cells[5].Value.ToString();
+            //    // TODO: заменить Article на Item повсюду
+            //    //current_item.Category = context.Categories.FirstOrDefault(c => c.Name == row.Cells[4].Value);
 
-                //DB.ShowByName(current_item);
-            }
+            //    //DB.ShowByName(current_item);
+            //}
 
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                string value1 = row.Cells[0].Value.ToString();
-                string value2 = row.Cells[1].Value.ToString();
-                string value3 = row.Cells[2].Value.ToString();
-                string value4 = row.Cells[3].Value.ToString();
-                string value5 = row.Cells[4].Value.ToString();
-                //string value6 = row.Cells[5].Value.ToString();
-                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
-            }
+            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            //{
+            //    string value1 = row.Cells[0].Value.ToString();
+            //    string value2 = row.Cells[1].Value.ToString();
+            //    string value3 = row.Cells[2].Value.ToString();
+            //    string value4 = row.Cells[3].Value.ToString();
+            //    string value5 = row.Cells[4].Value.ToString();
+            //    //string value6 = row.Cells[5].Value.ToString();
+            //    toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
+            //}
 
 
         }
