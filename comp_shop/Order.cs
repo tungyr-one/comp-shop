@@ -14,19 +14,20 @@ namespace comp_shop
     
     public partial class Order
     {
-        public int OrderID { get; set; }
-        public string SellerName { get; set; }
-        public int Quantity { get; set; }
-        public string Customer { get; set; }
-        public string CustomerContact { get; set; }
-        public int ItemID { get; set; }
-        public System.DateTime OrderDate { get; set; }
-    
-        public virtual Item Item { get; set; }
 
         public override string ToString()
         {
             return "Id " + OrderID + ": " + Customer;
         }
+
+        public int OrderID { get; set; }
+        public string SellerName { get; set; }
+        public System.DateTime OrderDate { get; set; }
+        public int Quantity { get; set; }
+        public string Customer { get; set; }
+        public string CustomerContact { get; set; }
+        public int ItemID { get; set; }
+    
+        public virtual Item Item { get; set; }
     }
 }

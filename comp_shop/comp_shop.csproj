@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssociatedInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssociatedInfo.Designer.cs">
+      <DependentUpon>AssociatedInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
@@ -93,12 +99,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ComputerShopModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="AssociatedInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AssociatedInfo.Designer.cs">
-      <DependentUpon>AssociatedInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="Item.cs">

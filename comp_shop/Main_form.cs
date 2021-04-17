@@ -39,8 +39,11 @@ namespace comp_shop
 {
     public partial class Main_form : Form
     {
-        Article current_item = new Article();
-        //Item current_item = new Item();
+        //Article current_item = new Article();
+        // сущности для обмена данными с формами добавления / редактирования сущносстей
+        Item current_item = new Item();
+
+        // списки для обмена данными с формами связанных данных
         List<Item> itemsConnectedData = new List<Item>();
         List<Order> ordersConnectedData = new List<Order>();
 
@@ -183,14 +186,14 @@ namespace comp_shop
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
-            // открыте формы изменения товара
-            NewItemForm new_item_form = new NewItemForm(false);
+            //// открыте формы изменения товара
+            //NewItemForm new_item_form = new NewItemForm(false);
 
-            // передача в форму редактирования выбранной сущности
-            new_item_form.workingItem = current_item;
-            new_item_form.ShowDialog();
-            //обновление списка товаров
-            dataGridView1.DataSource = DB.ShowAllItems();
+            //// передача в форму редактирования выбранной сущности
+            //new_item_form.workingItem = current_item;
+            //new_item_form.ShowDialog();
+            ////обновление списка товаров
+            //dataGridView1.DataSource = DB.ShowAllItems();
 
         }
 
@@ -427,14 +430,14 @@ namespace comp_shop
         //нажатие кнопки удалить
         private void button2_Click(object sender, EventArgs e)
         {
-            DB.RemoveItem(current_item);
+            //DB.RemoveItem(current_item);
         }
 
         //изменение выбора строки
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
 
-            // присваивание текущему обрабатываемому товару имен из выбранного элемента в DataGridView
+            // присваивание текущей обрабатываемой сущности имени из выбранного элемента в DataGridView
             //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             //{
             //    //current_item.Id = Convert.ToInt32(row.Cells[0].Value);

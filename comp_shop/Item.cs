@@ -19,21 +19,21 @@ namespace comp_shop
         {
             this.Orders = new HashSet<Order>();
         }
-    
-        public int ItemID { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int CategoryID { get; set; }
-        public int SupplierID { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Supplier Supplier { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
 
         public override string ToString()
         {
             return Name + "; " + Price;
         }
+
+        public int ItemID { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int CategoryID { get; set; }
+        public Nullable<int> SupplierID { get; set; }
+    
+        public virtual Category Category { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
