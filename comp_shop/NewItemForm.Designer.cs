@@ -88,9 +88,9 @@
             this.label4.Location = new System.Drawing.Point(60, 218);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 20);
+            this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Продавец";
+            this.label4.Text = "Заказы";
             // 
             // textBox2
             // 

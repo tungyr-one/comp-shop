@@ -25,6 +25,16 @@ namespace comp_shop
             return Name + "; " + Price;
         }
 
+        public string OrdersToString()
+        {
+            string res = "";
+            foreach (Order ord in this.Orders)
+            {
+                res += ord.ToString() + "; ";
+            }
+            return res;
+        }
+
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

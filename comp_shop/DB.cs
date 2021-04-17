@@ -245,8 +245,8 @@ namespace comp_shop
             }
         }
 
-
-        static public void addToDB(Article insertEntry)
+        // добавление товара в БД
+        static public void addItem(Article insertItem)
         {
             // проверка содержимого полей Article
             //MessageBox.Show("outside using: " + insertEntry.Name + "-" +
@@ -258,20 +258,28 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertEntry.Category);
-                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertEntry.Supplier);
+                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertItem.Category);
+                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertItem.Supplier);
                     var itemEntry = new Item()
                     {
-                        Name = insertEntry.Name,
-                        Price = insertEntry.Price,
+                        Name = insertItem.Name,
+                        Price = insertItem.Price,
                         Category = categoryEntry,
                         Supplier = supplierEntry,
-                    };                    
+                    };
                     context.Items.Add(itemEntry);
 
                     context.SaveChanges();
                     MessageBox.Show("Добавлен товрар: " + itemEntry.ToString());
                 }
+
+                //using (var context = new ComputerShopEntities())
+                //{
+                //    context.Items.Add(insertItem);
+
+                //    context.SaveChanges();
+                //    MessageBox.Show("Добавлен товар: " + insertItem.ToString());
+                //}
             }
             catch (DbEntityValidationException e)
             {
@@ -287,6 +295,45 @@ namespace comp_shop
             }
         }
 
+        // редактирование товара
+        static public void editItem(Article itemToEdit)
+        {
+            //using (var context = new ComputerShopEntities())
+            //{
+            //    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category.ToString());
+            //    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier.ToString());
+            //    var original = context.Items.Find(itemToEdit.ItemID);
+            //    if (original != null)
+            //    {
+            //        original.Name = itemToEdit.Name.ToString();
+            //        original.Price = Convert.ToDecimal(itemToEdit.Price);
+            //        original.Category = categoryEntry;
+            //        original.Supplier = supplierEntry;
+            //    };
+            //    context.SaveChanges();
+            //    MessageBox.Show(itemToEdit.Name + " updated!");
+            //}
+
+
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Items.Single(x => x.Name == itemToEdit.Name);
+
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
+
+                if (original != null)
+                {
+                    original.Name = itemToEdit.Name;
+                    original.Price = itemToEdit.Price;
+                    original.Category = categoryEntry;
+                    original.Supplier = supplierEntry;
+                };
+                context.SaveChanges();
+                MessageBox.Show(itemToEdit.Name + " updated!");
+            }
+        }
+
         // удаление товара
         static public void RemoveItem(Article removeEntry)
         {
@@ -299,28 +346,7 @@ namespace comp_shop
         }
 
 
-        // редактирование товара
-        static public void editEntry(Article entryToEdit)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                var original = context.Items.Find(entryToEdit.Id);
 
-                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == entryToEdit.Category);
-                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == entryToEdit.Supplier);
-
-                if (original != null)
-                {
-                    original.Name = entryToEdit.Name;
-                    original.Price = entryToEdit.Price;
-                    original.Category = categoryEntry;
-                    original.Supplier = supplierEntry;
-                };
-                context.SaveChanges();
-                MessageBox.Show(entryToEdit.Name + " updated!");
-            }
-            
-        }
 
         // SEARCHING
 
@@ -331,7 +357,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").Include("Orders").ToList<Item>();
 
                     return data;
                 }
@@ -341,7 +367,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").ToList<Item>();
+                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").Include("Orders").ToList<Item>();
 
                     return data;
                 }
@@ -413,6 +439,24 @@ namespace comp_shop
                 var data = context.Suppliers.Where(x => x.Name == itemSupplier).ToList<Supplier>();
 
                 return data;
+            }
+        }
+
+        static public Category SearchCategory(string categoryToFind)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Category category = context.Categories.FirstOrDefault(c => c.Name == categoryToFind);
+                return category;
+            }
+        }
+
+        static public Supplier SearchSupplier(string supplierToFind)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == supplierToFind);
+                return supplier;
             }
         }
 

@@ -12,8 +12,8 @@ namespace comp_shop
 {
     public partial class NewItemForm : Form
     {
-        public Article workingItem = new Article();
-        //public Item workingItem = new Item();
+        public Article articleItem = new Article();
+        public Item workingItem = new Item();
         bool createOperation;
 
         public NewItemForm(bool createOperation = true)
@@ -60,9 +60,8 @@ namespace comp_shop
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = workingItem.Name;
                 this.textBox2.Text = workingItem.Price.ToString();
-                // TODO: show article catagory and supplier
                 this.comboBox1.SelectedItem = workingItem.Category;
-                this.textBox3.Text = workingItem.Sellers;
+                this.textBox3.Text = workingItem.OrdersToString();
                 this.comboBox2.SelectedItem = workingItem.Category;
             }
         }
@@ -70,22 +69,30 @@ namespace comp_shop
         // метод создания/редактирования товара
         private void CreateEditItem()
         {
+            //// формирования объекта класса Item для передачи в БД
+            //workingItem.Name = textBox1.Text;
+            //workingItem.Price = decimal.Parse(textBox2.Text);
+            //workingItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+            ////workingItem.Orders = textBox3.Text;
+            //workingItem.Supplier = DB.SearchSupplier(comboBox2.SelectedItem.ToString());
+            //this.button2.Text = "Готово";
+
             // формирования объекта класса Article для передачи в БД
-            workingItem.Name = textBox1.Text;
-            workingItem.Price = decimal.Parse(textBox2.Text);
-            workingItem.Category = comboBox1.SelectedItem.ToString();
-            workingItem.Sellers = textBox3.Text;
-            workingItem.Supplier = comboBox2.SelectedItem.ToString();
+            articleItem.Name = textBox1.Text;
+            articleItem.Price = decimal.Parse(textBox2.Text);
+            articleItem.Category = comboBox1.SelectedItem.ToString();
+            //workingItem.Orders = textBox3.Text;
+            articleItem.Supplier = comboBox2.SelectedItem.ToString();
             this.button2.Text = "Готово";
 
             // определение необходимого метода в классе работы с БД
-            if(createOperation)
+            if (createOperation)
             {
-                DB.addToDB(workingItem);
+                DB.addItem(articleItem);
             }
             else
             {
-                DB.editEntry(workingItem);
+                DB.editItem(articleItem);
             }
 
         }

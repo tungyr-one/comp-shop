@@ -186,14 +186,14 @@ namespace comp_shop
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
-            //// открыте формы изменения товара
-            //NewItemForm new_item_form = new NewItemForm(false);
+            // открыте формы изменения товара
+            NewItemForm new_item_form = new NewItemForm(false);
 
-            //// передача в форму редактирования выбранной сущности
-            //new_item_form.workingItem = current_item;
-            //new_item_form.ShowDialog();
-            ////обновление списка товаров
-            //dataGridView1.DataSource = DB.ShowAllItems();
+            // передача в форму редактирования выбранной сущности
+            new_item_form.workingItem = current_item;
+            new_item_form.ShowDialog();
+            //обновление списка товаров
+            dataGridView1.DataSource = DB.ShowAllItems();
 
         }
 
