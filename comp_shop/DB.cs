@@ -324,16 +324,27 @@ namespace comp_shop
 
         // SEARCHING
 
-        static public List<Item> SearchItemByName(string itemName)
+        static public List<Item> SearchItemByNameOrID(string itemName = null, int ID = 0)
         {
-            // простой варант но показывает System.Data.Entity.DynamicProxies при включенной lazy loading и ничего не показывает при выключенной
-            //var context = new ComputerShopEntities();
-            //return (from item in context.Items where item.Name == itemName select item).ToList();
-            using (var context = new ComputerShopEntities())
+            // обработка поля поиск в главной форме
+            if (ID == 0)
             {
-                var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+                using (var context = new ComputerShopEntities())
+                {
+                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
 
-                return data;
+                    return data;
+                }
+            }
+            // загрузка выбранной сущности в статусную строку
+            else
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").ToList<Item>();
+
+                    return data;
+                }
             }
         }
 
