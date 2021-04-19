@@ -14,6 +14,11 @@ namespace comp_shop
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderItems = new HashSet<OrderItems>();
+        }
 
         public override string ToString()
         {
@@ -23,11 +28,10 @@ namespace comp_shop
         public int OrderID { get; set; }
         public string SellerName { get; set; }
         public System.DateTime OrderDate { get; set; }
-        public int Quantity { get; set; }
         public string Customer { get; set; }
         public string CustomerContact { get; set; }
-        public int ItemID { get; set; }
     
-        public virtual Item Item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
     }
 }

@@ -98,39 +98,39 @@ namespace comp_shop
         //_______________________________________________________________________________
 
         // заказы товара в виде строки
-        static public string OrdersToString(int itemID)
-        {
+        //static public string OrdersToString(int itemID)
+        //{
 
-            using (var context = new ComputerShopEntities())
-            {
+        //    using (var context = new ComputerShopEntities())
+        //    {
 
-                //MessageBox.Show(dataStr1);
+        //        //MessageBox.Show(dataStr1);
 
-                // !!!поиск только одного товара
-                var itemWithOrders = context.Items.Find(itemID);
-                //!!! поиск множества товаров
-                //var original = context.Items.Where(x => x.Name == item.Name);
-                //MessageBox.Show(original.Sellers.Count().ToString());
-                List<Order> ords = itemWithOrders.Orders.ToList();
-                string sellersListStr = "";
+        //        // !!!поиск только одного товара
+        //        var itemWithOrders = context.Items.Find(itemID);
+        //        //!!! поиск множества товаров
+        //        //var original = context.Items.Where(x => x.Name == item.Name);
+        //        //MessageBox.Show(original.Sellers.Count().ToString());
+        //        List<Order> ords = itemWithOrders.Orders.ToList();
+        //        string sellersListStr = "";
 
-                foreach (Order sel in ords)
-                {
-                    sellersListStr += sel + "; ";
-                }
-                return sellersListStr;
-            }
-        }
+        //        foreach (Order sel in ords)
+        //        {
+        //            sellersListStr += sel + "; ";
+        //        }
+        //        return sellersListStr;
+        //    }
+        //}
 
-        // список заказов на товар для ConnectedInfo
-        static public List<Order> OrdersToList(int itemID)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                List<Order> original = context.Orders.Where(x => x.ItemID == itemID).ToList();
-                return original;
-            }
-        }
+        //// список заказов на товар для ConnectedInfo
+        //static public List<Order> OrdersToList(int itemID)
+        //{
+        //    using (var context = new ComputerShopEntities())
+        //    {
+        //        List<Order> original = context.Orders.Where(x => x.ItemID == itemID).ToList();
+        //        return original;
+        //    }
+        //}
 
         // товары поставщика в виде строки
         static public string ItemsToString(int supplierID)
@@ -367,7 +367,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").Include("Orders").ToList<Item>();
+                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").Include("OrderItems").ToList<Item>();
 
                     return data;
                 }
@@ -463,14 +463,13 @@ namespace comp_shop
 
         // ORDERS
 
-
         static public List<Order> ShowAllOrders()
         {
             ComputerShopEntities dataEntities = new ComputerShopEntities();
 
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Orders.Include("Item").ToList<Order>();
+                var data = context.Orders.ToList<Order>();
                 return data;
             }
         }

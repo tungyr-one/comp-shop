@@ -17,22 +17,12 @@ namespace comp_shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderItems = new HashSet<OrderItems>();
         }
 
         public override string ToString()
         {
-            return Name + "; " + Price;
-        }
-
-        public string OrdersToString()
-        {
-            string res = "";
-            foreach (Order ord in this.Orders)
-            {
-                res += ord.ToString() + "; ";
-            }
-            return res;
+            return Name;
         }
 
         public int ItemID { get; set; }
@@ -42,8 +32,8 @@ namespace comp_shop
         public Nullable<int> SupplierID { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

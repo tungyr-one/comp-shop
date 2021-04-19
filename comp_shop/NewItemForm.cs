@@ -61,7 +61,7 @@ namespace comp_shop
                 this.textBox1.Text = workingItem.Name;
                 this.textBox2.Text = workingItem.Price.ToString();
                 this.comboBox1.SelectedItem = workingItem.Category;
-                this.textBox3.Text = workingItem.OrdersToString();
+                //this.textBox3.Text = workingItem.OrdersToString();
                 this.comboBox2.SelectedItem = workingItem.Category;
             }
         }

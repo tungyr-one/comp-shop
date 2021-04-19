@@ -473,16 +473,16 @@ namespace comp_shop
         // нажатие кнопки show orders
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            var senderGrid = (DataGridView)sender;
+            //var senderGrid = (DataGridView)sender;
 
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                AssociatedInfo connInfoForm = new AssociatedInfo();
-                ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
-                connInfoForm.ordersToItems= ordersConnectedData;
-                connInfoForm.ShowDialog();
-            }
+            //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+            //    e.RowIndex >= 0)
+            //{
+            //    AssociatedInfo connInfoForm = new AssociatedInfo();
+            //    ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+            //    connInfoForm.ordersToItems= ordersConnectedData;
+            //    connInfoForm.ShowDialog();
+            //}
 
         }
 
