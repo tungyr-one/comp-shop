@@ -45,7 +45,7 @@ namespace comp_shop
 
         // списки для обмена данными с формами связанных данных
         List<Item> itemsConnectedData = new List<Item>();
-        List<Order> ordersConnectedData = new List<Order>();
+        List<ItemOrdersView> ordersConnectedData = new List<ItemOrdersView>();
 
         ComputerShopEntities context = new ComputerShopEntities();
 
@@ -470,20 +470,20 @@ namespace comp_shop
 
         }
 
-        // нажатие кнопки show orders
+        // нажатие кнопки show orders в ячейках
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //var senderGrid = (DataGridView)sender;
+            var senderGrid = (DataGridView)sender;
 
-            //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-            //    e.RowIndex >= 0)
-            //{
-            //    AssociatedInfo connInfoForm = new AssociatedInfo();
-            //    ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
-            //    connInfoForm.ordersToItems= ordersConnectedData;
-            //    connInfoForm.ShowDialog();
-            //}
-
+            // проверка нажатия кнопки в ячейке
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                AssociatedInfo connInfoForm = new AssociatedInfo();
+                ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+                connInfoForm.ordersToItems = ordersConnectedData;
+                connInfoForm.ShowDialog();
+            }
         }
 
         // нажатие кнопки show items

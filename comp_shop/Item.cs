@@ -25,6 +25,7 @@ namespace comp_shop
             return Name;
         }
 
+
         public int ItemID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

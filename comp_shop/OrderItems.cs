@@ -20,10 +20,5 @@ namespace comp_shop
     
         public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
-
-        public string ToString()
-        {
-            return OrderID + "; " + ItemsQuantity;
-        }
     }
 }

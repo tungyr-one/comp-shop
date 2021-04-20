@@ -14,7 +14,7 @@ namespace comp_shop
     {
         
         public List<Item> itemsToSupplier = new List<Item>();
-        public List<Order> ordersToItems = new List<Order>();
+        public List<ItemOrdersView> ordersToItems = new List<ItemOrdersView>();
 
         public AssociatedInfo()
         {

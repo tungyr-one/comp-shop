@@ -104,6 +104,7 @@
     <Compile Include="Item.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemOrdersView.cs" />
     <Compile Include="Main_form.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.OrderItems" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="7.625" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="ComputerShopModel.FK__ItemOrder__ItemI__658C0CBD" ManuallyRouted="false" />

@@ -122,15 +122,36 @@ namespace comp_shop
         //    }
         //}
 
-        //// список заказов на товар для ConnectedInfo
+        //список заказов на товар для AssociatedInfo
+        static public List<ItemOrdersView> OrdersToList(int itemID)
         //static public List<Order> OrdersToList(int itemID)
-        //{
-        //    using (var context = new ComputerShopEntities())
-        //    {
-        //        List<Order> original = context.Orders.Where(x => x.ItemID == itemID).ToList();
-        //        return original;
-        //    }
-        //}
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                List<OrderItems> orderIts = context.OrderItems1.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").ToList();
+
+
+                // работает, показывает заказы, но не показывает количество
+                var itemWithOrders = context.Items.Find(itemID);
+
+                List<ItemOrdersView> data = new List<ItemOrdersView>();
+
+                for (int i = 0; i < orderIts.Count(); i++)
+                {
+                    ItemOrdersView ord = new ItemOrdersView(
+                    item: orderIts[i].Item.ToString(),
+                    orderID: orderIts[i].OrderID.ToString(),
+                    quantity: orderIts[i].ItemsQuantity,
+                    orderDate: orderIts[i].Order.OrderDate.ToString(),
+                    sellerName: orderIts[i].Order.SellerName,
+                    customer: orderIts[i].Order.Customer,
+                    customerContact: orderIts[i].Order.CustomerContact
+                    );
+                    data.Add(ord);
+                }
+                return data;
+            }
+        }
 
         // товары поставщика в виде строки
         static public string ItemsToString(int supplierID)
