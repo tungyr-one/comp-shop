@@ -144,7 +144,7 @@ namespace comp_shop
             AssociatedInfo associatedInfoForm = new AssociatedInfo();
             List<ItemOrdersEntity> ordersConnectedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
             associatedInfoForm.ordersToItems = ordersConnectedData;
-            associatedInfoForm.Text = "Продажи товара";
+            associatedInfoForm.Text = "Заказы товара";
             associatedInfoForm.ShowDialog();
         }
     }

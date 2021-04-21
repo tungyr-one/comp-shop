@@ -301,9 +301,9 @@
             // 
             // edit
             // 
-            this.edit.Location = new System.Drawing.Point(66, 578);
+            this.edit.Location = new System.Drawing.Point(36, 578);
             this.edit.Name = "edit";
-            this.edit.Size = new System.Drawing.Size(232, 37);
+            this.edit.Size = new System.Drawing.Size(304, 37);
             this.edit.TabIndex = 9;
             this.edit.Text = "Редактировать товар";
             this.edit.UseVisualStyleBackColor = true;
@@ -311,9 +311,9 @@
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(66, 621);
+            this.add.Location = new System.Drawing.Point(36, 621);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(232, 37);
+            this.add.Size = new System.Drawing.Size(304, 37);
             this.add.TabIndex = 10;
             this.add.Text = "Добавить новый товар";
             this.add.UseVisualStyleBackColor = true;
@@ -428,9 +428,9 @@
             // 
             // remove
             // 
-            this.remove.Location = new System.Drawing.Point(66, 662);
+            this.remove.Location = new System.Drawing.Point(36, 662);
             this.remove.Name = "remove";
-            this.remove.Size = new System.Drawing.Size(232, 37);
+            this.remove.Size = new System.Drawing.Size(304, 37);
             this.remove.TabIndex = 19;
             this.remove.Text = "Удалить товар";
             this.remove.UseVisualStyleBackColor = true;
@@ -500,7 +500,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1069, 569);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Продажи";
+            this.tabPage2.Text = "Заказы";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
@@ -537,7 +537,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1063, 563);
+            this.dataGridView2.Size = new System.Drawing.Size(1063, 570);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView2_DataError);

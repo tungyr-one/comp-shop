@@ -16,7 +16,7 @@ namespace comp_shop
     // how to bind collection to DataGridView: http://www.developer-corner.com/blog/2007/07/19/datagridview-how-to-bind-nested-objects/
     class DB    
     {
-
+        #region
         //_______________________________________________________________________________
 
 
@@ -122,7 +122,36 @@ namespace comp_shop
         //    }
         //}
 
-        //список заказов на товар для AssociatedInfo
+
+        //// товары поставщика в виде строки
+        //static public string ItemsToString(int supplierID)
+        //{
+
+        //    using (var context = new ComputerShopEntities())
+        //    {
+
+        //        //MessageBox.Show(dataStr1);
+
+        //        // !!!поиск только одного товара
+        //        var itemWithOrders = context.Suppliers.Find(supplierID);
+        //        //!!! поиск множества товаров
+        //        //var original = context.Items.Where(x => x.Name == item.Name);
+        //        //MessageBox.Show(original.Sellers.Count().ToString());
+        //        List<Item> ords = itemWithOrders.Items.ToList();
+        //        string sellersListStr = "";
+
+        //        foreach (Item sel in ords)
+        //        {
+        //            sellersListStr += sel + "; ";
+        //        }
+        //        return sellersListStr;
+        //    }
+        //}
+        #endregion
+
+        // ASSOCIATED LISTS
+
+        // создание списка заказов на товар для AssociatedInfo
         static public List<ItemOrdersEntity> OrdersForDataGridView1(int itemID)
         {
             using (var context = new ComputerShopEntities())
@@ -132,6 +161,7 @@ namespace comp_shop
 
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
+                // заполнение форм сущности ItemOrdersEntity данными
                 for (int i = 0; i < orderIts.Count(); i++)
                 {
                     ItemOrdersEntity ord = new ItemOrdersEntity(
@@ -150,6 +180,7 @@ namespace comp_shop
             }
         }
 
+        // создание списка товаров на заказ для AssociatedInfo
         static public List<ItemOrdersEntity> ItemsForDataGridView2(int orderID)
         {
             using (var context = new ComputerShopEntities())
@@ -159,6 +190,7 @@ namespace comp_shop
 
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
+                // заполнение форм сущности ItemOrdersEntity данными
                 for (int i = 0; i < orderIts.Count(); i++)
                 {
                     ItemOrdersEntity ord = new ItemOrdersEntity(
@@ -177,33 +209,7 @@ namespace comp_shop
             }
         }
 
-        // товары поставщика в виде строки
-        static public string ItemsToString(int supplierID)
-        {
-
-            using (var context = new ComputerShopEntities())
-            {
-
-                //MessageBox.Show(dataStr1);
-
-                // !!!поиск только одного товара
-                var itemWithOrders = context.Suppliers.Find(supplierID);
-                //!!! поиск множества товаров
-                //var original = context.Items.Where(x => x.Name == item.Name);
-                //MessageBox.Show(original.Sellers.Count().ToString());
-                List<Item> ords = itemWithOrders.Items.ToList();
-                string sellersListStr = "";
-
-                foreach (Item sel in ords)
-                {
-                    sellersListStr += sel + "; ";
-                }
-                return sellersListStr;
-            }
-        }
-
-
-        // список товаров поставщика для ConnectedInfo
+        // создание списка товаров поставщика для AssociatedInfo
         static public List<Item> ItemsToList(int SupplierID)
         {
             using (var context = new ComputerShopEntities())
@@ -213,11 +219,12 @@ namespace comp_shop
             }
         }
 
+        // ITEMS
+
+        // загрузка всех товаров
         static public List<Item> ShowAllItems()
         {
-
             ComputerShopEntities dataEntities = new ComputerShopEntities();
-
 
             using (var context = new ComputerShopEntities())
             {
@@ -227,7 +234,137 @@ namespace comp_shop
 
         }
 
+        // добавление товара в БД
+        static public void addItem(Article insertItem)
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertItem.Category);
+                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertItem.Supplier);
+                    var itemEntry = new Item()
+                    {
+                        Name = insertItem.Name,
+                        Price = insertItem.Price,
+                        Category = categoryEntry,
+                        Supplier = supplierEntry,
+                    };
+                    context.Items.Add(itemEntry);
 
+                    context.SaveChanges();
+                    MessageBox.Show("Добавлен товрар: " + itemEntry.ToString());
+                }
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show(ve.ErrorMessage);
+                    }
+                }
+                throw;
+
+            }
+        }
+
+        // редактирование товара
+        static public void editItem(Article itemToEdit)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
+
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
+
+                if (original != null)
+                {
+                    original.Name = itemToEdit.Name;
+                    original.Price = itemToEdit.Price;
+                    original.Category = categoryEntry;
+                    original.Supplier = supplierEntry;
+                };
+                context.SaveChanges();
+                MessageBox.Show(itemToEdit.Name + " updated!");
+            }
+        }
+
+        // удаление товара
+        static public void RemoveItem(Item removeEntry)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
+                context.SaveChanges();
+                MessageBox.Show(removeEntry.Name + " removed from database!");
+            }
+        }
+
+        // ITEM SEARCHING
+
+        // поиск товара по имени или ID
+        static public List<Item> SearchItemByNameOrID(string itemName = null, int ID = 0)
+        {
+            // обработка поля поиск в главной форме
+            if (ID == 0)
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+
+                    return data;
+                }
+            }
+            // загрузка выбранной сущности в статусную строку
+            else
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").Include("OrderItems").ToList<Item>();
+
+                    return data;
+                }
+            }
+        }
+
+        // поиск товара по цене
+        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Items.Where(x => priceTo >= x.Price && x.Price >= priceFrom).Include("Category").Include("Supplier").ToList<Item>();
+
+                return data;
+            }
+        }
+
+        // поиск товара по категории
+        static public List<Item> SearchByCategory(string itemCategory)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Category category = context.Categories.FirstOrDefault(c => c.Name == itemCategory);
+                var data = context.Items.Where(x => x.Category.Name == category.Name).Include("Category").Include("Supplier").ToList<Item>();
+                return data;
+            }
+        }
+
+        // поиск товара по категории и цене
+        static public List<Item> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom && s.Category.Name == itemCategory).Include("Category").Include("Supplier").ToList();
+                return data;
+            }
+        }
+
+        // CATEGORY
 
         // добавление категории
         static public void AddCategory(string categoryName)
@@ -260,6 +397,73 @@ namespace comp_shop
             }
         }
 
+        // TODO: заменить на выбор из списка, комбо?
+        // поиск категории
+        static public Category SearchCategory(string categoryToFind)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Category category = context.Categories.FirstOrDefault(c => c.Name == categoryToFind);
+                return category;
+            }
+        }
+
+        // ORDERS
+
+        // список всех заказов
+        static public List<Order> ShowAllOrders()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.ToList<Order>();
+                return data;
+            }
+        }
+
+        // поиск заказа по продавцу и времени
+        static public List<Order> SearchBySellerAndTime(string itemSeller, DateTime dateFrom, DateTime dateTo)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
+                                        .Where(x => x.OrderDate >= dateFrom)
+                                        .Where(x => x.SellerName == itemSeller)
+                                        .Include("Item").ToList<Order>();
+
+                return data;
+            }
+        }
+
+        // поиск заказа по времени
+        static public List<Order> SearchByTime(DateTime dateFrom, DateTime dateTo)
+        {
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
+                                        .Where(x => x.OrderDate >= dateFrom)
+                                        .Include("Item").ToList<Order>();
+
+                return data;
+            }
+        }
+
+        // SUPPLIER
+
+        // список всех поставщиков
+        static public List<Supplier> ShowAllSuppliers()
+        {
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Suppliers.ToList<Supplier>();
+                return data;
+            }
+        }
 
         // добавление поставщика
         static public void AddSupplier(string supplierName, string supplierAddres = null)
@@ -290,192 +494,7 @@ namespace comp_shop
             }
         }
 
-        // добавление товара в БД
-        static public void addItem(Article insertItem)
-        {
-            // проверка содержимого полей Article
-            //MessageBox.Show("outside using: " + insertEntry.Name + "-" +
-            //    insertEntry.Price + "-" +
-            //    insertEntry.Category + "-" +
-            //    insertEntry.Sellers + "-" +
-            //    insertEntry.Supplier);
-            try
-            {
-                using (var context = new ComputerShopEntities())
-                {
-                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertItem.Category);
-                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertItem.Supplier);
-                    var itemEntry = new Item()
-                    {
-                        Name = insertItem.Name,
-                        Price = insertItem.Price,
-                        Category = categoryEntry,
-                        Supplier = supplierEntry,
-                    };
-                    context.Items.Add(itemEntry);
-
-                    context.SaveChanges();
-                    MessageBox.Show("Добавлен товрар: " + itemEntry.ToString());
-                }
-
-                //using (var context = new ComputerShopEntities())
-                //{
-                //    context.Items.Add(insertItem);
-
-                //    context.SaveChanges();
-                //    MessageBox.Show("Добавлен товар: " + insertItem.ToString());
-                //}
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        MessageBox.Show(ve.ErrorMessage);
-                    }
-                }
-                throw;
-
-            }
-        }
-
-        // редактирование товара
-        static public void editItem(Article itemToEdit)
-        {
-            //using (var context = new ComputerShopEntities())
-            //{
-            //    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category.ToString());
-            //    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier.ToString());
-            //    var original = context.Items.Find(itemToEdit.ItemID);
-            //    if (original != null)
-            //    {
-            //        original.Name = itemToEdit.Name.ToString();
-            //        original.Price = Convert.ToDecimal(itemToEdit.Price);
-            //        original.Category = categoryEntry;
-            //        original.Supplier = supplierEntry;
-            //    };
-            //    context.SaveChanges();
-            //    MessageBox.Show(itemToEdit.Name + " updated!");
-            //}
-
-
-            using (var context = new ComputerShopEntities())
-            {
-                var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
-
-                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
-                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
-
-                if (original != null)
-                {
-                    original.Name = itemToEdit.Name;
-                    original.Price = itemToEdit.Price;
-                    original.Category = categoryEntry;
-                    original.Supplier = supplierEntry;
-                };
-                context.SaveChanges();
-                MessageBox.Show(itemToEdit.Name + " updated!");
-            }
-        }
-
-        // удаление товара
-        static public void RemoveItem(Item removeEntry)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
-                context.SaveChanges();
-                MessageBox.Show(removeEntry.Name + " removed from database!");
-            }
-        }
-
-
-
-
-        // SEARCHING
-
-        static public List<Item> SearchItemByNameOrID(string itemName = null, int ID = 0)
-        {
-            // обработка поля поиск в главной форме
-            if (ID == 0)
-            {
-                using (var context = new ComputerShopEntities())
-                {
-                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
-
-                    return data;
-                }
-            }
-            // загрузка выбранной сущности в статусную строку
-            else
-            {
-                using (var context = new ComputerShopEntities())
-                {
-                    var data = context.Items.Where(x => x.ItemID == ID).Include("Category").Include("Supplier").Include("OrderItems").ToList<Item>();
-
-                    return data;
-                }
-            }
-        }
-
-        static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
-        {
-
-            using (var context = new ComputerShopEntities())
-            {
-                var data = context.Items.Where(x => priceTo >= x.Price && x.Price >= priceFrom).Include("Category").Include("Supplier").ToList<Item>();
-
-                return data;
-            }
-        }
-
-        static public List<Item> SearchByCategory(string itemCategory)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                Category category = context.Categories.FirstOrDefault(c => c.Name == itemCategory);
-                var data = context.Items.Where(x => x.Category.Name == category.Name).Include("Category").Include("Supplier").ToList<Item>();
-                return data;
-            }
-        }
-
-        static public List<Item> SearchByCategoryAndPrice(string itemCategory, decimal priceFrom, decimal priceTo)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                var data = context.Items.Where(s => priceTo >= s.Price && s.Price >= priceFrom && s.Category.Name == itemCategory).Include("Category").Include("Supplier").ToList();
-                return data;
-            }
-        }
-
-        static public List<Order> SearchBySellerAndTime(string itemSeller, DateTime dateFrom, DateTime dateTo )
-        {
-
-            using (var context = new ComputerShopEntities())
-            {
-                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
-                                        .Where(x => x.OrderDate >= dateFrom)
-                                        .Where(x => x.SellerName == itemSeller)
-                                        .Include("Item").ToList<Order>();
-
-                return data;
-            }
-        }
-
-        static public List<Order> SearchByTime(DateTime dateFrom, DateTime dateTo)
-        {
-
-            using (var context = new ComputerShopEntities())
-            {
-                var data = context.Orders.Where(x => dateTo >= x.OrderDate)
-                                        .Where(x => x.OrderDate >= dateFrom)
-                                        .Include("Item").ToList<Order>();
-
-                return data;
-            }
-        }
-
+        // поиск поставщика по имени
         static public List<Supplier> SearchBySupplier(string itemSupplier)
         {
             using (var context = new ComputerShopEntities())
@@ -487,15 +506,8 @@ namespace comp_shop
             }
         }
 
-        static public Category SearchCategory(string categoryToFind)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                Category category = context.Categories.FirstOrDefault(c => c.Name == categoryToFind);
-                return category;
-            }
-        }
-
+        // TODO: заменить на выбор из списка, комбо?
+        // поиск поставщика 
         static public Supplier SearchSupplier(string supplierToFind)
         {
             using (var context = new ComputerShopEntities())
@@ -505,19 +517,6 @@ namespace comp_shop
             }
         }
 
-
-        // ORDERS
-
-        static public List<Order> ShowAllOrders()
-        {
-            ComputerShopEntities dataEntities = new ComputerShopEntities();
-
-            using (var context = new ComputerShopEntities())
-            {
-                var data = context.Orders.ToList<Order>();
-                return data;
-            }
-        }
 
         // список товаров по ID order
         //static public string ItemsToString(int orderID)
@@ -562,15 +561,6 @@ namespace comp_shop
             // SUPPLIERS
 
 
-            static public List<Supplier> ShowAllSuppliers()
-            {
-                ComputerShopEntities dataEntities = new ComputerShopEntities();
 
-                using (var context = new ComputerShopEntities())
-                {
-                var data = context.Suppliers.ToList<Supplier>();
-                return data;
-                }
-            }
     }
 }

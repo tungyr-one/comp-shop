@@ -44,8 +44,8 @@ namespace comp_shop
         public static Item currentItem = new Item();
 
         // списки для обмена данными с формами связанных данных
-        List<Item> itemsConnectedData = new List<Item>();
-        List<ItemOrdersEntity> ordersItemsAssociatedData = new List<ItemOrdersEntity>();
+        public static List<Item> itemsConnectedData = new List<Item>();
+        public static List<ItemOrdersEntity> ordersItemsAssociatedData = new List<ItemOrdersEntity>();
 
         public MainForm()
         {
@@ -494,8 +494,7 @@ namespace comp_shop
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
                 ordersItemsAssociatedData = DB.OrdersForDataGridView1(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
-                connInfoForm.ordersToItems = ordersItemsAssociatedData;
-                connInfoForm.Text = "Продажи товара";
+                connInfoForm.Text = "Заказы товара";
                 connInfoForm.ShowDialog();
             }
         }
@@ -510,7 +509,6 @@ namespace comp_shop
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
                 ordersItemsAssociatedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
-                connInfoForm.ordersToItems = ordersItemsAssociatedData;
                 connInfoForm.Text = "Товары в заказе";
                 connInfoForm.ShowDialog();
             }
@@ -526,7 +524,6 @@ namespace comp_shop
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
                 itemsConnectedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
-                connInfoForm.itemsToSupplier = itemsConnectedData;
                 connInfoForm.Text = "Поставляемые товары";
                 connInfoForm.ShowDialog();
             }
@@ -536,11 +533,12 @@ namespace comp_shop
         // обработка переключения вкладок
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
+            // вкладка товары
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 // включение первой радиокнопки
                 radioButton1.Checked = true;
-// отключение первых пяти радиокнопок
+
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
@@ -555,7 +553,14 @@ namespace comp_shop
                 dateTimePicker1.Visible = false;
                 dateTimePicker2.Enabled = false;
                 dateTimePicker2.Visible = false;
+
+                // изменение названия кнопок
+                edit.Text = "Редактировать товар";
+                add.Text = "Добавить новый товар";
+                remove.Text = "Удалить товар";
             }
+
+            //вкладка продажи
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 radioButton1.Enabled = false;
@@ -573,7 +578,14 @@ namespace comp_shop
                 dateTimePicker1.Visible = true;
                 dateTimePicker2.Enabled = true;
                 dateTimePicker2.Visible = true;
+
+                // изменение названия кнопок
+                edit.Text = "Редактировать заказ";
+                add.Text = "Добавить новый заказ";
+                remove.Text = "Удалить заказ";
             }
+            
+            // вкладка поставщики
             else
             {
                 radioButton1.Enabled = false;
@@ -591,6 +603,11 @@ namespace comp_shop
                 dateTimePicker1.Visible = false;
                 dateTimePicker2.Enabled = false;
                 dateTimePicker2.Visible = false;
+
+                // изменение названия кнопок
+                edit.Text = "Изменить поставщика";
+                add.Text = "Добавить нового поставщика";
+                remove.Text = "Удалить поставщика";
             }
         }
 
