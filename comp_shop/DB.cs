@@ -141,7 +141,8 @@ namespace comp_shop
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
                     sellerName: orderIts[i].Order.SellerName,
                     customer: orderIts[i].Order.Customer,
-                    customerContact: orderIts[i].Order.CustomerContact
+                    customerContact: orderIts[i].Order.CustomerContact,
+                    category: orderIts[i].Item.Category.Name
                     );
                     data.Add(ord);
                 }
@@ -167,7 +168,8 @@ namespace comp_shop
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
                     sellerName: orderIts[i].Order.SellerName,
                     customer: orderIts[i].Order.Customer,
-                    customerContact: orderIts[i].Order.CustomerContact
+                    customerContact: orderIts[i].Order.CustomerContact,
+                    category: orderIts[i].Item.Category.Name
                     );
                     data.Add(ord);
                 }
@@ -360,7 +362,7 @@ namespace comp_shop
 
             using (var context = new ComputerShopEntities())
             {
-                var original = context.Items.Single(x => x.Name == itemToEdit.Name);
+                var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
 
                 Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
                 Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
@@ -378,11 +380,11 @@ namespace comp_shop
         }
 
         // удаление товара
-        static public void RemoveItem(Article removeEntry)
+        static public void RemoveItem(Item removeEntry)
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.Id));
+                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
                 context.SaveChanges();
                 MessageBox.Show(removeEntry.Name + " removed from database!");
             }

@@ -105,11 +105,11 @@
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ItemOrdersEntity.cs" />
-    <Compile Include="Main_form.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main_form.Designer.cs">
-      <DependentUpon>Main_form.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Article.cs" />
     <Compile Include="ManageCategory.cs">
@@ -144,8 +144,8 @@
     <EmbeddedResource Include="AssociatedInfo.resx">
       <DependentUpon>AssociatedInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main_form.resx">
-      <DependentUpon>Main_form.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageCategory.resx">
       <DependentUpon>ManageCategory.cs</DependentUpon>

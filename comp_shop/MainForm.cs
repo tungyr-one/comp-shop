@@ -37,24 +37,26 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    public partial class Main_form : Form
+    public partial class MainForm : Form
     {
-        //Article current_item = new Article();
+        //Article currentItem = new Article();
         // сущности для обмена данными с формами добавления / редактирования сущносстей
-        Item current_item = new Item();
+        public static Item currentItem = new Item();
 
         // списки для обмена данными с формами связанных данных
         List<Item> itemsConnectedData = new List<Item>();
         List<ItemOrdersEntity> ordersConnectedData = new List<ItemOrdersEntity>();
 
-        ComputerShopEntities context = new ComputerShopEntities();
-
-        public Main_form()
+        public MainForm()
         {
             InitializeComponent();
             radioButton1.Checked = true;
+            
         }
 
+        // TODO: использовать один currentItem на всех
+        //public Item currentItem
+        //{ get; set; }
 
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
@@ -88,7 +90,7 @@ namespace comp_shop
             //orderBindingSource1.DataSource = context.Orders.ToList();
         }
 
-
+        #region
         //COMBOBOX загрузка дополнительной информации o заказах в DataGridView1 
         //private void DataGridViewOrdersForItems()
         //{
@@ -123,7 +125,7 @@ namespace comp_shop
         //    }
         //}
 
-
+        #endregion
         //добавление кнопок для вызова дополнительной информации о продажах
         private void DataGridViewOrdersForItems()
         {
@@ -184,9 +186,6 @@ namespace comp_shop
 
         }
 
-
-
-
         // нажатие кнопки добавить
         private void addItem_Click(object sender, EventArgs e)
         {
@@ -196,7 +195,6 @@ namespace comp_shop
             dataGridView1.DataSource = DB.ShowAllItems();
         }
 
-
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
@@ -204,11 +202,16 @@ namespace comp_shop
             NewItemForm new_item_form = new NewItemForm(false);
 
             // передача в форму редактирования выбранной сущности
-            new_item_form.workingItem = current_item;
+            //new_item_form.workingItem = currentItem;
             new_item_form.ShowDialog();
             //обновление списка товаров
             dataGridView1.DataSource = DB.ShowAllItems();
+        }
 
+        //нажатие кнопки удалить
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DB.RemoveItem(currentItem);
         }
 
         // нажатие кнопки поиск
@@ -429,11 +432,7 @@ namespace comp_shop
             }
         }
 
-        //нажатие кнопки удалить
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //DB.RemoveItem(current_item);
-        }
+
 
         //изменение выбора строки в товарах
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -441,7 +440,7 @@ namespace comp_shop
             // присваивание текущей обрабатываемой сущности имени из выбранного элемента в DataGridView
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                current_item = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
+                currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
             }
 
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)

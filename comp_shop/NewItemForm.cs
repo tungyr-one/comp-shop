@@ -13,7 +13,7 @@ namespace comp_shop
     public partial class NewItemForm : Form
     {
         public Article articleItem = new Article();
-        public Item workingItem = new Item();
+        //public Item workingItem = new Item();
         bool createOperation;
 
         public NewItemForm(bool createOperation = true)
@@ -49,7 +49,10 @@ namespace comp_shop
                 // временные постоянные значения полей
                 textBox1.Text = "Razor";
                 textBox2.Text = "10255,45";
-                textBox3.Text = "Pupkin";
+
+                // изменение видимости лэйбла и кнопни заказы
+                label4.Visible = false;
+                button5.Visible = false;
             }
             // если редактирование товара
             else
@@ -58,11 +61,16 @@ namespace comp_shop
                 button1.Text = "Изменить";                
                 
                 // присваивание текстовым полям значений редактируемого товара
-                this.textBox1.Text = workingItem.Name;
-                this.textBox2.Text = workingItem.Price.ToString();
-                this.comboBox1.SelectedItem = workingItem.Category;
+                this.textBox1.Text = MainForm.currentItem.Name;
+                this.textBox2.Text = MainForm.currentItem.Price.ToString();
+                // TODO: показывать в комбобоксе категорию текущего товара, а не первую из списка
+                this.comboBox1.SelectedItem = MainForm.currentItem.Category;
                 //this.textBox3.Text = workingItem.OrdersToString();
-                this.comboBox2.SelectedItem = workingItem.Category;
+                this.comboBox2.SelectedItem = MainForm.currentItem.Category;
+
+                // изменение видимости лэйбла и кнопни заказы
+                label4.Visible = true;
+                button5.Visible = true;
             }
         }
 
@@ -78,6 +86,7 @@ namespace comp_shop
             //this.button2.Text = "Готово";
 
             // формирования объекта класса Article для передачи в БД
+            articleItem.Id = MainForm.currentItem.ItemID;
             articleItem.Name = textBox1.Text;
             articleItem.Price = decimal.Parse(textBox2.Text);
             articleItem.Category = comboBox1.SelectedItem.ToString();
@@ -126,6 +135,16 @@ namespace comp_shop
         {
             this.Close();
             return;
+        }
+
+        // кнопка показать заказы
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // загрузка окна заказов на товар
+            AssociatedInfo connInfoForm = new AssociatedInfo();
+            List<ItemOrdersEntity> ordersConnectedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
+            connInfoForm.ordersToItems = ordersConnectedData;
+            connInfoForm.ShowDialog();
         }
     }
 }

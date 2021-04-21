@@ -29,7 +29,10 @@ namespace comp_shop
         public string CustomerContact
         { get; set; }
 
-        public ItemOrdersEntity(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact)
+        public string Category
+        { get; set; }
+
+        public ItemOrdersEntity(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact, string category)
         {
             Item = item;
             OrderID = orderID;
@@ -38,7 +41,7 @@ namespace comp_shop
             SellerName = sellerName;
             Customer = customer;
             CustomerContact = customerContact;
-
+            Category = category;
            
         }
     }

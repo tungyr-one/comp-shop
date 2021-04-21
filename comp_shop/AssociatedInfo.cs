@@ -46,6 +46,7 @@ namespace comp_shop
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 dataGridView1.DataSource = ordersToItems;
+                //MainForm.currentItem;
                 
             }
 
