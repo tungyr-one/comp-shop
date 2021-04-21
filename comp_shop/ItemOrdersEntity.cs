@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace comp_shop
 {
-    public class ItemOrdersView
+    public class ItemOrdersEntity
     {
         public string Item
         { get; set; }
@@ -29,7 +29,7 @@ namespace comp_shop
         public string CustomerContact
         { get; set; }
 
-        public ItemOrdersView(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact)
+        public ItemOrdersEntity(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact)
         {
             Item = item;
             OrderID = orderID;

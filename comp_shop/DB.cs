@@ -123,22 +123,44 @@ namespace comp_shop
         //}
 
         //список заказов на товар для AssociatedInfo
-        static public List<ItemOrdersView> OrdersToList(int itemID)
-        //static public List<Order> OrdersToList(int itemID)
+        static public List<ItemOrdersEntity> OrdersForDataGridView1(int itemID)
         {
             using (var context = new ComputerShopEntities())
             {
+                // выборка всех промежуточных сущностей заказов с количеством товара, найденного по ID товара
                 List<OrderItems> orderIts = context.OrderItems1.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").ToList();
 
-
-                // работает, показывает заказы, но не показывает количество
-                var itemWithOrders = context.Items.Find(itemID);
-
-                List<ItemOrdersView> data = new List<ItemOrdersView>();
+                List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
                 for (int i = 0; i < orderIts.Count(); i++)
                 {
-                    ItemOrdersView ord = new ItemOrdersView(
+                    ItemOrdersEntity ord = new ItemOrdersEntity(
+                    item: orderIts[i].Item.ToString(),
+                    orderID: orderIts[i].OrderID.ToString(),
+                    quantity: orderIts[i].ItemsQuantity,
+                    orderDate: orderIts[i].Order.OrderDate.ToString(),
+                    sellerName: orderIts[i].Order.SellerName,
+                    customer: orderIts[i].Order.Customer,
+                    customerContact: orderIts[i].Order.CustomerContact
+                    );
+                    data.Add(ord);
+                }
+                return data;
+            }
+        }
+
+        static public List<ItemOrdersEntity> ItemsForDataGridView2(int orderID)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                // выборка всех промежуточных сущностей товаров с количеством товара, найденного по ID заказа
+                List<OrderItems> orderIts = context.OrderItems1.Where(x => x.OrderID == orderID).Include(x => x.Item).Include("Order").ToList();
+
+                List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
+
+                for (int i = 0; i < orderIts.Count(); i++)
+                {
+                    ItemOrdersEntity ord = new ItemOrdersEntity(
                     item: orderIts[i].Item.ToString(),
                     orderID: orderIts[i].OrderID.ToString(),
                     quantity: orderIts[i].ItemsQuantity,

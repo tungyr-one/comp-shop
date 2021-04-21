@@ -45,7 +45,7 @@ namespace comp_shop
 
         // списки для обмена данными с формами связанных данных
         List<Item> itemsConnectedData = new List<Item>();
-        List<ItemOrdersView> ordersConnectedData = new List<ItemOrdersView>();
+        List<ItemOrdersEntity> ordersConnectedData = new List<ItemOrdersEntity>();
 
         ComputerShopEntities context = new ComputerShopEntities();
 
@@ -77,6 +77,7 @@ namespace comp_shop
             // загрузка списка заказов в DataGridView
             DataGridViewOrdersForItems();
             DataGridViewItemsForSuppliers();
+            DataGridViewItemsForOrders();
             //DB.LoadAllStuff(1);
 
             //DataGridViewComboBoxColumn orders =
@@ -93,7 +94,7 @@ namespace comp_shop
         //{
         //    foreach (DataGridViewRow row in dataGridView1.Rows)
         //    {
-        //        List<Order> ordersData = DB.OrdersToList(Convert.ToInt32(row.Cells[0].Value));
+        //        List<Order> ordersData = DB.OrdersForDataGridView1(Convert.ToInt32(row.Cells[0].Value));
         //        DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
         //        cell.DataSource = ordersData;
         //        // демонстрация первого заказа в combobox если он есть
@@ -135,6 +136,19 @@ namespace comp_shop
             buttonColumn.UseColumnTextForButtonValue = true;
 
             dataGridView1.Columns.Add(buttonColumn);
+        }
+
+        //добавление кнопок для вызова дополнительной информации о заказанных товарах и их количестве
+        private void DataGridViewItemsForOrders()
+        {
+            DataGridViewButtonColumn buttonColumn =
+                        new DataGridViewButtonColumn();
+            buttonColumn.HeaderText = "Items";
+            buttonColumn.Name = "Show items";
+            buttonColumn.Text = "Show items";
+            buttonColumn.UseColumnTextForButtonValue = true;
+
+            dataGridView2.Columns.Add(buttonColumn);
         }
 
         // //добавление кнопок для вызова дополнительной информации о товарах
@@ -470,7 +484,7 @@ namespace comp_shop
 
         }
 
-        // нажатие кнопки show orders в ячейках
+        // нажатие кнопки show orders в ячейках закладки товары
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
@@ -480,13 +494,28 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
-                ordersConnectedData = DB.OrdersToList(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+                ordersConnectedData = DB.OrdersForDataGridView1(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
                 connInfoForm.ordersToItems = ordersConnectedData;
                 connInfoForm.ShowDialog();
             }
         }
 
-        // нажатие кнопки show items
+        // нажатие кнопки show items в закладке продажи
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                AssociatedInfo connInfoForm = new AssociatedInfo();
+                ordersConnectedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
+                connInfoForm.ordersToItems = ordersConnectedData;
+                connInfoForm.ShowDialog();
+            }
+        }
+
+        // нажатие кнопки show items в закладке поставщики
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
@@ -562,5 +591,7 @@ namespace comp_shop
                 dateTimePicker2.Visible = false;
             }
         }
+
+
     }
 }
