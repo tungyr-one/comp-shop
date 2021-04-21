@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    public partial class NewItemForm : Form
+    public partial class ItemOperationForm : Form
     {
         public Article articleItem = new Article();
         //public Item workingItem = new Item();
         bool createOperation;
 
-        public NewItemForm(bool createOperation = true)
+        public ItemOperationForm(bool createOperation = true)
         {
             InitializeComponent();
             
@@ -141,7 +141,7 @@ namespace comp_shop
         private void button5_Click(object sender, EventArgs e)
         {
             // загрузка окна заказов на товар
-            AssociatedInfo associatedInfoForm = new AssociatedInfo();
+            ShowInfoForm associatedInfoForm = new ShowInfoForm();
             List<ItemOrdersEntity> ordersConnectedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
             associatedInfoForm.ordersToItems = ordersConnectedData;
             associatedInfoForm.Text = "Заказы товара";

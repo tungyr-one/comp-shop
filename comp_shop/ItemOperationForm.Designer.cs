@@ -1,6 +1,6 @@
 ﻿namespace comp_shop
 {
-    partial class NewItemForm
+    partial class ItemOperationForm
     {
         /// <summary>
         /// Required designer variable.

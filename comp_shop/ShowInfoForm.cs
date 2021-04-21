@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    public partial class AssociatedInfo : Form
+    public partial class ShowInfoForm : Form
     {
         
         public List<Item> itemsForSupplier = new List<Item>();
         public List<ItemOrdersEntity> ordersToItems = new List<ItemOrdersEntity>();
 
-        public AssociatedInfo()
+        public ShowInfoForm()
         {
             InitializeComponent();
             
@@ -50,15 +50,25 @@ namespace comp_shop
                 button1.Text = "Редактировать товар";
                 button2.Text = "Новый товар";
             }
+            // добавление товаров в новый заказ
+            else if(this.Text == "Товары в заказ")
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.DataSource = MainForm.itemsAssociatedData;
+                button1.Text = "Выбрать товар";
+                button2.Text = "Отмена";
+            }
             else
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = itemBindingSource;
-                dataGridView1.DataSource = MainForm.itemsConnectedData;
+                dataGridView1.DataSource = MainForm.itemsAssociatedData;
                 button1.Text = "Редактировать товар";
                 button2.Text = "Новый товар";
 
             }
+            
 
 
         }
@@ -68,5 +78,13 @@ namespace comp_shop
 
             }
 
+        // TODO: упростить выбор товара и поиск его в БД (возвращать не список а один товар?)
+        // нажатие кнопки добавить товар в новый заказ
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
+            MessageBox.Show(MainForm.currentItem.Name);
+        }
     }
 }

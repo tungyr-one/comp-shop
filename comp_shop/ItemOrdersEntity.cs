@@ -14,7 +14,7 @@ namespace comp_shop
         public string OrderID
         { get; set; }
 
-        public decimal Quantity
+        public int Quantity
         { get; set; }
 
         public string OrderDate
@@ -31,6 +31,10 @@ namespace comp_shop
 
         public string Category
         { get; set; }
+
+        public ItemOrdersEntity()
+        {
+        }
 
         public ItemOrdersEntity(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact, string category)
         {

@@ -42,9 +42,11 @@ namespace comp_shop
         //Article currentItem = new Article();
         // сущности для обмена данными с формами добавления / редактирования сущносстей
         public static Item currentItem = new Item();
+        public static ItemOrdersEntity currentOrderItems = new ItemOrdersEntity();
+        public static Supplier currentSupplier = new Supplier();
 
         // списки для обмена данными с формами связанных данных
-        public static List<Item> itemsConnectedData = new List<Item>();
+        public static List<Item> itemsAssociatedData = new List<Item>();
         public static List<ItemOrdersEntity> ordersItemsAssociatedData = new List<ItemOrdersEntity>();
 
         public MainForm()
@@ -126,7 +128,7 @@ namespace comp_shop
         //}
 
         #endregion
-        //добавление кнопок для вызова дополнительной информации о продажах
+        //добавление кнопок в DataGridView1 для вызова дополнительной информации о продажах
         private void DataGridViewOrdersForItems()
         {
             
@@ -140,7 +142,7 @@ namespace comp_shop
             dataGridView1.Columns.Add(buttonColumn);
         }
 
-        //добавление кнопок для вызова дополнительной информации о заказанных товарах и их количестве
+        //добавление кнопок в DataGridView2 для вызова дополнительной информации о заказанных товарах и их количестве
         private void DataGridViewItemsForOrders()
         {
             DataGridViewButtonColumn buttonColumn =
@@ -153,7 +155,7 @@ namespace comp_shop
             dataGridView2.Columns.Add(buttonColumn);
         }
 
-        // //добавление кнопок для вызова дополнительной информации о товарах
+        // //добавление кнопок в DataGridView3 для вызова дополнительной информации о товарах поставщика
         private void DataGridViewItemsForSuppliers()
         {
             DataGridViewButtonColumn buttonColumn =
@@ -166,16 +168,13 @@ namespace comp_shop
             dataGridView3.Columns.Add(buttonColumn);
         }
 
-        // отобразить все записи
+        // отобразить все записи во всех вкладках
         private void button1_Click(object sender, EventArgs e)
         {
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
-
-            // загрузка списка продавцов в DataGridView
-            //DataGridViewSellersForItems();
 
             // TODO: временная проверка удалить
             List<Item> check = DB.ShowAllItems();
@@ -186,20 +185,39 @@ namespace comp_shop
 
         }
 
-        // нажатие кнопки добавить
+        // нажатие кнопки добавить 
         private void addItem_Click(object sender, EventArgs e)
         {
-            NewItemForm new_item_form = new NewItemForm();
-            new_item_form.ShowDialog();
-            //обновление списка товаров
-            dataGridView1.DataSource = DB.ShowAllItems();
+            // товар
+            if (tabControl1.SelectedTab.Name == "tabPage1")
+            {
+                ItemOperationForm new_item_form = new ItemOperationForm();
+                new_item_form.ShowDialog();
+                //обновление списка товаров
+                dataGridView1.DataSource = DB.ShowAllItems();
+            }
+            // заказ
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
+            {
+                OrderOperationForm orderForm = new OrderOperationForm();
+                orderForm.Text = "Создание нового заказа";
+                orderForm.ShowDialog();
+                //обновление списка товаров
+                dataGridView1.DataSource = DB.ShowAllOrders();
+            }
+
+            // вкладка поставщики
+            else
+            {
+
+            }
         }
 
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
             // открыте формы изменения товара
-            NewItemForm new_item_form = new NewItemForm(false);
+            ItemOperationForm new_item_form = new ItemOperationForm(false);
 
             // передача в форму редактирования выбранной сущности
             //new_item_form.workingItem = currentItem;
@@ -433,7 +451,6 @@ namespace comp_shop
         }
 
 
-
         //изменение выбора строки в товарах
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -492,8 +509,8 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                AssociatedInfo connInfoForm = new AssociatedInfo();
-                ordersItemsAssociatedData = DB.OrdersForDataGridView1(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+                ShowInfoForm connInfoForm = new ShowInfoForm();
+                ordersItemsAssociatedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
                 connInfoForm.Text = "Заказы товара";
                 connInfoForm.ShowDialog();
             }
@@ -507,7 +524,7 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                AssociatedInfo connInfoForm = new AssociatedInfo();
+                ShowInfoForm connInfoForm = new ShowInfoForm();
                 ordersItemsAssociatedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Товары в заказе";
                 connInfoForm.ShowDialog();
@@ -522,8 +539,8 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                AssociatedInfo connInfoForm = new AssociatedInfo();
-                itemsConnectedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
+                ShowInfoForm connInfoForm = new ShowInfoForm();
+                itemsAssociatedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Поставляемые товары";
                 connInfoForm.ShowDialog();
             }

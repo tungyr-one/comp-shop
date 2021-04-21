@@ -76,11 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssociatedInfo.cs">
+    <Compile Include="ShowInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AssociatedInfo.Designer.cs">
-      <DependentUpon>AssociatedInfo.cs</DependentUpon>
+    <Compile Include="ShowInfoForm.Designer.cs">
+      <DependentUpon>ShowInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
@@ -124,11 +124,11 @@
     <Compile Include="ManageSupplier.Designer.cs">
       <DependentUpon>ManageSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewItemForm.cs">
+    <Compile Include="ItemOperationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewItemForm.Designer.cs">
-      <DependentUpon>NewItemForm.cs</DependentUpon>
+    <Compile Include="ItemOperationForm.Designer.cs">
+      <DependentUpon>ItemOperationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
@@ -136,13 +136,19 @@
     <Compile Include="OrderItems.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderOperationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrderOperationForm.Designer.cs">
+      <DependentUpon>OrderOperationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AssociatedInfo.resx">
-      <DependentUpon>AssociatedInfo.cs</DependentUpon>
+    <EmbeddedResource Include="ShowInfoForm.resx">
+      <DependentUpon>ShowInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -153,8 +159,11 @@
     <EmbeddedResource Include="ManageSupplier.resx">
       <DependentUpon>ManageSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewItemForm.resx">
-      <DependentUpon>NewItemForm.cs</DependentUpon>
+    <EmbeddedResource Include="ItemOperationForm.resx">
+      <DependentUpon>ItemOperationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrderOperationForm.resx">
+      <DependentUpon>OrderOperationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

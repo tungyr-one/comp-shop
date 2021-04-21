@@ -517,6 +517,21 @@ namespace comp_shop
             }
         }
 
+        // SELLER
+
+        // создание списка продавцов
+        static public List<string> AllSellers()
+        {
+            List<string> sellers = new List<string>();
+            foreach (Order ord in ShowAllOrders())
+            {
+                if(!sellers.Contains(ord.SellerName))
+                {
+                    sellers.Add(ord.SellerName);
+                }
+            }
+            return sellers;
+        }
 
         // список товаров по ID order
         //static public string ItemsToString(int orderID)
