@@ -31,23 +31,32 @@ namespace comp_shop
             //ordersToItems.Clear();
 
 
-            // проверка заполненности списка товаров и домонстрация его в DataGridView
-            if (itemsToSupplier.Count > 0)
+            // проверка для чего было вызвано окно
+            if (this.Text == "Продажи товара")
             {
-                this.Text = "Товары поставщика";
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = itemBindingSource;
-                dataGridView1.DataSource = itemsToSupplier;
-                
-            }
-            else
-            {
-                this.Text = "Продажи товара";
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 dataGridView1.DataSource = ordersToItems;
-                //MainForm.currentItem;
+                button1.Text = "Редактировать заказ";
+                button2.Text = "Новый заказ";
                 
+            }
+            else if (this.Text == "Товары в заказе")
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.DataSource = ordersToItems;
+                button1.Text = "Редактировать товар";
+                button2.Text = "Новый товар";
+            }
+            else
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = itemBindingSource;
+                dataGridView1.DataSource = itemsToSupplier;
+                button1.Text = "Редактировать товар";
+                button2.Text = "Новый товар";
+
             }
 
 
@@ -58,10 +67,5 @@ namespace comp_shop
 
             }
 
-        private void ConnectedInfo_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            itemsToSupplier.Clear();
-            ordersToItems.Clear();
-        }
     }
 }

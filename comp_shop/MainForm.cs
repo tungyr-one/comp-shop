@@ -45,7 +45,7 @@ namespace comp_shop
 
         // списки для обмена данными с формами связанных данных
         List<Item> itemsConnectedData = new List<Item>();
-        List<ItemOrdersEntity> ordersConnectedData = new List<ItemOrdersEntity>();
+        List<ItemOrdersEntity> ordersItemsAssociatedData = new List<ItemOrdersEntity>();
 
         public MainForm()
         {
@@ -493,8 +493,9 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
-                ordersConnectedData = DB.OrdersForDataGridView1(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
-                connInfoForm.ordersToItems = ordersConnectedData;
+                ordersItemsAssociatedData = DB.OrdersForDataGridView1(Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value));
+                connInfoForm.ordersToItems = ordersItemsAssociatedData;
+                connInfoForm.Text = "Продажи товара";
                 connInfoForm.ShowDialog();
             }
         }
@@ -508,8 +509,9 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 AssociatedInfo connInfoForm = new AssociatedInfo();
-                ordersConnectedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
-                connInfoForm.ordersToItems = ordersConnectedData;
+                ordersItemsAssociatedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
+                connInfoForm.ordersToItems = ordersItemsAssociatedData;
+                connInfoForm.Text = "Товары в заказе";
                 connInfoForm.ShowDialog();
             }
         }
@@ -525,6 +527,7 @@ namespace comp_shop
                 AssociatedInfo connInfoForm = new AssociatedInfo();
                 itemsConnectedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
                 connInfoForm.itemsToSupplier = itemsConnectedData;
+                connInfoForm.Text = "Поставляемые товары";
                 connInfoForm.ShowDialog();
             }
 

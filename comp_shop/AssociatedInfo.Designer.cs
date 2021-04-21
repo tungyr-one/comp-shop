@@ -31,16 +31,16 @@ namespace comp_shop
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.orderIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerContactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderItemsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
@@ -65,13 +65,23 @@ namespace comp_shop
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
-            // orderBindingSource
+            // button1
             // 
-            this.orderBindingSource.DataSource = typeof(comp_shop.Order);
+            this.button1.Location = new System.Drawing.Point(20, 645);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(314, 35);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // itemBindingSource
+            // button2
             // 
-            this.itemBindingSource.DataSource = typeof(comp_shop.Item);
+            this.button2.Location = new System.Drawing.Point(391, 645);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(277, 35);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // orderIDDataGridViewTextBoxColumn
             // 
@@ -109,23 +119,13 @@ namespace comp_shop
             this.orderItemsDataGridViewTextBoxColumn.HeaderText = "OrderItems";
             this.orderItemsDataGridViewTextBoxColumn.Name = "orderItemsDataGridViewTextBoxColumn";
             // 
-            // button1
+            // orderBindingSource
             // 
-            this.button1.Location = new System.Drawing.Point(20, 645);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 35);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.orderBindingSource.DataSource = typeof(comp_shop.Order);
             // 
-            // button2
+            // itemBindingSource
             // 
-            this.button2.Location = new System.Drawing.Point(234, 645);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(207, 35);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.itemBindingSource.DataSource = typeof(comp_shop.Item);
             // 
             // AssociatedInfo
             // 
@@ -139,7 +139,6 @@ namespace comp_shop
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AssociatedInfo";
             this.Text = "ConnectedInfo";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConnectedInfo_FormClosing);
             this.Load += new System.EventHandler(this.ConnectedInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();

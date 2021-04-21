@@ -141,10 +141,11 @@ namespace comp_shop
         private void button5_Click(object sender, EventArgs e)
         {
             // загрузка окна заказов на товар
-            AssociatedInfo connInfoForm = new AssociatedInfo();
+            AssociatedInfo associatedInfoForm = new AssociatedInfo();
             List<ItemOrdersEntity> ordersConnectedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
-            connInfoForm.ordersToItems = ordersConnectedData;
-            connInfoForm.ShowDialog();
+            associatedInfoForm.ordersToItems = ordersConnectedData;
+            associatedInfoForm.Text = "Продажи товара";
+            associatedInfoForm.ShowDialog();
         }
     }
 }

@@ -402,7 +402,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").Include("Orders").ToList<Item>();
+                    var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
 
                     return data;
                 }
