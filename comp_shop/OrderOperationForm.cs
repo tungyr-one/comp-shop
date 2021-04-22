@@ -85,13 +85,26 @@ namespace comp_shop
 
         // нажатие кнопки удаления товара из заказа
         private void button4_Click(object sender, EventArgs e)
-        {
+        {            
+            if (MainForm.currentItemOrdersEntities.Count <= 1)
+            {
+                //dataGridView1.RowCount = 1;
+                //dataGridView1.ColumnCount = 2;
+                // очищение списка заказанных товаро
+                MainForm.currentItemOrdersEntities.Clear();
+                // очищение таблицы
+                dataGridView1.DataSource = null;
+                dataGridView1.Rows.Clear();
+                return;
+            }
+
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
-            MainForm.currentItemOrdersEntities.RemoveAll(x => x.Item.ToString() == rows[0].Cells[0].Value.ToString());
+            MainForm.currentItemOrdersEntities.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+            // TODO: изменение количества товара прямо в таблице
+            dataGridView1.ReadOnly = true;
+
             dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
             dataGridView1.ColumnCount = 2;
-
-            // TODO: изменение количества товара прямо в таблице
             dataGridView1.ReadOnly = true;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
