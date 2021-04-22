@@ -38,11 +38,24 @@ namespace comp_shop
             }
             else if (this.Text == "Редактирование заказа")
             {
-                //dataGridView1.AutoGenerateColumns = true;
-                //dataGridView1.DataSource = orderBindingSource;
-                //dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
-                //button1.Text = "Редактировать товар";
-                //button2.Text = "Новый товар";
+                // установка значений для полей редактирования
+                comboBox1.SelectedItem = MainForm.currentItemOrderEntity.SellerName;
+                dateTimePicker1.Value = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
+                textBox2.Text = MainForm.currentItemOrderEntity.Customer;
+                textBox3.Text = MainForm.currentItemOrderEntity.CustomerContact;
+
+                // заполнение таблицы данными о товарах в заказе
+                MainForm.currentItemOrdersEntities = DB.LoadItemOrdersEntities(MainForm.currentItemOrderEntity.OrderID);
+                dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
+                dataGridView1.ColumnCount = 2;
+
+                // TODO: изменение количества товара прямо в таблице
+                dataGridView1.ReadOnly = true;
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
+                    dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
+                }
             }
         }
 

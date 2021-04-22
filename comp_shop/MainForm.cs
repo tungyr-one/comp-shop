@@ -493,7 +493,7 @@ namespace comp_shop
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
             // присваивание текущей обрабатываемой сущности заказа имени из выбранного элемента в DataGridView2
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dataGridView2.SelectedRows)
             {
                 // поиск выделенного заказа в БД
                 var selectedOrder = DB.SearchOrderByID(Convert.ToInt32(row.Cells[0].Value));
@@ -565,7 +565,7 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 ShowInfoForm connInfoForm = new ShowInfoForm();
-                currentItemOrdersEntities = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
+                currentItemOrdersEntities = DB.LoadItemOrdersEntities(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Товары в заказе";
                 connInfoForm.ShowDialog();
             }

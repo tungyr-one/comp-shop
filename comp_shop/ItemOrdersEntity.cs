@@ -36,6 +36,8 @@ namespace comp_shop
         {
         }
 
+        // TODO: также копировать список связанных товаров-заказов при создании
+
         public ItemOrdersEntity(int orderID, string orderDate, string sellerName, string customer, string customerContact, string item = null, int quantity = 0, string category = null)
         {
             Item = item;

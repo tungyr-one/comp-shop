@@ -181,13 +181,13 @@ namespace comp_shop
         }
 
         // создание списка товаров на заказ для AssociatedInfo
-        static public List<ItemOrdersEntity> ItemsForDataGridView2(int orderID)
+        static public List<ItemOrdersEntity> LoadItemOrdersEntities(int orderID)
         {
             using (var context = new ComputerShopEntities())
             {
                 // выборка всех промежуточных сущностей товаров с количеством товара, найденного по ID заказа
                 List<OrderItems> orderIts = context.OrderItems1.Where(x => x.OrderID == orderID).Include(x => x.Item).Include("Order").ToList();
-
+                // TODO: сразу заполнять MainForm.currentItemOrdersEntities без промежуточных списков
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
                 // заполнение форм сущности ItemOrdersEntity данными
