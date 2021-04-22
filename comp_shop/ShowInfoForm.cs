@@ -37,40 +37,41 @@ namespace comp_shop
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 //dataGridView1.DataSource = ordersToItems;
-                dataGridView1.DataSource = MainForm.ordersItemsAssociatedData;
+                dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 button1.Text = "Редактировать заказ";
                 button2.Text = "Новый заказ";
-                
+                button3.Text = "Поиск по ID";
+
             }
             else if (this.Text == "Товары в заказе")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = MainForm.ordersItemsAssociatedData;
+                dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 button1.Text = "Редактировать товар";
                 button2.Text = "Новый товар";
+                button3.Text = "Поиск по названию";
             }
             // добавление товаров в новый заказ
-            else if(this.Text == "Товары в заказ")
+            else if (this.Text == "Товары в заказ")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = MainForm.itemsAssociatedData;
+                dataGridView1.DataSource = MainForm.currentItems;
                 button1.Text = "Выбрать товар";
                 button2.Text = "Отмена";
+                button3.Text = "Поиск по названию";
             }
             else
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = itemBindingSource;
-                dataGridView1.DataSource = MainForm.itemsAssociatedData;
+                dataGridView1.DataSource = MainForm.currentItems;
                 button1.Text = "Редактировать товар";
                 button2.Text = "Новый товар";
+                button3.Text = "Поиск по названию";
 
             }
-            
-
-
         }
 
             private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -84,7 +85,27 @@ namespace comp_shop
         {
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
             MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
-            MessageBox.Show(MainForm.currentItem.Name);
+            this.Close();
+        }
+
+        // поиск товара / заказа
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //поиск заказа по ID
+            if (this.Text == "Заказы товара")
+            {
+
+            }
+            // поиск товара по имени
+            else
+            {
+                dataGridView1.DataSource = DB.SearchItemByNameOrID(textBox1.Text);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

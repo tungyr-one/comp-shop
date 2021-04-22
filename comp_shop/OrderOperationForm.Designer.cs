@@ -43,6 +43,11 @@ namespace comp_shop
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Товар = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Количество = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button4 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +73,7 @@ namespace comp_shop
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 125);
+            this.label3.Location = new System.Drawing.Point(54, 217);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 20);
@@ -78,7 +83,7 @@ namespace comp_shop
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 172);
+            this.label4.Location = new System.Drawing.Point(40, 262);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 20);
@@ -88,7 +93,7 @@ namespace comp_shop
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(40, 217);
+            this.label5.Location = new System.Drawing.Point(40, 127);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 20);
@@ -97,7 +102,7 @@ namespace comp_shop
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(40, 254);
+            this.label6.Location = new System.Drawing.Point(40, 156);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(110, 45);
@@ -121,31 +126,31 @@ namespace comp_shop
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(176, 119);
+            this.button1.Location = new System.Drawing.Point(176, 211);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 33);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Выбрать товары";
+            this.button1.Text = "Выбрать товар";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(176, 171);
+            this.textBox1.Location = new System.Drawing.Point(176, 262);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(200, 26);
             this.textBox1.TabIndex = 9;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(176, 211);
+            this.textBox2.Location = new System.Drawing.Point(176, 127);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(200, 26);
             this.textBox2.TabIndex = 10;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(176, 254);
+            this.textBox3.Location = new System.Drawing.Point(176, 166);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(200, 26);
             this.textBox3.TabIndex = 11;
@@ -169,11 +174,45 @@ namespace comp_shop
             this.button3.Text = "Готово";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Товар,
+            this.Количество});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 393);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(452, 268);
+            this.dataGridView1.TabIndex = 14;
+            // 
+            // Товар
+            // 
+            this.Товар.HeaderText = "Товар";
+            this.Товар.Name = "Товар";
+            // 
+            // Количество
+            // 
+            this.Количество.HeaderText = "Количество";
+            this.Количество.Name = "Количество";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(106, 667);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(186, 35);
+            this.button4.TabIndex = 15;
+            this.button4.Text = "Удалить";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // OrderOperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 395);
+            this.ClientSize = new System.Drawing.Size(476, 703);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox3);
@@ -193,6 +232,7 @@ namespace comp_shop
             this.Name = "OrderOperationForm";
             this.Text = "Создание заказа";
             this.Load += new System.EventHandler(this.OrderOperationForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,5 +254,9 @@ namespace comp_shop
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Товар;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Количество;
+        private System.Windows.Forms.Button button4;
     }
 }

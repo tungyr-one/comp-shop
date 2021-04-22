@@ -42,12 +42,12 @@ namespace comp_shop
         //Article currentItem = new Article();
         // сущности для обмена данными с формами добавления / редактирования сущносстей
         public static Item currentItem = new Item();
-        public static ItemOrdersEntity currentOrderItems = new ItemOrdersEntity();
+        public static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
         public static Supplier currentSupplier = new Supplier();
 
         // списки для обмена данными с формами связанных данных
-        public static List<Item> itemsAssociatedData = new List<Item>();
-        public static List<ItemOrdersEntity> ordersItemsAssociatedData = new List<ItemOrdersEntity>();
+        public static List<Item> currentItems = new List<Item>();
+        public static List<ItemOrdersEntity> currentItemOrdersEntities = new List<ItemOrdersEntity>();
 
         public MainForm()
         {
@@ -199,6 +199,8 @@ namespace comp_shop
             // заказ
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
+                // удаление всех предыдущих значений в списке для нового заказа
+                currentItemOrdersEntities.Clear();
                 OrderOperationForm orderForm = new OrderOperationForm();
                 orderForm.Text = "Создание нового заказа";
                 orderForm.ShowDialog();
@@ -510,7 +512,7 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 ShowInfoForm connInfoForm = new ShowInfoForm();
-                ordersItemsAssociatedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
+                currentItemOrdersEntities = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
                 connInfoForm.Text = "Заказы товара";
                 connInfoForm.ShowDialog();
             }
@@ -525,7 +527,7 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 ShowInfoForm connInfoForm = new ShowInfoForm();
-                ordersItemsAssociatedData = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
+                currentItemOrdersEntities = DB.ItemsForDataGridView2(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Товары в заказе";
                 connInfoForm.ShowDialog();
             }
@@ -540,7 +542,7 @@ namespace comp_shop
                 e.RowIndex >= 0)
             {
                 ShowInfoForm connInfoForm = new ShowInfoForm();
-                itemsAssociatedData = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
+                currentItems = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Поставляемые товары";
                 connInfoForm.ShowDialog();
             }

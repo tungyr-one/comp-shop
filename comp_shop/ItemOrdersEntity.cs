@@ -48,5 +48,18 @@ namespace comp_shop
             Category = category;
            
         }
+
+        // конструктор копирования
+        public ItemOrdersEntity(ItemOrdersEntity obj)
+        {
+            this.Item = obj.Item;
+            this.OrderID = obj.OrderID;
+            this.Quantity = obj.Quantity;
+            this.OrderDate = obj.OrderDate;
+            this.SellerName = obj.SellerName;
+            this.Customer = obj.Customer;
+            this.CustomerContact = obj.CustomerContact;
+            this.Category = obj.Category;
+        }
     }
 }

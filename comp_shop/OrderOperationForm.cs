@@ -20,15 +20,16 @@ namespace comp_shop
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
                 comboBox1.DataSource = DB.AllSellers();
-
-                //comboBox1.ValueMember = "Name";
-                //comboBox1.DisplayMember = "Name";
-
             }
         }
 
+        // загрузка формы
         private void OrderOperationForm_Load(object sender, EventArgs e)
         {
+
+            dataGridView1.Columns[0].Name = "Item name";
+            dataGridView1.Columns[1].Name = "Item quantity";
+
             if (this.Text == "Создание нового заказа")
             {               
                 //button1.Text = "Редактировать заказ";
@@ -39,7 +40,7 @@ namespace comp_shop
             {
                 //dataGridView1.AutoGenerateColumns = true;
                 //dataGridView1.DataSource = orderBindingSource;
-                //dataGridView1.DataSource = MainForm.ordersItemsAssociatedData;
+                //dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 //button1.Text = "Редактировать товар";
                 //button2.Text = "Новый товар";
             }
@@ -49,7 +50,7 @@ namespace comp_shop
         private void button1_Click(object sender, EventArgs e)
         {
              ShowInfoForm allItems = new ShowInfoForm();
-            MainForm.itemsAssociatedData = DB.ShowAllItems();
+            MainForm.currentItems = DB.ShowAllItems();
             allItems.Text = "Товары в заказ";
             allItems.ShowDialog();
         }
@@ -57,12 +58,46 @@ namespace comp_shop
         // добавление нового товара в заказ
         private void button2_Click(object sender, EventArgs e)
         {
-            MainForm.currentOrderItems.SellerName = comboBox1.SelectedItem.ToString();
-            MainForm.currentOrderItems.OrderDate = dateTimePicker1.Value.ToString();
-            MainForm.currentOrderItems.Item = MainForm.currentItem.Name;
-            MainForm.currentOrderItems.Quantity = Convert.ToInt32(textBox1.Text);
-            MainForm.currentOrderItems.Customer = textBox2.Text;
-            MainForm.currentOrderItems.CustomerContact = textBox3.Text;
+            // создание отдельной сущности заказа с товаром и его количеством
+            MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
+            MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
+            MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
+            MainForm.currentItemOrderEntity.Quantity = Convert.ToInt32(textBox1.Text);
+            MainForm.currentItemOrderEntity.Customer = textBox2.Text;
+            MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
+
+            // добавление в список товаров нового товара с помощью конструктора копирования
+            ItemOrdersEntity newItem = new ItemOrdersEntity(MainForm.currentItemOrderEntity);
+            MainForm.currentItemOrdersEntities.Add(newItem);
+
+            // отображение всех товаров в заказе в DataGridView1
+            dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
+            dataGridView1.ColumnCount = 2;
+
+            // TODO: изменение количества товара прямо в таблице
+            dataGridView1.ReadOnly = true;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
+                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
+            }
+        }
+
+        // нажатие кнопки удаления товара из заказа
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            MainForm.currentItemOrdersEntities.RemoveAll(x => x.Item.ToString() == rows[0].Cells[0].Value.ToString());
+            dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
+            dataGridView1.ColumnCount = 2;
+
+            // TODO: изменение количества товара прямо в таблице
+            dataGridView1.ReadOnly = true;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
+                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
+            }
         }
     }
 }
