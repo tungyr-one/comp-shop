@@ -410,6 +410,61 @@ namespace comp_shop
 
         // ORDERS
 
+        // создание заказа с товарами и привязанным количеством
+        static public void AddOrder()
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    // создание нового Order-a
+                    var orderEntry = new Order()
+                    {
+                        SellerName = MainForm.currentItemOrdersEntities[0].SellerName,
+                        OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
+                        Customer = MainForm.currentItemOrdersEntities[0].Customer,
+                        CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact
+                    };
+                    context.Orders.Add(orderEntry);
+                    context.SaveChanges();
+                    int orderId = orderEntry.OrderID;
+
+                    // создание привязанных к созданному Order OrderItems из списка
+                    foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
+                    {
+                        var orderItemsEntry = new OrderItems()
+                        {
+                            // TODO: поменять поле ItemOrdersEntity Item на int для хранения itemID а не имени?
+                            // нахождение ItemID по имени Item
+                            ItemID = DB.SearchItemByNameOrID(itemName:ordItem.Item)[0].ItemID,
+                            OrderID = orderId,
+                            ItemsQuantity = ordItem.Quantity,
+                        };
+                        // TODO: убрать единицу в OrderItems1?
+                        context.OrderItems1.Add(orderItemsEntry);
+                        context.SaveChanges();
+                    }
+
+                    // TODO: выводить все названия товаров в добавленном заказе?
+                    MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара");
+                }
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show(ve.ErrorMessage);
+                    }
+                }
+                throw;
+
+            }
+        }
+
+
         // список всех заказов
         static public List<Order> ShowAllOrders()
         {

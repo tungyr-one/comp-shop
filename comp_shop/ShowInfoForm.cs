@@ -107,5 +107,10 @@ namespace comp_shop
         {
             this.Close();
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button1_Click(sender, e);
+        }
     }
 }

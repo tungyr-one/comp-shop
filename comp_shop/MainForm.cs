@@ -456,22 +456,22 @@ namespace comp_shop
         //изменение выбора строки в товарах
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            // присваивание текущей обрабатываемой сущности имени из выбранного элемента в DataGridView
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
-            }
+            //// присваивание текущей обрабатываемой сущности имени из выбранного элемента в DataGridView
+            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            //{
+            //    currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
+            //}
 
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                string value1 = row.Cells[0].Value.ToString();
-                string value2 = row.Cells[1].Value.ToString();
-                string value3 = row.Cells[2].Value.ToString();
-                string value4 = row.Cells[3].Value.ToString();
-                string value5 = row.Cells[4].Value.ToString();
-                //string value6 = row.Cells[5].Value.ToString();
-                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
-            }
+            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            //{
+            //    string value1 = row.Cells[0].Value.ToString();
+            //    string value2 = row.Cells[1].Value.ToString();
+            //    string value3 = row.Cells[2].Value.ToString();
+            //    string value4 = row.Cells[3].Value.ToString();
+            //    string value5 = row.Cells[4].Value.ToString();
+            //    //string value6 = row.Cells[5].Value.ToString();
+            //    toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
+            //}
 
 
         }
