@@ -246,7 +246,22 @@ namespace comp_shop
         //нажатие кнопки удалить
         private void button2_Click(object sender, EventArgs e)
         {
-            DB.RemoveItem(currentItem);
+            if (tabControl1.SelectedTab.Name == "tabPage1")
+            {
+                DB.RemoveItem(currentItem);
+                dataGridView1.DataSource = DB.ShowAllItems();
+            }
+            //заказ
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
+            {
+                DB.RemoveOrder(currentItemOrderEntity);
+                dataGridView2.DataSource = DB.ShowAllOrders();
+            }
+            // вкладка поставщики
+            else
+            {
+
+            }
         }
 
         // нажатие кнопки поиск

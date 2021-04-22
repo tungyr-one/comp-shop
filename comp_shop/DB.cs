@@ -234,6 +234,7 @@ namespace comp_shop
 
         }
 
+        // TODO: избавиться от Article
         // добавление товара в БД
         static public void addItem(Article insertItem)
         {
@@ -271,6 +272,7 @@ namespace comp_shop
             }
         }
 
+        // TODO: избавиться от Article
         // редактирование товара
         static public void editItem(Article itemToEdit)
         {
@@ -460,6 +462,87 @@ namespace comp_shop
                 }
                 throw;
 
+            }
+        }
+
+
+        static public void editOrder(int orderID)
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    // поиск Order-a для редактирования
+                    var original = context.Orders.Single(x => x.OrderID == orderID);
+                    // изменение полей Order-a
+                    if (original != null)
+                    {
+                        original.SellerName = MainForm.currentItemOrdersEntities[0].SellerName;
+                        original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate);
+                        original.Customer = MainForm.currentItemOrdersEntities[0].Customer;
+                        original.CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact;
+                    }
+                    context.SaveChanges();
+
+                    //// редактирование привязанных к созданному Order OrderItems из списка
+                    // загрузка всех связанных заказов
+                    //var originalList = LoadItemOrdersEntities(orderID);
+
+                    //if (originalList.Count == MainForm.currentItemOrdersEntities.Count)
+                    //{
+                    //    foreach(ItemOrdersEntity ordItem in originalList)
+                    //    {
+
+                    //        ordItem.Item = 
+                    //        OrderID = 
+                    //        ItemsQuantity = 
+                    //    }
+                    //}
+
+
+
+                    //foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
+                    //{
+                    //    var orderItemsEntry = new OrderItems()
+                    //    {
+                    //        // TODO: поменять поле ItemOrdersEntity Item на int для хранения itemID а не имени?
+                    //        // нахождение ItemID по имени Item
+                    //        ItemID = DB.SearchItemByNameOrID(itemName: ordItem.Item)[0].ItemID,
+                    //        OrderID = orderId,
+                    //        ItemsQuantity = ordItem.Quantity,
+                    //    };
+                    //    // TODO: убрать единицу в OrderItems1?
+                    //    context.OrderItems1.Add(orderItemsEntry);
+                    //    context.SaveChanges();
+                    //}
+
+                    //// TODO: выводить все названия товаров в добавленном заказе?
+                    //MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара");
+                }
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        MessageBox.Show(ve.ErrorMessage);
+                    }
+                }
+                throw;
+
+            }
+        }
+
+
+        static public void RemoveOrder(ItemOrdersEntity toRemove)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                context.OrderItems1.Remove(context.OrderItems1.Single(a => a.OrderID == toRemove.OrderID));
+                context.SaveChanges();
+                MessageBox.Show(toRemove.OrderID + " removed from database!");
             }
         }
 

@@ -30,7 +30,7 @@ namespace comp_shop
             dataGridView1.Columns[0].Name = "Item name";
             dataGridView1.Columns[1].Name = "Item quantity";
 
-            if (this.Text == "Создание нового заказа")
+            if (this.Text == "Создание заказа")
             {               
                 //button1.Text = "Редактировать заказ";
                 //button2.Text = "Готово";
@@ -59,7 +59,7 @@ namespace comp_shop
             }
         }
 
-        // обработка нажатия кнопки показа всех заказов
+        // обработка нажатия кнопки показа всех товаров для добавления в заказ
         private void button1_Click(object sender, EventArgs e)
         {
              ShowInfoForm allItems = new ShowInfoForm();
@@ -132,11 +132,19 @@ namespace comp_shop
             }
         }
 
-        // занесение в БД списка заказов с товарами и их количеством
+        // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
         private void button3_Click(object sender, EventArgs e)
         {
-            DB.AddOrder();
-            this.Close();
+            if (this.Text == "Создание нового заказа")
+            {
+                DB.AddOrder();
+                this.Close();
+            }
+            else
+            {
+                DB.editOrder(MainForm.currentItemOrderEntity.OrderID);
+                this.Close();
+            }
         }
     }
 }
