@@ -204,10 +204,9 @@ namespace comp_shop
                 OrderOperationForm orderForm = new OrderOperationForm();
                 orderForm.Text = "Создание нового заказа";
                 orderForm.ShowDialog();
-                //обновление списка товаров
-                dataGridView1.DataSource = DB.ShowAllOrders();
+                //обновление списка заказов
+                dataGridView2.DataSource = DB.ShowAllOrders();
             }
-
             // вкладка поставщики
             else
             {
@@ -218,14 +217,30 @@ namespace comp_shop
         // нажатие кнопки редактировать
         private void editItem_Click(object sender, EventArgs e)
         {
-            // открыте формы изменения товара
-            ItemOperationForm new_item_form = new ItemOperationForm(false);
+            // товар
+            if (tabControl1.SelectedTab.Name == "tabPage1")
+            {
+                // открыте формы изменения товара
+                ItemOperationForm new_item_form = new ItemOperationForm(false);
+                new_item_form.ShowDialog();
+                dataGridView1.DataSource = DB.ShowAllItems();
+            }
+            //заказ
+            else if (tabControl1.SelectedTab.Name == "tabPage2")
+            {
+                // удаление всех предыдущих значений в списке для редактируемого заказа
+                currentItemOrdersEntities.Clear();
+                OrderOperationForm orderForm = new OrderOperationForm();
+                orderForm.Text = "Редактирование заказа";
+                orderForm.ShowDialog();
+                //обновление списка заказов
+                dataGridView2.DataSource = DB.ShowAllOrders();
+            }
+            // вкладка поставщики
+            else
+            {
 
-            // передача в форму редактирования выбранной сущности
-            //new_item_form.workingItem = currentItem;
-            new_item_form.ShowDialog();
-            //обновление списка товаров
-            dataGridView1.DataSource = DB.ShowAllItems();
+            }
         }
 
         //нажатие кнопки удалить
@@ -456,26 +471,49 @@ namespace comp_shop
         //изменение выбора строки в товарах
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            //// присваивание текущей обрабатываемой сущности имени из выбранного элемента в DataGridView
-            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            //{
-            //    currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
-            //}
+            // присваивание текущей обрабатываемой сущности товара имени из выбранного элемента в DataGridView1
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
+            }
 
-            //foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            //{
-            //    string value1 = row.Cells[0].Value.ToString();
-            //    string value2 = row.Cells[1].Value.ToString();
-            //    string value3 = row.Cells[2].Value.ToString();
-            //    string value4 = row.Cells[3].Value.ToString();
-            //    string value5 = row.Cells[4].Value.ToString();
-            //    //string value6 = row.Cells[5].Value.ToString();
-            //    toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
-            //}
-
-
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                string value4 = row.Cells[3].Value.ToString();
+                string value5 = row.Cells[4].Value.ToString();
+                //string value6 = row.Cells[5].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
+            }
         }
 
+        //изменение выбора строки в заказах
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            // присваивание текущей обрабатываемой сущности заказа имени из выбранного элемента в DataGridView2
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                // поиск выделенного заказа в БД
+                var selectedOrder = DB.SearchOrderByID(Convert.ToInt32(row.Cells[0].Value));
+                currentItemOrderEntity.OrderID = selectedOrder.OrderID;
+                currentItemOrderEntity.SellerName = selectedOrder.SellerName;
+                currentItemOrderEntity.OrderDate = selectedOrder.OrderDate.ToString();
+                currentItemOrderEntity.Customer = selectedOrder.Customer;
+                currentItemOrderEntity.CustomerContact = selectedOrder.CustomerContact;
+            }
+
+            foreach (DataGridViewRow row in dataGridView2.SelectedRows)
+            {
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                string value4 = row.Cells[3].Value.ToString();
+                string value5 = row.Cells[4].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
+            }
+        }
 
         // не показывает ошибку, хотя она присутствует
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)

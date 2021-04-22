@@ -11,7 +11,7 @@ namespace comp_shop
         public string Item
         { get; set; }
 
-        public string OrderID
+        public int OrderID
         { get; set; }
 
         public int Quantity
@@ -36,7 +36,7 @@ namespace comp_shop
         {
         }
 
-        public ItemOrdersEntity(string item, string orderID, int quantity, string orderDate, string sellerName, string customer, string customerContact, string category)
+        public ItemOrdersEntity(int orderID, string orderDate, string sellerName, string customer, string customerContact, string item = null, int quantity = 0, string category = null)
         {
             Item = item;
             OrderID = orderID;

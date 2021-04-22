@@ -166,7 +166,7 @@ namespace comp_shop
                 {
                     ItemOrdersEntity ord = new ItemOrdersEntity(
                     item: orderIts[i].Item.ToString(),
-                    orderID: orderIts[i].OrderID.ToString(),
+                    orderID: orderIts[i].OrderID,
                     quantity: orderIts[i].ItemsQuantity,
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
                     sellerName: orderIts[i].Order.SellerName,
@@ -195,7 +195,7 @@ namespace comp_shop
                 {
                     ItemOrdersEntity ord = new ItemOrdersEntity(
                     item: orderIts[i].Item.ToString(),
-                    orderID: orderIts[i].OrderID.ToString(),
+                    orderID: orderIts[i].OrderID,
                     quantity: orderIts[i].ItemsQuantity,
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
                     sellerName: orderIts[i].Order.SellerName,
@@ -319,7 +319,6 @@ namespace comp_shop
                     return data;
                 }
             }
-            // загрузка выбранной сущности в статусную строку
             else
             {
                 using (var context = new ComputerShopEntities())
@@ -473,6 +472,16 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 var data = context.Orders.ToList<Order>();
+                return data;
+            }
+        }
+
+        // поиск заказа по ID
+        static public Order SearchOrderByID(int orderId)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Orders.Find(orderId);
                 return data;
             }
         }
