@@ -46,8 +46,11 @@ namespace comp_shop
 
                 // заполнение таблицы данными о товарах в заказе
                 MainForm.currentItemOrdersEntities = DB.LoadItemOrdersEntities(MainForm.currentItemOrderEntity.OrderID);
-                dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
                 dataGridView1.ColumnCount = 2;
+                // проверка на отсутствие товаров в заказе
+                if (MainForm.currentItemOrdersEntities.Count == 0)
+                { dataGridView1.RowCount = 1; return; }
+                dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
 
                 // TODO: изменение количества товара прямо в таблице
                 dataGridView1.ReadOnly = true;
@@ -132,6 +135,7 @@ namespace comp_shop
             }
         }
 
+        // TODO: проверка на дублированные значения товар-количество в заказе
         // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -142,6 +146,14 @@ namespace comp_shop
             }
             else
             {
+                // обновление данных сущности
+                MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
+                MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
+                MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
+                MainForm.currentItemOrderEntity.Quantity = Convert.ToInt32(numericUpDown1.Text);
+                MainForm.currentItemOrderEntity.Customer = textBox2.Text;
+                MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
+
                 DB.editOrder(MainForm.currentItemOrderEntity.OrderID);
                 this.Close();
             }

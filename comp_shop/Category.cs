@@ -25,7 +25,6 @@ namespace comp_shop
             return Name;
         }
 
-
         public int CategoryID { get; set; }
         public string Name { get; set; }
     

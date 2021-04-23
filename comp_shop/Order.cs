@@ -19,7 +19,6 @@ namespace comp_shop
         {
             this.OrderItems = new HashSet<OrderItems>();
         }
-
         public override string ToString()
         {
             return "Id " + OrderID + ": " + Customer;

@@ -25,7 +25,6 @@ namespace comp_shop
             return Name;
         }
 
-
         public int SupplierID { get; set; }
         public string Name { get; set; }
         public string Contacts { get; set; }

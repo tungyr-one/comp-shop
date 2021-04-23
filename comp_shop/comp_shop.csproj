@@ -76,14 +76,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs">
+      <DependentUpon>ComputerShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>ComputerShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>ComputerShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItems.cs">
+      <DependentUpon>ComputerShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShowInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ShowInfoForm.Designer.cs">
       <DependentUpon>ShowInfoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ComputerShopModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -101,9 +110,6 @@
       <DependentUpon>ComputerShopModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DB.cs" />
-    <Compile Include="Item.cs">
-      <DependentUpon>ComputerShopModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ItemOrdersEntity.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -129,12 +135,6 @@
     </Compile>
     <Compile Include="ItemOperationForm.Designer.cs">
       <DependentUpon>ItemOperationForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Order.cs">
-      <DependentUpon>ComputerShopModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrderItems.cs">
-      <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderOperationForm.cs">
       <SubType>Form</SubType>

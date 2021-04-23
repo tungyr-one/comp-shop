@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace comp_shop
 {
+    // TODO: создать просто поле с Order и список OrderItems вместо этого колхоза
     public class ItemOrdersEntity
     {
         public string Item

@@ -272,7 +272,8 @@ namespace comp_shop
             }
         }
 
-        // TODO: избавиться от Article
+        // TODO: избавиться от Article 
+        //!!! быстрое обновление сущности: context.Entry(original).CurrentValues.SetValues()
         // редактирование товара
         static public void editItem(Article itemToEdit)
         {
@@ -295,6 +296,7 @@ namespace comp_shop
             }
         }
 
+        //TODO: проверка на нахождение в заказах и показ сообщения об этом
         // удаление товара
         static public void RemoveItem(Item removeEntry)
         {
@@ -477,28 +479,30 @@ namespace comp_shop
                     // изменение полей Order-a
                     if (original != null)
                     {
-                        original.SellerName = MainForm.currentItemOrdersEntities[0].SellerName;
-                        original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate);
-                        original.Customer = MainForm.currentItemOrdersEntities[0].Customer;
-                        original.CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact;
+                        original.SellerName = MainForm.currentItemOrderEntity.SellerName;
+                        original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
+                        original.Customer = MainForm.currentItemOrderEntity.Customer;
+                        original.CustomerContact = MainForm.currentItemOrderEntity.CustomerContact;
                     }
                     context.SaveChanges();
 
-                    //// редактирование привязанных к созданному Order OrderItems из списка
-                    // загрузка всех связанных заказов
-                    //var originalList = LoadItemOrdersEntities(orderID);
+                    // редактирование привязанных к созданному Order OrderItems из списка
+                    // удаление всех старых сущностей товаров заказа
+                    original.OrderItems.Clear();
+                    context.SaveChanges();
 
-                    //if (originalList.Count == MainForm.currentItemOrdersEntities.Count)
-                    //{
-                    //    foreach(ItemOrdersEntity ordItem in originalList)
-                    //    {
+                    // добавление новых сущностей товаров в список товара заказа
+                    foreach (ItemOrdersEntity itOrd in MainForm.currentItemOrdersEntities)
+                    {
+                        OrderItems temp = new OrderItems();
+                        temp.ItemID = SearchItemByNameOrID(itemName: itOrd.Item)[0].ItemID;
+                        temp.OrderID = itOrd.OrderID;
+                        temp.ItemsQuantity = itOrd.Quantity;
+                        original.OrderItems.Add(temp);
+                    }
+                    context.SaveChanges();
 
-                    //        ordItem.Item = 
-                    //        OrderID = 
-                    //        ItemsQuantity = 
-                    //    }
-                    //}
-
+                    MessageBox.Show($"Обновлен заказ: ID{orderID} на {MainForm.currentItemOrdersEntities.Count} товара");
 
 
                     //foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
@@ -535,14 +539,16 @@ namespace comp_shop
             }
         }
 
-
+        // удаление заказа
         static public void RemoveOrder(ItemOrdersEntity toRemove)
         {
             using (var context = new ComputerShopEntities())
             {
-                context.OrderItems1.Remove(context.OrderItems1.Single(a => a.OrderID == toRemove.OrderID));
+                var original = context.Orders.Find(toRemove.OrderID);
+                context.OrderItems1.RemoveRange(original.OrderItems);
+                context.Entry(original).State = EntityState.Deleted;
                 context.SaveChanges();
-                MessageBox.Show(toRemove.OrderID + " removed from database!");
+                MessageBox.Show("Заказ с ID " + toRemove.OrderID + " удален из базы данных!");
             }
         }
 

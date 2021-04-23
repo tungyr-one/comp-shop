@@ -204,9 +204,19 @@ namespace comp_shop
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(176, 262);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(200, 26);
             this.numericUpDown1.TabIndex = 16;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // OrderOperationForm
             // 

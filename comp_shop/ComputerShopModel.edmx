@@ -214,8 +214,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ItemOrder__Order__668030F6">
-          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
-          <End Role="OrderItems" Type="ComputerShopModel.OrderItems" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderItems" Type="ComputerShopModel.OrderItems" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="OrderID" />
