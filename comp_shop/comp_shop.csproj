@@ -147,6 +147,12 @@
     <Compile Include="Supplier.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SupplierOperationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierOperationForm.Designer.cs">
+      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ShowInfoForm.resx">
       <DependentUpon>ShowInfoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +180,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SupplierOperationForm.resx">
+      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="ComputerShopModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ComputerShopModel.Designer.cs</LastGenOutput>

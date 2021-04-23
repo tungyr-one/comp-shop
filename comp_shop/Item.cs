@@ -20,6 +20,19 @@ namespace comp_shop
             this.OrderItems = new HashSet<OrderItems>();
         }
 
+        // конструктор копирования
+        public Item(Item obj)
+        {
+            this.ItemID = obj.ItemID;
+            this.Name = obj.Name;
+            this.Price = obj.Price;
+            this.CategoryID = obj.CategoryID;
+            this.SupplierID = obj.SupplierID;
+            this.OrderItems = obj.OrderItems;
+            this.Supplier = obj.Supplier;
+            this.Category = obj.Category;
+        }
+
         public override string ToString()
         {
             return Name;

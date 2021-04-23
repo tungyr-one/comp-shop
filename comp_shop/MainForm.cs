@@ -186,7 +186,7 @@ namespace comp_shop
         }
 
         // нажатие кнопки добавить 
-        private void addItem_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             // товар
             if (tabControl1.SelectedTab.Name == "tabPage1")
@@ -201,8 +201,10 @@ namespace comp_shop
             {
                 // удаление всех предыдущих значений в списке для нового заказа
                 currentItemOrdersEntities.Clear();
-                OrderOperationForm orderForm = new OrderOperationForm();
-                orderForm.Text = "Создание нового заказа";
+                OrderOperationForm orderForm = new OrderOperationForm
+                {
+                    Text = "Создание нового заказа"
+                };
                 orderForm.ShowDialog();
                 //обновление списка заказов
                 dataGridView2.DataSource = DB.ShowAllOrders();
@@ -210,7 +212,13 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-
+                SupplierOperationForm supplierForm = new SupplierOperationForm
+                {
+                    Text = "Новый поставщик"
+                };
+                supplierForm.ShowDialog();
+                //обновление списка поставщиков
+                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
         }
 
@@ -239,7 +247,13 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-
+                // открыте формы изменения поставщика
+                SupplierOperationForm supplierForm = new SupplierOperationForm
+                {
+                    Text = "Изменить поставщика"
+                };
+                supplierForm.ShowDialog();
+                dataGridView1.DataSource = DB.ShowAllSuppliers();
             }
         }
 

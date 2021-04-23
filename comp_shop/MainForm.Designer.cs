@@ -317,7 +317,7 @@
             this.add.TabIndex = 10;
             this.add.Text = "Добавить новый товар";
             this.add.UseVisualStyleBackColor = true;
-            this.add.Click += new System.EventHandler(this.addItem_Click);
+            this.add.Click += new System.EventHandler(this.Add_Click);
             // 
             // menuStrip1
             // 

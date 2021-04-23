@@ -26,18 +26,8 @@ namespace comp_shop
         // загрузка формы
         private void OrderOperationForm_Load(object sender, EventArgs e)
         {
-
-            dataGridView1.Columns[0].Name = "Item name";
-            dataGridView1.Columns[1].Name = "Item quantity";
-
-            if (this.Text == "Создание заказа")
-            {               
-                //button1.Text = "Редактировать заказ";
-                //button2.Text = "Готово";
-
-            }
-            else if (this.Text == "Редактирование заказа")
-            {
+            if (this.Text == "Редактирование заказа")
+            { 
                 // установка значений для полей редактирования
                 comboBox1.SelectedItem = MainForm.currentItemOrderEntity.SellerName;
                 dateTimePicker1.Value = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
@@ -54,6 +44,7 @@ namespace comp_shop
 
                 // TODO: изменение количества товара прямо в таблице
                 dataGridView1.ReadOnly = true;
+                // заполенение таблицы данными
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
                     dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
@@ -66,7 +57,6 @@ namespace comp_shop
         private void button1_Click(object sender, EventArgs e)
         {
              ShowInfoForm allItems = new ShowInfoForm();
-            MainForm.currentItems = DB.ShowAllItems();
             allItems.Text = "Товары в заказ";
             allItems.ShowDialog();
         }
@@ -111,7 +101,7 @@ namespace comp_shop
         {            
             if (MainForm.currentItemOrdersEntities.Count <= 1)
             {
-                // очищение списка заказанных товаро
+                // очищение списка заказанных товаров
                 MainForm.currentItemOrdersEntities.Clear();
                 // очищение таблицы
                 dataGridView1.DataSource = null;

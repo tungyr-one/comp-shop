@@ -57,7 +57,17 @@ namespace comp_shop
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = MainForm.currentItems;
+                dataGridView1.DataSource = DB.ShowAllItems();
+                button1.Text = "Выбрать товар";
+                button2.Text = "Отмена";
+                button3.Text = "Поиск по названию";
+            }
+            // добавление товаров к поставщику
+            else if (this.Text == "Товары к поставщику")
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.DataSource = DB.ShowAllItems();
                 button1.Text = "Выбрать товар";
                 button2.Text = "Отмена";
                 button3.Text = "Поиск по названию";
@@ -80,6 +90,7 @@ namespace comp_shop
             }
 
         // TODO: упростить выбор товара и поиск его в БД (возвращать не список а один товар?)
+        // TODO: добавление разных сущностей?
         // нажатие кнопки добавить товар в новый заказ
         private void button1_Click(object sender, EventArgs e)
         {
@@ -88,6 +99,7 @@ namespace comp_shop
             this.Close();
         }
 
+        // TODO: допилить поиск в форме
         // поиск товара / заказа
         private void button3_Click(object sender, EventArgs e)
         {
