@@ -20,9 +20,9 @@ namespace comp_shop
         // загрузка формы
         private void SupplierOperationForm_Load(object sender, EventArgs e)
         {
-            dataGridView1.Columns[0].Name = "Item ID";
-            dataGridView1.Columns[1].Name = "Item Name";
-            dataGridView1.Columns[2].Name = "Category";
+            //dataGridView1.Columns[0].Name = "Item ID";
+            //dataGridView1.Columns[1].Name = "Item Name";
+            //dataGridView1.Columns[2].Name = "Category";
 
             if (this.Text != "Новый поставщик")
             {
@@ -122,7 +122,7 @@ namespace comp_shop
         {
             if (this.Text == "Новый поставщик")
             {
-                DB.AddSupplier(MainForm.currentSupplier.Name, MainForm.currentSupplier.Contacts);
+                DB.AddSupplier();
                 this.Close();
             }
             else

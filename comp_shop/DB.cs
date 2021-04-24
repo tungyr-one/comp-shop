@@ -604,7 +604,7 @@ namespace comp_shop
             }
         }
 
-        // SUPPLIER
+        // SUPPLIERS
 
         // список всех поставщиков
         static public List<Supplier> ShowAllSuppliers()
@@ -619,13 +619,20 @@ namespace comp_shop
         }
 
         // добавление поставщика
-        static public void AddSupplier(string supplierName, string supplierAddres = null)
+        static public void AddSupplier()
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Suppliers.Add(new Supplier { Name = supplierName, Contacts = supplierAddres });
+                context.Suppliers.Add(MainForm.currentSupplier);
+                
+                foreach(Item itm in MainForm.currentItems)
+                {
+                    
+                    itm.SupplierID = MainForm.currentSupplier.SupplierID;
+                    MainForm.currentSupplier.Items.Add(itm);
+                }
+                MessageBox.Show("Добавлен поставщик: " + MainForm.currentSupplier.Name);
                 context.SaveChanges();
-                MessageBox.Show("Добавлен поставщик: " + supplierName);
             }
         }
 

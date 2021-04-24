@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
+    // TODO: заменить на SupplierOperationForm?
     public partial class ManageSupplier : Form
     {
         public string newSupplier = null;
@@ -51,7 +52,7 @@ namespace comp_shop
             // определение нобходимого действия в зависимости от нажатой радиокнопки
             if (radioButton1.Checked)
             {
-                DB.AddSupplier(textBox1.Text, textBox2.Text);
+                //DB.AddSupplier(textBox1.Text, textBox2.Text);
             }
             else
             {

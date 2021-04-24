@@ -38,10 +38,10 @@ namespace comp_shop
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,6 +103,7 @@ namespace comp_shop
             this.button3.TabIndex = 5;
             this.button3.Text = "Готово";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox1
             // 
@@ -130,15 +131,6 @@ namespace comp_shop
             this.dataGridView1.Size = new System.Drawing.Size(474, 358);
             this.dataGridView1.TabIndex = 8;
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(185, 667);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(152, 43);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Удалить";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // Column1
             // 
             this.Column1.HeaderText = "ID товара";
@@ -153,6 +145,15 @@ namespace comp_shop
             // 
             this.Column3.HeaderText = "Категория";
             this.Column3.Name = "Column3";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(185, 667);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(152, 43);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Удалить";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // SupplierOperationForm
             // 
@@ -170,7 +171,7 @@ namespace comp_shop
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SupplierOperationForm";
             this.Text = "SupplierOperationForm";
             this.Load += new System.EventHandler(this.SupplierOperationForm_Load);
