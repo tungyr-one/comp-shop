@@ -56,7 +56,7 @@ namespace comp_shop
             }
             else
             {
-                DB.RemoveSupplier(textBox1.Text);
+                //DB.RemoveSupplier(textBox1.Text);
             }
             button2.Text = "Готово";
         }

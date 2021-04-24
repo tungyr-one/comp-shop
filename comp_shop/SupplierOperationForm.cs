@@ -20,9 +20,6 @@ namespace comp_shop
         // загрузка формы
         private void SupplierOperationForm_Load(object sender, EventArgs e)
         {
-            //dataGridView1.Columns[1].Name = "Item Name";
-            //dataGridView1.Columns[2].Name = "Category";
-
             if (this.Text != "Новый поставщик")
             {
                 textBox1.Text = MainForm.currentSupplier.Name;
@@ -30,7 +27,7 @@ namespace comp_shop
 
                 // заполнение таблицы данными о товарах поставщика
                 MainForm.currentItems = DB.ItemsToList(MainForm.currentSupplier.SupplierID);
-                dataGridView1.ColumnCount = 3;
+                dataGridView1.ColumnCount = 2;
                 // проверка на отсутствие товаров в заказе
                 if (MainForm.currentItems.Count == 0)
                 { dataGridView1.RowCount = 1; return; }
@@ -44,6 +41,15 @@ namespace comp_shop
                 }
 
             }
+            else
+            {
+                // TODO: временные поля - удалить
+                textBox1.Text = "Temp supllier";
+                textBox2.Text = "Temp contacts";
+
+                // очистка списка текущих товаров
+                MainForm.currentItems.Clear();
+            }
         }
 
         // обработка нажатия кнопки добавления нового товара нового поставщика
@@ -52,6 +58,7 @@ namespace comp_shop
             ItemOperationForm newItem = new ItemOperationForm();
             newItem.Text = "Добавление товара поставщика";
             newItem.ShowDialog();
+            button2_Click(sender, e);
         }
 
         // добавление нового товара к поставщику
@@ -59,17 +66,13 @@ namespace comp_shop
         {
             try
             {
-                // создание отдельной сущности поставщика
-                MainForm.currentSupplier.Name = textBox1.Text;
-                MainForm.currentSupplier.Contacts = textBox2.Text;
-
                 // добавление к поставщику товаров с помощью конструктора копирования
                 Item newItem = new Item(MainForm.currentItem);
                 MainForm.currentItems.Add(newItem);
 
                 // отображение всех товаров поставщика в DataGridView1
                 dataGridView1.RowCount = MainForm.currentItems.Count;
-                dataGridView1.ColumnCount = 3;
+                dataGridView1.ColumnCount = 2;
 
                 dataGridView1.ReadOnly = true;
                 for (int i = 0; i < dataGridView1.RowCount; i++)
@@ -104,7 +107,7 @@ namespace comp_shop
 
             // TODO: собрать повторящийся код заполнения таблицы в один метод
             dataGridView1.RowCount = MainForm.currentItems.Count;
-            dataGridView1.ColumnCount = 3;
+            dataGridView1.ColumnCount = 2;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].Name;
@@ -118,6 +121,12 @@ namespace comp_shop
         {
             if (this.Text == "Новый поставщик")
             {
+
+                // значения полей поставщика
+                MainForm.currentSupplier.Name = textBox1.Text;
+                MainForm.currentSupplier.Contacts = textBox2.Text;
+                MainForm.currentSupplier.Items = MainForm.currentItems;
+
                 DB.AddSupplier();
                 this.Close();
             }

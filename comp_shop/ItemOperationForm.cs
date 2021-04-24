@@ -48,9 +48,8 @@ namespace comp_shop
         {
             // TODO: изменить способ определения назначения вызова формы
             // если создание товара
-            if (createOperation == true)
+            if (this.Text == "Создание нового товара")
             {
-                this.Text = "Добавление товара";
                 button1.Text = "Добавить";
 
                 //TODO: delete
@@ -58,7 +57,7 @@ namespace comp_shop
                 textBox1.Text = "Razor";
                 textBox2.Text = "10255,45";
 
-                // изменение видимости лэйбла и кнопни заказы
+                // изменение видимости лэйбла и кнопки заказы
                 label4.Visible = false;
                 button5.Visible = false;
                 comboBox2.Enabled = true;
@@ -76,10 +75,13 @@ namespace comp_shop
             // если редактирование товара
             else
             {
-                this.Text = "Изменение товара";
+                this.Text = "Редактирование товара";
                 button1.Text = "Изменить";
 
                 comboBox2.Enabled = true;
+
+                label5.Visible = true;
+                comboBox2.Visible = true;
 
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = MainForm.currentItem.Name;
@@ -87,11 +89,13 @@ namespace comp_shop
                 // TODO: показывать в комбобоксе категорию текущего товара, а не первую из списка
                 this.comboBox1.SelectedItem = MainForm.currentItem.Category;
                 //this.textBox3.Text = workingItem.OrdersToString();
-                this.comboBox2.SelectedItem = MainForm.currentItem.Category;
+                this.comboBox2.SelectedItem = MainForm.currentItem.Supplier;
 
                 // изменение видимости лэйбла и кнопни заказы
                 label4.Visible = true;
                 button5.Visible = true;
+
+
             }
         }
 
@@ -115,19 +119,21 @@ namespace comp_shop
             //workingItem.Orders = textBox3.Text;
             articleItem.Supplier = comboBox2.SelectedItem.ToString();            
 
-            MainForm.currentItem.Name = textBox1.Text;
-            MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
-            MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
-            //workingItem.Orders = textBox3.Text;
-
             this.button2.Text = "Готово";
             // определение необходимого метода в классе работы с БД
-            if (createOperation)
+            if (this.Text == "Создание нового товара")
             {
                 DB.addItem(articleItem);
             }
             else if (this.Text == "Добавление товара поставщика")
             {
+                MainForm.currentItem = new Item(MainForm.currentItem);
+                MainForm.currentItem.Name = textBox1.Text;
+                MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+                MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+                MainForm.currentItem.Supplier = null;
+                //workingItem.Orders = textBox3.Text;
+
                 this.Close();
             }
             else

@@ -191,8 +191,11 @@ namespace comp_shop
             // товар
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
-                ItemOperationForm new_item_form = new ItemOperationForm();
-                new_item_form.ShowDialog();
+                ItemOperationForm newItemForm = new ItemOperationForm()
+                {
+                    Text = "Создание нового товара"
+                };
+                newItemForm.ShowDialog();
                 //обновление списка товаров
                 dataGridView1.DataSource = DB.ShowAllItems();
             }
@@ -229,8 +232,9 @@ namespace comp_shop
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 // открыте формы изменения товара
-                ItemOperationForm new_item_form = new ItemOperationForm(false);
-                new_item_form.ShowDialog();
+                ItemOperationForm editItemForm = new ItemOperationForm(false);
+                editItemForm.Text = "Редактирование товара";
+                editItemForm.ShowDialog();
                 dataGridView1.DataSource = DB.ShowAllItems();
             }
             //заказ
@@ -274,7 +278,9 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-
+                // TODO: change to supplier entity as parameter
+                DB.RemoveSupplier(currentSupplier);
+                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
         }
 
@@ -541,6 +547,28 @@ namespace comp_shop
                 string value4 = row.Cells[3].Value.ToString();
                 string value5 = row.Cells[4].Value.ToString();
                 toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
+            }
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            // присваивание текущей обрабатываемой сущности поставщика имени из выбранного элемента в DataGridView3
+            foreach (DataGridViewRow row in dataGridView3.SelectedRows)
+            {
+                // поиск выделенного заказа в БД
+                var selectedSupplier = DB.SearchSupplier(supplierID: Convert.ToInt32(row.Cells[0].Value));
+                currentSupplier.SupplierID = selectedSupplier.SupplierID;
+                currentSupplier.Name = selectedSupplier.Name;
+                currentSupplier.Contacts = selectedSupplier.Contacts;
+                currentSupplier.Items = DB.ItemsToList(SupplierID: Convert.ToInt32(row.Cells[0].Value));
+            }
+
+            foreach (DataGridViewRow row in dataGridView3.SelectedRows)
+            {
+                string value1 = row.Cells[0].Value.ToString();
+                string value2 = row.Cells[1].Value.ToString();
+                string value3 = row.Cells[2].Value.ToString();
+                toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3;
             }
         }
 

@@ -624,11 +624,13 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 context.Suppliers.Add(MainForm.currentSupplier);
-                
-                foreach(Item itm in MainForm.currentItems)
+                context.SaveChanges();
+
+                foreach (Item itm in MainForm.currentItems)
                 {
                     
-                    itm.SupplierID = MainForm.currentSupplier.SupplierID;
+                    //itm.SupplierID = MainForm.currentSupplier.SupplierID;
+                    //itm.Supplier = MainForm.currentSupplier;
                     MainForm.currentSupplier.Items.Add(itm);
                 }
                 MessageBox.Show("Добавлен поставщик: " + MainForm.currentSupplier.Name);
@@ -637,15 +639,20 @@ namespace comp_shop
         }
 
         // удаление поставщика
-        static public void RemoveSupplier(string supplierName)
+        static public void RemoveSupplier(Supplier toRemove)
         {
             try
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    context.Suppliers.Remove(context.Suppliers.Single(a => a.Name == supplierName));
+
+                    var original = context.Suppliers.Find(toRemove.SupplierID);
+                    context.Items.RemoveRange(original.Items);
+                    context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
-                    MessageBox.Show(supplierName + " удален!");
+                    //context.Suppliers.Remove(context.Suppliers.SingleOrDefault(a => a.Name == supplierName));
+                    //context.SaveChanges();
+                    MessageBox.Show(toRemove.Name + " удален!");
                 }
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
@@ -668,8 +675,17 @@ namespace comp_shop
 
         // TODO: заменить на выбор из списка, комбо?
         // поиск поставщика 
-        static public Supplier SearchSupplier(string supplierToFind)
+        static public Supplier SearchSupplier(int supplierID, string supplierToFind=null)
         {
+            if (supplierToFind == null)
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    Supplier supplier = context.Suppliers.Find(supplierID);
+                    return supplier;
+                }
+            }
+
             using (var context = new ComputerShopEntities())
             {
                 Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == supplierToFind);
