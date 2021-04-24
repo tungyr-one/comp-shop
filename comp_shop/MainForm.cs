@@ -215,7 +215,7 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-                SupplierOperationForm supplierForm = new SupplierOperationForm
+                ManageSupplier supplierForm = new ManageSupplier
                 {
                     Text = "Новый поставщик"
                 };
@@ -252,12 +252,12 @@ namespace comp_shop
             else
             {
                 // открыте формы изменения поставщика
-                SupplierOperationForm supplierForm = new SupplierOperationForm
+                ManageSupplier supplierForm = new ManageSupplier
                 {
-                    Text = "Изменить поставщика"
+                    Text = "Редактировать поставщика"
                 };
                 supplierForm.ShowDialog();
-                dataGridView1.DataSource = DB.ShowAllSuppliers();
+                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
         }
 
@@ -550,12 +550,13 @@ namespace comp_shop
             }
         }
 
+        //изменение выбора строки в поставщиках
         private void dataGridView3_SelectionChanged(object sender, EventArgs e)
         {
             // присваивание текущей обрабатываемой сущности поставщика имени из выбранного элемента в DataGridView3
             foreach (DataGridViewRow row in dataGridView3.SelectedRows)
             {
-                // поиск выделенного заказа в БД
+                // поиск выделенного поставщика в БД
                 var selectedSupplier = DB.SearchSupplier(supplierID: Convert.ToInt32(row.Cells[0].Value));
                 currentSupplier.SupplierID = selectedSupplier.SupplierID;
                 currentSupplier.Name = selectedSupplier.Name;
@@ -650,6 +651,8 @@ namespace comp_shop
             // вкладка товары
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
+                // обновление содержимого таблицы
+                DB.ShowAllItems();
                 // включение первой радиокнопки
                 radioButton1.Checked = true;
 
@@ -677,6 +680,8 @@ namespace comp_shop
             //вкладка продажи
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
+                // обновление содержимого таблицы
+                DB.ShowAllOrders();
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
                 radioButton3.Enabled = false;
@@ -702,6 +707,8 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
+                // обновление содержимого таблицы
+                DB.ShowAllSuppliers();
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
                 radioButton3.Enabled = false;

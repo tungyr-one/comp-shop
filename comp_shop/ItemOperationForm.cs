@@ -37,10 +37,6 @@ namespace comp_shop
 
                 
             }
-
-            // TODO: просто выключить, а не скрывать
-            label5.Visible = false;
-            comboBox2.Visible = false;
         }
 
         // установка значений полей при загрузке
@@ -56,32 +52,17 @@ namespace comp_shop
                 // временные постоянные значения полей
                 textBox1.Text = "Razor";
                 textBox2.Text = "10255,45";
-
-                // изменение видимости лэйбла и кнопки заказы
-                label4.Visible = false;
-                button5.Visible = false;
-                comboBox2.Enabled = true;
             }
             else if (this.Text == "Добавление товара поставщика")
             {
                 textBox1.Text = "Razor";
                 textBox2.Text = "10255,45";
-
-                label4.Visible = false;
-                button5.Visible = false;
-
-                comboBox2.Enabled = false;
             }
             // если редактирование товара
             else
             {
                 this.Text = "Редактирование товара";
                 button1.Text = "Изменить";
-
-                comboBox2.Enabled = true;
-
-                label5.Visible = true;
-                comboBox2.Visible = true;
 
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = MainForm.currentItem.Name;
@@ -143,7 +124,7 @@ namespace comp_shop
 
         }
 
-        // обработка нажатия кнопки добавления категории
+        // обработка нажатия кнопки управления категориями
         private void button3_Click(object sender, EventArgs e)
         {
             ManageCategory CategoryForm = new ManageCategory();
@@ -152,11 +133,13 @@ namespace comp_shop
             comboBox1.DataSource = c.Categories.ToList();
         }
 
-        // обработка нажатия кнопки добавления поставщика
+        // обработка нажатия кнопки управления поставщиками
         private void button4_Click(object sender, EventArgs e)
         {
+            MainForm.currentSupplier = DB.SearchSupplier(supplierToFind: comboBox2.SelectedItem.ToString());
             ManageSupplier SupplierForm = new ManageSupplier();
             SupplierForm.ShowDialog();
+            // отображение обновленного списка поставщиков в combobox
             ComputerShopEntities c = new ComputerShopEntities();
             comboBox2.DataSource = c.Suppliers.ToList();
         }

@@ -127,7 +127,7 @@ namespace comp_shop
                 MainForm.currentSupplier.Contacts = textBox2.Text;
                 MainForm.currentSupplier.Items = MainForm.currentItems;
 
-                DB.AddSupplier();
+                DB.AddSupplier(MainForm.currentSupplier);
                 this.Close();
             }
             else

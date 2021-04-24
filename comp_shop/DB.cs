@@ -619,21 +619,14 @@ namespace comp_shop
         }
 
         // добавление поставщика
-        static public void AddSupplier()
+        static public void AddSupplier(Supplier newSupplier)
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Suppliers.Add(MainForm.currentSupplier);
+                context.Suppliers.Add(newSupplier);
                 context.SaveChanges();
 
-                foreach (Item itm in MainForm.currentItems)
-                {
-                    
-                    //itm.SupplierID = MainForm.currentSupplier.SupplierID;
-                    //itm.Supplier = MainForm.currentSupplier;
-                    MainForm.currentSupplier.Items.Add(itm);
-                }
-                MessageBox.Show("Добавлен поставщик: " + MainForm.currentSupplier.Name);
+                MessageBox.Show("Добавлен поставщик: " + newSupplier.Name);
                 context.SaveChanges();
             }
         }
@@ -661,6 +654,18 @@ namespace comp_shop
             }
         }
 
+        // редактирование поставщика
+        static public void editSupplier(Supplier toEdit)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Suppliers.Find(toEdit.SupplierID);
+                context.Entry(original).CurrentValues.SetValues(toEdit);
+                context.SaveChanges();
+                MessageBox.Show("Поставщик " + toEdit.Name + " обновлен!");
+            }
+        }
+
         // поиск поставщика по имени
         static public List<Supplier> SearchBySupplier(string itemSupplier)
         {
@@ -675,7 +680,7 @@ namespace comp_shop
 
         // TODO: заменить на выбор из списка, комбо?
         // поиск поставщика 
-        static public Supplier SearchSupplier(int supplierID, string supplierToFind=null)
+        static public Supplier SearchSupplier(int supplierID=0, string supplierToFind=null)
         {
             if (supplierToFind == null)
             {
