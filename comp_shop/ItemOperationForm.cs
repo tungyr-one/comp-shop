@@ -34,18 +34,26 @@ namespace comp_shop
 
                 comboBox2.ValueMember = "Name";
                 comboBox2.DisplayMember = "Name";
+
+                
             }
+
+            // TODO: просто выключить, а не скрывать
+            label5.Visible = false;
+            comboBox2.Visible = false;
         }
 
         // установка значений полей при загрузке
         private void NewItemForm_Load(object sender, EventArgs e)
         {
+            // TODO: изменить способ определения назначения вызова формы
             // если создание товара
             if (createOperation == true)
             {
                 this.Text = "Добавление товара";
                 button1.Text = "Добавить";
 
+                //TODO: delete
                 // временные постоянные значения полей
                 textBox1.Text = "Razor";
                 textBox2.Text = "10255,45";
@@ -53,13 +61,26 @@ namespace comp_shop
                 // изменение видимости лэйбла и кнопни заказы
                 label4.Visible = false;
                 button5.Visible = false;
+                comboBox2.Enabled = true;
+            }
+            else if (this.Text == "Добавление товара поставщика")
+            {
+                textBox1.Text = "Razor";
+                textBox2.Text = "10255,45";
+
+                label4.Visible = false;
+                button5.Visible = false;
+
+                comboBox2.Enabled = false;
             }
             // если редактирование товара
             else
             {
                 this.Text = "Изменение товара";
-                button1.Text = "Изменить";                
-                
+                button1.Text = "Изменить";
+
+                comboBox2.Enabled = true;
+
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = MainForm.currentItem.Name;
                 this.textBox2.Text = MainForm.currentItem.Price.ToString();
@@ -85,19 +106,29 @@ namespace comp_shop
             //workingItem.Supplier = DB.SearchSupplier(comboBox2.SelectedItem.ToString());
             //this.button2.Text = "Готово";
 
+            // TODO: replace to currentItem!!!
             // формирования объекта класса Article для передачи в БД
             articleItem.Id = MainForm.currentItem.ItemID;
             articleItem.Name = textBox1.Text;
             articleItem.Price = decimal.Parse(textBox2.Text);
             articleItem.Category = comboBox1.SelectedItem.ToString();
             //workingItem.Orders = textBox3.Text;
-            articleItem.Supplier = comboBox2.SelectedItem.ToString();
-            this.button2.Text = "Готово";
+            articleItem.Supplier = comboBox2.SelectedItem.ToString();            
 
+            MainForm.currentItem.Name = textBox1.Text;
+            MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+            MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+            //workingItem.Orders = textBox3.Text;
+
+            this.button2.Text = "Готово";
             // определение необходимого метода в классе работы с БД
             if (createOperation)
             {
                 DB.addItem(articleItem);
+            }
+            else if (this.Text == "Добавление товара поставщика")
+            {
+                this.Close();
             }
             else
             {

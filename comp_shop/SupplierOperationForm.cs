@@ -20,7 +20,6 @@ namespace comp_shop
         // загрузка формы
         private void SupplierOperationForm_Load(object sender, EventArgs e)
         {
-            //dataGridView1.Columns[0].Name = "Item ID";
             //dataGridView1.Columns[1].Name = "Item Name";
             //dataGridView1.Columns[2].Name = "Category";
 
@@ -40,23 +39,22 @@ namespace comp_shop
                 // заполенение таблицы данными
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
-                    dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].ItemID;
-                    dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Name;
-                    dataGridView1.Rows[i].Cells[2].Value = MainForm.currentItems[i].Category;
+                    dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].Name;
+                    dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Category;
                 }
 
             }
         }
 
-        // обработка нажатия кнопки показа всех товаров для привязки к поставщику
+        // обработка нажатия кнопки добавления нового товара нового поставщика
         private void button1_Click(object sender, EventArgs e)
         {
-            ShowInfoForm allItems = new ShowInfoForm();
-            allItems.Text = "Товары к поставщику";
-            allItems.ShowDialog();
+            ItemOperationForm newItem = new ItemOperationForm();
+            newItem.Text = "Добавление товара поставщика";
+            newItem.ShowDialog();
         }
 
-        // добавление нового товара в заказ
+        // добавление нового товара к поставщику
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -76,9 +74,8 @@ namespace comp_shop
                 dataGridView1.ReadOnly = true;
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
-                    dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].ItemID;
-                    dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Name;
-                    dataGridView1.Rows[i].Cells[2].Value = MainForm.currentItems[i].Category;
+                    dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].Name;
+                    dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Category;
                 }
             }
             catch
@@ -110,9 +107,8 @@ namespace comp_shop
             dataGridView1.ColumnCount = 3;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].ItemID;
-                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Name;
-                dataGridView1.Rows[i].Cells[2].Value = MainForm.currentItems[i].Category;
+                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItems[i].Name;
+                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItems[i].Category;
             }
         }
 
