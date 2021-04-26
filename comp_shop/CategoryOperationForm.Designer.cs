@@ -1,7 +1,7 @@
 ﻿
 namespace comp_shop
 {
-    partial class ManageCategory
+    partial class CategoryOperationForm
     {
         /// <summary>
         /// Required designer variable.

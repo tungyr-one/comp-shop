@@ -32,6 +32,7 @@ namespace comp_shop
 
 
             // проверка для чего было вызвано окно
+            // 
             if (this.Text == "Заказы товара")
             {
                 dataGridView1.AutoGenerateColumns = true;
@@ -39,7 +40,7 @@ namespace comp_shop
                 //dataGridView1.DataSource = ordersToItems;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 button1.Text = "Редактировать заказ";
-                button2.Text = "Новый заказ";
+                button2.Text = "Добавить заказ";
                 button3.Text = "Поиск по ID";
 
             }
@@ -49,11 +50,11 @@ namespace comp_shop
                 dataGridView1.DataSource = orderBindingSource;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 button1.Text = "Редактировать товар";
-                button2.Text = "Новый товар";
+                button2.Text = "Добавить товар";
                 button3.Text = "Поиск по названию";
             }
             // добавление товаров в новый заказ
-            else if (this.Text == "Товары в заказ")
+            else if (this.Text == "Выбор товара")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;

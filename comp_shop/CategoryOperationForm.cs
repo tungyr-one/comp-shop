@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    public partial class ManageCategory : Form
+    public partial class CategoryOperationForm : Form
     {
         public string newCategory;
 
-        public ManageCategory()
+        public CategoryOperationForm()
         {
             InitializeComponent();
             radioButton1.Checked = true;

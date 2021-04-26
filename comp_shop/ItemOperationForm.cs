@@ -34,8 +34,6 @@ namespace comp_shop
 
                 comboBox2.ValueMember = "Name";
                 comboBox2.DisplayMember = "Name";
-
-                
             }
         }
 
@@ -127,7 +125,7 @@ namespace comp_shop
         // обработка нажатия кнопки управления категориями
         private void button3_Click(object sender, EventArgs e)
         {
-            ManageCategory CategoryForm = new ManageCategory();
+            CategoryOperationForm CategoryForm = new CategoryOperationForm();
             CategoryForm.ShowDialog();
             ComputerShopEntities c = new ComputerShopEntities();
             comboBox1.DataSource = c.Categories.ToList();
@@ -136,10 +134,12 @@ namespace comp_shop
         // обработка нажатия кнопки управления поставщиками
         private void button4_Click(object sender, EventArgs e)
         {
-            MainForm.currentSupplier = DB.SearchSupplier(supplierToFind: comboBox2.SelectedItem.ToString());
-            ManageSupplier SupplierForm = new ManageSupplier();
+            // поиск поставщика из комбо и назначение текущей сущности поставщика
+            MainForm.currentSupplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
+            SupplierOperationForm SupplierForm = new SupplierOperationForm();
+            SupplierForm.Text = "Управление поставщиками";
             SupplierForm.ShowDialog();
-            // отображение обновленного списка поставщиков в combobox
+            // отображение обновленного списка поставщиков в combobox после закрытия формы редактирования поставщика
             ComputerShopEntities c = new ComputerShopEntities();
             comboBox2.DataSource = c.Suppliers.ToList();
         }

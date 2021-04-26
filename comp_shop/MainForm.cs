@@ -215,7 +215,7 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-                ManageSupplier supplierForm = new ManageSupplier
+                SupplierOperationForm supplierForm = new SupplierOperationForm
                 {
                     Text = "Новый поставщик"
                 };
@@ -252,9 +252,9 @@ namespace comp_shop
             else
             {
                 // открыте формы изменения поставщика
-                ManageSupplier supplierForm = new ManageSupplier
+                SupplierOperationForm supplierForm = new SupplierOperationForm
                 {
-                    Text = "Редактировать поставщика"
+                    Text = "Изменить поставщика"
                 };
                 supplierForm.ShowDialog();
                 dataGridView3.DataSource = DB.ShowAllSuppliers();
@@ -283,6 +283,54 @@ namespace comp_shop
                 dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
         }
+
+        // нажатие кнопки show orders в ячейках закладки товары
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            // проверка нажатия кнопки в ячейке
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                ShowInfoForm connInfoForm = new ShowInfoForm();
+                currentItemOrdersEntities = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
+                connInfoForm.Text = "Заказы товара";
+                connInfoForm.ShowDialog();
+            }
+        }
+
+        // нажатие кнопки show items в закладке продажи
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                ShowInfoForm connInfoForm = new ShowInfoForm();
+                currentItemOrdersEntities = DB.LoadItemOrdersEntities(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
+                connInfoForm.Text = "Товары в заказе";
+                connInfoForm.ShowDialog();
+            }
+        }
+
+        // нажатие кнопки show items в закладке поставщики
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                ShowInfoForm connInfoForm = new ShowInfoForm();
+                currentItems = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
+                connInfoForm.Text = "Товары поставщика";
+                connInfoForm.ShowDialog();
+            }
+
+        }
+
 
         // нажатие кнопки поиск
         private void find_Click(object sender, EventArgs e)
@@ -598,52 +646,7 @@ namespace comp_shop
 
         }
 
-        // нажатие кнопки show orders в ячейках закладки товары
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
 
-            // проверка нажатия кнопки в ячейке
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                ShowInfoForm connInfoForm = new ShowInfoForm();
-                currentItemOrdersEntities = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
-                connInfoForm.Text = "Заказы товара";
-                connInfoForm.ShowDialog();
-            }
-        }
-
-        // нажатие кнопки show items в закладке продажи
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                ShowInfoForm connInfoForm = new ShowInfoForm();
-                currentItemOrdersEntities = DB.LoadItemOrdersEntities(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
-                connInfoForm.Text = "Товары в заказе";
-                connInfoForm.ShowDialog();
-            }
-        }
-
-        // нажатие кнопки show items в закладке поставщики
-        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                e.RowIndex >= 0)
-            {
-                ShowInfoForm connInfoForm = new ShowInfoForm();
-                currentItems = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
-                connInfoForm.Text = "Поставляемые товары";
-                connInfoForm.ShowDialog();
-            }
-
-        }
 
         // обработка переключения вкладок
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)

@@ -57,7 +57,7 @@ namespace comp_shop
         private void button1_Click(object sender, EventArgs e)
         {
              ShowInfoForm allItems = new ShowInfoForm();
-            allItems.Text = "Товары в заказ";
+            allItems.Text = "Выбор товара";
             allItems.ShowDialog();
         }
 

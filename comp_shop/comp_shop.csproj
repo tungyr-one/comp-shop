@@ -118,17 +118,17 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Article.cs" />
-    <Compile Include="ManageCategory.cs">
+    <Compile Include="CategoryOperationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageCategory.Designer.cs">
-      <DependentUpon>ManageCategory.cs</DependentUpon>
+    <Compile Include="CategoryOperationForm.Designer.cs">
+      <DependentUpon>CategoryOperationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageSupplier.cs">
+    <Compile Include="SupplierOperationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageSupplier.Designer.cs">
-      <DependentUpon>ManageSupplier.cs</DependentUpon>
+    <Compile Include="SupplierOperationForm.Designer.cs">
+      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemOperationForm.cs">
       <SubType>Form</SubType>
@@ -147,23 +147,17 @@
     <Compile Include="Supplier.cs">
       <DependentUpon>ComputerShopModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SupplierOperationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SupplierOperationForm.Designer.cs">
-      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="ShowInfoForm.resx">
       <DependentUpon>ShowInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageCategory.resx">
-      <DependentUpon>ManageCategory.cs</DependentUpon>
+    <EmbeddedResource Include="CategoryOperationForm.resx">
+      <DependentUpon>CategoryOperationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageSupplier.resx">
-      <DependentUpon>ManageSupplier.cs</DependentUpon>
+    <EmbeddedResource Include="SupplierOperationForm.resx">
+      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemOperationForm.resx">
       <DependentUpon>ItemOperationForm.cs</DependentUpon>
@@ -180,9 +174,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SupplierOperationForm.resx">
-      <DependentUpon>SupplierOperationForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EntityDeploy Include="ComputerShopModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ComputerShopModel.Designer.cs</LastGenOutput>

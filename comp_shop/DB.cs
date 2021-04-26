@@ -638,7 +638,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-
+                    //TODO: удаление поставщика даже с привязанными товарами как ?
                     var original = context.Suppliers.Find(toRemove.SupplierID);
                     context.Items.RemoveRange(original.Items);
                     context.Entry(original).State = EntityState.Deleted;
@@ -647,12 +647,12 @@ namespace comp_shop
                     //context.SaveChanges();
                     MessageBox.Show(toRemove.Name + " удален!");
                 }
-            }
+        }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
                 MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!");
             }
-        }
+}
 
         // редактирование поставщика
         static public void editSupplier(Supplier toEdit)
@@ -680,9 +680,9 @@ namespace comp_shop
 
         // TODO: заменить на выбор из списка, комбо?
         // поиск поставщика 
-        static public Supplier SearchSupplier(int supplierID=0, string supplierToFind=null)
+        static public Supplier SearchSupplier(int supplierID=0, string supplierName=null)
         {
-            if (supplierToFind == null)
+            if (supplierName == null)
             {
                 using (var context = new ComputerShopEntities())
                 {
@@ -693,7 +693,7 @@ namespace comp_shop
 
             using (var context = new ComputerShopEntities())
             {
-                Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == supplierToFind);
+                Supplier supplier = context.Suppliers.FirstOrDefault(c => c.Name == supplierName);
                 return supplier;
             }
         }
