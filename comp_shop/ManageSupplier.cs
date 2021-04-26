@@ -13,8 +13,6 @@ namespace comp_shop
     // TODO: заменить на SupplierOperationForm?
     public partial class ManageSupplier : Form
     {
-        public string newSupplier = null;
-
         public ManageSupplier()
         {
             InitializeComponent();
@@ -54,18 +52,14 @@ namespace comp_shop
             }
         }
 
-        // завершение процесса
-        private void button2_Click(object sender, EventArgs e)
-        {
-            newSupplier = null;
-            this.Close();
-        }
+
 
         // радиокнопка Добавление
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             // изменение название кнопки в зависимости от выбранного радиокнопки
             button1.Text = "Добавить";
+            button2.Text = "Готово";
             textBox2.Enabled = true;
             // очистка поля имени и контактов
             textBox1.Text = "";
@@ -104,50 +98,112 @@ namespace comp_shop
         // нажатие кнопки добавить / выбрать
         private void button1_Click(object sender, EventArgs e)
         {
-            // проверка заполненности поля названия категории
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("Имя поставщика пусто!");
-            }
 
             // определение нобходимого действия в зависимости от нажатой радиокнопки
+            // добавление нового поставщика
             if (radioButton1.Checked)
             {
+                // проверка на пустое имя поставщика
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Имя поставщика пусто!");
+                    return;
+                }
+
                 Supplier newSupplier = new Supplier();
                 newSupplier.Name = textBox1.Text;
                 newSupplier.Contacts = textBox2.Text;
                 DB.AddSupplier(newSupplier);
             }
+            // вызов окна выбора постащика
             else if (radioButton2.Checked)
             {
                 // если окно было запущено из диалога изменения/создания товара
                 if (this.Text == "Управление поставщиками")
                 {
+                    // запуск окна выбора со всеми поставщиками 
                     ShowInfoForm suppliersShow = new ShowInfoForm();
                     suppliersShow.Text = "Выбор поставщика";
                     suppliersShow.ShowDialog();
+
+                    // назначение текстовым полям формы изменения поставщика значений выбранного поставщика
+                    textBox1.Text = MainForm.currentSupplier.Name;
+                    textBox2.Text = MainForm.currentSupplier.Contacts;
                 }
                 // если окно было запущено из закладки поставщиков
                 else
                 {
+                    // создание временной сущности поставщика для редактирования
                     Supplier editSupplier = new Supplier();
+                    // назначение полей текущей сущности поставщика временной сущности
                     editSupplier.SupplierID = MainForm.currentSupplier.SupplierID;
                     editSupplier.Name = textBox1.Text;
                     editSupplier.Contacts = textBox2.Text;
                     DB.editSupplier(editSupplier);
                 }
             }
+            // если 3-я радиокнопка - удаление - нажата
             else
             {
+                // если окно было запущено из диалога изменения/создания товара
                 if (this.Text == "Управление поставщиками")
                 {
+                    // запуск окна выбора со всеми поставщиками 
                     ShowInfoForm suppliersShow = new ShowInfoForm();
                     suppliersShow.Text = "Выбор поставщика";
                     suppliersShow.ShowDialog();
+
+                    // назначение текстовым полям формы удаления поставщика значений выбранного поставщика
+                    textBox1.Text = MainForm.currentSupplier.Name;
+                    textBox2.Text = MainForm.currentSupplier.Contacts;
                 }
-                //DB.RemoveSupplier(textBox1.Text);
+
             }
-            button2.Text = "Готово";
+        }
+
+        // завершение процесса
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // проверка заполненности поля названия категории
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Имя поставщика пусто!");
+                return;
+            }
+            else
+            {
+                // кнопка "Готово" после добавления поставщика
+                if (radioButton1.Checked)
+                {
+
+                }
+                // кнопка "Изменить" после выбора и редактирования поставщика
+                else if (radioButton2.Checked)
+                {
+                    // создание временной сущности поставщика для редактирования
+                    Supplier editSupplier = new Supplier();
+                    // назначение полей текущей сущности поставщика временной сущности
+                    editSupplier.SupplierID = MainForm.currentSupplier.SupplierID;
+                    editSupplier.Name = textBox1.Text;
+                    editSupplier.Contacts = textBox2.Text;
+                    DB.editSupplier(editSupplier);
+                }
+                // кнопка "Удалить" после выбора поставщика
+                else
+                {
+                    // TODO: попробовать упростить не передавая временную сущность в DB а используя там MainForm.currentSupplier.
+                    // создание временной сущности поставщика для удаления
+                    Supplier removeSupplier = new Supplier();
+                    // назначение полей текущей сущности поставщика временной сущности
+                    removeSupplier.SupplierID = MainForm.currentSupplier.SupplierID;
+                    removeSupplier.Name = textBox1.Text;
+                    removeSupplier.Contacts = textBox2.Text;
+                    DB.RemoveSupplier(removeSupplier);
+                }
+            this.Close();
+            }
+
+
         }
 
 
