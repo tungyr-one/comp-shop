@@ -584,7 +584,7 @@ namespace comp_shop
                 var data = context.Orders.Where(x => dateTo >= x.OrderDate)
                                         .Where(x => x.OrderDate >= dateFrom)
                                         .Where(x => x.SellerName == itemSeller)
-                                        .Include("Item").ToList<Order>();
+                                        .ToList<Order>();
 
                 return data;
             }
@@ -598,7 +598,7 @@ namespace comp_shop
             {
                 var data = context.Orders.Where(x => dateTo >= x.OrderDate)
                                         .Where(x => x.OrderDate >= dateFrom)
-                                        .Include("Item").ToList<Order>();
+                                       .ToList<Order>();
 
                 return data;
             }

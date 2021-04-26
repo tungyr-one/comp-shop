@@ -134,10 +134,11 @@ namespace comp_shop
             
             DataGridViewButtonColumn buttonColumn =
                         new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Orders";
-            buttonColumn.Name = "Show Orders";
-            buttonColumn.Text = "Show Orders";
+            buttonColumn.HeaderText = "Заказы";
+            buttonColumn.Name = "Показать заказы";
+            buttonColumn.Text = "Показать заказы";
             buttonColumn.UseColumnTextForButtonValue = true;
+            buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dataGridView1.Columns.Add(buttonColumn);
         }
@@ -147,10 +148,11 @@ namespace comp_shop
         {
             DataGridViewButtonColumn buttonColumn =
                         new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Items";
-            buttonColumn.Name = "Show items";
-            buttonColumn.Text = "Show items";
+            buttonColumn.HeaderText = "Товары";
+            buttonColumn.Name = "Показать товары";
+            buttonColumn.Text = "Показать товары";
             buttonColumn.UseColumnTextForButtonValue = true;
+            buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dataGridView2.Columns.Add(buttonColumn);
         }
@@ -160,10 +162,11 @@ namespace comp_shop
         {
             DataGridViewButtonColumn buttonColumn =
                         new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Items";
-            buttonColumn.Name = "Show items";
-            buttonColumn.Text = "Show items";
+            buttonColumn.HeaderText = "Товары";
+            buttonColumn.Name = "Показать товары";
+            buttonColumn.Text = "Показать товары";
             buttonColumn.UseColumnTextForButtonValue = true;
+            buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             dataGridView3.Columns.Add(buttonColumn);
         }
@@ -175,14 +178,6 @@ namespace comp_shop
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
-
-            // TODO: временная проверка удалить
-            List<Item> check = DB.ShowAllItems();
-            foreach (Item ord in check)
-            {
-                label2.Text += ord + " - ";
-            }
-
         }
 
         // нажатие кнопки добавить 

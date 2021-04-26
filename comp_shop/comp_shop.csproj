@@ -189,6 +189,7 @@
     <None Include="Properties\DataSources\comp_shop.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\DB.datasource" />
     <None Include="Properties\DataSources\Item.datasource" />
+    <None Include="Properties\DataSources\ItemOrdersEntity.datasource" />
     <None Include="Properties\DataSources\Items.datasource" />
     <None Include="Properties\DataSources\Main_form.datasource" />
     <None Include="Properties\DataSources\ManageCategory.datasource" />

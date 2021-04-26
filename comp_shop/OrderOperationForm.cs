@@ -29,8 +29,7 @@ namespace comp_shop
             // если окно вызывается для редактирования заказа
             if (this.Text == "Редактирование заказа")
             {
-                button1.Enabled = false;
-                button2.Text = "Отмена";
+                button3.Text = "Отмена";
                 // очистка текущего товара
                 MainForm.currentItem = null;
                 // установка значений для полей редактирования
@@ -57,13 +56,6 @@ namespace comp_shop
                 }
 
 
-            }
-            // если окно вызывается для добавления нового заказа из окна привязанных к товару заказов
-            else if (this.Text == "Добавление нового заказа на товар")
-            {
-                // отключение кнопки выбора других товаров
-                button1.Enabled = false;
-                label8.Text = MainForm.currentItem.Name;
             }
         }      
 
