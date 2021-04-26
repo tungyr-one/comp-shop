@@ -98,7 +98,7 @@ namespace comp_shop
         //{
         //    foreach (DataGridViewRow row in dataGridView1.Rows)
         //    {
-        //        List<Order> ordersData = DB.OrdersForDataGridView1(Convert.ToInt32(row.Cells[0].Value));
+        //        List<Order> ordersData = DB.OrdersOfItem(Convert.ToInt32(row.Cells[0].Value));
         //        DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
         //        cell.DataSource = ordersData;
         //        // демонстрация первого заказа в combobox если он есть
@@ -293,10 +293,11 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                ShowInfoForm connInfoForm = new ShowInfoForm();
-                currentItemOrdersEntities = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
-                connInfoForm.Text = "Заказы товара";
-                connInfoForm.ShowDialog();
+                // загрузка формы показа заказов товара
+                ShowInfoForm ordersForItemForm = new ShowInfoForm();
+                currentItemOrdersEntities = DB.OrdersOfItem(MainForm.currentItem.ItemID);
+                ordersForItemForm.Text = "Заказы товара";
+                ordersForItemForm.ShowDialog();
             }
         }
 

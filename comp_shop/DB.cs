@@ -152,7 +152,7 @@ namespace comp_shop
         // ASSOCIATED LISTS
 
         // создание списка заказов на товар для AssociatedInfo
-        static public List<ItemOrdersEntity> OrdersForDataGridView1(int itemID)
+        static public List<ItemOrdersEntity> OrdersOfItem(int itemID)
         {
             using (var context = new ComputerShopEntities())
             {

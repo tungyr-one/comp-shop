@@ -32,66 +32,50 @@ namespace comp_shop
 
 
             // проверка для чего было вызвано окно
-            // 
+            // загузка оформленных заказов на текущий товар
             if (this.Text == "Заказы товара")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 //dataGridView1.DataSource = ordersToItems;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
-                button1.Text = "Редактировать заказ";
-                button2.Text = "Добавить заказ";
+                button1.Text = "Добавить заказ";
+                button2.Text = "Удалить заказ";
                 button3.Text = "Поиск по ID";
-
+                button4.Text = "Готово";
             }
+            // загузка товаров текущего заказа 
             else if (this.Text == "Товары в заказе")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = orderBindingSource;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
-                button1.Text = "Редактировать товар";
-                button2.Text = "Добавить товар";
+                button1.Text = "Добавить товар";
+                button2.Text = "Редактировать товар";
                 button3.Text = "Поиск по названию";
+                button4.Text = "Готово";
             }
-            // добавление товаров в новый заказ
-            else if (this.Text == "Выбор товара")
-            {
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = DB.ShowAllItems();
-                button1.Text = "Выбрать товар";
-                button2.Text = "Отмена";
-                button3.Text = "Поиск по названию";
-            }
-            // TODO: одинаковое с предыдущим объединить
-            // добавление товаров к поставщику
-            else if (this.Text == "Товары к поставщику")
-            {
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = DB.ShowAllItems();
-                button1.Text = "Выбрать товар";
-                button2.Text = "Отмена";
-                button3.Text = "Поиск по названию";
-            }
-            else if (this.Text == "Выбор поставщика")
-            {
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = orderBindingSource;
-                dataGridView1.DataSource = DB.ShowAllSuppliers();
-                button1.Text = "Выбрать";
-                button2.Text = "Отмена";
-                button3.Text = "Поиск по имени";
-            }
-            else
+            // загрузка товаров текушего поставщика
+            else if (this.Text == "Товары поставщика")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = itemBindingSource;
                 dataGridView1.DataSource = MainForm.currentItems;
-                button1.Text = "Редактировать товар";
-                button2.Text = "Новый товар";
+                button1.Text = "Добавить товар";
+                button2.Text = "Удалить товар";
                 button3.Text = "Поиск по названию";
-
+                button4.Text = "Готово";
+            }
+            // загрузка всех товаров для выбора
+            else
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.DataSource = DB.ShowAllItems();
+                button1.Text = "Новый товар";
+                button2.Text = "Выбрать товар";
+                button3.Text = "Поиск по названию";
+                button4.Text = "Отмена";
             }
         }
 
@@ -102,20 +86,37 @@ namespace comp_shop
 
         // TODO: упростить выбор товара и поиск его в БД (возвращать не список а один товар?)
         // TODO: добавление разных сущностей?
-        // нажатие кнопки выбрать
+        // нажатие кнопки добавить заказ / товар / выбрать товар
         private void button1_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
-            if (this.Text == "Выбор поставщика")
+            // если список заказов товара - добавление нового заказа
+            if (this.Text == "Заказы товара")
             {
-                MainForm.currentSupplier = DB.SearchSupplier(supplierID: Convert.ToInt32(rows[0].Cells[0].Value));
-                this.Close();
+                // удаление всех предыдущих значений в списке для нового заказа
+                MainForm.currentItemOrdersEntities.Clear();
+                OrderOperationForm orderForm = new OrderOperationForm
+                {
+                    Text = "Добавление нового заказа на товар"
+                };
+                orderForm.ShowDialog();
+                //обновление списка заказов
+                dataGridView1.DataSource = DB.ShowAllOrders();
+                //this.Close();
             }
             else
             {
-                MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
+                
             }               
             
+            //this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            // нажатие кнопки "Выбрать товар"
+            MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
             this.Close();
         }
 
@@ -135,14 +136,19 @@ namespace comp_shop
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
+        // обработка двойного клика
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            button1_Click(sender, e);
+            // если выбор товара из всех имеющихся
+            if (this.Text == "Выбор товара")
+            { button2_Click(sender, e); }
+        }
+
+        // нажатие кнопки отмена
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

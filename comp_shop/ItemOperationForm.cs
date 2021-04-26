@@ -162,7 +162,7 @@ namespace comp_shop
         {
             // загрузка окна заказов на товар
             ShowInfoForm associatedInfoForm = new ShowInfoForm();
-            List<ItemOrdersEntity> ordersConnectedData = DB.OrdersForDataGridView1(MainForm.currentItem.ItemID);
+            List<ItemOrdersEntity> ordersConnectedData = DB.OrdersOfItem(MainForm.currentItem.ItemID);
             associatedInfoForm.ordersToItems = ordersConnectedData;
             associatedInfoForm.Text = "Заказы товара";
             associatedInfoForm.ShowDialog();

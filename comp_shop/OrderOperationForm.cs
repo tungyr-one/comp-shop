@@ -26,8 +26,13 @@ namespace comp_shop
         // загрузка формы
         private void OrderOperationForm_Load(object sender, EventArgs e)
         {
+            // если окно вызывается для редактирования заказа
             if (this.Text == "Редактирование заказа")
-            { 
+            {
+                button1.Enabled = false;
+                button2.Text = "Отмена";
+                // очистка текущего товара
+                MainForm.currentItem = null;
                 // установка значений для полей редактирования
                 comboBox1.SelectedItem = MainForm.currentItemOrderEntity.SellerName;
                 dateTimePicker1.Value = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
@@ -50,22 +55,33 @@ namespace comp_shop
                     dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
                     dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
                 }
+
+
             }
-        }
+            // если окно вызывается для добавления нового заказа из окна привязанных к товару заказов
+            else if (this.Text == "Добавление нового заказа на товар")
+            {
+                // отключение кнопки выбора других товаров
+                button1.Enabled = false;
+                label8.Text = MainForm.currentItem.Name;
+            }
+        }      
 
         // обработка нажатия кнопки показа всех товаров для добавления в заказ
         private void button1_Click(object sender, EventArgs e)
         {
-             ShowInfoForm allItems = new ShowInfoForm();
+            ShowInfoForm allItems = new ShowInfoForm();
             allItems.Text = "Выбор товара";
             allItems.ShowDialog();
+            if (MainForm.currentItem.Name != null)
+            { label8.Text = MainForm.currentItem.Name; }
         }
 
         // добавление нового товара в заказ
         private void button2_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
                 // создание отдельной сущности заказа с товаром и его количеством
                 MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
                 MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
@@ -89,10 +105,42 @@ namespace comp_shop
                     dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
                     dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
                 }
+
             }
             catch
             {
                 MessageBox.Show("Ошибка!");
+            }
+            // если товар успешно добавился то можно создавать заказ
+            button3.Text = "Готово";
+        }
+
+        // TODO: проверка на дублированные значения товар-количество в заказе
+        // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (this.Text == "Создание нового заказа")
+            {
+                if (button3.Text == "Отмена")
+                {
+                    this.Close();
+                    return;
+                }
+                DB.AddOrder();
+                this.Close();
+            }
+            else
+            {
+                // обновление данных сущности
+                MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
+                MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
+                MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
+                MainForm.currentItemOrderEntity.Quantity = Convert.ToInt32(numericUpDown1.Text);
+                MainForm.currentItemOrderEntity.Customer = textBox2.Text;
+                MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
+
+                DB.editOrder(MainForm.currentItemOrderEntity.OrderID);
+                this.Close();
             }
         }
 
@@ -106,6 +154,8 @@ namespace comp_shop
                 // очищение таблицы
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
+                // недостаточно товаров для заказа
+                button3.Text = "Отмена";
                 return;
             }
 
@@ -125,28 +175,6 @@ namespace comp_shop
             }
         }
 
-        // TODO: проверка на дублированные значения товар-количество в заказе
-        // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (this.Text == "Создание нового заказа")
-            {
-                DB.AddOrder();
-                this.Close();
-            }
-            else
-            {
-                // обновление данных сущности
-                MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
-                MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
-                MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
-                MainForm.currentItemOrderEntity.Quantity = Convert.ToInt32(numericUpDown1.Text);
-                MainForm.currentItemOrderEntity.Customer = textBox2.Text;
-                MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
 
-                DB.editOrder(MainForm.currentItemOrderEntity.OrderID);
-                this.Close();
-            }
-        }
     }
 }
