@@ -25,15 +25,7 @@ using System.Windows.Forms;
 //    информации об объектах и корректировки данных в случае необходимости;
 
 
-// disable lazy loading EF:
 
-//public partial class ComputerShopEntities : DbContext
-//{
-//    public ComputerShopEntities()
-//        : base("name=ComputerShopEntities")
-//    {
-//        this.Configuration.LazyLoadingEnabled = false;
-//    }
 
 namespace comp_shop
 {
@@ -320,8 +312,6 @@ namespace comp_shop
         // нажатие кнопки поиск
         private void find_Click(object sender, EventArgs e)
         {
-
-            // TODO: text fields validation first
             if (radioButton1.Checked)
             {
                 if (searchBox1.Text == "")

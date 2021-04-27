@@ -12,8 +12,6 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-
-    // how to bind collection to DataGridView: http://www.developer-corner.com/blog/2007/07/19/datagridview-how-to-bind-nested-objects/
     class DB    
     {
         #region
@@ -151,7 +149,7 @@ namespace comp_shop
 
         // ASSOCIATED LISTS
 
-        // создание списка заказов на товар для AssociatedInfo
+        // создание списка заказов на товар для вывода в ShowInfoForm
         static public List<ItemOrdersEntity> OrdersOfItem(int itemID)
         {
             using (var context = new ComputerShopEntities())
@@ -180,14 +178,13 @@ namespace comp_shop
             }
         }
 
-        // создание списка товаров на заказ для AssociatedInfo
+        // создание списка товаров на заказ для вывода в ShowInfoForm
         static public List<ItemOrdersEntity> LoadItemOrdersEntities(int orderID)
         {
             using (var context = new ComputerShopEntities())
             {
                 // выборка всех промежуточных сущностей товаров с количеством товара, найденного по ID заказа
                 List<OrderItems> orderIts = context.OrderItems1.Where(x => x.OrderID == orderID).Include(x => x.Item).Include("Order").ToList();
-                // TODO: сразу заполнять MainForm.currentItemOrdersEntities без промежуточных списков
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
                 // заполнение форм сущности ItemOrdersEntity данными
@@ -209,7 +206,7 @@ namespace comp_shop
             }
         }
 
-        // создание списка товаров поставщика для AssociatedInfo
+        // создание списка товаров поставщика для вывода в ShowInfoForm
         static public List<Item> ItemsToList(int SupplierID)
         {
             using (var context = new ComputerShopEntities())
@@ -231,10 +228,8 @@ namespace comp_shop
                 var data = context.Items.Include("Category").Include("Supplier").ToList<Item>();
                 return data;
             }
-
         }
 
-        // TODO: избавиться от Article
         // добавление товара в БД
         static public void addItem()
         {
@@ -248,6 +243,7 @@ namespace comp_shop
                 }
 
             }
+            // отлавливание ошибок
             catch (DbEntityValidationException e)
             {
                 foreach (var eve in e.EntityValidationErrors)
@@ -258,7 +254,6 @@ namespace comp_shop
                     }
                 }
                 throw;
-
             }
         }
 
@@ -282,37 +277,25 @@ namespace comp_shop
                 context.SaveChanges();
                 MessageBox.Show(MainForm.currentItem.Name + " обновлен!");
             }
-
-            //using (var context = new ComputerShopEntities())
-            //{
-            //    var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
-
-            //    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
-            //    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
-
-            //    if (original != null)
-            //    {
-            //        original.Name = itemToEdit.Name;
-            //        original.Price = itemToEdit.Price;
-            //        original.Category = categoryEntry;
-            //        original.Supplier = supplierEntry;
-            //    };
-            //    context.SaveChanges();
-            //    MessageBox.Show(itemToEdit.Name + " updated!");
-            //}
         }
 
-        //TODO: проверка на нахождение в заказах и показ сообщения об этом
         // удаление товара
         static public void RemoveItem(Item removeEntry)
         {
-            using (var context = new ComputerShopEntities())
+            try
             {
-                var original = context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
-                context.Entry(original).Collection(r => r.OrderItems).CurrentValue = null;
-                context.Entry(original).State = EntityState.Deleted;
-                context.SaveChanges();
-                MessageBox.Show(removeEntry.Name + " удален из базы!");
+                using (var context = new ComputerShopEntities())
+                {
+                    var original = context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
+                    context.Entry(original).Collection(r => r.OrderItems).CurrentValue = null;
+                    context.Entry(original).State = EntityState.Deleted;
+                    context.SaveChanges();
+                    MessageBox.Show(removeEntry.Name + " удален из базы!");
+                }
+            }
+            catch
+            {
+                 MessageBox.Show("Невозможно удалить товар!");
             }
         }
 
@@ -345,7 +328,6 @@ namespace comp_shop
         // поиск товара по цене
         static public List<Item> SearchByPrice(decimal priceFrom, decimal priceTo)
         {
-
             using (var context = new ComputerShopEntities())
             {
                 var data = context.Items.Where(x => priceTo >= x.Price && x.Price >= priceFrom).Include("Category").Include("Supplier").ToList<Item>();
@@ -388,8 +370,6 @@ namespace comp_shop
             }
         }
 
-
-        // TODO: автоматически назначать привязанным к категории товарам категорию "без категории" (и поставщика тоже)
         // удаление категории
         static public void RemoveCategory(string categoryName)
         {
@@ -408,7 +388,6 @@ namespace comp_shop
             }
         }
 
-        // TODO: заменить на выбор из списка, комбо?
         // поиск категории
         static public Category SearchCategory(string categoryToFind)
         {
@@ -445,18 +424,15 @@ namespace comp_shop
                     {
                         var orderItemsEntry = new OrderItems()
                         {
-                            // TODO: поменять поле ItemOrdersEntity Item на int для хранения itemID а не имени?
                             // нахождение ItemID по имени Item
                             ItemID = DB.SearchItemByNameOrID(itemName:ordItem.Item)[0].ItemID,
                             OrderID = orderId,
                             ItemsQuantity = ordItem.Quantity,
                         };
-                        // TODO: убрать единицу в OrderItems1?
                         context.OrderItems1.Add(orderItemsEntry);
                         context.SaveChanges();
                     }
 
-                    // TODO: выводить все названия товаров в добавленном заказе?
                     MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара");
                 }
 
@@ -511,25 +487,6 @@ namespace comp_shop
                     context.SaveChanges();
 
                     MessageBox.Show($"Обновлен заказ: ID{orderID} на {MainForm.currentItemOrdersEntities.Count} товара");
-
-
-                    //foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
-                    //{
-                    //    var orderItemsEntry = new OrderItems()
-                    //    {
-                    //        // TODO: поменять поле ItemOrdersEntity Item на int для хранения itemID а не имени?
-                    //        // нахождение ItemID по имени Item
-                    //        ItemID = DB.SearchItemByNameOrID(itemName: ordItem.Item)[0].ItemID,
-                    //        OrderID = orderId,
-                    //        ItemsQuantity = ordItem.Quantity,
-                    //    };
-                    //    // TODO: убрать единицу в OrderItems1?
-                    //    context.OrderItems1.Add(orderItemsEntry);
-                    //    context.SaveChanges();
-                    //}
-
-                    //// TODO: выводить все названия товаров в добавленном заказе?
-                    //MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара");
                 }
 
             }
@@ -646,13 +603,10 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    //TODO: удаление поставщика даже с привязанными товарами как ?
                     var original = context.Suppliers.Find(toRemove.SupplierID);
                     context.Items.RemoveRange(original.Items);
                     context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
-                    //context.Suppliers.Remove(context.Suppliers.SingleOrDefault(a => a.Name == supplierName));
-                    //context.SaveChanges();
                     MessageBox.Show(toRemove.Name + " удален!");
                 }
         }
@@ -686,7 +640,6 @@ namespace comp_shop
             }
         }
 
-        // TODO: заменить на выбор из списка, комбо?
         // поиск поставщика 
         static public Supplier SearchSupplier(int supplierID=0, string supplierName=null)
         {
@@ -721,50 +674,5 @@ namespace comp_shop
             }
             return sellers;
         }
-
-        // список товаров по ID order
-        //static public string ItemsToString(int orderID)
-        //{
-
-            //using (var context = new ComputerShopEntities())
-            //{
-            //    ////!!! другой способ загрузки Sellers
-            //    //var itemSearch = context.Items.Find(itemID);
-
-            //    //// Load the blog related to a given post.
-            //    //context.Entry(itemSearch).Collection(p => p.Sellers).Load();
-            //    //List<Seller> sels1 = itemSearch.Sellers.ToList();
-            //    //string dataStr1 = "";
-            //    //foreach (Seller sel in sels1)
-            //    //{
-            //    //    dataStr1 += sel.SellerName + "; ";
-            //    //    dataStr1 += "\n";
-            //    //}
-
-
-            //    //MessageBox.Show(dataStr1);
-
-            //    // !!!поиск только одного товара
-            //    var orderWithItems = context.Orders.Find(orderID);
-            //    //!!! поиск множества товаров
-            //    //var original = context.Items.Where(x => x.Name == item.Name);
-            //    //MessageBox.Show(original.Sellers.Count().ToString());
-            //    //var sellerResults = context.Items.Where(x => x.)
-
-            //    List<Item> items = orderWithItems.Items.ToList();
-            //    string itemsListStr = "";
-
-            //    foreach (Item it in items)
-            //    {
-            //        itemsListStr += it.Name + "; "; ;
-            //    }
-            //    return itemsListStr;
-            //}
-        //}
-
-            // SUPPLIERS
-
-
-
     }
 }

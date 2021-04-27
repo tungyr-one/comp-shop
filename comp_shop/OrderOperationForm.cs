@@ -46,7 +46,6 @@ namespace comp_shop
                 { dataGridView1.RowCount = 1; return; }
                 dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
 
-                // TODO: изменение количества товара прямо в таблице
                 dataGridView1.ReadOnly = true;
                 // заполенение таблицы данными
                 for (int i = 0; i < dataGridView1.RowCount; i++)
@@ -90,7 +89,6 @@ namespace comp_shop
                 dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
                 dataGridView1.ColumnCount = 2;
 
-                // TODO: изменение количества товара прямо в таблице
                 dataGridView1.ReadOnly = true;
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
@@ -107,7 +105,6 @@ namespace comp_shop
             button3.Text = "Готово";
         }
 
-        // TODO: проверка на дублированные значения товар-количество в заказе
         // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -154,7 +151,6 @@ namespace comp_shop
             // удаление из списка заказов по индексу
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
             MainForm.currentItemOrdersEntities.RemoveAt(dataGridView1.CurrentCell.RowIndex);
-            // TODO: изменение количества товара прямо в таблице
             dataGridView1.ReadOnly = true;
 
             dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;

@@ -21,7 +21,6 @@ namespace comp_shop
             
            this.createOperation = createOperation;
 
-            // Todo: сделать поле продавец изначально пустым, затем списком кто и сколько продавал?
 // заполнение комбобоксов значениями
             using (ComputerShopEntities c = new ComputerShopEntities())
             {

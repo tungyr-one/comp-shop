@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    // TODO: заменить на SupplierOperationForm?
     public partial class SupplierOperationForm : Form
     {
         public SupplierOperationForm()
@@ -176,14 +175,6 @@ namespace comp_shop
                 // кнопка "Изменить" после выбора и редактирования поставщика
                 else if (radioButton2.Checked)
                 {
-                    //// создание временной сущности поставщика для редактирования
-                    //Supplier editSupplier = new Supplier();
-                    ////// назначение полей текущей сущности поставщика временной сущности
-                    //editSupplier.SupplierID = MainForm.currentSupplier.SupplierID;
-                    //editSupplier.Name = textBox1.Text;
-                    //editSupplier.Contacts = textBox2.Text;                   
-                    //DB.editSupplier(editSupplier);
-
                     MainForm.currentSupplier.Name = textBox1.Text;
                     MainForm.currentSupplier.Contacts = textBox2.Text;
 
@@ -192,7 +183,6 @@ namespace comp_shop
                 // кнопка "Удалить" после выбора поставщика
                 else
                 {
-                    // TODO: попробовать упростить не передавая временную сущность в DB а используя там MainForm.currentSupplier.
                     // создание временной сущности поставщика для удаления
                     Supplier removeSupplier = new Supplier();
                     removeSupplier.Name = textBox1.Text;
