@@ -262,8 +262,6 @@ namespace comp_shop
             }
         }
 
-        // TODO: избавиться от Article 
-        //!!! быстрое обновление сущности: context.Entry(original).CurrentValues.SetValues()
         // редактирование товара
         static public void editItem()
         {
@@ -282,7 +280,7 @@ namespace comp_shop
                     original.Supplier = supplierEntry;
                 };
                 context.SaveChanges();
-                MessageBox.Show(MainForm.currentItem.Name + " updated!");
+                MessageBox.Show(MainForm.currentItem.Name + " обновлен!");
             }
 
             //using (var context = new ComputerShopEntities())
@@ -310,8 +308,8 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-
                 var original = context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
+                context.Entry(original).Collection(r => r.OrderItems).CurrentValue = null;
                 context.Entry(original).State = EntityState.Deleted;
                 context.SaveChanges();
                 MessageBox.Show(removeEntry.Name + " удален из базы!");

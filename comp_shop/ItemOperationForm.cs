@@ -12,7 +12,6 @@ namespace comp_shop
 {
     public partial class ItemOperationForm : Form
     {
-        public Article articleItem = new Article();
         //public Item workingItem = new Item();
         bool createOperation;
 
@@ -76,17 +75,20 @@ namespace comp_shop
         // метод создания/редактирования товара
         private void CreateEditItem()
         {
-            // формирования объекта класса Item для передачи в БД
-            MainForm.currentItem.Name = textBox1.Text;
-            MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
-            MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
-            MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName:comboBox2.SelectedItem.ToString());
+
             this.button2.Text = "Готово";  
 
             // определение необходимого метода в классе работы с БД
             // если создание товара
             if (this.Text == "Создание нового товара")
             {
+                // создание нового экземпляра currentItem
+                MainForm.currentItem = new Item();
+                // формирования объекта класса Item для передачи в БД
+                MainForm.currentItem.Name = textBox1.Text;
+                MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+                MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+                MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
                 DB.addItem();
             }
             // если добавление товара поставщика
@@ -104,6 +106,10 @@ namespace comp_shop
             // редактирование товара
             else
             {
+                MainForm.currentItem.Name = textBox1.Text;
+                MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+                MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+                MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
                 DB.editItem();
             }
         }
