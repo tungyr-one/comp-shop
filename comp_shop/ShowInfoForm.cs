@@ -19,34 +19,18 @@ namespace comp_shop
         public ShowInfoForm()
         {
             InitializeComponent();
-            
+
         }
 
         private void ConnectedInfo_Load(object sender, EventArgs e)
         {
-
-            //dataGridView1.AutoGenerateColumns = true;
-            ////dataGridView1.DataSource = orderBindingSource;
-            //dataGridView1.DataSource = ordersToItems;
-            //ordersToItems.Clear();
-
-
             // проверка для чего было вызвано окно
             // загузка оформленных заказов на текущий товар
             if (this.Text == "Заказы товара")
             {
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = itemOrdersEntityBindingSource;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
                 button4.Text = "Готово";
-
-
-                dataGridView1.Columns["OrderDate"].HeaderText = "Дата заказа";
-                dataGridView1.Columns["OrderID"].HeaderText = "ID заказа";
-                dataGridView1.Columns["Quanitity"].HeaderText = "Количество";
-                dataGridView1.Columns["SellerName"].HeaderText = "Имя продавца";
-                dataGridView1.Columns["Customer"].HeaderText = "Покупатель";
-                dataGridView1.Columns["CustomerContact"].HeaderText = "Контакты покупателя";
             }
             // загузка товаров текущего заказа 
             else if (this.Text == "Товары в заказе")
@@ -58,20 +42,49 @@ namespace comp_shop
             // загрузка товаров текушего поставщика
             else if (this.Text == "Товары поставщика")
             {
-                //dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = itemBindingSource;
+                dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = MainForm.currentItems;
                 button4.Text = "Готово";
+
+                dataGridView1.Columns["ItemID"].HeaderText = "ID товара";
+                dataGridView1.Columns["Name"].HeaderText = "Название";
+                dataGridView1.Columns["Price"].HeaderText = "Цена";
+                dataGridView1.Columns["Supplier"].HeaderText = "Поставщик";
+                dataGridView1.Columns["Category"].HeaderText = "Категория";
+                dataGridView1.Columns["CategoryID"].Visible = false;
+                dataGridView1.Columns["SupplierID"].Visible = false;
+                dataGridView1.Columns["OrderItems"].Visible = false;
             }
             // загрузка всех товаров для выбора
             else
             {
-                //dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = orderBindingSource;
+                dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = DB.ShowAllItems();
                 button4.Text = "Отмена";
             }
 
+            try
+            {
+                //настройка заголовков столбцов таблицы
+                dataGridView1.Columns["OrderID"].HeaderText = "ID заказа";
+                dataGridView1.Columns["SellerName"].HeaderText = "Имя продавца";
+                dataGridView1.Columns["Item"].HeaderText = "Товар";
+                dataGridView1.Columns["Customer"].HeaderText = "Покупатель";
+                dataGridView1.Columns["CustomerContact"].HeaderText = "Контакты покупателя";
+                dataGridView1.Columns["OrderDate"].HeaderText = "Дата заказа";
+                dataGridView1.Columns["Quantity"].HeaderText = "Количество";
+                dataGridView1.Columns["Category"].HeaderText = "Категория";
+                dataGridView1.Columns["ItemID"].HeaderText = "ID товара";
+                dataGridView1.Columns["Name"].HeaderText = "Название";
+                dataGridView1.Columns["Price"].HeaderText = "Цена";
+                dataGridView1.Columns["Supplier"].HeaderText = "Поставщик";
+            }
+            catch
+            { }
+
+            // настройка ширины колонок
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoResizeColumns();
         }
 
             private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
