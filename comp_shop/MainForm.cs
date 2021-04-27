@@ -39,7 +39,6 @@ namespace comp_shop
 {
     public partial class MainForm : Form
     {
-        //Article currentItem = new Article();
         // сущности для обмена данными с формами добавления / редактирования сущносстей
         public static Item currentItem = new Item();
         public static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
@@ -53,17 +52,11 @@ namespace comp_shop
         {
             InitializeComponent();
             radioButton1.Checked = true;
-            
         }
-
-        // TODO: использовать один currentItem на всех
-        //public Item currentItem
-        //{ get; set; }
 
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
-
             radioButton5.Enabled = false;
             radioButton6.Enabled = false;
 
@@ -72,9 +65,6 @@ namespace comp_shop
             dateTimePicker2.Enabled = false;
             dateTimePicker2.Visible = false;
 
-
-            // отключение кнопок поиска по продавцу и поставщику
-
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
@@ -82,14 +72,7 @@ namespace comp_shop
             DataGridViewOrdersForItems();
             DataGridViewItemsForSuppliers();
             DataGridViewItemsForOrders();
-            //DB.LoadAllStuff(1);
 
-            //DataGridViewComboBoxColumn orders =
-            //dataGridView1.Columns[6] as DataGridViewComboBoxColumn;
-            //orders.DataSource = comboboxOrders;
-            //orders.ValueType = typeof(Order);
-
-            //orderBindingSource1.DataSource = context.Orders.ToList();
         }
 
         #region
@@ -171,10 +154,9 @@ namespace comp_shop
             dataGridView3.Columns.Add(buttonColumn);
         }
 
-        // отобразить все записи во всех вкладках
+        // загрузка всех записей во всех вкладках
         private void button1_Click(object sender, EventArgs e)
         {
-            //dataGridView1.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridView1.DataSource = DB.ShowAllItems();
             dataGridView2.DataSource = DB.ShowAllOrders();
             dataGridView3.DataSource = DB.ShowAllSuppliers();
@@ -183,22 +165,24 @@ namespace comp_shop
         // нажатие кнопки добавить 
         private void Add_Click(object sender, EventArgs e)
         {
-            // товар
+            // вкладка товары
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
+                // новый экземпляр окна операций с товаром
                 ItemOperationForm newItemForm = new ItemOperationForm()
                 {
                     Text = "Создание нового товара"
                 };
                 newItemForm.ShowDialog();
-                //обновление списка товаров
+                //обновление списка товаров после внесения нового товара
                 dataGridView1.DataSource = DB.ShowAllItems();
             }
-            // заказ
+            // вкладка заказы
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 // удаление всех предыдущих значений в списке для нового заказа
                 currentItemOrdersEntities.Clear();
+                // новый экземпляр окна операций с заказом
                 OrderOperationForm orderForm = new OrderOperationForm
                 {
                     Text = "Создание нового заказа"
@@ -210,6 +194,7 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
+                // новый экземпляр окна операций с поставщиком
                 SupplierOperationForm supplierForm = new SupplierOperationForm
                 {
                     Text = "Новый поставщик"
@@ -252,6 +237,7 @@ namespace comp_shop
                     Text = "Изменить поставщика"
                 };
                 supplierForm.ShowDialog();
+                // обновление списка поставщиков
                 dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
         }
@@ -259,12 +245,13 @@ namespace comp_shop
         //нажатие кнопки удалить
         private void button2_Click(object sender, EventArgs e)
         {
+            // вкладка товары
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 DB.RemoveItem(currentItem);
                 dataGridView1.DataSource = DB.ShowAllItems();
             }
-            //заказ
+            // вкладка заказы
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 DB.RemoveOrder(currentItemOrderEntity);
@@ -273,7 +260,6 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-                // TODO: change to supplier entity as parameter
                 DB.RemoveSupplier(currentSupplier);
                 dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
@@ -288,7 +274,7 @@ namespace comp_shop
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                // загрузка формы показа заказов товара
+                // загрузка формы демонстрции заказов товара
                 ShowInfoForm ordersForItemForm = new ShowInfoForm();
                 currentItemOrdersEntities = DB.OrdersOfItem(MainForm.currentItem.ItemID);
                 ordersForItemForm.Text = "Заказы товара";
@@ -301,9 +287,11 @@ namespace comp_shop
         {
             var senderGrid = (DataGridView)sender;
 
+            // проверка нажатия кнопки в ячейке
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
+                // загрузка формы демонстрции товаров заказа
                 ShowInfoForm connInfoForm = new ShowInfoForm();
                 currentItemOrdersEntities = DB.LoadItemOrdersEntities(Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Товары в заказе";
@@ -316,15 +304,16 @@ namespace comp_shop
         {
             var senderGrid = (DataGridView)sender;
 
+            // проверка нажатия кнопки в ячейке
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
+                // загрузка формы демонстрции товаров поставщика
                 ShowInfoForm connInfoForm = new ShowInfoForm();
                 currentItems = DB.ItemsToList(Convert.ToInt32(dataGridView3.SelectedRows[0].Cells[0].Value));
                 connInfoForm.Text = "Товары поставщика";
                 connInfoForm.ShowDialog();
             }
-
         }
 
 
@@ -335,87 +324,45 @@ namespace comp_shop
             // TODO: text fields validation first
             if (radioButton1.Checked)
             {
-
-                dataGridView1.DataSource = DB.SearchItemByNameOrID(searchBox1.Text);
-
-                #region
-                //// ЗАПИСЬ С ПОДТЯГИВАНИЕМ ИНФЫ ИЗ ДРУГИХ ТАБЛИЦ
-                //using (var context = new ComputerShopEntities())
-                //{
-                //    var data = (from item in context.Items
-                //        join category in context.Categories on item.CategoryID equals category.CategoryID
-                //        join supplier in context.Suppliers on item.SupplierID equals supplier.SupplierID
-                //             where item.Name == searchBox1.Text
-                //             select new
-                //             {
-                //                 ItemId = item.ItemID,
-                //                 ItemName = item.Name,
-                //                 ItemPrice = item.Price,
-                //                 ItemSeller = item.Seller,
-                //                 CategoryName = category.Name,
-                //                 SupplierName = supplier.Name
-                //             }).ToList();
-
-                //    dataGridView1.DataSource = data;
-                //}
-
-                //// найти одну запись без подтягивания записей из других таблиц
-                //using (var context = new ComputerShopEntities())
-                //{
-                //    var data = (from d in context.Items
-                //                where d.Name == searchBox1.Text
-                //                select d).ToList();
-                //    dataGridView1.DataSource = data;
-
-                //}
-
-
-
-                //using (var db = new ComputerShopEntities())
-                //{
-                //    var data = (from item in db.Items.Where(s => s.Name == searchBox1.Text).ToList()                            
-                //                select new
-                //                {
-                //                    item.ItemID,
-                //                    ItemName = item.Name,
-                //                    ItemPrice = item.Price,
-                //                    ItemSeller = item.Seller,
-                //                }).ToList();
-                //    dataGridView1.DataSource = data;
-                //    return;
-                //}
-                #endregion
-
+                if (searchBox1.Text == "")
+                {
+                    MessageBox.Show("Неправильное название!"); 
+                }
+                else
+                {
+                    dataGridView1.DataSource = DB.SearchItemByNameOrID(searchBox1.Text);
+                }
             }
 
             // поиск по цене
             if (radioButton2.Checked)
+            {
                 try
                 {
                     dataGridView1.DataSource = DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
-
                 }
                 catch
                 {
                     MessageBox.Show("Неправильная цена!");
                 }
+            }
 
             // поиск по категории
             if (radioButton3.Checked)
-                dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
-            //try
-            //    {
-            //        //List<Category> search_result;
-            //        dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
+            {
+                try
+                {
+                    dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
 
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Неправильная категория!");
-            //    }
-
+                }
+                catch
+                {
+                    MessageBox.Show("Неправильная категория!");
+                }
+            }
             // поиск по категории и цене
             if (radioButton4.Checked)
+            {
                 try
                 {
                     dataGridView1.DataSource = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
@@ -424,6 +371,7 @@ namespace comp_shop
                 {
                     MessageBox.Show("Неправильная категория или цена!");
                 }
+            }
 
             // поиск по продажам, продавцам и времени
             if (radioButton5.Checked)
@@ -434,13 +382,22 @@ namespace comp_shop
                     dataGridView2.DataSource = DB.SearchByTime(dateTimePicker1.Value, dateTimePicker2.Value);
                 }
                 else
-                dataGridView2.DataSource = DB.SearchBySellerAndTime(searchBox1.Text, dateTimePicker1.Value, dateTimePicker2.Value);
+                {
+                    dataGridView2.DataSource = DB.SearchBySellerAndTime(searchBox1.Text, dateTimePicker1.Value, dateTimePicker2.Value);
+                }
             }
 
             // поиск по поставщику
             if (radioButton6.Checked)
             {
-                dataGridView3.DataSource = DB.SearchBySupplier(searchBox1.Text);
+                if (searchBox1.Text == "")
+                {
+                    MessageBox.Show("Неправильное имя поставщика!");
+                }
+                else
+                {
+                    dataGridView3.DataSource = DB.SearchBySupplier(searchBox1.Text);
+                }
             }
         }
 
@@ -454,29 +411,30 @@ namespace comp_shop
             searchParam2.Visible = false;
             searchBox2.Visible = false;
 
+            // если нажата кнопка поиска по названию товара
             if (radioButton1.Checked)
             {
                 searchParam1.Text = "Название товара:";
             }
 
+            // если нажата кнопка поиска по цене товара
             if (radioButton2.Checked)
             {
-                // TODO: поля увеличивать и смещать левее, координаты как установить?
                 searchParam1.Text = "Цена от: ";
                 searchParam2.Text = "Цена до: ";
                 searchParam2.Visible = true;
                 searchBox2.Visible = true;
             }
 
+            // если нажата кнопка поиска по категории товара
             if (radioButton3.Checked)
             {
-                // TODO: Сделать комбо категории товара
                 searchParam1.Text = "Категория товара:";
             }
 
+            // если нажата кнопка поиска по категории и цене товара
             if (radioButton4.Checked)
             {
-                // TODO: Сделать комбо категории товара
                 searchParam1.Text = "Категория: ";
                 searchParam2.Text = "Цена от:";
                 searchParam2.Visible = true;
@@ -485,6 +443,7 @@ namespace comp_shop
                 searchBox3.Visible = true;
             }
 
+            // если нажата кнопка поиска по продавцу товара
             if (radioButton5.Checked)
             {
                 searchParam1.Text = "Продавец:";
@@ -493,15 +452,11 @@ namespace comp_shop
 
             }
 
+            // если нажата кнопка поиска по поставщику товара
             if (radioButton6.Checked)
             {
                 searchParam1.Text = "Поставщик:";
             }
-        }
-
-        private void Main_form_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
 
         // обработка нажатия Enter
@@ -556,6 +511,7 @@ namespace comp_shop
                 currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(row.Cells[0].Value))[0];
             }
 
+            // вывод текущего товара в статусную строку
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 string value1 = row.Cells[0].Value.ToString();
@@ -563,7 +519,6 @@ namespace comp_shop
                 string value3 = row.Cells[2].Value.ToString();
                 string value4 = row.Cells[3].Value.ToString();
                 string value5 = row.Cells[4].Value.ToString();
-                //string value6 = row.Cells[5].Value.ToString();
                 toolStripStatusLabel1.Text = "Выбрано: " + value1 + " - " + value2 + " - " + value3 + " - " + value4 + " - " + value5;
             }
         }
@@ -583,6 +538,7 @@ namespace comp_shop
                 currentItemOrderEntity.CustomerContact = selectedOrder.CustomerContact;
             }
 
+            // вывод текущего заказа в статусную строку
             foreach (DataGridViewRow row in dataGridView2.SelectedRows)
             {
                 string value1 = row.Cells[0].Value.ToString();
@@ -608,6 +564,7 @@ namespace comp_shop
                 currentSupplier.Items = DB.ItemsToList(SupplierID: Convert.ToInt32(row.Cells[0].Value));
             }
 
+            // вывод текущего поставщика в статусную строку
             foreach (DataGridViewRow row in dataGridView3.SelectedRows)
             {
                 string value1 = row.Cells[0].Value.ToString();
@@ -617,19 +574,10 @@ namespace comp_shop
             }
         }
 
-        // не показывает ошибку, хотя она присутствует
+        // сокрытие предупреждений таблиц
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            ////This event is used to avoid the error of DataGridviewCombobox Cell
-            //if (e.Exception.Message == "DataGridViewComboBoxCell value is not valid.")
-            //{
 
-            //    object value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            //    if (!((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Contains(value))
-            //    {
-            //        ((DataGridViewComboBoxColumn)dataGridView1.Columns[e.ColumnIndex]).Items.Add(value); e.ThrowException = false;
-            //    }
-            //}
         }
 
         private void dataGridView2_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -642,8 +590,6 @@ namespace comp_shop
 
         }
 
-
-
         // обработка переключения вкладок
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -652,7 +598,8 @@ namespace comp_shop
             {
                 // обновление содержимого таблицы
                 DB.ShowAllItems();
-                // включение первой радиокнопки
+
+                // включение / выключение радиокнопок
                 radioButton1.Checked = true;
 
                 radioButton1.Enabled = true;
@@ -681,6 +628,8 @@ namespace comp_shop
             {
                 // обновление содержимого таблицы
                 DB.ShowAllOrders();
+
+                // включение / выключение радиокнопок
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
                 radioButton3.Enabled = false;
@@ -708,6 +657,9 @@ namespace comp_shop
             {
                 // обновление содержимого таблицы
                 DB.ShowAllSuppliers();
+
+
+                // включение / выключение радиокнопок
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
                 radioButton3.Enabled = false;

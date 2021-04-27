@@ -759,7 +759,6 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainForm";
             this.Text = "Компьютерный магазин БД";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_form_FormClosing);
             this.Load += new System.EventHandler(this.Main_form_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyDown);
             this.groupBox1.ResumeLayout(false);

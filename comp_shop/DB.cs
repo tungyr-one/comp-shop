@@ -236,25 +236,15 @@ namespace comp_shop
 
         // TODO: избавиться от Article
         // добавление товара в БД
-        static public void addItem(Article insertItem)
+        static public void addItem()
         {
             try
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == insertItem.Category);
-                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == insertItem.Supplier);
-                    var itemEntry = new Item()
-                    {
-                        Name = insertItem.Name,
-                        Price = insertItem.Price,
-                        Category = categoryEntry,
-                        Supplier = supplierEntry,
-                    };
-                    context.Items.Add(itemEntry);
-
+                    context.Items.Add(MainForm.currentItem);
                     context.SaveChanges();
-                    MessageBox.Show("Добавлен товрар: " + itemEntry.ToString());
+                    MessageBox.Show("Добавлен товрар: " + MainForm.currentItem.ToString());
                 }
 
             }
@@ -275,25 +265,43 @@ namespace comp_shop
         // TODO: избавиться от Article 
         //!!! быстрое обновление сущности: context.Entry(original).CurrentValues.SetValues()
         // редактирование товара
-        static public void editItem(Article itemToEdit)
+        static public void editItem()
         {
             using (var context = new ComputerShopEntities())
             {
-                var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
+                var original = context.Items.Single(x => x.ItemID == MainForm.currentItem.ItemID);
 
-                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
-                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
+                Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == MainForm.currentItem.Category.Name);
+                Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == MainForm.currentItem.Supplier.Name);
 
                 if (original != null)
                 {
-                    original.Name = itemToEdit.Name;
-                    original.Price = itemToEdit.Price;
+                    original.Name = MainForm.currentItem.Name;
+                    original.Price = MainForm.currentItem.Price;
                     original.Category = categoryEntry;
                     original.Supplier = supplierEntry;
                 };
                 context.SaveChanges();
-                MessageBox.Show(itemToEdit.Name + " updated!");
+                MessageBox.Show(MainForm.currentItem.Name + " updated!");
             }
+
+            //using (var context = new ComputerShopEntities())
+            //{
+            //    var original = context.Items.Single(x => x.ItemID == itemToEdit.Id);
+
+            //    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == itemToEdit.Category);
+            //    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == itemToEdit.Supplier);
+
+            //    if (original != null)
+            //    {
+            //        original.Name = itemToEdit.Name;
+            //        original.Price = itemToEdit.Price;
+            //        original.Category = categoryEntry;
+            //        original.Supplier = supplierEntry;
+            //    };
+            //    context.SaveChanges();
+            //    MessageBox.Show(itemToEdit.Name + " updated!");
+            //}
         }
 
         //TODO: проверка на нахождение в заказах и показ сообщения об этом
@@ -302,9 +310,11 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
+
+                var original = context.Items.Remove(context.Items.Single(a => a.ItemID == removeEntry.ItemID));
+                context.Entry(original).State = EntityState.Deleted;
                 context.SaveChanges();
-                MessageBox.Show(removeEntry.Name + " removed from database!");
+                MessageBox.Show(removeEntry.Name + " удален из базы!");
             }
         }
 

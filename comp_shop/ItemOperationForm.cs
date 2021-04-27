@@ -40,7 +40,6 @@ namespace comp_shop
         // установка значений полей при загрузке
         private void NewItemForm_Load(object sender, EventArgs e)
         {
-            // TODO: изменить способ определения назначения вызова формы
             // если создание товара
             if (this.Text == "Создание нового товара")
             {
@@ -65,68 +64,58 @@ namespace comp_shop
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = MainForm.currentItem.Name;
                 this.textBox2.Text = MainForm.currentItem.Price.ToString();
-                // TODO: показывать в комбобоксе категорию текущего товара, а не первую из списка
-                this.comboBox1.SelectedItem = MainForm.currentItem.Category;
-                //this.textBox3.Text = workingItem.OrdersToString();
-                this.comboBox2.SelectedItem = MainForm.currentItem.Supplier;
+                this.comboBox1.SelectedItem = MainForm.currentItem.Category.Name;
+                this.comboBox2.SelectedItem = MainForm.currentItem.Supplier.Name;
 
                 // изменение видимости лэйбла и кнопни заказы
                 label4.Visible = true;
                 button5.Visible = true;
-
-
             }
         }
 
         // метод создания/редактирования товара
         private void CreateEditItem()
         {
-            //// формирования объекта класса Item для передачи в БД
-            //workingItem.Name = textBox1.Text;
-            //workingItem.Price = decimal.Parse(textBox2.Text);
-            //workingItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
-            ////workingItem.Orders = textBox3.Text;
-            //workingItem.Supplier = DB.SearchSupplier(comboBox2.SelectedItem.ToString());
-            //this.button2.Text = "Готово";
+            // формирования объекта класса Item для передачи в БД
+            MainForm.currentItem.Name = textBox1.Text;
+            MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+            MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+            MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName:comboBox2.SelectedItem.ToString());
+            this.button2.Text = "Готово";  
 
-            // TODO: replace to currentItem!!!
-            // формирования объекта класса Article для передачи в БД
-            articleItem.Id = MainForm.currentItem.ItemID;
-            articleItem.Name = textBox1.Text;
-            articleItem.Price = decimal.Parse(textBox2.Text);
-            articleItem.Category = comboBox1.SelectedItem.ToString();
-            //workingItem.Orders = textBox3.Text;
-            articleItem.Supplier = comboBox2.SelectedItem.ToString();            
-
-            this.button2.Text = "Готово";
             // определение необходимого метода в классе работы с БД
+            // если создание товара
             if (this.Text == "Создание нового товара")
             {
-                DB.addItem(articleItem);
+                DB.addItem();
             }
+            // если добавление товара поставщика
             else if (this.Text == "Добавление товара поставщика")
             {
+                // копирование текущего товара
                 MainForm.currentItem = new Item(MainForm.currentItem);
                 MainForm.currentItem.Name = textBox1.Text;
                 MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
                 MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
                 MainForm.currentItem.Supplier = null;
-                //workingItem.Orders = textBox3.Text;
 
                 this.Close();
             }
+            // редактирование товара
             else
             {
-                DB.editItem(articleItem);
+                DB.editItem();
             }
-
         }
 
         // обработка нажатия кнопки управления категориями
         private void button3_Click(object sender, EventArgs e)
         {
+            // создание экземпляра окна управления категориями
             CategoryOperationForm CategoryForm = new CategoryOperationForm();
             CategoryForm.ShowDialog();
+
+            // отображение обновленного списка категорий в combobox после закрытия формы редактирования категории
             ComputerShopEntities c = new ComputerShopEntities();
             comboBox1.DataSource = c.Categories.ToList();
         }
@@ -136,9 +125,11 @@ namespace comp_shop
         {
             // поиск поставщика из комбо и назначение текущей сущности поставщика
             MainForm.currentSupplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
+            // создание экземпляра окна управления поставщиками
             SupplierOperationForm SupplierForm = new SupplierOperationForm();
             SupplierForm.Text = "Управление поставщиками";
             SupplierForm.ShowDialog();
+
             // отображение обновленного списка поставщиков в combobox после закрытия формы редактирования поставщика
             ComputerShopEntities c = new ComputerShopEntities();
             comboBox2.DataSource = c.Suppliers.ToList();
