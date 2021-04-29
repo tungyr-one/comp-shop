@@ -28,8 +28,7 @@ namespace comp_shop
         {
             // если окно вызывается для редактирования заказа
             if (this.Text == "Редактирование заказа")
-            {
-                button3.Text = "Отмена";
+            {                
                 // очистка текущего товара
                 MainForm.currentItem = null;
                 // установка значений для полей редактирования
@@ -64,6 +63,8 @@ namespace comp_shop
             ShowInfoForm allItems = new ShowInfoForm();
             allItems.Text = "Выбор товара";
             allItems.ShowDialog();
+
+            // отображение выбранного товара
             if (MainForm.currentItem.Name != null)
             { label8.Text = MainForm.currentItem.Name; }
         }
@@ -101,25 +102,55 @@ namespace comp_shop
             {
                 MessageBox.Show("Ошибка!");
             }
-            // если товар успешно добавился то можно создавать заказ
-            button3.Text = "Готово";
         }
 
         // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
         private void button3_Click(object sender, EventArgs e)
         {
+            // проверка заполненности полей имени и контактов покупателя
+            if (textBox2.Text == "" || textBox3.Text == "" )
+            {
+                MessageBox.Show("Не заполнены поля покупателя!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // создание нового заказа
             if (this.Text == "Создание нового заказа")
             {
-                if (button3.Text == "Отмена")
-                {
-                    this.Close();
-                    return;
-                }
+                MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
+                MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
+                MainForm.currentItemOrderEntity.Customer = textBox2.Text;
+                MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
                 DB.AddOrder();
                 this.Close();
             }
+            // если редактирование заказа
             else
             {
+                // если товаров в заказе нет - заказ удаляется
+                if (MainForm.currentItemOrdersEntities.Count == 0)
+                {
+                    // очищаем все товары в заказе в БД
+                    try
+                    {
+                        DB.RemoveOrder(MainForm.currentItemOrderEntity);
+                        this.Close();
+                    }
+                    catch
+                    {
+
+                    }
+                    return;
+                }
+
+                // если пользователь не добавлял новые товары через ShowInfoForm
+                if (MainForm.currentItem == null)
+                {
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        MainForm.currentItem = DB.SearchItemByNameOrID(itemName: row.Cells[0].Value.ToString())[0];
+                    }
+                }
+
                 // обновление данных сущности
                 MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
                 MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
@@ -135,7 +166,8 @@ namespace comp_shop
 
         // нажатие кнопки удаления товара из заказа
         private void button4_Click(object sender, EventArgs e)
-        {            
+        {   
+            // если товаров в заказе меньше либо равно одному
             if (MainForm.currentItemOrdersEntities.Count <= 1)
             {
                 // очищение списка заказанных товаров
@@ -143,16 +175,17 @@ namespace comp_shop
                 // очищение таблицы
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                // недостаточно товаров для заказа
-                button3.Text = "Отмена";
+                MessageBox.Show("Заказ будет удален если в нем не будет товаров", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             // удаление из списка заказов по индексу
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
             MainForm.currentItemOrdersEntities.RemoveAt(dataGridView1.CurrentCell.RowIndex);
             dataGridView1.ReadOnly = true;
 
+            // заполнение таблицы оставшимися товарами
             dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
             dataGridView1.ColumnCount = 2;
             dataGridView1.ReadOnly = true;
@@ -162,7 +195,5 @@ namespace comp_shop
                 dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
             }
         }
-
-
     }
 }

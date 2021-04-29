@@ -167,7 +167,7 @@ namespace comp_shop
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(157, 44);
             this.button3.TabIndex = 13;
-            this.button3.Text = "Отмена";
+            this.button3.Text = "Готово";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

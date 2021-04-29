@@ -67,42 +67,6 @@ namespace comp_shop
 
         }
 
-        #region
-        //COMBOBOX загрузка дополнительной информации o заказах в DataGridView1 
-        //private void DataGridViewOrdersForItems()
-        //{
-        //    foreach (DataGridViewRow row in dataGridView1.Rows)
-        //    {
-        //        List<Order> ordersData = DB.OrdersOfItem(Convert.ToInt32(row.Cells[0].Value));
-        //        DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)(row.Cells["Orders"]);
-        //        cell.DataSource = ordersData;
-        //        // демонстрация первого заказа в combobox если он есть
-        //        if (ordersData.Count > 0)
-        //        cell.Value = ordersData[0];
-        //    }
-        //}
-
-        //STRING загрузка дополнительной информации o связанных заказах в DataGridView1 
-        //private void DataGridViewOrdersForItems()
-        //{
-        //    foreach (DataGridViewRow row in dataGridView1.Rows)
-        //    {
-        //        row.Cells[dataGridView1.Columns["Orders"].Index].Value = DB.OrdersToString(Convert.ToInt32(row.Cells[0].Value));
-        //    }
-        //}
-
-
-        //STRING загрузка дополнительной информации o связанных заказах в DataGridView3
-        //private void DataGridViewItemsForSuppliers()
-        //{
-        //    foreach (DataGridViewRow row in dataGridView3.Rows)
-        //    {
-        //        row.Cells[dataGridView3.Columns["Items"].Index].Value = DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value));
-        //        MessageBox.Show(DB.ItemsToString(Convert.ToInt32(row.Cells[0].Value)));
-        //    }
-        //}
-
-        #endregion
         //добавление кнопок в DataGridView1 для вызова дополнительной информации о продажах
         private void DataGridViewOrdersForItems()
         {
@@ -316,7 +280,7 @@ namespace comp_shop
             {
                 if (searchBox1.Text == "")
                 {
-                    MessageBox.Show("Неправильное название!"); 
+                    MessageBox.Show("Неправильное название!","Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -333,7 +297,7 @@ namespace comp_shop
                 }
                 catch
                 {
-                    MessageBox.Show("Неправильная цена!");
+                    MessageBox.Show("Неправильная цена!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -347,7 +311,7 @@ namespace comp_shop
                 }
                 catch
                 {
-                    MessageBox.Show("Неправильная категория!");
+                    MessageBox.Show("Неправильная категория!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // поиск по категории и цене
@@ -359,7 +323,7 @@ namespace comp_shop
                 }
                 catch
                 {
-                    MessageBox.Show("Неправильная категория или цена!");
+                    MessageBox.Show("Неправильная категория или цена!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -382,7 +346,7 @@ namespace comp_shop
             {
                 if (searchBox1.Text == "")
                 {
-                    MessageBox.Show("Неправильное имя поставщика!");
+                    MessageBox.Show("Неправильное имя поставщика!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

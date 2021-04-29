@@ -295,7 +295,7 @@ namespace comp_shop
             }
             catch
             {
-                 MessageBox.Show("Невозможно удалить товар!");
+                 MessageBox.Show("На товар оформлен заказ!");
             }
         }
 
@@ -432,8 +432,7 @@ namespace comp_shop
                         context.OrderItems1.Add(orderItemsEntry);
                         context.SaveChanges();
                     }
-
-                    MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара");
+                    MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
@@ -485,8 +484,7 @@ namespace comp_shop
                         original.OrderItems.Add(temp);
                     }
                     context.SaveChanges();
-
-                    MessageBox.Show($"Обновлен заказ: ID{orderID} на {MainForm.currentItemOrdersEntities.Count} товара");
+                    MessageBox.Show($"Обновлен заказ: ID{orderID} на {MainForm.currentItemOrdersEntities.Count} товара", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
@@ -513,7 +511,7 @@ namespace comp_shop
                 context.OrderItems1.RemoveRange(original.OrderItems);
                 context.Entry(original).State = EntityState.Deleted;
                 context.SaveChanges();
-                MessageBox.Show("Заказ с ID " + toRemove.OrderID + " удален из базы данных!");
+                MessageBox.Show("Заказ с ID " + toRemove.OrderID + " удален из базы данных!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -591,7 +589,7 @@ namespace comp_shop
                 context.Suppliers.Add(newSupplier);
                 context.SaveChanges();
 
-                MessageBox.Show("Добавлен поставщик: " + newSupplier.Name);
+                MessageBox.Show($"Добавлен поставщик:  {newSupplier.Name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 context.SaveChanges();
             }
         }
@@ -612,7 +610,7 @@ namespace comp_shop
         }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
-                MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!");
+                MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 }
 
@@ -624,7 +622,7 @@ namespace comp_shop
                 var original = context.Suppliers.Find(toEdit.SupplierID);
                 context.Entry(original).CurrentValues.SetValues(toEdit);
                 context.SaveChanges();
-                MessageBox.Show("Поставщик " + toEdit.Name + " обновлен!");
+                MessageBox.Show($"Поставщик {toEdit.Name} обновлен!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
