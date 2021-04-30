@@ -239,7 +239,7 @@ namespace comp_shop
                 {
                     context.Items.Add(MainForm.currentItem);
                     context.SaveChanges();
-                    MessageBox.Show("Добавлен товрар: " + MainForm.currentItem.ToString());
+                    MessageBox.Show($"Добавлен товар: {MainForm.currentItem.ToString()}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
@@ -275,7 +275,7 @@ namespace comp_shop
                     original.Supplier = supplierEntry;
                 };
                 context.SaveChanges();
-                MessageBox.Show(MainForm.currentItem.Name + " обновлен!");
+                MessageBox.Show($"{MainForm.currentItem.Name} обновлен!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -295,7 +295,7 @@ namespace comp_shop
             }
             catch
             {
-                 MessageBox.Show("На товар оформлен заказ!");
+                MessageBox.Show("На товар оформлен заказ!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -364,27 +364,60 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
+                // проверка название категории на существование в БД
+                if (SearchCategory(categoryName) != null)
+                {
+                    MessageBox.Show($"Категория {categoryName} уже существует!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 context.Categories.Add(new Category { Name = categoryName });
                 context.SaveChanges();
-                MessageBox.Show("Добавлена категория: " + categoryName);
+                MessageBox.Show($"Добавлена категория: {categoryName}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         // удаление категории
         static public void RemoveCategory(string categoryName)
         {
+            // попытка удалить категорию no category
+            if (categoryName == "no category")
+            {
+                MessageBox.Show("Неудаляемая категория", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    context.Categories.Remove(context.Categories.Single(a => a.Name == categoryName));
+                    var original = context.Categories.FirstOrDefault(a => a.Name == categoryName);
+                    // проверка привязанных к категории товаров
+                    if (original.Items.Count > 0)
+                    {
+                        foreach (Item it in original.Items)
+                        {
+                            it.Category = context.Categories.FirstOrDefault(a => a.Name == "no category");
+                        }
+                    }
+        
+                    context.Categories.Remove(context.Categories.FirstOrDefault(a => a.Name == categoryName));
                     context.SaveChanges();
-                    MessageBox.Show(categoryName + " удален!");
+                    MessageBox.Show($"Категория {categoryName} удалена!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
                 MessageBox.Show("Невозможно удалить, в категории есть товары!");
+            }
+        }
+
+        // все категории
+        static public List<Category> AllCategories()
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var data = context.Categories.ToList();
+                return data;
             }
         }
 

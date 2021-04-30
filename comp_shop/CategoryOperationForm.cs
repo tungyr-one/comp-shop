@@ -20,28 +20,46 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
-         // нажатие кнопки добавить / удалить
+        // загрузка окна
+        private void CategoryOperationForm_Load(object sender, EventArgs e)
+        {
+            DataGridViewUpdate();
+        }
+
+        // нажатие кнопки добавить / удалить
         private void button1_Click(object sender, EventArgs e)
         {
-            // проверка заполненности поля названия категории
-            if (textBox1.Text == "")
-            {
-                MessageBox.Show("Категория пуста!");
-            }
-
             // определение нобходимого действия в зависимости от нажатой радиокнопки
             if (radioButton1.Checked)
             {
+                // проверка заполненности поля названия категории
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Категория пуста!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 DB.AddCategory(textBox1.Text);
             }
             else
             {
-                DB.RemoveCategory(textBox1.Text);
+                DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+                DB.RemoveCategory(rows[0].Cells[1].Value.ToString());
             }
+            DataGridViewUpdate();
             button2.Text = "Готово";
         }
 
-       
+        // обновление и загрузка данных в таблицу категорий
+       private void DataGridViewUpdate()
+        {
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = DB.AllCategories();
+            dataGridView1.Columns["CategoryID"].HeaderText = "ID категории";
+            dataGridView1.Columns["Name"].HeaderText = "Название";
+            dataGridView1.Columns["Items"].Visible = false;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             newCategory = null;
@@ -50,12 +68,21 @@ namespace comp_shop
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+
+            textBox1.Enabled = true;
             button1.Text = "Добавить";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+
+            textBox1.Enabled = false;
             button1.Text = "Удалить";
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }
