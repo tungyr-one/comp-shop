@@ -62,8 +62,8 @@ namespace comp_shop
                 // присваивание текстовым полям значений редактируемого товара
                 this.textBox1.Text = MainForm.currentItem.Name;
                 this.textBox2.Text = MainForm.currentItem.Price.ToString();
-                this.comboBox1.SelectedItem = MainForm.currentItem.Category.Name;
-                this.comboBox2.SelectedItem = MainForm.currentItem.Supplier.Name;
+                this.comboBox1.SelectedValue = MainForm.currentItem.Category.Name;
+                this.comboBox2.SelectedValue = MainForm.currentItem.Supplier.Name;
 
                 // изменение видимости лэйбла и кнопни заказы
                 label4.Visible = true;

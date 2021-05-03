@@ -52,8 +52,6 @@ namespace comp_shop
                     dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
                     dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
                 }
-
-
             }
         }      
 
@@ -65,7 +63,7 @@ namespace comp_shop
             allItems.ShowDialog();
 
             // отображение выбранного товара
-            if (MainForm.currentItem.Name != null)
+            if (MainForm.currentItem != null)
             { label8.Text = MainForm.currentItem.Name; }
         }
 
@@ -84,6 +82,15 @@ namespace comp_shop
 
                 // добавление в список товаров нового товара с помощью конструктора копирования
                 ItemOrdersEntity newItem = new ItemOrdersEntity(MainForm.currentItemOrderEntity);
+                // проверка дублирования добавляемого товара
+                foreach (ItemOrdersEntity it in MainForm.currentItemOrdersEntities)
+                {
+                    if (newItem.Item == it.Item)
+                    {
+                        MessageBox.Show("Товар уже в заказе!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }    
                 MainForm.currentItemOrdersEntities.Add(newItem);
 
                 // отображение всех товаров в заказе в DataGridView1
@@ -100,7 +107,7 @@ namespace comp_shop
             }
             catch
             {
-                MessageBox.Show("Ошибка!");
+                MessageBox.Show("Ошибка! Проверьте заполненность полей!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

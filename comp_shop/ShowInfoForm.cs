@@ -193,14 +193,6 @@ namespace comp_shop
                     { }
                 }
             }
-            //try
-            //{
-            //    // сокрытие лишних колонок
-            //    dataGridView1.Columns["CategoryID"].Visible = false;
-            //    dataGridView1.Columns["Items"].Visible = false;
-            //    dataGridView1.Columns["OrderItems"].Visible = false;
-            //}
-            //catch { }
         }
 
        
