@@ -93,7 +93,6 @@ namespace comp_shop
         // нажатие кнопки добавить / выбрать
         private void button1_Click(object sender, EventArgs e)
         {
-
             // определение нобходимого действия в зависимости от нажатой радиокнопки
             // добавление нового поставщика
             if (radioButton1.Checked)
@@ -111,7 +110,7 @@ namespace comp_shop
                 newSupplier.Contacts = textBox2.Text;
                 DB.AddSupplier(newSupplier);
             }
-            // вызов окна выбора постащика для редактирования
+            // вызов окна выбора постащика
             else if (radioButton2.Checked)
             {
                 // если окно было запущено из диалога изменения/создания товара

@@ -619,11 +619,19 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-                context.Suppliers.Add(newSupplier);
-                context.SaveChanges();
+                // проверка названия поставщика на существование в БД
+                if (SearchSupplier(supplierName: newSupplier.Name) == null)
+                {
+                    context.Suppliers.Add(newSupplier);
+                    context.SaveChanges();
 
-                MessageBox.Show($"Добавлен поставщик:  {newSupplier.Name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                context.SaveChanges();
+                    MessageBox.Show($"Добавлен поставщик:  {newSupplier.Name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show($"Такой поставщик уже существует!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -638,9 +646,10 @@ namespace comp_shop
                     context.Items.RemoveRange(original.Items);
                     context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
-                    MessageBox.Show(toRemove.Name + " удален!");
+                    MessageBox.Show($"{toRemove.Name} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
-        }
+            }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
                 MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);

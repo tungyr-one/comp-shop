@@ -30,21 +30,21 @@ namespace comp_shop
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
-                button4.Text = "Готово";
+                button1.Text = "Готово";
             }
-            // загузка товаров текущего заказа 
+            // загрузка товаров текущего заказа 
             else if (this.Text == "Товары в заказе")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = MainForm.currentItemOrdersEntities;
-                button4.Text = "Готово";
+                button1.Text = "Готово";
             }
             // загрузка товаров текушего поставщика
             else if (this.Text == "Товары поставщика")
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = MainForm.currentItems;
-                button4.Text = "Готово";
+                button1.Text = "Готово";
 
                 dataGridView1.Columns["ItemID"].HeaderText = "ID товара";
                 dataGridView1.Columns["Name"].HeaderText = "Название";
@@ -55,12 +55,18 @@ namespace comp_shop
                 dataGridView1.Columns["SupplierID"].Visible = false;
                 dataGridView1.Columns["OrderItems"].Visible = false;
             }
-            // загрузка всех товаров для выбора
+            // загрузка всех товаров или поставщиков для выбора
+            else if (this.Text == "Выбор поставщика")
+            {
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.DataSource = DB.ShowAllSuppliers();
+                button1.Text = "Выбрать";
+            }
             else
             {
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.DataSource = DB.ShowAllItems();
-                button4.Text = "Отмена";
+                button1.Text = "Выбрать";
             }
 
             try
@@ -87,10 +93,15 @@ namespace comp_shop
             dataGridView1.AutoResizeColumns();
         }
 
-            private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
-            {
+        private void dataGridViewHeadersNaming()
+        {
 
-            }
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
 
 
         // обработка двойного клика
@@ -99,15 +110,50 @@ namespace comp_shop
             // если выбор товара из всех имеющихся
             if (this.Text == "Выбор товара")
             {
-                DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
-                MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
-                this.Close();
+                ItemChoose();
+            }
+            // если выбор поставщика из всех имеющихся
+            else if (this.Text == "Выбор поставщика")
+            {
+                SupplierChoose();
             }
         }
 
-        // нажатие кнопки отмена
-        private void button4_Click(object sender, EventArgs e)
+        // нажатие кнопки выбрать / готово
+        private void button1_Click(object sender, EventArgs e)
         {
+            // если выбор товара из всех имеющихся
+            if (this.Text == "Выбор товара")
+            {
+                ItemChoose();
+            }
+            // если выбор поставщика из всех имеющихся
+            else if (this.Text == "Выбор поставщика")
+            {
+                SupplierChoose();
+            }
+            else { this.Close(); }
+        }
+
+        // нажатие кнопки отмена
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // поиск выбранного товара
+        private void ItemChoose()
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            MainForm.currentItem = DB.SearchItemByNameOrID(ID: Convert.ToInt32(rows[0].Cells[0].Value))[0];
+            this.Close();
+        }
+
+        // поиск выбранного поставщика
+        private void SupplierChoose()
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            MainForm.currentSupplier = DB.SearchSupplier(supplierID: Convert.ToInt32(rows[0].Cells[0].Value));
             this.Close();
         }
     }
