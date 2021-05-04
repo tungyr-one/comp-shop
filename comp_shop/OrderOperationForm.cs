@@ -19,7 +19,7 @@ namespace comp_shop
             // заполнение данными комбобоксов
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
-                comboBox1.DataSource = DB.AllSellers();
+                comboBox1.DataSource = DB.ShowAllSellers();
             }
         }
 
@@ -123,11 +123,11 @@ namespace comp_shop
             // создание нового заказа
             if (this.Text == "Создание нового заказа")
             {
-                MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
-                MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
-                MainForm.currentItemOrderEntity.Customer = textBox2.Text;
-                MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
-                DB.AddOrder();
+                //MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
+                //MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
+                //MainForm.currentItemOrderEntity.Customer = textBox2.Text;
+                //MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
+                DB.AddOrder(orderDate: dateTimePicker1.Value, customer: textBox2.Text, customerContact: textBox3.Text, seller: comboBox1.SelectedItem.ToString());
                 this.Close();
             }
             // если редактирование заказа

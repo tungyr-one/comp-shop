@@ -637,11 +637,20 @@ namespace comp_shop
             }
         }
 
+        // нажатие кнопки управления категориями
         private void button1_Click_1(object sender, EventArgs e)
         {
             // создание экземпляра окна управления категориями
             CategoryOperationForm CategoryForm = new CategoryOperationForm();
             CategoryForm.ShowDialog();
+        }
+
+// нажатие кнопки управления продавцами
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            // создание экземпляра окна управления продавцами
+            SellerOperationForm SellerForm = new SellerOperationForm();
+            SellerForm.ShowDialog();
         }
     }
 }

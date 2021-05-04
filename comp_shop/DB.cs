@@ -441,7 +441,7 @@ namespace comp_shop
         // ORDERS
 
         // создание заказа с товарами и привязанным количеством
-        static public void AddOrder()
+        static public void AddOrder(DateTime orderDate, string customer, string customerContact, string seller)
         {
             try
             {
@@ -461,10 +461,10 @@ namespace comp_shop
                     // создание нового Order-a
                     var orderEntry = new Order()
                     {
-                        OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
-                        Customer = MainForm.currentItemOrdersEntities[0].Customer,
-                        CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact,
-                        Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName)
+                        OrderDate = orderDate,
+                        Customer = customer,
+                        CustomerContact = customerContact,
+                        Seller = SearchSeller(seller)
                     };
                     context.Orders.Add(orderEntry);
                     context.SaveChanges();
@@ -511,7 +511,7 @@ namespace comp_shop
                 {
                     // поиск Order-a для редактирования
                     var original = context.Orders.Single(x => x.OrderID == orderID);
-
+                    // временное поле имени продавца
                     string sellerTempName = MainForm.currentItemOrdersEntities[0].SellerName;
                     Seller seller = context.Sellers.FirstOrDefault(x => x.Name == sellerTempName);
                     // изменение полей Order-a
@@ -553,7 +553,6 @@ namespace comp_shop
                     }
                 }
                 throw;
-
             }
         }
 
@@ -604,7 +603,7 @@ namespace comp_shop
             {
                 var data = context.Orders.Where(x => dateTo >= x.OrderDate)
                                         .Where(x => x.OrderDate >= dateFrom)
-                                        .Where(x => x.Seller.Name == itemSeller)
+                                        .Where(x => x.Seller.Name == itemSeller).Include("Seller")
                                         .ToList<Order>();
 
                 return data;
@@ -726,17 +725,8 @@ namespace comp_shop
         // SELLER
 
         // создание списка продавцов
-        static public List<Seller> AllSellers()
+        static public List<Seller> ShowAllSellers()
         {
-            //List<string> sellers = new List<string>();
-            //foreach (Order ord in ShowAllOrders())
-            //{
-            //    if(!sellers.Contains(ord.SellerName))
-            //    {
-            //        sellers.Add(ord.SellerName);
-            //    }
-            //}
-            //return sellers;
             ComputerShopEntities dataEntities = new ComputerShopEntities();
 
             using (var context = new ComputerShopEntities())
@@ -744,11 +734,62 @@ namespace comp_shop
                 var data = context.Sellers.ToList<Seller>();
                 return data;
             }
+        }
 
+        // добавление продавца
+        static public void AddSeller(string name, string contacts)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                // проверка имени продавца на существование в БД
+                if (SearchSeller(sellerToFind: name) == null)
+                {
+                    context.Sellers.Add(new Seller
+                    {
+                        Name = name,
+                        Contacts = contacts
+                    });
+                    context.SaveChanges();
+
+                    MessageBox.Show($"Добавлен продавец:  {name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Такой продавец уже существует!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // удаление продавца
+        static public void RemoveSeller(string sellerName)
+        {
+            try
+            {
+                using (var context = new ComputerShopEntities())
+                {
+                    var original = context.Sellers.FirstOrDefault(a => a.Name == sellerName);
+                    // проверка привязанных к категории товаров
+                    //if (original.Items.Count > 0)
+                    //{
+                    //    foreach (Item it in original.Items)
+                    //    {
+                    //        it.Category = context.Categories.FirstOrDefault(a => a.Name == "no category");
+                    //    }
+                    //}
+
+                    context.Sellers.Remove(context.Sellers.FirstOrDefault(a => a.Name == sellerName));
+                    context.SaveChanges();
+                    MessageBox.Show($"Продавец {sellerName} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                MessageBox.Show($"За продавцом числятся заказы, удаление невозможно!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // поиск продавца
-        static public Seller searchSeller(string sellerToFind)
+        static public Seller SearchSeller(string sellerToFind)
         {
             using (var context = new ComputerShopEntities())
             {
