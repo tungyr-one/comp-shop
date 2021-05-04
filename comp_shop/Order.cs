@@ -19,12 +19,7 @@ namespace comp_shop
         {
             this.OrderItems = new HashSet<OrderItem>();
         }
-
-        public override string ToString()
-        {
-            return OrderID.ToString();
-        }
-
+    
         public int OrderID { get; set; }
         public System.DateTime OrderDate { get; set; }
         public string Customer { get; set; }

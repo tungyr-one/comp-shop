@@ -155,7 +155,7 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 // выборка всех промежуточных сущностей заказов с количеством товара, найденного по ID товара
-                List<OrderItem> orderIts = context.OrderItems.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").Include("Seller").ToList();
+                List<OrderItem> orderIts = context.OrderItems.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").ToList();
 
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
@@ -447,17 +447,29 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
+                    //Seller sellerEntry = context.Sellers.FirstOrDefault(c => c.Name == MainForm.currentItemOrdersEntities[0].SellerName);
+
+                    //context.Orders.Add(new Order 
+                    //{
+                    //    OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
+                    //    Customer = MainForm.currentItemOrdersEntities[0].Customer,
+                    //    CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact,
+                    //    Seller = sellerEntry,
+                    //});
+                    //context.SaveChanges();
+
                     // создание нового Order-a
                     var orderEntry = new Order()
                     {
-                        Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName),
                         OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
                         Customer = MainForm.currentItemOrdersEntities[0].Customer,
-                        CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact
+                        CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact,
+                        Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName)
                     };
                     context.Orders.Add(orderEntry);
                     context.SaveChanges();
                     int orderId = orderEntry.OrderID;
+                    //orderEntry.Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName);
 
                     // создание привязанных к созданному Order OrderItems из списка
                     foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
@@ -499,13 +511,16 @@ namespace comp_shop
                 {
                     // поиск Order-a для редактирования
                     var original = context.Orders.Single(x => x.OrderID == orderID);
+
+                    string sellerTempName = MainForm.currentItemOrdersEntities[0].SellerName;
+                    Seller seller = context.Sellers.FirstOrDefault(x => x.Name == sellerTempName);
                     // изменение полей Order-a
                     if (original != null)
-                    {
-                        original.Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName);
+                    {                        
                         original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
                         original.Customer = MainForm.currentItemOrderEntity.Customer;
                         original.CustomerContact = MainForm.currentItemOrderEntity.CustomerContact;
+                        original.Seller = seller;
                     }
                     context.SaveChanges();
 

@@ -156,12 +156,13 @@ namespace comp_shop
                     {
                         MainForm.currentItem = DB.SearchItemByNameOrID(itemName: row.Cells[0].Value.ToString())[0];
                     }
+
                 }
 
                 // обновление данных сущности
                 MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
                 MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
-                MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
+                //MainForm.currentItemOrderEntity.Item = MainForm.currentItem.Name;
                 MainForm.currentItemOrderEntity.Quantity = Convert.ToInt32(numericUpDown1.Text);
                 MainForm.currentItemOrderEntity.Customer = textBox2.Text;
                 MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
