@@ -82,13 +82,13 @@ namespace comp_shop
             if (this.Text == "Создание нового товара")
             {
                 // создание нового экземпляра currentItem
-                MainForm.currentItem = new Item();
+                //MainForm.currentItem = new Item();
                 // формирования объекта класса Item для передачи в БД
-                MainForm.currentItem.Name = textBox1.Text;
-                MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
-                MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
-                MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
-                DB.addItem();
+                //MainForm.currentItem.Name = textBox1.Text;
+                //MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
+                //MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
+                //MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
+                DB.addItem(name: textBox1.Text, price: decimal.Parse(textBox2.Text), category: comboBox1.SelectedItem.ToString(), supplier: comboBox2.SelectedItem.ToString());
             }
             // если добавление товара поставщика
             else if (this.Text == "Добавление товара поставщика")

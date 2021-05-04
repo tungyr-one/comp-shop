@@ -231,15 +231,23 @@ namespace comp_shop
         }
 
         // добавление товара в БД
-        static public void addItem()
+        static public void addItem(string name, decimal price, string category, string supplier)
         {
             try
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    context.Items.Add(MainForm.currentItem);
+                    Category categoryEntry = context.Categories.FirstOrDefault(c => c.Name == category);
+                    Supplier supplierEntry = context.Suppliers.FirstOrDefault(c => c.Name == supplier);
+
+                    context.Items.Add(new Item {
+                        Name = name,
+                        Price = price,
+                        Category = categoryEntry,
+                        Supplier = supplierEntry
+                    });
                     context.SaveChanges();
-                    MessageBox.Show($"Добавлен товар: {MainForm.currentItem.ToString()}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Добавлен товар: {name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
             }
