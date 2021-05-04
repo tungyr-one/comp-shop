@@ -486,7 +486,7 @@ namespace comp_shop
                 // поиск выделенного заказа в БД
                 var selectedOrder = DB.SearchOrderByID(Convert.ToInt32(row.Cells[0].Value));
                 currentItemOrderEntity.OrderID = selectedOrder.OrderID;
-                currentItemOrderEntity.SellerName = selectedOrder.SellerName;
+                currentItemOrderEntity.SellerName = selectedOrder.Seller.ToString();
                 currentItemOrderEntity.OrderDate = selectedOrder.OrderDate.ToString();
                 currentItemOrderEntity.Customer = selectedOrder.Customer;
                 currentItemOrderEntity.CustomerContact = selectedOrder.CustomerContact;
@@ -551,7 +551,7 @@ namespace comp_shop
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 // обновление содержимого таблицы
-                DB.ShowAllItems();
+                dataGridView1.DataSource = DB.ShowAllItems();
 
                 // включение / выключение радиокнопок
                 radioButton1.Checked = true;
@@ -581,7 +581,7 @@ namespace comp_shop
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 // обновление содержимого таблицы
-                DB.ShowAllOrders();
+                dataGridView2.DataSource = DB.ShowAllOrders();
 
                 // включение / выключение радиокнопок
                 radioButton1.Enabled = false;
@@ -610,7 +610,7 @@ namespace comp_shop
             else
             {
                 // обновление содержимого таблицы
-                DB.ShowAllSuppliers();
+                dataGridView3.DataSource = DB.ShowAllSuppliers();
 
 
                 // включение / выключение радиокнопок

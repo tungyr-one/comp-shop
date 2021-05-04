@@ -155,7 +155,7 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 // выборка всех промежуточных сущностей заказов с количеством товара, найденного по ID товара
-                List<OrderItems> orderIts = context.OrderItems1.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").ToList();
+                List<OrderItem> orderIts = context.OrderItems.Where(x => x.ItemID == itemID).Include(x => x.Order).Include("Item").Include("Seller").ToList();
 
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
@@ -167,7 +167,7 @@ namespace comp_shop
                     orderID: orderIts[i].OrderID,
                     quantity: orderIts[i].ItemsQuantity,
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
-                    sellerName: orderIts[i].Order.SellerName,
+                    sellerName: orderIts[i].Order.Seller.ToString(),
                     customer: orderIts[i].Order.Customer,
                     customerContact: orderIts[i].Order.CustomerContact,
                     category: orderIts[i].Item.Category.Name
@@ -184,7 +184,7 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 // выборка всех промежуточных сущностей товаров с количеством товара, найденного по ID заказа
-                List<OrderItems> orderIts = context.OrderItems1.Where(x => x.OrderID == orderID).Include(x => x.Item).Include("Order").ToList();
+                List<OrderItem> orderIts = context.OrderItems.Where(x => x.OrderID == orderID).Include(x => x.Item).Include("Order").ToList();
                 List<ItemOrdersEntity> data = new List<ItemOrdersEntity>();
 
                 // заполнение форм сущности ItemOrdersEntity данными
@@ -195,7 +195,7 @@ namespace comp_shop
                     orderID: orderIts[i].OrderID,
                     quantity: orderIts[i].ItemsQuantity,
                     orderDate: orderIts[i].Order.OrderDate.ToString(),
-                    sellerName: orderIts[i].Order.SellerName,
+                    sellerName: orderIts[i].Order.Seller.ToString(),
                     customer: orderIts[i].Order.Customer,
                     customerContact: orderIts[i].Order.CustomerContact,
                     category: orderIts[i].Item.Category.Name
@@ -318,7 +318,6 @@ namespace comp_shop
                 using (var context = new ComputerShopEntities())
                 {
                     var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
-
                     return data;
                 }
             }
@@ -451,7 +450,7 @@ namespace comp_shop
                     // создание нового Order-a
                     var orderEntry = new Order()
                     {
-                        SellerName = MainForm.currentItemOrdersEntities[0].SellerName,
+                        Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName),
                         OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
                         Customer = MainForm.currentItemOrdersEntities[0].Customer,
                         CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact
@@ -463,14 +462,14 @@ namespace comp_shop
                     // создание привязанных к созданному Order OrderItems из списка
                     foreach (ItemOrdersEntity ordItem in MainForm.currentItemOrdersEntities)
                     {
-                        var orderItemsEntry = new OrderItems()
+                        var orderItemsEntry = new OrderItem()
                         {
                             // нахождение ItemID по имени Item
                             ItemID = DB.SearchItemByNameOrID(itemName:ordItem.Item)[0].ItemID,
                             OrderID = orderId,
                             ItemsQuantity = ordItem.Quantity,
                         };
-                        context.OrderItems1.Add(orderItemsEntry);
+                        context.OrderItems.Add(orderItemsEntry);
                         context.SaveChanges();
                     }
                     MessageBox.Show($"Добавлен заказ: ID{orderId} на {MainForm.currentItemOrdersEntities.Count} товара", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -503,7 +502,7 @@ namespace comp_shop
                     // изменение полей Order-a
                     if (original != null)
                     {
-                        original.SellerName = MainForm.currentItemOrderEntity.SellerName;
+                        original.Seller = searchSeller(MainForm.currentItemOrdersEntities[0].SellerName);
                         original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
                         original.Customer = MainForm.currentItemOrderEntity.Customer;
                         original.CustomerContact = MainForm.currentItemOrderEntity.CustomerContact;
@@ -518,7 +517,7 @@ namespace comp_shop
                     // добавление новых сущностей товаров в список товара заказа
                     foreach (ItemOrdersEntity itOrd in MainForm.currentItemOrdersEntities)
                     {
-                        OrderItems temp = new OrderItems();
+                        OrderItem temp = new OrderItem();
                         temp.ItemID = SearchItemByNameOrID(itemName: itOrd.Item)[0].ItemID;
                         temp.OrderID = itOrd.OrderID;
                         temp.ItemsQuantity = itOrd.Quantity;
@@ -549,7 +548,7 @@ namespace comp_shop
             using (var context = new ComputerShopEntities())
             {
                 var original = context.Orders.Find(toRemove.OrderID);
-                context.OrderItems1.RemoveRange(original.OrderItems);
+                context.OrderItems.RemoveRange(original.OrderItems);
                 context.Entry(original).State = EntityState.Deleted;
                 context.SaveChanges();
                 MessageBox.Show("Заказ с ID " + toRemove.OrderID + " удален из базы данных!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -564,7 +563,7 @@ namespace comp_shop
 
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Orders.ToList<Order>();
+                var data = context.Orders.Include("Seller").ToList<Order>();
                 return data;
             }
         }
@@ -574,8 +573,11 @@ namespace comp_shop
         {
             using (var context = new ComputerShopEntities())
             {
-                var data = context.Orders.Find(orderId);
-                return data;
+                var order = context.Orders.Find(orderId);
+                context.Entry(order).Reference(p => p.Seller).Load();
+                //var order = context.Orders.Where(x => x.OrderID == orderId).Include("Seller");
+                //var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
+                return order;                
             }
         }
 
@@ -587,7 +589,7 @@ namespace comp_shop
             {
                 var data = context.Orders.Where(x => dateTo >= x.OrderDate)
                                         .Where(x => x.OrderDate >= dateFrom)
-                                        .Where(x => x.SellerName == itemSeller)
+                                        .Where(x => x.Seller.Name == itemSeller)
                                         .ToList<Order>();
 
                 return data;
@@ -709,17 +711,35 @@ namespace comp_shop
         // SELLER
 
         // создание списка продавцов
-        static public List<string> AllSellers()
+        static public List<Seller> AllSellers()
         {
-            List<string> sellers = new List<string>();
-            foreach (Order ord in ShowAllOrders())
+            //List<string> sellers = new List<string>();
+            //foreach (Order ord in ShowAllOrders())
+            //{
+            //    if(!sellers.Contains(ord.SellerName))
+            //    {
+            //        sellers.Add(ord.SellerName);
+            //    }
+            //}
+            //return sellers;
+            ComputerShopEntities dataEntities = new ComputerShopEntities();
+
+            using (var context = new ComputerShopEntities())
             {
-                if(!sellers.Contains(ord.SellerName))
-                {
-                    sellers.Add(ord.SellerName);
-                }
+                var data = context.Sellers.ToList<Seller>();
+                return data;
             }
-            return sellers;
+
+        }
+
+        // поиск продавца
+        static public Seller searchSeller(string sellerToFind)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                Seller seller = context.Sellers.FirstOrDefault(c => c.Name == sellerToFind);
+                return seller;
+            }
         }
     }
 }

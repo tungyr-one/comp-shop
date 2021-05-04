@@ -12,25 +12,12 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class Seller
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
+        public Seller()
         {
-            this.OrderItems = new HashSet<OrderItem>();
-        }
-
-        // конструктор копирования
-        public Item(Item obj)
-        {
-            this.ItemID = obj.ItemID;
-            this.Name = obj.Name;
-            this.Price = obj.Price;
-            this.CategoryID = obj.CategoryID;
-            this.SupplierID = obj.SupplierID;
-            this.OrderItems = obj.OrderItems;
-            this.Supplier = obj.Supplier;
-            this.Category = obj.Category;
+            this.Orders = new HashSet<Order>();
         }
 
         public override string ToString()
@@ -38,15 +25,11 @@ namespace comp_shop
             return Name;
         }
 
-        public int ItemID { get; set; }
+        public int SellerID { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int CategoryID { get; set; }
-        public Nullable<int> SupplierID { get; set; }
+        public string Contacts { get; set; }
     
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

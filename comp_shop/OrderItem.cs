@@ -12,7 +12,7 @@ namespace comp_shop
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderItems
+    public partial class OrderItem
     {
         public int ItemID { get; set; }
         public int OrderID { get; set; }

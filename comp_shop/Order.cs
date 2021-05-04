@@ -17,20 +17,22 @@ namespace comp_shop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderItems = new HashSet<OrderItems>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
+
         public override string ToString()
         {
-            return "Id " + OrderID + ": " + Customer;
+            return OrderID.ToString();
         }
 
         public int OrderID { get; set; }
-        public string SellerName { get; set; }
         public System.DateTime OrderDate { get; set; }
         public string Customer { get; set; }
         public string CustomerContact { get; set; }
+        public int SellerID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual Seller Seller { get; set; }
     }
 }
