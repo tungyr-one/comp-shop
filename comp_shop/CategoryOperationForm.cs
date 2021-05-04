@@ -23,6 +23,7 @@ namespace comp_shop
         // загрузка окна
         private void CategoryOperationForm_Load(object sender, EventArgs e)
         {
+            // обновление и загрузка данных в таблицу категорий
             DataGridViewUpdate();
         }
 
@@ -60,12 +61,14 @@ namespace comp_shop
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
+        // нажатие кнопки отмена
         private void button2_Click(object sender, EventArgs e)
         {
             newCategory = null;
             this.Close();
         }
 
+        // радиокнопка добавления категории
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -73,6 +76,7 @@ namespace comp_shop
             button1.Text = "Добавить";
         }
 
+        // радиокнопка удаления категории
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
 

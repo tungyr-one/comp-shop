@@ -36,7 +36,7 @@ namespace comp_shop
         }
 
         // установка значений полей при загрузке
-        private void NewItemForm_Load(object sender, EventArgs e)
+        private void itemOperationFormLoad(object sender, EventArgs e)
         {
             // если создание товара
             if (this.Text == "Создание нового товара")

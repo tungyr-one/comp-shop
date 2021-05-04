@@ -55,60 +55,47 @@
             this.findButton = new System.Windows.Forms.Button();
             this.edit = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьТоварToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьТоварToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.копироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вырезатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.параметрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.шрифтToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.цветФонаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.обАвтореToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadAll = new System.Windows.Forms.Button();
             this.remove = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.supplierIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customerContactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.supplierIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -320,103 +307,6 @@
             this.add.UseVisualStyleBackColor = true;
             this.add.Click += new System.EventHandler(this.Add_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.правкаToolStripMenuItem,
-            this.параметрыToolStripMenuItem,
-            this.справкаToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1451, 24);
-            this.menuStrip1.TabIndex = 11;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.редактироватьТоварToolStripMenuItem,
-            this.добавитьТоварToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.fileToolStripMenuItem.Text = "Файл";
-            // 
-            // редактироватьТоварToolStripMenuItem
-            // 
-            this.редактироватьТоварToolStripMenuItem.Name = "редактироватьТоварToolStripMenuItem";
-            this.редактироватьТоварToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.редактироватьТоварToolStripMenuItem.Text = "Редактировать товар";
-            // 
-            // добавитьТоварToolStripMenuItem
-            // 
-            this.добавитьТоварToolStripMenuItem.Name = "добавитьТоварToolStripMenuItem";
-            this.добавитьТоварToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.добавитьТоварToolStripMenuItem.Text = "Добавить товар";
-            // 
-            // правкаToolStripMenuItem
-            // 
-            this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.копироватьToolStripMenuItem,
-            this.вырезатьToolStripMenuItem});
-            this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.правкаToolStripMenuItem.Text = "Правка";
-            // 
-            // копироватьToolStripMenuItem
-            // 
-            this.копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-            this.копироватьToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.копироватьToolStripMenuItem.Text = "Копировать";
-            // 
-            // вырезатьToolStripMenuItem
-            // 
-            this.вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
-            this.вырезатьToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.вырезатьToolStripMenuItem.Text = "Вырезать";
-            // 
-            // параметрыToolStripMenuItem
-            // 
-            this.параметрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.шрифтToolStripMenuItem,
-            this.цветФонаToolStripMenuItem});
-            this.параметрыToolStripMenuItem.Name = "параметрыToolStripMenuItem";
-            this.параметрыToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.параметрыToolStripMenuItem.Text = "Параметры";
-            // 
-            // шрифтToolStripMenuItem
-            // 
-            this.шрифтToolStripMenuItem.Name = "шрифтToolStripMenuItem";
-            this.шрифтToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.шрифтToolStripMenuItem.Text = "Шрифт";
-            // 
-            // цветФонаToolStripMenuItem
-            // 
-            this.цветФонаToolStripMenuItem.Name = "цветФонаToolStripMenuItem";
-            this.цветФонаToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.цветФонаToolStripMenuItem.Text = "Цвет фона";
-            // 
-            // справкаToolStripMenuItem
-            // 
-            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.обАвтореToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem});
-            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.справкаToolStripMenuItem.Text = "Справка";
-            // 
-            // обАвтореToolStripMenuItem
-            // 
-            this.обАвтореToolStripMenuItem.Name = "обАвтореToolStripMenuItem";
-            this.обАвтореToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.обАвтореToolStripMenuItem.Text = "Об авторе";
-            // 
-            // оПрограммеToolStripMenuItem
-            // 
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.оПрограммеToolStripMenuItem.Text = "О программе";
-            // 
             // loadAll
             // 
             this.loadAll.Location = new System.Drawing.Point(362, 662);
@@ -502,6 +392,37 @@
             this.dataGridView3.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView3_DataError);
             this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
             // 
+            // supplierIDDataGridViewTextBoxColumn
+            // 
+            this.supplierIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.supplierIDDataGridViewTextBoxColumn.DataPropertyName = "SupplierID";
+            this.supplierIDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.supplierIDDataGridViewTextBoxColumn.Name = "supplierIDDataGridViewTextBoxColumn";
+            this.supplierIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.supplierIDDataGridViewTextBoxColumn.Width = 53;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Имя поставщика";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn1.Width = 159;
+            // 
+            // contactsDataGridViewTextBoxColumn
+            // 
+            this.contactsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.contactsDataGridViewTextBoxColumn.DataPropertyName = "Contacts";
+            this.contactsDataGridViewTextBoxColumn.HeaderText = "Контакты поставщика";
+            this.contactsDataGridViewTextBoxColumn.Name = "contactsDataGridViewTextBoxColumn";
+            this.contactsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contactsDataGridViewTextBoxColumn.Width = 203;
+            // 
+            // supplierBindingSource
+            // 
+            this.supplierBindingSource.DataSource = typeof(comp_shop.Supplier);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView2);
@@ -552,6 +473,55 @@
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView2_DataError);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "OrderID";
+            this.dataGridViewTextBoxColumn3.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "OrderDate";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Дата заказа";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 127;
+            // 
+            // customerDataGridViewTextBoxColumn
+            // 
+            this.customerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.customerDataGridViewTextBoxColumn.DataPropertyName = "Customer";
+            this.customerDataGridViewTextBoxColumn.HeaderText = "Покупатель";
+            this.customerDataGridViewTextBoxColumn.Name = "customerDataGridViewTextBoxColumn";
+            this.customerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.customerDataGridViewTextBoxColumn.Width = 135;
+            // 
+            // customerContactDataGridViewTextBoxColumn
+            // 
+            this.customerContactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.customerContactDataGridViewTextBoxColumn.DataPropertyName = "CustomerContact";
+            this.customerContactDataGridViewTextBoxColumn.HeaderText = "Контакты покупателя";
+            this.customerContactDataGridViewTextBoxColumn.Name = "customerContactDataGridViewTextBoxColumn";
+            this.customerContactDataGridViewTextBoxColumn.ReadOnly = true;
+            this.customerContactDataGridViewTextBoxColumn.Width = 199;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "SellerName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Имя продавца";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 141;
+            // 
+            // orderBindingSource
+            // 
+            this.orderBindingSource.DataSource = typeof(comp_shop.Order);
             // 
             // tabPage1
             // 
@@ -605,18 +575,6 @@
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(362, 27);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1077, 631);
-            this.tabControl1.TabIndex = 18;
-            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
-            // 
             // itemIDDataGridViewTextBoxColumn
             // 
             this.itemIDDataGridViewTextBoxColumn.DataPropertyName = "ItemID";
@@ -658,91 +616,34 @@
             // 
             this.itemBindingSource.DataSource = typeof(comp_shop.Item);
             // 
-            // dataGridViewTextBoxColumn3
+            // tabControl1
             // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "OrderID";
-            this.dataGridViewTextBoxColumn3.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 53;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(362, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1077, 631);
+            this.tabControl1.TabIndex = 18;
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
-            // dataGridViewTextBoxColumn9
+            // button1
             // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "OrderDate";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Дата заказа";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 127;
-            // 
-            // customerDataGridViewTextBoxColumn
-            // 
-            this.customerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.customerDataGridViewTextBoxColumn.DataPropertyName = "Customer";
-            this.customerDataGridViewTextBoxColumn.HeaderText = "Покупатель";
-            this.customerDataGridViewTextBoxColumn.Name = "customerDataGridViewTextBoxColumn";
-            this.customerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.customerDataGridViewTextBoxColumn.Width = 135;
-            // 
-            // customerContactDataGridViewTextBoxColumn
-            // 
-            this.customerContactDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.customerContactDataGridViewTextBoxColumn.DataPropertyName = "CustomerContact";
-            this.customerContactDataGridViewTextBoxColumn.HeaderText = "Контакты покупателя";
-            this.customerContactDataGridViewTextBoxColumn.Name = "customerContactDataGridViewTextBoxColumn";
-            this.customerContactDataGridViewTextBoxColumn.ReadOnly = true;
-            this.customerContactDataGridViewTextBoxColumn.Width = 199;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "SellerName";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Имя продавца";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 141;
-            // 
-            // orderBindingSource
-            // 
-            this.orderBindingSource.DataSource = typeof(comp_shop.Order);
-            // 
-            // supplierIDDataGridViewTextBoxColumn
-            // 
-            this.supplierIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.supplierIDDataGridViewTextBoxColumn.DataPropertyName = "SupplierID";
-            this.supplierIDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.supplierIDDataGridViewTextBoxColumn.Name = "supplierIDDataGridViewTextBoxColumn";
-            this.supplierIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.supplierIDDataGridViewTextBoxColumn.Width = 53;
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Имя поставщика";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn1.Width = 159;
-            // 
-            // contactsDataGridViewTextBoxColumn
-            // 
-            this.contactsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.contactsDataGridViewTextBoxColumn.DataPropertyName = "Contacts";
-            this.contactsDataGridViewTextBoxColumn.HeaderText = "Контакты поставщика";
-            this.contactsDataGridViewTextBoxColumn.Name = "contactsDataGridViewTextBoxColumn";
-            this.contactsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactsDataGridViewTextBoxColumn.Width = 203;
-            // 
-            // supplierBindingSource
-            // 
-            this.supplierBindingSource.DataSource = typeof(comp_shop.Supplier);
+            this.button1.Location = new System.Drawing.Point(601, 662);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(280, 37);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Управление категориями";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1451, 724);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.remove);
             this.Controls.Add(this.tabControl1);
@@ -753,9 +654,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainForm";
             this.Text = "Компьютерный магазин БД";
@@ -765,20 +664,18 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -798,19 +695,6 @@
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button edit;
         private System.Windows.Forms.Button add;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьТоварToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьТоварToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem копироватьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem вырезатьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem параметрыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem шрифтToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem цветФонаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem обАвтореToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.TextBox searchBox2;
         private System.Windows.Forms.Label searchParam2;
         private System.Windows.Forms.TextBox searchBox1;
@@ -864,6 +748,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn contactsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -637,6 +637,11 @@ namespace comp_shop
             }
         }
 
-
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            // создание экземпляра окна управления категориями
+            CategoryOperationForm CategoryForm = new CategoryOperationForm();
+            CategoryForm.ShowDialog();
+        }
     }
 }

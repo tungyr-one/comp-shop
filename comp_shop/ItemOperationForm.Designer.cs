@@ -199,7 +199,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "NewItemForm";
             this.Text = "Добавление/изменение товара";
-            this.Load += new System.EventHandler(this.NewItemForm_Load);
+            this.Load += new System.EventHandler(this.itemOperationFormLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

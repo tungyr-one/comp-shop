@@ -290,7 +290,7 @@ namespace comp_shop
                     context.Entry(original).Collection(r => r.OrderItems).CurrentValue = null;
                     context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
-                    MessageBox.Show(removeEntry.Name + " удален из базы!");
+                    MessageBox.Show($"{removeEntry.Name} удален из базы!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch
@@ -626,7 +626,6 @@ namespace comp_shop
                     context.SaveChanges();
 
                     MessageBox.Show($"Добавлен поставщик:  {newSupplier.Name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    context.SaveChanges();
                 }
                 else
                 {
@@ -646,7 +645,7 @@ namespace comp_shop
                     context.Items.RemoveRange(original.Items);
                     context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
-                    MessageBox.Show($"{toRemove.Name} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Поставщик {toRemove.Name} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }
