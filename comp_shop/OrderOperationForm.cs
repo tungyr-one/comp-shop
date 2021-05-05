@@ -20,6 +20,9 @@ namespace comp_shop
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
                 comboBox1.DataSource = DB.ShowAllSellers();
+
+                comboBox1.ValueMember = "Name";
+                comboBox1.DisplayMember = "Name";
             }
         }
 
@@ -32,7 +35,7 @@ namespace comp_shop
                 // очистка текущего товара
                 MainForm.currentItem = null;
                 // установка значений для полей редактирования
-                comboBox1.SelectedItem = MainForm.currentItemOrderEntity.SellerName;
+                comboBox1.SelectedValue = MainForm.currentItemOrderEntity.SellerName;
                 dateTimePicker1.Value = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
                 textBox2.Text = MainForm.currentItemOrderEntity.Customer;
                 textBox3.Text = MainForm.currentItemOrderEntity.CustomerContact;
@@ -103,7 +106,6 @@ namespace comp_shop
                     dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
                     dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
                 }
-
             }
             catch
             {
@@ -123,10 +125,6 @@ namespace comp_shop
             // создание нового заказа
             if (this.Text == "Создание нового заказа")
             {
-                //MainForm.currentItemOrderEntity.SellerName = comboBox1.SelectedItem.ToString();
-                //MainForm.currentItemOrderEntity.OrderDate = dateTimePicker1.Value.ToString();
-                //MainForm.currentItemOrderEntity.Customer = textBox2.Text;
-                //MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
                 DB.AddOrder(orderDate: dateTimePicker1.Value, customer: textBox2.Text, customerContact: textBox3.Text, seller: comboBox1.SelectedItem.ToString());
                 this.Close();
             }

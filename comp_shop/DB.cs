@@ -447,7 +447,7 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    //Seller sellerEntry = context.Sellers.FirstOrDefault(c => c.Name == MainForm.currentItemOrdersEntities[0].SellerName);
+                    Seller sellerEntry = context.Sellers.FirstOrDefault(c => c.Name == seller);
 
                     //context.Orders.Add(new Order 
                     //{
@@ -464,7 +464,7 @@ namespace comp_shop
                         OrderDate = orderDate,
                         Customer = customer,
                         CustomerContact = customerContact,
-                        Seller = SearchSeller(seller)
+                        Seller = sellerEntry
                     };
                     context.Orders.Add(orderEntry);
                     context.SaveChanges();

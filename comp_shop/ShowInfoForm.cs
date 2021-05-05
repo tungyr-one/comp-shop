@@ -63,7 +63,7 @@ namespace comp_shop
             DataGridViewHeadersRename();
 
             // настройка ширины колонок
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AutoResizeColumns();
         }
 

@@ -148,7 +148,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(100, 390);
+            this.button3.Location = new System.Drawing.Point(100, 389);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(128, 53);
             this.button3.TabIndex = 12;
@@ -158,7 +158,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(321, 390);
+            this.button4.Location = new System.Drawing.Point(311, 390);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(145, 52);
             this.button4.TabIndex = 13;
@@ -176,7 +176,7 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // NewItemForm
+            // ItemOperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -197,7 +197,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "NewItemForm";
+            this.Name = "ItemOperationForm";
             this.Text = "Добавление/изменение товара";
             this.Load += new System.EventHandler(this.itemOperationFormLoad);
             this.ResumeLayout(false);
