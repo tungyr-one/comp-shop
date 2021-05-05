@@ -57,14 +57,32 @@ namespace comp_shop
             dateTimePicker2.Enabled = false;
             dateTimePicker2.Visible = false;
 
-            dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllOrders();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
-            // загрузка списка заказов в DataGridView
+            UpdateMainForm();
+
+            // добавление кнопок для вызова дополнительной информации
             DataGridViewOrdersForItems();
             DataGridViewItemsForSuppliers();
             DataGridViewItemsForOrders();
+        }
 
+        // обновление данных всех таблиц
+        public void UpdateMainForm()
+        {
+            dataGridView1.DataSource = DB.ShowAllItems();
+            dataGridView2.DataSource = DB.ShowAllOrders();
+            dataGridView3.DataSource = DB.ShowAllSuppliers();
+
+            // настройка ширины колонок
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoResizeColumns();            
+            
+            // настройка ширины колонок
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.AutoResizeColumns();            
+            
+            // настройка ширины колонок
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.AutoResizeColumns();
         }
 
         //добавление кнопок в DataGridView1 для вызова дополнительной информации о продажах
@@ -113,9 +131,7 @@ namespace comp_shop
         // загрузка всех записей во всех вкладках
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllOrders();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            UpdateMainForm();
         }
 
         // нажатие кнопки добавить 
@@ -130,8 +146,6 @@ namespace comp_shop
                     Text = "Создание нового товара"
                 };
                 newItemForm.ShowDialog();
-                //обновление списка товаров после внесения нового товара
-                dataGridView1.DataSource = DB.ShowAllItems();
             }
             // вкладка заказы
             else if (tabControl1.SelectedTab.Name == "tabPage2")
@@ -144,8 +158,6 @@ namespace comp_shop
                     Text = "Создание нового заказа"
                 };
                 orderForm.ShowDialog();
-                //обновление списка заказов
-                dataGridView2.DataSource = DB.ShowAllOrders();
             }
             // вкладка поставщики
             else
@@ -156,9 +168,8 @@ namespace comp_shop
                     Text = "Новый поставщик"
                 };
                 supplierForm.ShowDialog();
-                //обновление списка поставщиков
-                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
+            UpdateMainForm();
         }
 
         // нажатие кнопки редактировать
@@ -171,7 +182,6 @@ namespace comp_shop
                 ItemOperationForm editItemForm = new ItemOperationForm(false);
                 editItemForm.Text = "Редактирование товара";
                 editItemForm.ShowDialog();
-                dataGridView1.DataSource = DB.ShowAllItems();
             }
             //заказ
             else if (tabControl1.SelectedTab.Name == "tabPage2")
@@ -181,8 +191,6 @@ namespace comp_shop
                 OrderOperationForm orderForm = new OrderOperationForm();
                 orderForm.Text = "Редактирование заказа";
                 orderForm.ShowDialog();
-                //обновление списка заказов
-                dataGridView2.DataSource = DB.ShowAllOrders();
             }
             // вкладка поставщики
             else
@@ -193,9 +201,8 @@ namespace comp_shop
                     Text = "Изменить поставщика"
                 };
                 supplierForm.ShowDialog();
-                // обновление списка поставщиков
-                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
+            UpdateMainForm();
         }
 
         //нажатие кнопки удалить
@@ -205,20 +212,18 @@ namespace comp_shop
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
                 DB.RemoveItem(currentItem);
-                dataGridView1.DataSource = DB.ShowAllItems();
             }
             // вкладка заказы
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
                 DB.RemoveOrder(currentItemOrderEntity);
-                dataGridView2.DataSource = DB.ShowAllOrders();
             }
             // вкладка поставщики
             else
             {
                 DB.RemoveSupplier(currentSupplier);
-                dataGridView3.DataSource = DB.ShowAllSuppliers();
             }
+            UpdateMainForm();
         }
 
         // нажатие кнопки show orders в ячейках закладки товары
@@ -391,6 +396,7 @@ namespace comp_shop
             {
                 searchParam1.Text = "Категория: ";
                 searchParam2.Text = "Цена от:";
+                searchParam3.Text = "Цена до:";
                 searchParam2.Visible = true;
                 searchBox2.Visible = true;
                 searchParam3.Visible = true;
@@ -550,9 +556,6 @@ namespace comp_shop
             // вкладка товары
             if (tabControl1.SelectedTab.Name == "tabPage1")
             {
-                // обновление содержимого таблицы
-                dataGridView1.DataSource = DB.ShowAllItems();
-
                 // включение / выключение радиокнопок
                 radioButton1.Checked = true;
 
@@ -580,9 +583,6 @@ namespace comp_shop
             //вкладка продажи
             else if (tabControl1.SelectedTab.Name == "tabPage2")
             {
-                // обновление содержимого таблицы
-                dataGridView2.DataSource = DB.ShowAllOrders();
-
                 // включение / выключение радиокнопок
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
@@ -609,10 +609,6 @@ namespace comp_shop
             // вкладка поставщики
             else
             {
-                // обновление содержимого таблицы
-                dataGridView3.DataSource = DB.ShowAllSuppliers();
-
-
                 // включение / выключение радиокнопок
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
@@ -635,6 +631,7 @@ namespace comp_shop
                 add.Text = "Добавить нового поставщика";
                 remove.Text = "Удалить поставщика";
             }
+            UpdateMainForm();
         }
 
         // нажатие кнопки управления категориями

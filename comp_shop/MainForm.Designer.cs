@@ -67,6 +67,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.itemIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,7 +84,6 @@
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -310,7 +310,7 @@
             // 
             // loadAll
             // 
-            this.loadAll.Location = new System.Drawing.Point(362, 662);
+            this.loadAll.Location = new System.Drawing.Point(399, 660);
             this.loadAll.Name = "loadAll";
             this.loadAll.Size = new System.Drawing.Size(232, 37);
             this.loadAll.TabIndex = 15;
@@ -387,7 +387,7 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(1063, 592);
+            this.dataGridView3.Size = new System.Drawing.Size(1063, 599);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView3_DataError);
@@ -438,7 +438,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1063, 592);
+            this.dataGridView2.Size = new System.Drawing.Size(1063, 599);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView2_DataError);
@@ -510,13 +510,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(601, 662);
+            this.button1.Location = new System.Drawing.Point(730, 664);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(280, 37);
             this.button1.TabIndex = 21;
             this.button1.Text = "Управление категориями";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1096, 664);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(280, 37);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "Управление продавцами";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // itemIDDataGridViewTextBoxColumn
             // 
@@ -608,44 +618,31 @@
             // 
             // supplierIDDataGridViewTextBoxColumn
             // 
-            this.supplierIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.supplierIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.supplierIDDataGridViewTextBoxColumn.DataPropertyName = "SupplierID";
             this.supplierIDDataGridViewTextBoxColumn.HeaderText = "ID";
             this.supplierIDDataGridViewTextBoxColumn.Name = "supplierIDDataGridViewTextBoxColumn";
             this.supplierIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.supplierIDDataGridViewTextBoxColumn.Width = 53;
             // 
             // nameDataGridViewTextBoxColumn1
             // 
-            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn1.HeaderText = "Имя поставщика";
             this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
             this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn1.Width = 159;
             // 
             // contactsDataGridViewTextBoxColumn
             // 
-            this.contactsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.contactsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.contactsDataGridViewTextBoxColumn.DataPropertyName = "Contacts";
             this.contactsDataGridViewTextBoxColumn.HeaderText = "Контакты поставщика";
             this.contactsDataGridViewTextBoxColumn.Name = "contactsDataGridViewTextBoxColumn";
             this.contactsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contactsDataGridViewTextBoxColumn.Width = 203;
             // 
             // supplierBindingSource
             // 
             this.supplierBindingSource.DataSource = typeof(comp_shop.Supplier);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(887, 662);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(280, 37);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Управление продавцами";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // MainForm
             // 
@@ -751,9 +748,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn supplierIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contactsDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
@@ -761,6 +755,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn customerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn customerContactDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn supplierIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contactsDataGridViewTextBoxColumn;
     }
 }
 

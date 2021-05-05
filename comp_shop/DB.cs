@@ -449,15 +449,6 @@ namespace comp_shop
                 {
                     Seller sellerEntry = context.Sellers.FirstOrDefault(c => c.Name == seller);
 
-                    //context.Orders.Add(new Order 
-                    //{
-                    //    OrderDate = Convert.ToDateTime(MainForm.currentItemOrdersEntities[0].OrderDate),
-                    //    Customer = MainForm.currentItemOrdersEntities[0].Customer,
-                    //    CustomerContact = MainForm.currentItemOrdersEntities[0].CustomerContact,
-                    //    Seller = sellerEntry,
-                    //});
-                    //context.SaveChanges();
-
                     // создание нового Order-a
                     var orderEntry = new Order()
                     {
@@ -665,9 +656,11 @@ namespace comp_shop
             {
                 using (var context = new ComputerShopEntities())
                 {
-                    var original = context.Suppliers.Find(toRemove.SupplierID);
-                    context.Items.RemoveRange(original.Items);
-                    context.Entry(original).State = EntityState.Deleted;
+                    context.Suppliers.Remove(context.Suppliers.FirstOrDefault(a => a.Name == toRemove.Name));
+                    // удаление связанных товаров
+                    //var original = context.Suppliers.Find(toRemove.SupplierID);
+                    //context.Items.RemoveRange(original.Items);
+                    //context.Entry(original).State = EntityState.Deleted;
                     context.SaveChanges();
                     MessageBox.Show($"Поставщик {toRemove.Name} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
