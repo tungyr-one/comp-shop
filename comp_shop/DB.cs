@@ -730,7 +730,7 @@ namespace comp_shop
         }
 
         // добавление продавца
-        static public void AddSeller(string name, string contacts)
+        static public void AddSeller(string name, string contacts, string accountType, string pass)
         {
             using (var context = new ComputerShopEntities())
             {
@@ -740,15 +740,17 @@ namespace comp_shop
                     context.Sellers.Add(new Seller
                     {
                         Name = name,
-                        Contacts = contacts
+                        Contacts = contacts,
+                        AccountType = accountType,
+                        Password = pass
                     });
                     context.SaveChanges();
 
-                    MessageBox.Show($"Добавлен продавец:  {name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Добавлен аккаунт:  {name}", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Такой продавец уже существует!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Такой аккаунт уже существует!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

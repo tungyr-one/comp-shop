@@ -19,8 +19,13 @@ namespace comp_shop
             // заполнение данными комбобоксов
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
-                comboBox1.DataSource = DB.ShowAllSellers();
+                List<Seller> dataSource = DB.ShowAllSellers();
 
+                // удаление админа из списка всех продавцов
+                var adminToRemove = dataSource.Single(r => r.SellerID == 1);
+                dataSource.Remove(adminToRemove);
+
+                comboBox1.DataSource = dataSource;
                 comboBox1.ValueMember = "Name";
                 comboBox1.DisplayMember = "Name";
             }
