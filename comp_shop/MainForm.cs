@@ -46,9 +46,20 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
+        public void AppEnter()
+        {
+            entryForm newEntryForm = new entryForm();
+            newEntryForm.ShowDialog();
+            if (newEntryForm.login == "exitApp")
+            {
+                this.Close();
+            }
+        }
+
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
+            AppEnter();
             radioButton5.Enabled = false;
             radioButton6.Enabled = false;
 
