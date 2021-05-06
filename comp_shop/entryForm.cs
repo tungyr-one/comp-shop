@@ -12,34 +12,55 @@ namespace comp_shop
 {
     public partial class entryForm : Form
     {
-        public string login = "";
-        public string password = "";
+        // переменная состояния логина
+        internal bool entrySuccess = false;
 
         public entryForm()
         {
             InitializeComponent();
         }
 
+        // обработка кнопки войти
         private void button1_Click(object sender, EventArgs e)
         {
-            login = textBox1.Text;
-            password = textBox2.Text;
+            // поиск в БД юзера
+            MainForm.currentAccount = DB.SearchSeller(textBox1.Text);
 
-            if (login != "admin" && password != "0000")
+            // если юзера не нашлось
+            if (MainForm.currentAccount == null)
             {
-                MessageBox.Show("Wrong credentials!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Нет такого пользователя!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                entrySuccess = false;
                 return;
             }
-            else
+
+            // если пароль неверный
+            else if (MainForm.currentAccount.Password != textBox2.Text)
             {
-                this.Close();
+                MessageBox.Show("Неверный пароль!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                entrySuccess = false;
+                return;
+            }
+            else {
+                entrySuccess = true;
+                this.Close(); 
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            login = "exitApp";
+            entrySuccess = false;            
             this.Close();
+        }
+
+        // обработка нажатия Enter
+        private void entryForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+                if (e.KeyCode == Keys.Enter)
+                {
+                    button1.PerformClick();
+                }
         }
     }
 }

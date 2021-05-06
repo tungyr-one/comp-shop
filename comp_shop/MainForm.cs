@@ -35,7 +35,7 @@ namespace comp_shop
         public static Item currentItem = new Item();
         public static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
         public static Supplier currentSupplier = new Supplier();
-        public static Seller currentSeller = new Seller();
+        public static Seller currentAccount = new Seller();
 
         // списки для обмена данными с формами связанных данных
         public static List<Item> currentItems = new List<Item>();
@@ -47,21 +47,12 @@ namespace comp_shop
             radioButton1.Checked = true;
         }
 
-        public void AppEnter()
-        {
-            entryForm newEntryForm = new entryForm();
-            newEntryForm.ShowDialog();
-            if (newEntryForm.login == "exitApp")
-            {
-                this.Close();
-            }
-        }
 
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
             // метод входа в приложение
-            //AppEnter();
+            AppEnter();
 
             radioButton5.Enabled = false;
             radioButton6.Enabled = false;
@@ -78,6 +69,39 @@ namespace comp_shop
             DataGridViewItemsForSuppliers();
             DataGridViewItemsForOrders();
         }
+
+        public void AppEnter()
+        {
+            entryForm newEntryForm = new entryForm();
+            newEntryForm.ShowDialog();
+            if (!newEntryForm.entrySuccess)
+            {
+                this.Close();
+            }
+
+            // отключение определенных кнопок если вошел не админ
+            if (currentAccount.Name != "admin")
+            {
+                removeButton.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = false;
+            }
+            else
+                {
+                removeButton.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+            }
+        }
+
+        // нажатие кнопки смена пользователя
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AppEnter();
+            this.Show();
+        }
+
 
         // обновление данных всех таблиц
         public void UpdateMainForm()
@@ -591,7 +615,7 @@ namespace comp_shop
                 // изменение названия кнопок
                 edit.Text = "Редактировать товар";
                 add.Text = "Добавить новый товар";
-                remove.Text = "Удалить товар";
+                removeButton.Text = "Удалить товар";
             }
 
             //вкладка продажи
@@ -617,7 +641,7 @@ namespace comp_shop
                 // изменение названия кнопок
                 edit.Text = "Редактировать заказ";
                 add.Text = "Добавить новый заказ";
-                remove.Text = "Удалить заказ";
+                removeButton.Text = "Удалить заказ";
             }
             
             // вкладка поставщики
@@ -643,7 +667,7 @@ namespace comp_shop
                 // изменение названия кнопок
                 edit.Text = "Изменить поставщика";
                 add.Text = "Добавить нового поставщика";
-                remove.Text = "Удалить поставщика";
+                removeButton.Text = "Удалить поставщика";
             }
             UpdateMainForm();
         }
@@ -663,5 +687,7 @@ namespace comp_shop
             SellerOperationForm SellerForm = new SellerOperationForm();
             SellerForm.ShowDialog();
         }
+
+
     }
 }

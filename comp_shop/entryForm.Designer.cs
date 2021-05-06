@@ -39,7 +39,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(181, 60);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(5);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(207, 26);
             this.textBox1.TabIndex = 0;
@@ -47,7 +47,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(181, 134);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(5);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(207, 26);
             this.textBox2.TabIndex = 1;
@@ -75,7 +75,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(74, 220);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 35);
             this.button1.TabIndex = 4;
@@ -86,7 +86,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(298, 220);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 35);
             this.button2.TabIndex = 5;
@@ -106,9 +106,10 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "entryForm";
             this.Text = "Вход в приложение";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.entryForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

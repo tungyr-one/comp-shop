@@ -38,6 +38,19 @@ namespace comp_shop
         // установка значений полей при загрузке
         private void itemOperationFormLoad(object sender, EventArgs e)
         {
+            // отключение кнопок если вошел не админ
+            if (MainForm.currentAccount.Name != "admin")
+            {
+                button3.Enabled = false;
+                button4.Enabled = false;
+            }
+            else
+            {
+                button3.Enabled = true;
+                button4.Enabled = true;
+            }
+
+
             // если создание товара
             if (this.Text == "Создание нового товара")
             {
