@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace comp_shop
 {
-    class DB    
+    class DB
     {
         #region
         //_______________________________________________________________________________
@@ -406,7 +406,7 @@ namespace comp_shop
                             it.Category = context.Categories.FirstOrDefault(a => a.Name == "no category");
                         }
                     }
-        
+
                     context.Categories.Remove(context.Categories.FirstOrDefault(a => a.Name == categoryName));
                     context.SaveChanges();
                     MessageBox.Show($"Категория {categoryName} удалена!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -468,7 +468,7 @@ namespace comp_shop
                         var orderItemsEntry = new OrderItem()
                         {
                             // нахождение ItemID по имени Item
-                            ItemID = DB.SearchItemByNameOrID(itemName:ordItem.Item)[0].ItemID,
+                            ItemID = DB.SearchItemByNameOrID(itemName: ordItem.Item)[0].ItemID,
                             OrderID = orderId,
                             ItemsQuantity = ordItem.Quantity,
                         };
@@ -507,7 +507,7 @@ namespace comp_shop
                     Seller seller = context.Sellers.FirstOrDefault(x => x.Name == sellerTempName);
                     // изменение полей Order-a
                     if (original != null)
-                    {                        
+                    {
                         original.OrderDate = Convert.ToDateTime(MainForm.currentItemOrderEntity.OrderDate);
                         original.Customer = MainForm.currentItemOrderEntity.Customer;
                         original.CustomerContact = MainForm.currentItemOrderEntity.CustomerContact;
@@ -582,7 +582,7 @@ namespace comp_shop
                 context.Entry(order).Reference(p => p.Seller).Load();
                 //var order = context.Orders.Where(x => x.OrderID == orderId).Include("Seller");
                 //var data = context.Items.Where(x => x.Name == itemName).Include("Category").Include("Supplier").ToList<Item>();
-                return order;                
+                return order;
             }
         }
 
@@ -670,7 +670,7 @@ namespace comp_shop
             {
                 MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
 
         // редактирование поставщика
         static public void editSupplier(Supplier toEdit)
@@ -697,7 +697,7 @@ namespace comp_shop
         }
 
         // поиск поставщика 
-        static public Supplier SearchSupplier(int supplierID=0, string supplierName=null)
+        static public Supplier SearchSupplier(int supplierID = 0, string supplierName = null)
         {
             if (supplierName == null)
             {
@@ -755,6 +755,18 @@ namespace comp_shop
             }
         }
 
+        // изменение продавца
+        static public void EditSeller(Seller editSeller)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Sellers.Find(editSeller.SellerID);
+                context.Entry(original).CurrentValues.SetValues(editSeller);
+                context.SaveChanges();
+                MessageBox.Show($"Продавец {editSeller.Name} обновлен!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         // удаление продавца
         static public void RemoveSeller(string sellerName)
         {
@@ -763,15 +775,6 @@ namespace comp_shop
                 using (var context = new ComputerShopEntities())
                 {
                     var original = context.Sellers.FirstOrDefault(a => a.Name == sellerName);
-                    // проверка привязанных к категории товаров
-                    //if (original.Items.Count > 0)
-                    //{
-                    //    foreach (Item it in original.Items)
-                    //    {
-                    //        it.Category = context.Categories.FirstOrDefault(a => a.Name == "no category");
-                    //    }
-                    //}
-
                     context.Sellers.Remove(context.Sellers.FirstOrDefault(a => a.Name == sellerName));
                     context.SaveChanges();
                     MessageBox.Show($"Продавец {sellerName} удален!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);

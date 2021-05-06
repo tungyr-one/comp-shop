@@ -117,7 +117,7 @@ namespace comp_shop
             this.textBox1.Location = new System.Drawing.Point(189, 138);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(325, 26);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -145,7 +145,7 @@ namespace comp_shop
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(496, 227);
-            this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.TabIndex = 7;
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -154,7 +154,7 @@ namespace comp_shop
             this.button1.Location = new System.Drawing.Point(94, 641);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 42);
-            this.button1.TabIndex = 4;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -164,7 +164,7 @@ namespace comp_shop
             this.button2.Location = new System.Drawing.Point(339, 641);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(114, 42);
-            this.button2.TabIndex = 5;
+            this.button2.TabIndex = 6;
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -175,7 +175,7 @@ namespace comp_shop
             this.label2.Location = new System.Drawing.Point(41, 206);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 20);
-            this.label2.TabIndex = 6;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Контакты:";
             // 
             // textBox2
@@ -183,7 +183,7 @@ namespace comp_shop
             this.textBox2.Location = new System.Drawing.Point(189, 203);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(325, 26);
-            this.textBox2.TabIndex = 7;
+            this.textBox2.TabIndex = 2;
             // 
             // label3
             // 
@@ -208,7 +208,7 @@ namespace comp_shop
             this.textBox3.Location = new System.Drawing.Point(189, 339);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(325, 26);
-            this.textBox3.TabIndex = 10;
+            this.textBox3.TabIndex = 4;
             // 
             // comboBox1
             // 
@@ -216,7 +216,7 @@ namespace comp_shop
             this.comboBox1.Location = new System.Drawing.Point(189, 274);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(325, 28);
-            this.comboBox1.TabIndex = 11;
+            this.comboBox1.TabIndex = 3;
             // 
             // SellerOperationForm
             // 
@@ -240,6 +240,7 @@ namespace comp_shop
             this.Name = "SellerOperationForm";
             this.Text = "Управление продавцами";
             this.Load += new System.EventHandler(this.CategoryOperationForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sellerFormKeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

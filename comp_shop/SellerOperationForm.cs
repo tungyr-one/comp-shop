@@ -24,7 +24,7 @@ namespace comp_shop
         // загрузка окна
         private void CategoryOperationForm_Load(object sender, EventArgs e)
         {
-            // обновление и загрузка данных в таблицу категорий
+            // обновление и загрузка данных в таблицу продавцов
             DataGridViewUpdate();
             // по умолчанию нажата первая радиокнопка
             radioButton1.Checked = true;
@@ -39,7 +39,6 @@ namespace comp_shop
         {
             // изменение название кнопки в зависимости от выбранного радиокнопки
             button1.Text = "Добавить";
-            button2.Text = "Готово";
             textBox1.Enabled = true;
             textBox2.Enabled = true;
             textBox3.Enabled = true;
@@ -57,7 +56,6 @@ namespace comp_shop
         {
             workingSellerUpdate();
             button1.Text = "Изменить";
-            button2.Text = "Готово";
             textBox1.Enabled = true;
             textBox2.Enabled = true;
             textBox3.Enabled = true;
@@ -68,7 +66,6 @@ namespace comp_shop
         {
             workingSellerUpdate();
             button1.Text = "Удалить";
-            button2.Text = "Готово";
             textBox1.Enabled = false;
             textBox2.Enabled = false;
             textBox3.Enabled = false;
@@ -96,7 +93,12 @@ namespace comp_shop
             // изменение продавца
             else if (radioButton2.Checked)
             {
-                //DB.EditSeller(textBox1.Text, textBox2.Text, comboBox1.SelectedValue.ToString(), textBox3.Text);
+                workingSeller.Name = textBox1.Text;
+                workingSeller.Contacts = textBox2.Text;
+                workingSeller.AccountType = comboBox1.SelectedValue.ToString();
+                workingSeller.Password = textBox3.Text;
+
+                DB.EditSeller(workingSeller);
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
@@ -104,6 +106,7 @@ namespace comp_shop
             // удаление 
             else
             {
+                //var sellerRemove = workingSellerUpdate();
                 // проверка на попытку удаления админа
                 if (workingSeller.Name == "admin")
                 {
@@ -127,6 +130,15 @@ namespace comp_shop
             this.Close();
         }
 
+        // обработка нажатия Enter
+        private void sellerFormKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.PerformClick();
+            }
+        }
+
         // обновление и загрузка данных в таблицу категорий
         private void DataGridViewUpdate()
         {
@@ -135,6 +147,7 @@ namespace comp_shop
             dataGridView1.Columns["SellerID"].HeaderText = "ID продавца";
             dataGridView1.Columns["Name"].HeaderText = "Имя";
             dataGridView1.Columns["Contacts"].HeaderText = "Контакты";
+            dataGridView1.Columns["AccountType"].HeaderText = "Тип аккаунта";
             dataGridView1.Columns["Orders"].Visible = false;
             dataGridView1.Columns["Password"].Visible = false;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -162,7 +175,7 @@ namespace comp_shop
         private Seller workingSellerUpdate()
         {
             DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
-            Seller workingSeller = DB.SearchSeller(rows[0].Cells[1].Value.ToString());
+            workingSeller = DB.SearchSeller(rows[0].Cells[1].Value.ToString());
             textBox1.Text = workingSeller.Name;
             textBox2.Text = workingSeller.Contacts;
             comboBox1.SelectedItem = workingSeller.AccountType.ToString();
