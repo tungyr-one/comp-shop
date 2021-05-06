@@ -13,6 +13,7 @@ namespace comp_shop
     public partial class CategoryOperationForm : Form
     {
         public string newCategory;
+        Category workingCategory = new Category();
 
         public CategoryOperationForm()
         {
@@ -31,6 +32,7 @@ namespace comp_shop
         private void button1_Click(object sender, EventArgs e)
         {
             // определение нобходимого действия в зависимости от нажатой радиокнопки
+            // добавление
             if (radioButton1.Checked)
             {
                 // проверка заполненности поля названия категории
@@ -41,6 +43,22 @@ namespace comp_shop
                 }
                 DB.AddCategory(textBox1.Text);
             }
+            //изменение
+            else if (radioButton2.Checked)
+            {
+
+                // проверка заполненности поля названия категории
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Категория пуста!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                workingCategory.Name = textBox1.Text;
+                DB.EditCategory(workingCategory);
+                textBox1.Clear();
+            }
+            //удаление
             else
             {
                 DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
@@ -76,10 +94,18 @@ namespace comp_shop
             button1.Text = "Добавить";
         }
 
-        // радиокнопка удаления категории
+        // радиокнопка изменения категории
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+            workingCategoryUpdate();
+            textBox1.Enabled = true;
+            textBox1.Text = workingCategory.Name;
+            button1.Text = "Изменить";
+        }
 
+        // радиокнопка удаления категории
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
             textBox1.Enabled = false;
             button1.Text = "Удалить";
         }
@@ -87,6 +113,28 @@ namespace comp_shop
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (!radioButton1.Checked)
+                try
+                {
+                    workingCategoryUpdate();
+                }
+                catch
+                {
+
+                }
+        }
+
+        //обновление сущности текущей категории и обновление содержимого поля с данными сущности
+        private Category workingCategoryUpdate()
+        {
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            workingCategory = DB.SearchCategory(rows[0].Cells[1].Value.ToString());
+            textBox1.Text = workingCategory.Name;
+            return workingCategory;
         }
     }
 }

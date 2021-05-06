@@ -18,6 +18,9 @@ namespace comp_shop
         public entryForm()
         {
             InitializeComponent();
+            //TODO: temp field values - delete
+            textBox1.Text = "admin";
+            textBox2.Text = "1111";
         }
 
         // обработка кнопки войти

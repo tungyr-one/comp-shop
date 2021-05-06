@@ -383,6 +383,25 @@ namespace comp_shop
             }
         }
 
+        // редактирование категории
+        static public void EditCategory(Category toEdit)
+        {
+            // попытка удалить категорию no category
+            if (toEdit.Name == "no category")
+            {
+                MessageBox.Show("Неизменяемая категория", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Categories.Find(toEdit.CategoryID);
+                context.Entry(original).CurrentValues.SetValues(toEdit);
+                context.SaveChanges();
+                MessageBox.Show($"Категория {toEdit.Name} обновлена!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         // удаление категории
         static public void RemoveCategory(string categoryName)
         {
@@ -649,6 +668,18 @@ namespace comp_shop
             }
         }
 
+        // редактирование поставщика
+        static public void editSupplier(Supplier toEdit)
+        {
+            using (var context = new ComputerShopEntities())
+            {
+                var original = context.Suppliers.Find(toEdit.SupplierID);
+                context.Entry(original).CurrentValues.SetValues(toEdit);
+                context.SaveChanges();
+                MessageBox.Show($"Поставщик {toEdit.Name} обновлен!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         // удаление поставщика
         static public void RemoveSupplier(Supplier toRemove)
         {
@@ -669,18 +700,6 @@ namespace comp_shop
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
                 MessageBox.Show("Невозможно удалить, к поставщику привязаны товары!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // редактирование поставщика
-        static public void editSupplier(Supplier toEdit)
-        {
-            using (var context = new ComputerShopEntities())
-            {
-                var original = context.Suppliers.Find(toEdit.SupplierID);
-                context.Entry(original).CurrentValues.SetValues(toEdit);
-                context.SaveChanges();
-                MessageBox.Show($"Поставщик {toEdit.Name} обновлен!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

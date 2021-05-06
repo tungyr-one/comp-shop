@@ -93,6 +93,13 @@ namespace comp_shop
             // изменение продавца
             else if (radioButton2.Checked)
             {
+                // проверка заполненности поля имени и контактов продавца
+                if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
+                {
+                    MessageBox.Show("Поля пусты!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 workingSeller.Name = textBox1.Text;
                 workingSeller.Contacts = textBox2.Text;
                 workingSeller.AccountType = comboBox1.SelectedValue.ToString();
