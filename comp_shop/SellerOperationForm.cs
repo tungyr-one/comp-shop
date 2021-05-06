@@ -82,11 +82,18 @@ namespace comp_shop
         private void DataGridViewUpdate()
         {
             dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = DB.ShowAllSellers();
+            List <Seller> dataSource = DB.ShowAllSellers();
+
+            // удаление админа из списка всех продавцов
+            var adminToRemove = dataSource.Single(r => r.SellerID == 1);
+            dataSource.Remove(adminToRemove);
+
+            dataGridView1.DataSource = dataSource;
             dataGridView1.Columns["SellerID"].HeaderText = "ID продавца";
             dataGridView1.Columns["Name"].HeaderText = "Имя";
             dataGridView1.Columns["Contacts"].HeaderText = "Контакты";
             dataGridView1.Columns["Orders"].Visible = false;
+            dataGridView1.Columns["Password"].Visible = false;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 

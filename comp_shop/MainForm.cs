@@ -35,6 +35,7 @@ namespace comp_shop
         public static Item currentItem = new Item();
         public static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
         public static Supplier currentSupplier = new Supplier();
+        public static Seller currentSeller = new Seller();
 
         // списки для обмена данными с формами связанных данных
         public static List<Item> currentItems = new List<Item>();
@@ -59,7 +60,9 @@ namespace comp_shop
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
-            AppEnter();
+            // метод входа в приложение
+            //AppEnter();
+
             radioButton5.Enabled = false;
             radioButton6.Enabled = false;
 

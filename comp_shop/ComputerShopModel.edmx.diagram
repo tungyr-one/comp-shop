@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a72dff9e5c1f466185e4005c700aee4b" Name="Diagram1">
+      <Diagram DiagramId="1496f3bf909a4121a1fcb6212593e53e" Name="Diagram1">
         <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Item" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.OrderItem" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="8.375" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ComputerShopModel.Seller" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Order" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Seller" Width="1.5" PointX="7.625" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="ComputerShopModel.FK_Items_Categories" ManuallyRouted="false" />
         <AssociationConnector Association="ComputerShopModel.FK__ItemOrder__ItemI__658C0CBD" ManuallyRouted="false" />
