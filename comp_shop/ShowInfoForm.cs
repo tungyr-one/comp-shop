@@ -50,13 +50,13 @@ namespace comp_shop
             else if (this.Text == "Выбор поставщика")
             {
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = DB.ShowAllSuppliers();
+                dataGridView1.DataSource = DB.AllSuppliers();
                 button1.Text = "Выбрать";
             }
             else
             {
                 dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.DataSource = DB.ShowAllItems();
+                dataGridView1.DataSource = DB.AllItems();
                 button1.Text = "Выбрать";
             }
 

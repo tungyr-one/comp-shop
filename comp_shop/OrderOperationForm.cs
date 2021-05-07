@@ -19,7 +19,7 @@ namespace comp_shop
             // заполнение данными комбобоксов
             using (ComputerShopEntities c = new ComputerShopEntities())
             {
-                List<Seller> dataSource = DB.ShowAllSellers();
+                List<Seller> dataSource = DB.AllSellers();
 
                 // удаление админа из списка всех продавцов
                 var adminToRemove = dataSource.Single(r => r.SellerID == 1);
@@ -170,7 +170,7 @@ namespace comp_shop
                 MainForm.currentItemOrderEntity.Customer = textBox2.Text;
                 MainForm.currentItemOrderEntity.CustomerContact = textBox3.Text;
 
-                DB.editOrder(MainForm.currentItemOrderEntity.OrderID);
+                DB.EditOrder(MainForm.currentItemOrderEntity.OrderID);
                 this.Close();
             }
         }

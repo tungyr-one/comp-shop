@@ -118,21 +118,21 @@ namespace comp_shop
             this.comboBox1.Location = new System.Drawing.Point(176, 46);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(200, 28);
-            this.comboBox1.TabIndex = 6;
+            this.comboBox1.TabIndex = 0;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(176, 83);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
-            this.dateTimePicker1.TabIndex = 7;
+            this.dateTimePicker1.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(176, 211);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 33);
-            this.button1.TabIndex = 8;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Выбрать товар";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -142,21 +142,21 @@ namespace comp_shop
             this.textBox2.Location = new System.Drawing.Point(176, 127);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(200, 26);
-            this.textBox2.TabIndex = 10;
+            this.textBox2.TabIndex = 2;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(176, 166);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(200, 26);
-            this.textBox3.TabIndex = 11;
+            this.textBox3.TabIndex = 3;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(44, 332);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(186, 44);
-            this.button2.TabIndex = 12;
+            this.button2.TabIndex = 6;
             this.button2.Text = "Добавить в заказ";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -166,7 +166,7 @@ namespace comp_shop
             this.button3.Location = new System.Drawing.Point(262, 332);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(157, 44);
-            this.button3.TabIndex = 13;
+            this.button3.TabIndex = 7;
             this.button3.Text = "Готово";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -198,7 +198,7 @@ namespace comp_shop
             this.button4.Location = new System.Drawing.Point(106, 667);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(186, 35);
-            this.button4.TabIndex = 15;
+            this.button4.TabIndex = 8;
             this.button4.Text = "Удалить";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -213,7 +213,7 @@ namespace comp_shop
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(200, 26);
-            this.numericUpDown1.TabIndex = 16;
+            this.numericUpDown1.TabIndex = 5;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
             0,
@@ -263,7 +263,7 @@ namespace comp_shop
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "OrderOperationForm";
-            this.Text = "Создание заказа";
+            this.Text = "1";
             this.Load += new System.EventHandler(this.OrderOperationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

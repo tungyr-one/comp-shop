@@ -177,7 +177,7 @@ namespace comp_shop
                     MainForm.currentSupplier.Name = textBox1.Text;
                     MainForm.currentSupplier.Contacts = textBox2.Text;
 
-                    DB.editSupplier(MainForm.currentSupplier);
+                    DB.EditSupplier(MainForm.currentSupplier);
                 }
                 // кнопка "Удалить" после выбора поставщика
                 else

@@ -55,16 +55,6 @@ namespace comp_shop
             if (this.Text == "Создание нового товара")
             {
                 button1.Text = "Добавить";
-
-                //TODO: delete
-                // временные постоянные значения полей
-                textBox1.Text = "Razor";
-                textBox2.Text = "10255,45";
-            }
-            else if (this.Text == "Добавление товара поставщика")
-            {
-                textBox1.Text = "Razor";
-                textBox2.Text = "10255,45";
             }
             // если редактирование товара
             else
@@ -94,14 +84,7 @@ namespace comp_shop
             // если создание товара
             if (this.Text == "Создание нового товара")
             {
-                // создание нового экземпляра currentItem
-                //MainForm.currentItem = new Item();
-                // формирования объекта класса Item для передачи в БД
-                //MainForm.currentItem.Name = textBox1.Text;
-                //MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
-                //MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
-                //MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
-                DB.addItem(name: textBox1.Text, price: decimal.Parse(textBox2.Text), category: comboBox1.SelectedItem.ToString(), supplier: comboBox2.SelectedItem.ToString());
+                DB.AddItem(name: textBox1.Text, price: decimal.Parse(textBox2.Text), category: comboBox1.SelectedItem.ToString(), supplier: comboBox2.SelectedItem.ToString());
             }
             // если добавление товара поставщика
             else if (this.Text == "Добавление товара поставщика")
@@ -122,7 +105,7 @@ namespace comp_shop
                 MainForm.currentItem.Price = decimal.Parse(textBox2.Text);
                 MainForm.currentItem.Category = DB.SearchCategory(comboBox1.SelectedItem.ToString());
                 MainForm.currentItem.Supplier = DB.SearchSupplier(supplierName: comboBox2.SelectedItem.ToString());
-                DB.editItem();
+                DB.EditItem();
             }
         }
 

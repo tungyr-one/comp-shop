@@ -50,20 +50,11 @@ namespace comp_shop
             }
         }
 
+        // обработка нажания кнопки отмена
         private void button2_Click(object sender, EventArgs e)
         {
             entrySuccess = false;            
             this.Close();
-        }
-
-        // обработка нажатия Enter
-        private void entryForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-                if (e.KeyCode == Keys.Enter)
-                {
-                    button1.PerformClick();
-                }
         }
     }
 }

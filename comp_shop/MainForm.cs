@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Задание:
 //Требования к функциональным характеристикам:
 //-	программа должна обеспечивать доступ к информации о товарах магазина компьютерной техники, 
 //    содержащейся в БД;
@@ -25,21 +26,19 @@ using System.Windows.Forms;
 //    информации об объектах и корректировки данных в случае необходимости;
 
 
-
-
 namespace comp_shop
 {
     public partial class MainForm : Form
     {
         // сущности для обмена данными с формами добавления / редактирования сущносстей
-        public static Item currentItem = new Item();
-        public static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
-        public static Supplier currentSupplier = new Supplier();
-        public static Seller currentAccount = new Seller();
+        internal static Item currentItem = new Item();
+        internal static ItemOrdersEntity currentItemOrderEntity = new ItemOrdersEntity();
+        internal static Supplier currentSupplier = new Supplier();
+        internal static Seller currentAccount = new Seller();
 
         // списки для обмена данными с формами связанных данных
-        public static List<Item> currentItems = new List<Item>();
-        public static List<ItemOrdersEntity> currentItemOrdersEntities = new List<ItemOrdersEntity>();
+        internal static List<Item> currentItems = new List<Item>();
+        internal static List<ItemOrdersEntity> currentItemOrdersEntities = new List<ItemOrdersEntity>();
 
         public MainForm()
         {
@@ -51,7 +50,6 @@ namespace comp_shop
         // загрузка формы
         private void Main_form_Load(object sender, EventArgs e)
         {
-            // метод входа в приложение
             AppEnter();
 
             radioButton5.Enabled = false;
@@ -106,9 +104,9 @@ namespace comp_shop
         // обновление данных всех таблиц
         public void UpdateMainForm()
         {
-            dataGridView1.DataSource = DB.ShowAllItems();
-            dataGridView2.DataSource = DB.ShowAllOrders();
-            dataGridView3.DataSource = DB.ShowAllSuppliers();
+            dataGridView1.DataSource = DB.AllItems();
+            dataGridView2.DataSource = DB.AllOrders();
+            dataGridView3.DataSource = DB.AllSuppliers();
 
             // настройка ширины колонок
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -336,7 +334,7 @@ namespace comp_shop
             {
                 try
                 {
-                    dataGridView1.DataSource = DB.SearchByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
+                    dataGridView1.DataSource = DB.SearchItemByPrice(decimal.Parse(searchBox1.Text), decimal.Parse(searchBox2.Text));
                 }
                 catch
                 {
@@ -349,7 +347,7 @@ namespace comp_shop
             {
                 try
                 {
-                    dataGridView1.DataSource = DB.SearchByCategory(searchBox1.Text);
+                    dataGridView1.DataSource = DB.SearchItemByCategory(searchBox1.Text);
 
                 }
                 catch
@@ -362,7 +360,7 @@ namespace comp_shop
             {
                 try
                 {
-                    dataGridView1.DataSource = DB.SearchByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
+                    dataGridView1.DataSource = DB.SearchItemByCategoryAndPrice(searchBox1.Text, decimal.Parse(searchBox2.Text), decimal.Parse(searchBox3.Text));
                 }
                 catch
                 {
@@ -376,11 +374,11 @@ namespace comp_shop
                 // поиск только по времени если поле имени продавца пустое
                 if (searchBox1.Text == "")
                 {
-                    dataGridView2.DataSource = DB.SearchByTime(dateTimePicker1.Value, dateTimePicker2.Value);
+                    dataGridView2.DataSource = DB.SearchOrderByTime(dateTimePicker1.Value, dateTimePicker2.Value);
                 }
                 else
                 {
-                    dataGridView2.DataSource = DB.SearchBySellerAndTime(searchBox1.Text, dateTimePicker1.Value, dateTimePicker2.Value);
+                    dataGridView2.DataSource = DB.SearchOrderBySellerAndTime(searchBox1.Text, dateTimePicker1.Value, dateTimePicker2.Value);
                 }
             }
 
@@ -393,7 +391,19 @@ namespace comp_shop
                 }
                 else
                 {
-                    dataGridView3.DataSource = DB.SearchBySupplier(searchBox1.Text);
+                    List<Supplier> foundSuppliers = new List<Supplier>();
+                    Supplier tempSupplier = DB.SearchSupplier(supplierName: searchBox1.Text);
+                    // проверка на нулевой результат
+                    if (tempSupplier == null)
+                    {
+                        MessageBox.Show($"Нет такого поставщика!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        foundSuppliers.Add(tempSupplier);
+                        dataGridView3.DataSource = foundSuppliers;
+                    }
                 }
             }
         }

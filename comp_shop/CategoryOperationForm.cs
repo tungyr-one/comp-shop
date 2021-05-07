@@ -14,11 +14,17 @@ namespace comp_shop
     {
         public string newCategory;
         Category workingCategory = new Category();
+        List<Category> categoriesForDataGridView = DB.AllCategories();
 
         public CategoryOperationForm()
         {
             InitializeComponent();
-            radioButton1.Checked = true;
+            radioButton1.Checked = true;            
+
+            // удаление категории no category из списка всех категорий
+            var noCategoryRemove = categoriesForDataGridView.Single(r => r.CategoryID == 1);
+            categoriesForDataGridView.Remove(noCategoryRemove);
+            dataGridView1.DataSource = categoriesForDataGridView;
         }
 
         // загрузка окна
@@ -72,7 +78,12 @@ namespace comp_shop
        private void DataGridViewUpdate()
         {
             dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = DB.AllCategories();
+            categoriesForDataGridView = DB.AllCategories();
+            // удаление категории no category из списка всех категорий
+            var noCategoryRemove = categoriesForDataGridView.Single(r => r.CategoryID == 1);
+            categoriesForDataGridView.Remove(noCategoryRemove);
+
+            dataGridView1.DataSource = categoriesForDataGridView;
             dataGridView1.Columns["CategoryID"].HeaderText = "ID категории";
             dataGridView1.Columns["Name"].HeaderText = "Название";
             dataGridView1.Columns["Items"].Visible = false;

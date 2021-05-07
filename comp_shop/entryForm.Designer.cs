@@ -109,7 +109,6 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "entryForm";
             this.Text = "Вход в приложение";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.entryForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

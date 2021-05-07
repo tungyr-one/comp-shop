@@ -150,13 +150,13 @@ namespace comp_shop
         private void DataGridViewUpdate()
         {
             dataGridView1.AutoGenerateColumns = true;
-            dataGridView1.DataSource = DB.ShowAllSellers();
+            dataGridView1.DataSource = DB.AllSellers();
             dataGridView1.Columns["SellerID"].HeaderText = "ID продавца";
             dataGridView1.Columns["Name"].HeaderText = "Имя";
             dataGridView1.Columns["Contacts"].HeaderText = "Контакты";
             dataGridView1.Columns["AccountType"].HeaderText = "Тип аккаунта";
-            dataGridView1.Columns["Orders"].Visible = false;
-            dataGridView1.Columns["Password"].Visible = false;
+            dataGridView1.Columns["Password"].HeaderText = "Пароль";
+            dataGridView1.Columns["Orders"].Visible = false;          
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
