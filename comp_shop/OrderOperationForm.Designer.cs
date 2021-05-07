@@ -49,6 +49,7 @@ namespace comp_shop
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -163,11 +164,11 @@ namespace comp_shop
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(262, 332);
+            this.button3.Location = new System.Drawing.Point(254, 332);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(157, 44);
+            this.button3.Size = new System.Drawing.Size(196, 44);
             this.button3.TabIndex = 7;
-            this.button3.Text = "Готово";
+            this.button3.Text = "Удалить из заказа";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -180,7 +181,7 @@ namespace comp_shop
             this.dataGridView1.Location = new System.Drawing.Point(12, 393);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(452, 268);
+            this.dataGridView1.Size = new System.Drawing.Size(452, 257);
             this.dataGridView1.TabIndex = 14;
             // 
             // Товар
@@ -195,11 +196,11 @@ namespace comp_shop
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(106, 667);
+            this.button4.Location = new System.Drawing.Point(45, 659);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(186, 35);
+            this.button4.Size = new System.Drawing.Size(185, 44);
             this.button4.TabIndex = 8;
-            this.button4.Text = "Удалить";
+            this.button4.Text = "Готово";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -237,11 +238,22 @@ namespace comp_shop
             this.label8.Size = new System.Drawing.Size(0, 20);
             this.label8.TabIndex = 18;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(254, 659);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(157, 44);
+            this.button5.TabIndex = 19;
+            this.button5.Text = "Отмена";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // OrderOperationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 703);
+            this.ClientSize = new System.Drawing.Size(476, 715);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.numericUpDown1);
@@ -294,5 +306,6 @@ namespace comp_shop
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button5;
     }
 }

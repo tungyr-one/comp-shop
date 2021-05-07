@@ -118,11 +118,43 @@ namespace comp_shop
             }
         }
 
-        // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
+        // нажатие кнопки удаления товара из заказа 
         private void button3_Click(object sender, EventArgs e)
         {
+            // если товаров в заказе меньше либо равно одному
+            if (MainForm.currentItemOrdersEntities.Count <= 1)
+            {
+                // очищение списка заказанных товаров
+                MainForm.currentItemOrdersEntities.Clear();
+                // очищение таблицы
+                dataGridView1.DataSource = null;
+                dataGridView1.Rows.Clear();
+                MessageBox.Show("Заказ будет удален если в нем не будет товаров", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // удаление из списка заказов по индексу
+            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+            MainForm.currentItemOrdersEntities.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+            dataGridView1.ReadOnly = true;
+
+            // заполнение таблицы оставшимися товарами
+            dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
+            dataGridView1.ColumnCount = 2;
+            dataGridView1.ReadOnly = true;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
+                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
+            }
+        }
+
+        // занесение нового или отредактированного списка заказов с товарами и их количеством в БД 
+        private void button4_Click(object sender, EventArgs e)
+        {
+
             // проверка заполненности полей имени и контактов покупателя
-            if (textBox2.Text == "" || textBox3.Text == "" )
+            if (textBox2.Text == "" || textBox3.Text == "")
             {
                 MessageBox.Show("Не заполнены поля покупателя!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -175,36 +207,10 @@ namespace comp_shop
             }
         }
 
-        // нажатие кнопки удаления товара из заказа
-        private void button4_Click(object sender, EventArgs e)
-        {   
-            // если товаров в заказе меньше либо равно одному
-            if (MainForm.currentItemOrdersEntities.Count <= 1)
-            {
-                // очищение списка заказанных товаров
-                MainForm.currentItemOrdersEntities.Clear();
-                // очищение таблицы
-                dataGridView1.DataSource = null;
-                dataGridView1.Rows.Clear();
-                MessageBox.Show("Заказ будет удален если в нем не будет товаров", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-
-            // удаление из списка заказов по индексу
-            DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
-            MainForm.currentItemOrdersEntities.RemoveAt(dataGridView1.CurrentCell.RowIndex);
-            dataGridView1.ReadOnly = true;
-
-            // заполнение таблицы оставшимися товарами
-            dataGridView1.RowCount = MainForm.currentItemOrdersEntities.Count;
-            dataGridView1.ColumnCount = 2;
-            dataGridView1.ReadOnly = true;
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
-                dataGridView1.Rows[i].Cells[0].Value = MainForm.currentItemOrdersEntities[i].Item;
-                dataGridView1.Rows[i].Cells[1].Value = MainForm.currentItemOrdersEntities[i].Quantity;
-            }
+        // кнопка отмена
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
